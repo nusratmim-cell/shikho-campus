@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>University activity map — Shikho Campus</title>
+<link rel="stylesheet" href="./pro.css?v=20"/>
+<link rel="stylesheet" href="./spec.css?v=20"/>
+<link rel="stylesheet" href="./dev.css?v=20"/>
+<script src="./nav.js?v=20" defer></script>
+</head>
+<body>
+<div class="layout">
+
+<nav>
+  <div class="brand">Shikho Campus</div>
+  <div class="sub">University activity map</div>
+  <div class="g">Modules</div>
+  <a href="./index.html">Overview</a>
+  <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
+  <a href="./ai.html">Shikho Campus AI</a>
+  <a href="./student.html">1 · Student</a>
+  <a href="./faculty.html">2 · Faculty</a>
+  <a href="./admin.html">3 · Administrator</a>
+  <a href="./coordinator.html">4 · Coordinator</a>
+  <div class="g">On this page</div>
+  <a href="#how">How to read</a>
+  <a href="#lifecycle">Student life cycle</a>
+  <a href="#term">The term, week by week</a>
+  <a href="#a-admission">A · Admission &amp; entry</a>
+  <a href="#b-registration">B · Registration</a>
+  <a href="#c-teaching">C · Teaching &amp; learning</a>
+  <a href="#d-assessment">D · Assessment &amp; exams</a>
+  <a href="#e-results">E · Results &amp; progression</a>
+  <a href="#f-money">F · Money</a>
+  <a href="#g-advising">G · Advising &amp; support</a>
+  <a href="#h-services">H · Campus services</a>
+  <a href="#i-life">I · Student life</a>
+  <a href="#j-conduct">J · Conduct &amp; grievance</a>
+  <a href="#k-faculty">K · Faculty affairs</a>
+  <a href="#l-quality">L · Quality &amp; accreditation</a>
+  <a href="#m-exit">M · Graduation &amp; alumni</a>
+  <a href="#n-institution">N · Institution running</a>
+  <a href="#scope">What we build, and when</a>
+</nav>
+
+<main>
+<div class="page-bar">
+  <a class="page-bar-back" href="./index.html">← Back to overview</a>
+  <a class="page-bar-demo" href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open live demo ↗</a>
+</div>
+<p class="crumb"><a href="./index.html">Overview</a> · University activity map</p>
+
+
+<header>
+  <h1>Everything that happens in a university</h1>
+  <p class="lede">This page lists every real activity that takes place in a private university in Bangladesh — from the day a student applies to the day they collect a certificate as an alumnus — and says which module handles it, which feature covers it, and whether we build it now or later. If an activity is not on this list, it is missing from the product.</p>
+</header>
+<aside class="demo-strip">
+  <strong>Live demo</strong>
+  <span>Open the live campus demo and try any role.</span>
+  <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">shikho-brac-platform.vercel.app ↗</a>
+</aside>
+
+
+<section id="how">
+  <h2>How to read this page</h2>
+  <table>
+    <tr><th>Column</th><th>Meaning</th></tr>
+    <tr><td>Activity</td><td>Something a real person actually does on campus.</td></tr>
+    <tr><td>Who does it</td><td>The person responsible in a normal Bangladeshi private university.</td></tr>
+    <tr><td>Module</td><td>Which of our four modules owns it.</td></tr>
+    <tr><td>Feature</td><td>The feature that delivers it.</td></tr>
+    <tr><td>Stage</td><td><strong>Now</strong> = first release · <strong>Next</strong> = second wave · <strong>Later</strong> = planned · <strong>Outside</strong> = stays in another system, we only read or show the result.</td></tr>
+  </table>
+  <div class="callout">
+    <b>The honest boundary</b>
+    Some activities belong to systems the university already owns — the student information system, the accounts software, the bank. For those we do not rebuild the activity; we show it, act on it, and hand information back. Those rows are marked <strong>Outside</strong> and the connection is named.
+  </div>
+</section>
+
+<section id="lifecycle">
+  <h2>The student life cycle in one view</h2>
+  <div class="mono">Enquiry → Application → Admission test → Offer → Admission fee → Enrolment
+   → Orientation → Advising → Course registration → Fee payment
+   → Classes · attendance · assignments · quizzes · midterm
+   → Exam eligibility → Final exam → Grades → Certification → Result publication
+   → Next term registration ⟲  (repeat each term)
+   → Probation / retake / semester drop / readmission (if needed)
+   → Internship or thesis → Final term → Clearance → Graduation application
+   → Convocation → Certificate &amp; transcript → Alumni</div>
+</section>
+
+<section id="term">
+  <h2>The term, week by week</h2>
+  <table>
+    <tr><th>Period</th><th>What happens on campus</th><th>Who leads</th><th>Covered by</th></tr>
+    <tr><td>Before term</td><td>Offering prepared, sections created, teachers assigned, routine and rooms fixed, students advised</td><td>Coordinator → Chair</td><td>Coordinator load &amp; flag · Administrator staffing · Advising</td></tr>
+    <tr><td>Registration week</td><td>Advising meetings, course add/drop, dues cleared, holds resolved</td><td>Student · Advisor · Accounts</td><td>Student registration, advising, fees, holds</td></tr>
+    <tr><td>Weeks 1–6</td><td>Classes, attendance, materials, quizzes, assignments, announcements</td><td>Faculty · Students</td><td>Faculty teaching &amp; assessment · Student learning</td></tr>
+    <tr><td>Midterm</td><td>Midterm exams, marks entry, marks shown after posting</td><td>Faculty</td><td>Faculty assessment &amp; grading</td></tr>
+    <tr><td>Weeks 7–12</td><td>Classes continue, second instalment of fees, advising for weak students</td><td>All</td><td>Fees · advising · at-risk lists</td></tr>
+    <tr><td>Before finals</td><td>Attendance checked, exam eligibility decided and locked, exam routine and invigilation duty published, dues gate applied</td><td>Chair · Coordinator</td><td>Administrator eligibility &amp; exam schedule · Fee gating</td></tr>
+    <tr><td>Final exams</td><td>Exams held, scripts marked, marks entered</td><td>Faculty</td><td>Faculty grading</td></tr>
+    <tr><td>Result time</td><td>Teacher submits, chair certifies or returns, results sent to registrar and published</td><td>Faculty → Chair → Registrar</td><td>Grade submission · Certification · Registrar export</td></tr>
+    <tr><td>Term close</td><td>Probation list, retake advice, next-term planning, evidence filed for accreditation</td><td>Chair · Coordinator</td><td>Policy, reports, quality pack</td></tr>
+  </table>
+</section>
+
+<!-- A -->
+<section id="a-admission">
+  <h2>A · Admission and entry</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Enquiry and application form</td><td>Applicant · Admission office</td><td>—</td><td>Admission system of the university</td><td>Outside</td></tr>
+    <tr><td>Admission test and interview</td><td>Admission office</td><td>—</td><td>Admission system</td><td>Outside</td></tr>
+    <tr><td>Offer, admission fee, seat confirmation</td><td>Applicant · Accounts</td><td>—</td><td>Finance system; we display the resulting dues</td><td>Outside</td></tr>
+    <tr><td>Student record created (ID, programme, batch)</td><td>Registrar</td><td>Coordinator</td><td>Load student records</td><td>Now</td></tr>
+    <tr><td>Credit transfer / waiver from previous institution</td><td>Registrar · Chair</td><td>Administrator</td><td>Academic policy — credit transfer treatment</td><td>Next</td></tr>
+    <tr><td>Orientation and first login</td><td>Student · IT</td><td>Student</td><td>Mobile app and portal sign-in</td><td>Now</td></tr>
+    <tr><td>Student ID card issue</td><td>Student · Admin office</td><td>Student</td><td>Campus service request</td><td>Next</td></tr>
+  </table>
+</section>
+
+<!-- B -->
+<section id="b-registration">
+  <h2>B · Advising and course registration</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Advisor assigned to each student</td><td>Chair · Coordinator</td><td>Administrator</td><td>Advisor assignment</td><td>Now</td></tr>
+    <tr><td>Student checks what courses remain for the degree</td><td>Student</td><td>Student</td><td>My advisor &amp; degree plan</td><td>Now</td></tr>
+    <tr><td>Advising meeting before registration</td><td>Student · Advisor</td><td>Student + Faculty</td><td>Book appointment · My advisees</td><td>Now</td></tr>
+    <tr><td>Course registration, add and drop</td><td>Student</td><td>Student</td><td>Registration add/drop (or the university's own system)</td><td>Now / Outside</td></tr>
+    <tr><td>Prerequisite, credit limit and clash checking</td><td>System</td><td>Student</td><td>Registration rules</td><td>Now</td></tr>
+    <tr><td>Section capacity and seat allotment</td><td>Coordinator · System</td><td>Coordinator</td><td>Offering records</td><td>Now</td></tr>
+    <tr><td>Late registration with fine</td><td>Student · Accounts</td><td>Student</td><td>Fees (the fine comes from finance)</td><td>Now</td></tr>
+    <tr><td>Semester drop / leave of absence</td><td>Student · Chair</td><td>Administrator</td><td>Policy and approval</td><td>Next</td></tr>
+    <tr><td>Readmission after a gap</td><td>Student · Registrar</td><td>Administrator</td><td>Policy — catalogue year in force</td><td>Next</td></tr>
+  </table>
+</section>
+
+<!-- C -->
+<section id="c-teaching">
+  <h2>C · Teaching and learning</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Class routine and room allocation</td><td>Coordinator</td><td>Coordinator</td><td>Class routine &amp; rooms</td><td>Now</td></tr>
+    <tr><td>Teacher uploads slides, notes, readings</td><td>Faculty</td><td>Faculty</td><td>Course content</td><td>Now</td></tr>
+    <tr><td>Reuse last term's course</td><td>Faculty</td><td>Faculty</td><td>Import or copy a course</td><td>Now</td></tr>
+    <tr><td>Same content across many sections</td><td>Faculty · Chair</td><td>Faculty</td><td>Blueprint sync</td><td>Next</td></tr>
+    <tr><td>Several section codes taught together</td><td>Chair</td><td>Administrator</td><td>Cross-list sections</td><td>Now</td></tr>
+    <tr><td>Live class in the portal</td><td>Faculty · Students</td><td>Faculty + Student</td><td>Take a live class · Join live class</td><td>Now</td></tr>
+    <tr><td>Class in the classroom (physical)</td><td>Faculty</td><td>Faculty</td><td>Attendance register</td><td>Now</td></tr>
+    <tr><td>Lecture recorded and shared</td><td>Faculty</td><td>Faculty</td><td>Record and share lectures</td><td>Now</td></tr>
+    <tr><td>Student watches missed class</td><td>Student</td><td>Student</td><td>Watch recorded lecture</td><td>Now</td></tr>
+    <tr><td>Notices to the class</td><td>Faculty</td><td>Faculty</td><td>Announcements</td><td>Now</td></tr>
+    <tr><td>Syllabus shared and followed</td><td>Faculty</td><td>Faculty</td><td>Syllabus</td><td>Now</td></tr>
+    <tr><td>Attendance taken and questioned</td><td>Faculty · Student</td><td>Faculty + Student</td><td>Attendance register · My attendance</td><td>Now</td></tr>
+    <tr><td>Make-up class after a holiday</td><td>Faculty · Coordinator</td><td>Coordinator</td><td>Routine change</td><td>Next</td></tr>
+    <tr><td>Lab sessions and lab groups</td><td>Lab instructor</td><td>Faculty</td><td>Sections and content</td><td>Now</td></tr>
+    <tr><td>Field trip / industrial visit</td><td>Faculty · Chair</td><td>Faculty</td><td>Announcements and attendance exception</td><td>Later</td></tr>
+    <tr><td>Guest lecture</td><td>Faculty</td><td>Faculty</td><td>Live class with guest host</td><td>Next</td></tr>
+    <tr><td>Study help outside class</td><td>Student</td><td>Student</td><td>Tutor · Practice · Smart Class</td><td>Now</td></tr>
+    <tr><td>Private effort / Momentum rings</td><td>Student</td><td>Student</td><td>Momentum (never graded, never ranked)</td><td>Now</td></tr>
+  </table>
+</section>
+
+<!-- D -->
+<section id="d-assessment">
+  <h2>D · Assessment and examinations</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Decide marks distribution (quiz/midterm/final/lab %)</td><td>Faculty · Chair</td><td>Faculty</td><td>Grade groups and weightage</td><td>Now</td></tr>
+    <tr><td>Set late submission rule</td><td>Faculty</td><td>Faculty</td><td>Late policy</td><td>Now</td></tr>
+    <tr><td>Decide when students see marks</td><td>Faculty</td><td>Faculty</td><td>Grade posting policy</td><td>Now</td></tr>
+    <tr><td>Give assignment</td><td>Faculty</td><td>Faculty</td><td>Create assignment</td><td>Now</td></tr>
+    <tr><td>Student submits assignment</td><td>Student</td><td>Student</td><td>Submit assignment</td><td>Now</td></tr>
+    <tr><td>Class test / online quiz</td><td>Faculty · Student</td><td>Faculty + Student</td><td>Create quiz · Take quiz</td><td>Now</td></tr>
+    <tr><td>Extra time or extra attempt for one student</td><td>Faculty</td><td>Faculty</td><td>Exam moderation</td><td>Now</td></tr>
+    <tr><td>Presentation and viva marks</td><td>Faculty</td><td>Faculty</td><td>Assignment of type presentation</td><td>Now</td></tr>
+    <tr><td>Group work and group marks</td><td>Faculty</td><td>Faculty</td><td>Group submission</td><td>Next</td></tr>
+    <tr><td>Plagiarism / similarity check</td><td>Faculty</td><td>Faculty</td><td>Similarity connector</td><td>Later</td></tr>
+    <tr><td>Midterm and final exam schedule</td><td>Chair · Coordinator</td><td>Administrator</td><td>Exam schedule</td><td>Next</td></tr>
+    <tr><td>Invigilation duty roster</td><td>Chair</td><td>Administrator</td><td>Exam duty</td><td>Next</td></tr>
+    <tr><td>Question paper preparation and moderation</td><td>Faculty · Chair</td><td>Faculty</td><td>Question paper support</td><td>Next</td></tr>
+    <tr><td>Seat plan and admit card</td><td>Coordinator</td><td>Coordinator</td><td>Exam operations</td><td>Later</td></tr>
+    <tr><td>Exam eligibility from attendance</td><td>Chair</td><td>Administrator</td><td>Exam eligibility</td><td>Now</td></tr>
+    <tr><td>Script marking and marks entry</td><td>Faculty</td><td>Faculty</td><td>Grading queue · Gradebook</td><td>Now</td></tr>
+    <tr><td>Answer script review request</td><td>Student · Chair</td><td>Student</td><td>Grade review request</td><td>Next</td></tr>
+    <tr><td>Improvement / retake exam</td><td>Student · Registrar</td><td>Administrator</td><td>Retake policy and cap</td><td>Next</td></tr>
+    <tr><td>Make-up exam for absence</td><td>Chair</td><td>Administrator</td><td>Exception with reason</td><td>Next</td></tr>
+  </table>
+</section>
+
+<!-- E -->
+<section id="e-results">
+  <h2>E · Results, progression and records</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Teacher submits final grades</td><td>Faculty</td><td>Faculty</td><td>Submit final grades</td><td>Now</td></tr>
+    <tr><td>Chair certifies or returns the grade sheet</td><td>Chair</td><td>Administrator</td><td>Certify final grades</td><td>Now</td></tr>
+    <tr><td>Results sent to registrar and published</td><td>Coordinator · Registrar</td><td>Coordinator</td><td>Send certified results</td><td>Now</td></tr>
+    <tr><td>Student sees grade and GPA</td><td>Student</td><td>Student</td><td>Grades and standing</td><td>Now</td></tr>
+    <tr><td>Grade correction after publication</td><td>Faculty → Chair</td><td>Administrator</td><td>Amendment with reason and approval</td><td>Now</td></tr>
+    <tr><td>Probation and warning list</td><td>Chair · Advisor</td><td>Administrator</td><td>Policy thresholds and at-risk report</td><td>Now</td></tr>
+    <tr><td>Dean's list and honours</td><td>Chair</td><td>Administrator</td><td>Policy and reports</td><td>Next</td></tr>
+    <tr><td>Transcript and certificate issue</td><td>Registrar</td><td>Student + Coordinator</td><td>Document request · Document processing</td><td>Next</td></tr>
+    <tr><td>Verification request from an employer or foreign university</td><td>Registrar</td><td>Coordinator</td><td>Document processing</td><td>Later</td></tr>
+  </table>
+</section>
+
+<!-- F -->
+<section id="f-money">
+  <h2>F · Money</h2>
+  <div class="callout danger">
+    <b>The rule that never changes</b>
+    Shikho Campus never holds university money. Fees are calculated by the university's finance system; payment travels from the student, through a licensed payment provider, straight into the university's bank account. We show the bill, start the payment, record the result, and clear the block.
+  </div>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Tuition and fee amounts decided</td><td>Finance office</td><td>—</td><td>Finance system</td><td>Outside</td></tr>
+    <tr><td>Invoice/dues shown to student</td><td>System</td><td>Student</td><td>Fees dashboard</td><td>Now</td></tr>
+    <tr><td>Payment by bKash, Nagad, Rocket or card</td><td>Student</td><td>Student</td><td>Pay fees online</td><td>Now</td></tr>
+    <tr><td>Payment in instalments</td><td>Student</td><td>Student</td><td>Instalments</td><td>Now</td></tr>
+    <tr><td>Payment at a bank counter</td><td>Student · Coordinator</td><td>Student + Coordinator</td><td>Bank slip · Verify payments</td><td>Now</td></tr>
+    <tr><td>Receipt and payment proof</td><td>Student</td><td>Student</td><td>Receipts and history</td><td>Now</td></tr>
+    <tr><td>Unpaid dues block registration, exam or transcript</td><td>Finance · Chair</td><td>Administrator</td><td>Fee policy — what dues block</td><td>Now</td></tr>
+    <tr><td>Scholarship, waiver, sibling discount</td><td>Scholarship committee</td><td>Administrator</td><td>Scholarship approval; shown on the bill</td><td>Next</td></tr>
+    <tr><td>Late fee and fine</td><td>Finance</td><td>Student</td><td>Shown as a line on the bill</td><td>Now</td></tr>
+    <tr><td>Refund after drop or withdrawal</td><td>Finance</td><td>Student</td><td>Refund schedule shown before dropping</td><td>Now</td></tr>
+    <tr><td>Payment matching and daily reconciliation</td><td>Coordinator · Accounts</td><td>Coordinator</td><td>Verify payments</td><td>Now</td></tr>
+    <tr><td>Payroll, procurement, budgets</td><td>Finance</td><td>—</td><td>Finance system</td><td>Outside</td></tr>
+  </table>
+</section>
+
+<!-- G -->
+<section id="g-advising">
+  <h2>G · Advising, counselling and student support</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Regular academic advising</td><td>Advisor · Student</td><td>Student + Faculty</td><td>Advising appointment · My advisees</td><td>Now</td></tr>
+    <tr><td>Quick question to the advisor</td><td>Student</td><td>Student</td><td>Ask advisor a question</td><td>Now</td></tr>
+    <tr><td>Advising hold before registration</td><td>Chair</td><td>Student</td><td>Holds and how to clear them</td><td>Now</td></tr>
+    <tr><td>Support for a failing or absent student</td><td>Advisor · Chair</td><td>Faculty</td><td>At-risk flags in advisee list</td><td>Now</td></tr>
+    <tr><td>Personal or mental health counselling</td><td>Counsellor</td><td>Student</td><td>Confidential referral route</td><td>Next</td></tr>
+    <tr><td>Career guidance and job placement</td><td>Career office</td><td>Student</td><td>Campus services</td><td>Later</td></tr>
+    <tr><td>Support for students with disability</td><td>Chair · Faculty</td><td>Faculty</td><td>Exam moderation, accessible content</td><td>Now</td></tr>
+  </table>
+</section>
+
+<!-- H -->
+<section id="h-services">
+  <h2>H · Campus services</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Library borrowing and dues</td><td>Library</td><td>Student</td><td>Shown as a hold; borrowing stays in library system</td><td>Now / Outside</td></tr>
+    <tr><td>Hostel seat, rent and rules</td><td>Hostel office</td><td>Student</td><td>Service request; dues shown</td><td>Next</td></tr>
+    <tr><td>Transport pass and routes</td><td>Transport office</td><td>Student</td><td>Service request</td><td>Later</td></tr>
+    <tr><td>Medical centre visit</td><td>Medical centre</td><td>Student</td><td>Service request; medical exemption evidence</td><td>Later</td></tr>
+    <tr><td>ID card issue and replacement</td><td>Admin office</td><td>Student</td><td>Service request</td><td>Next</td></tr>
+    <tr><td>Certificate, testimonial, recommendation letter</td><td>Registrar · Faculty</td><td>Student + Coordinator</td><td>Document request · Document processing</td><td>Next</td></tr>
+    <tr><td>IT help — password, email, portal problem</td><td>IT</td><td>Student</td><td>Help and support</td><td>Now</td></tr>
+    <tr><td>Clearance before graduation</td><td>Several offices</td><td>Coordinator</td><td>Clearance processing</td><td>Next</td></tr>
+  </table>
+</section>
+
+<!-- I -->
+<section id="i-life">
+  <h2>I · Student life</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Clubs, societies and membership</td><td>Students · Club adviser</td><td>Student</td><td>Clubs and events</td><td>Later</td></tr>
+    <tr><td>Seminars, workshops, competitions</td><td>Department · Clubs</td><td>Student</td><td>Events and notices</td><td>Later</td></tr>
+    <tr><td>Sports and cultural programmes</td><td>Student affairs</td><td>Student</td><td>Events</td><td>Later</td></tr>
+    <tr><td>Volunteering and community service hours</td><td>Student affairs</td><td>Student</td><td>Records for co-curricular transcript</td><td>Later</td></tr>
+    <tr><td>Study tour, exchange, foreign programme</td><td>International office</td><td>Administrator</td><td>Credit transfer policy</td><td>Later</td></tr>
+  </table>
+</section>
+
+<!-- J -->
+<section id="j-conduct">
+  <h2>J · Conduct, discipline and grievance</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Exam malpractice case</td><td>Chair · Exam committee</td><td>Administrator</td><td>Disciplinary cases</td><td>Next</td></tr>
+    <tr><td>Plagiarism case</td><td>Faculty · Chair</td><td>Administrator</td><td>Disciplinary cases</td><td>Next</td></tr>
+    <tr><td>Ragging, harassment or misconduct complaint</td><td>Proctor · Committee</td><td>Administrator</td><td>Confidential case with restricted access</td><td>Next</td></tr>
+    <tr><td>Attendance or marks dispute</td><td>Student · Chair</td><td>Administrator</td><td>Review with full history of the record</td><td>Now</td></tr>
+    <tr><td>Appeal against a decision</td><td>Student</td><td>Administrator</td><td>Every automatic decision can show its reason</td><td>Now</td></tr>
+  </table>
+</section>
+
+<!-- K -->
+<section id="k-faculty">
+  <h2>K · Faculty affairs</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Teaching load and section assignment</td><td>Chair</td><td>Administrator</td><td>Compose offering and assign teachers</td><td>Now</td></tr>
+    <tr><td>Unstaffed section raised to the chair</td><td>Coordinator</td><td>Coordinator</td><td>Flag unstaffed sections</td><td>Now</td></tr>
+    <tr><td>Substitute teacher when someone leaves</td><td>Chair</td><td>Administrator</td><td>Reassign section</td><td>Now</td></tr>
+    <tr><td>Student evaluation of teaching</td><td>Students</td><td>Student + Administrator</td><td>Evaluation survey · Results</td><td>Next</td></tr>
+    <tr><td>Thesis and project supervision</td><td>Faculty</td><td>Faculty</td><td>Supervision</td><td>Next</td></tr>
+    <tr><td>Research output and publications</td><td>Faculty</td><td>—</td><td>Research system</td><td>Outside</td></tr>
+    <tr><td>Leave, promotion, appraisal</td><td>HR</td><td>—</td><td>HR system</td><td>Outside</td></tr>
+  </table>
+</section>
+
+<!-- L -->
+<section id="l-quality">
+  <h2>L · Quality, accreditation and reporting</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Course outcomes defined and mapped</td><td>Chair · Faculty</td><td>Administrator</td><td>Outcome framework</td><td>Later</td></tr>
+    <tr><td>Outcome attainment measured from marks</td><td>System</td><td>Administrator</td><td>Attainment report</td><td>Later</td></tr>
+    <tr><td>Course file / course portfolio prepared</td><td>Faculty</td><td>Faculty</td><td>Evidence bundle from real records</td><td>Later</td></tr>
+    <tr><td>Self-assessment report for accreditation</td><td>Quality cell</td><td>Administrator</td><td>Evidence export</td><td>Later</td></tr>
+    <tr><td>UGC and ministry reporting</td><td>Registrar</td><td>Administrator</td><td>Reports from real data</td><td>Later</td></tr>
+    <tr><td>Department performance review</td><td>Chair · Dean</td><td>Administrator</td><td>Ask the department</td><td>Next</td></tr>
+  </table>
+</section>
+
+<!-- M -->
+<section id="m-exit">
+  <h2>M · Graduation and alumni</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Degree audit — is the student complete?</td><td>Advisor · Registrar</td><td>Student</td><td>Degree plan</td><td>Now</td></tr>
+    <tr><td>Internship or final thesis</td><td>Student · Supervisor</td><td>Faculty</td><td>Supervision</td><td>Next</td></tr>
+    <tr><td>Graduation application</td><td>Student</td><td>Student</td><td>Document and application request</td><td>Next</td></tr>
+    <tr><td>Clearance from all offices</td><td>Student · Offices</td><td>Coordinator</td><td>Clearance processing</td><td>Next</td></tr>
+    <tr><td>Convocation registration and fee</td><td>Student · Registrar</td><td>Student</td><td>Fees and events</td><td>Later</td></tr>
+    <tr><td>Certificate and final transcript</td><td>Registrar</td><td>Coordinator</td><td>Document processing</td><td>Next</td></tr>
+    <tr><td>Alumni record handover</td><td>Alumni office</td><td>Coordinator</td><td>Graduation list and alumni handover</td><td>Later</td></tr>
+  </table>
+</section>
+
+<!-- N -->
+<section id="n-institution">
+  <h2>N · Running the institution</h2>
+  <table>
+    <tr><th>Activity</th><th>Who does it</th><th>Module</th><th>Feature</th><th>Stage</th></tr>
+    <tr><td>Academic calendar and term dates</td><td>Registrar</td><td>Administrator</td><td>Term windows in policy</td><td>Now</td></tr>
+    <tr><td>Curriculum approval and revision</td><td>Academic council</td><td>Administrator</td><td>Catalogue version</td><td>Next</td></tr>
+    <tr><td>Grading scale change</td><td>Academic council</td><td>Administrator</td><td>Policy with effective date</td><td>Now</td></tr>
+    <tr><td>Attendance rule change</td><td>Academic council</td><td>Administrator</td><td>Policy with effective date</td><td>Now</td></tr>
+    <tr><td>Notices to all students or staff</td><td>Registrar · Coordinator</td><td>Coordinator</td><td>Notices and bulk communication</td><td>Now</td></tr>
+    <tr><td>Which parts of the platform are switched on</td><td>Chair · IT</td><td>Administrator</td><td>Module entitlements</td><td>Now</td></tr>
+    <tr><td>Who can see what</td><td>IT · Chair</td><td>All</td><td>Roles and permissions</td><td>Now</td></tr>
+    <tr><td>Data privacy, consent and record keeping</td><td>Registrar · IT</td><td>All</td><td>Privacy and audit</td><td>Now</td></tr>
+  </table>
+</section>
+
+<section id="scope">
+  <h2>What we build, and when</h2>
+  <table>
+    <tr><th>Stage</th><th>What it covers</th><th>Why this order</th></tr>
+    <tr><td><strong>Now</strong></td><td>Records loading, offering and staffing, teaching, content, attendance, assignments, quizzes, grading, grade submission, certification, exam eligibility, results to registrar, fees and online payment, holds, advising, notices, policy settings</td><td>This is a complete working term. A university can run a full semester without spreadsheets.</td></tr>
+    <tr><td><strong>Next</strong></td><td>Exam schedule and duty, question paper support, documents and clearance, scholarships, discipline cases, teacher evaluation, thesis supervision, semester drop and readmission, AI help</td><td>These are the office activities that surround the term.</td></tr>
+    <tr><td><strong>Later</strong></td><td>Outcome-based education reports, accreditation evidence, clubs and events, transport and medical, alumni, convocation</td><td>Valuable, but no university will refuse to buy without them on day one.</td></tr>
+    <tr><td><strong>Outside</strong></td><td>Admission processing, payroll, procurement, HR, research management, library circulation, actual banking</td><td>These already exist at every university. We connect to them instead of replacing them.</td></tr>
+  </table>
+  <div class="callout ok">
+    <b>How to use this page in a sales conversation</b>
+    When a university asks "does it handle X?", find X in these tables. The answer is always one of four honest things: we do it now, we do it next, it is planned, or it stays in your existing system and we connect to it.
+  </div>
+</section>
+
+<footer>
+  University activity map · If an activity happens on campus and is not listed here, it is a gap in this document — tell us and it gets added.
+</footer>
+</main>
+</div>
+</body>
+</html>

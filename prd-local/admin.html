@@ -1,0 +1,1357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Administrator module — Shikho Campus PRD</title>
+<link rel="stylesheet" href="./pro.css?v=20"/>
+<link rel="stylesheet" href="./spec.css?v=20"/>
+<link rel="stylesheet" href="./dev.css?v=20"/>
+<script src="./nav.js?v=20" defer></script>
+</head>
+<body>
+<div class="layout">
+
+<nav>
+  <div class="brand">Shikho Campus</div>
+  <div class="sub">Administrator module</div>
+
+  <div class="g">On this page</div>
+  <a href="#introduction">Introduction</a>
+  <a href="#features">All features</a>
+
+  <div class="g">Features</div>
+  <a href="#ADM-HOME-01">Decisions dashboard</a>
+  <a href="#ADM-CRT-01">Certify grades</a>
+  <a href="#ADM-ELG-01">Exam eligibility</a>
+  <a href="#ADM-STF-01">Compose offering</a>
+  <a href="#ADM-XL-01">Cross-list sections</a>
+  <a href="#ADM-POL-01">Academic policy</a>
+  <a href="#ADM-FEE-01">Fee policy</a>
+  <a href="#ADM-SCH-01">Scholarships</a>
+  <a href="#ADM-EXM-01">Exam schedule</a>
+  <a href="#ADM-DSP-01">Disciplinary cases</a>
+  <a href="#ADM-QAC-01">Accreditation reports</a>
+  <a href="#ADM-FDB-01">Teacher evaluation</a>
+  <a href="#ADM-TOG-01">Module entitlements</a>
+  <a href="#ADM-AI-01">Ask the department</a>
+
+  <div class="g">Go to</div>
+  <a href="./ai.html">Shikho Campus AI</a>
+  <a href="./university-activities.html">All university activities</a>
+  <a href="./platform.html">How parts connect</a>
+  <a href="./index.html">Overview</a>
+  <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
+  <a href="./student.html">Student</a>
+  <a href="./faculty.html">Faculty</a>
+  <a href="./coordinator.html">Coordinator</a>
+  <a href="./platform.html">Platform &amp; loops</a>
+</nav>
+
+<main>
+<div class="page-bar">
+  <a class="page-bar-back" href="./index.html">← Back to overview</a>
+  <a class="page-bar-demo" href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open live demo ↗</a>
+</div>
+
+
+<header>
+  <h1>The Administrator module</h1>
+  <p class="lede">Chair, dean and registrar-side governance for a private university term: certify results, lock exam eligibility, staff the offering, publish academic and fee policy, approve scholarships, run exams and discipline, and read accreditation evidence.</p>
+</header>
+<aside class="demo-strip">
+  <strong>Live demo</strong>
+  <span>Open the live campus demo and try the Administrator role.</span>
+  <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">shikho-brac-platform.vercel.app ↗</a>
+</aside>
+
+
+<section id="introduction">
+<h2>Introduction to the Administrator module</h2>
+
+<h3>What this module is</h3>
+<p>The Administrator module is the governance layer of Shikho Campus. It is where a department chair, a dean, a controller of exams or a registrar delegate makes institutional decisions that other people must live by: this section’s marks are now official; these students may sit the final; this teacher owns this section; this attendance rule is the one we will lock; these unpaid dues block admit cards; this waiver is approved for finance to apply.</p>
+<p>It is not a second gradebook, not a finance ledger, and not a clerical import desk. Those jobs belong to Faculty, to the university’s finance systems (mirrored through the Coordinator module), and to the Coordinator records desk. Administration answers a different question: <strong>is the institution running correctly, and what needs my decision before students are harmed by delay?</strong></p>
+
+<h3>Who uses it</h3>
+<p>Primary users are academic officers — chairs and heads of department — working on a laptop in a department office in Dhaka, Chattogram or Sylhet, usually between meetings. Deans and school offices use wider views across departments. Registrar and exam-controller delegates use certification queues, eligibility locks, exam schedules and policy publishing. Quality assurance officers use outcome and evaluation reports before BAC or BAETE visits. None of these people should need a developer vocabulary to understand the screens.</p>
+
+<h3>A day in the life</h3>
+<p>It is a Sunday morning in result week. The chair of Computer Science opens Administrator → Decisions dashboard before the first meeting. Seven items are due today: four sections waiting for grade certification, one unstaffed laboratory section the coordinator flagged on Thursday, a merit-waiver case that must clear before billing lock, and an eligibility exception for a student with a hospital letter. She opens the first section under Administrator → Certify grades, reads the distribution and the flags, and certifies — she cannot type over a mark even if a parent is waiting outside. She returns one section to a teacher with a written reason about an unexplained fail concentration. She assigns a teacher to the laboratory under Administrator → Compose offering. She approves the waiver category for finance to price. She grants a time-bounded exam exception under Administrator → Exam eligibility and notes that the list will lock tomorrow evening. By lunch the dashboard is quieter, students who were blocked only by waiting signatures can move, and nothing on her screens has invented a fee or altered a teacher’s judgement.</p>
+
+<h3>What this module owns, and what it does not</h3>
+  <table>
+    <tr><th>It owns</th><th>It does not own</th></tr>
+    <tr><td>Certify or return decisions on submitted finals</td><td>Individual marks — teachers author marks; chairs never edit them</td></tr>
+    <tr><td>Teacher assignment to sections and cross-listing decisions</td><td>Bulk SIS import of students and empty offerings — coordinator loads records</td></tr>
+    <tr><td>Published academic policy (scale, attendance, probation, credits, retakes)</td><td>Invoice amounts and payment settlement — finance owns money; platform never holds it</td></tr>
+    <tr><td>Fee-block matrix: which unpaid dues block which academic acts</td><td>Creating tuition figures or taking payment</td></tr>
+    <tr><td>Scholarship/waiver approval decisions (categories and conditions)</td><td>Posting the taka reduction inside finance</td></tr>
+    <tr><td>Exam eligibility lock, exceptions, exam timetable and invigilation duty</td><td>Day-to-day attendance entry — faculty ledger</td></tr>
+    <tr><td>Disciplinary case register and sanctions that create holds</td><td>Secret changes to gradebooks disguised as discipline</td></tr>
+    <tr><td>Accreditation evidence packs and teacher-evaluation aggregates</td><td>Identifiable student survey responses</td></tr>
+    <tr><td>Module entitlement switches for the university</td><td>Deleting academic history when a module is turned off</td></tr>
+  </table>
+
+<div class="callout danger">
+  <b>Three lines nobody may cross</b>
+  The administrator never edits a mark — only certify or return. The platform never holds student money — dues and payments belong to the university finance path. The coordinator path never assigns teachers and never creates fee amounts; staffing and fee policy live here, record loading and verification live there.
+</div>
+
+<h3>How it connects with the other three modules</h3>
+  <table>
+    <tr><th>Other module</th><th>What flows from Administrator</th><th>What flows into Administrator</th></tr>
+    <tr><td>Student</td><td>Certified results visibility rules, eligibility status, holds from fee policy, exam schedule, scholarship outcomes, evaluation survey windows</td><td>Course evaluation responses (anonymous), payment and registration consequences of holds, document/clearance pressure that surfaces on dashboards</td></tr>
+    <tr><td>Faculty</td><td>Section assignments, policy scales, return reasons, invigilation duties, cross-list teaching spaces, evaluation aggregates for own sections</td><td>Submitted finals, attendance ledgers, misconduct referrals, assessment outcome maps</td></tr>
+    <tr><td>Coordinator</td><td>Staffing that clears unstaffed flags, fee-block rules, certified-only export eligibility, exam room needs, clearance sanctions</td><td>Unstaffed flags, finance dues mirrors, bank-slip verification outcomes, document/clearance progress, export acknowledgements</td></tr>
+  </table>
+</section>
+
+<section id="admin-flow">
+  <h2>What the chair decides — and what they never do</h2>
+  <p>The Administrator module is a decision desk, not a second gradebook and not a finance ledger. The morning screen (ADM-HOME-01) queues only decisions that unlock students or the calendar. The binding limits are:</p>
+  <table>
+    <tr><th>Decision</th><th>What the chair may do</th><th>What the chair may not do</th></tr>
+    <tr><td>Final grades</td><td>Certify a submitted sheet, or return it with a written reason</td><td>Edit any individual mark</td></tr>
+    <tr><td>Exam eligibility</td><td>Lock who may sit finals from attendance and fee rules; grant named exceptions with reasons</td><td>Invent attendance figures or hide the rule that produced a bar</td></tr>
+    <tr><td>Staffing</td><td>Assign teachers to sections so an unstaffed offering can open</td><td>Teach or mark on a colleague’s behalf from this module</td></tr>
+    <tr><td>Fee consequences</td><td>Publish which unpaid dues block registration, admit cards, documents, or class access</td><td>Create invoice amounts or hold student money</td></tr>
+    <tr><td>Analyst (AI)</td><td>Ask read-only questions against records the chair may already see</td><td>Change a record, or see a teacher’s private Momentum</td></tr>
+  </table>
+  <aside class="demo-strip">
+    <strong>Live demo</strong>
+    <span>Choose Administrator, then open Certify or Analyst.</span>
+    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
+  </aside>
+</section>
+
+
+<section id="features">
+<h2>Features at a glance</h2>
+<p>Fourteen features. Priority marks what a university needs before a live term can be governed safely. The right-hand column is where most integration effort lives.</p>
+  <table>
+    <tr><th>Feature ID</th><th>Feature name</th><th>One-line description</th><th>Priority</th><th>Connects with</th></tr>
+    <tr><td><strong>ADM-HOME-01</strong></td><td>Decisions dashboard</td><td>One morning screen of decisions waiting, ranked by how soon they block students or the calendar.</td><td>P0</td><td>All administrator features; coordinator unstaffed flags; student/faculty unlocks</td></tr>
+    <tr><td><strong>ADM-CRT-01</strong></td><td>Certify final grades</td><td>Review submitted finals and certify or return — never edit a mark.</td><td>P0</td><td>Faculty gradebook; COO-EXP-01; student results; ADM-HOME-01</td></tr>
+    <tr><td><strong>ADM-ELG-01</strong></td><td>Exam eligibility from attendance</td><td>Compute eligible/barred lists from attendance, lock before exams, record exceptions.</td><td>P0</td><td>Faculty attendance; ADM-POL-01; student exam info; ADM-EXM-01</td></tr>
+    <tr><td><strong>ADM-STF-01</strong></td><td>Compose offering and assign teachers</td><td>Build the term offering and assign teachers — the only place staffing happens.</td><td>P0</td><td>COO-IMP-01; COO-FLG-01; Faculty home; student course headers</td></tr>
+    <tr><td><strong>ADM-XL-01</strong></td><td>Cross-list sections</td><td>Link sections to share teaching while keeping official rosters separate.</td><td>P1</td><td>ADM-STF-01; Faculty content/gradebook; ADM-CRT-01; ADM-ELG-01</td></tr>
+    <tr><td><strong>ADM-POL-01</strong></td><td>Academic policy settings</td><td>Grade scale, attendance rule, probation, credit limits, retake caps — one published truth.</td><td>P0</td><td>Gradebook; eligibility; registration; accreditation</td></tr>
+    <tr><td><strong>ADM-FEE-01</strong></td><td>Fee policy and what unpaid dues block</td><td>Map finance charge types to academic holds — platform never holds money.</td><td>P0</td><td>COO-FEE-01; COO-REC-01; student holds; scholarships</td></tr>
+    <tr><td><strong>ADM-SCH-01</strong></td><td>Scholarships and waivers approval</td><td>Approve aid categories for finance to apply — officers do not invent invoice amounts.</td><td>P1</td><td>ADM-FEE-01; finance via coordinator sync; student fee dashboard</td></tr>
+    <tr><td><strong>ADM-EXM-01</strong></td><td>Exam schedule and invigilation duty</td><td>Publish exam timetable, rooms and invigilator duties.</td><td>P1</td><td>Eligibility lists; student exam info; faculty calendar; class routine</td></tr>
+    <tr><td><strong>ADM-DSP-01</strong></td><td>Disciplinary cases</td><td>Track notice, response, hearing and sanctions with due-process audit.</td><td>P1</td><td>Faculty referrals; student holds; ADM-HOME-01; accreditation metrics</td></tr>
+    <tr><td><strong>ADM-QAC-01</strong></td><td>Accreditation and outcome reports</td><td>Assemble OBE / BAC / BAETE evidence packs from certified data.</td><td>P1</td><td>Faculty outcomes; ADM-CRT-01; ADM-FDB-01; ADM-POL-01</td></tr>
+    <tr><td><strong>ADM-FDB-01</strong></td><td>Teacher evaluation results</td><td>Aggregate course-evaluation results for chairs — never student identities.</td><td>P1</td><td>Student course evaluation; faculty self-view; ADM-QAC-01</td></tr>
+    <tr><td><strong>ADM-TOG-01</strong></td><td>Module entitlements on/off</td><td>Switch licensed feature bundles on or off without redeploying.</td><td>P0</td><td>All modules’ navigation; platform tenant config</td></tr>
+    <tr><td><strong>ADM-AI-01</strong></td><td>Ask the department</td><td>Read-only analytics questions for chairs — cannot change records.</td><td>P2</td><td>Certify, staffing, eligibility data; ADM-QAC-01; ADM-HOME-01</td></tr>
+  </table>
+</section>
+
+<h2 id="feature-details">Feature details</h2>
+<p>Each feature below uses the same structure: what it does, why it exists, who uses it, what they see, how the work runs, what information moves, what it connects with, configurable rules, hard prohibitions, unusual cases, and how we know it works.</p>
+
+<article class="spec" id="ADM-HOME-01">
+  <div class="spec-head"><h3>ADM-HOME-01 · Decisions dashboard</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Gives the chair, dean or registrar one morning screen of decisions waiting — grades to certify, unstaffed sections, scholarship cases, disciplinary files, exam-duty gaps and fee-block exceptions — ranked by how soon they block students or the term calendar. One frame whose state changes by term phase (setup · current · closed), not three pages. Same three sections always: Needs you · Timeline · Performance. Needs you surfaces Certify, Eligibility, and Staff a section. An Ask bar opens Analyst.</p>
+  <h4>Why it exists</h4>
+  <p>At a Bangladeshi private university the calendar moves on hard deadlines: add-drop closes, eligibility locks, finals start, results must reach the registrar. Chairs and deans lose hours hunting email and spreadsheets for what needs a signature today. Without one decisions surface, urgent certification sits behind routine notices, a section opens without a teacher, and a student discovers a blocked admit card too late. The dashboard exists so governance work starts with urgency, not with browsing menus.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Chair / head of department</td><td>Every working morning, and again before eligibility lock and finals</td><td>A ranked list of department decisions only their signature can clear</td></tr>
+    <tr><td>Dean / school office</td><td>Weekly review and before academic council</td><td>Cross-department hotspots: late certifications, staffing gaps, fee-block spikes</td></tr>
+    <tr><td>Registrar (institutional queue)</td><td>Result weeks and graduation windows</td><td>What remains uncertified or uncleared before transcript printing</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Header</strong>
+      <p>Title “Decisions today”, term selector, last refreshed time, department filter for multi-department roles.</p>
+      <div class="copy">Decisions today — Spring 2026 · Computer Science &amp; Engineering</div>
+      <div class="copy">Last updated 8 minutes ago</div>
+    </div>
+    <div class="zone">
+      <strong>Urgency strip</strong>
+      <p>Tiles: Due today · Due this week · Returned to teachers · Waiting on other offices. Each tile filters the list.</p>
+      <div class="copy">7 due today</div>
+      <div class="copy">12 due this week</div>
+    </div>
+    <div class="zone">
+      <strong>Decision list</strong>
+      <p>Rows sorted by deadline then severity. Each row shows decision type, course or student, who is waiting, age, and a link into the owning feature.</p>
+      <div class="copy">Certify grades — CSE110 Section A · submitted by Dr Rahman · 2 days waiting</div>
+      <div class="copy">Unstaffed section — ENG201 Section C · term starts in 5 days</div>
+    </div>
+    <div class="zone">
+      <strong>Calm empty state</strong>
+      <p>When the queue is clear, the screen says so and only shows the next calendar checkpoint.</p>
+      <div class="copy">Nothing needs your decision right now. Next checkpoint: eligibility lock in 9 days.</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Chair</span>Opens Administrator → Decisions dashboard at the start of the day.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Loads open decisions for the selected term and department, ranks by deadline and severity, and shows counts.</div></li>
+    <li><span class="n">3</span><div><span class="who">Chair</span>Opens “Due today” and works the top row.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Opens the correct feature screen with that case already selected.</div></li>
+    <li><span class="n">5</span><div><span class="who">Chair</span>Completes the decision there, then returns to the dashboard.</div></li>
+    <li><span class="n">6</span><div><span class="who">System</span>Removes or re-ranks the row and refreshes the counts.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Open decision items</td><td>Grade submissions, staffing flags, scholarship queues, discipline files, exam gaps, fee exceptions</td><td>Dashboard list and urgency tiles</td></tr>
+    <tr><td>Deadlines and calendar checkpoints</td><td>Academic calendar and policy lock dates</td><td>Ranking and “next checkpoint” copy</td></tr>
+    <tr><td>Decision outcome</td><td>Completed action in the owning feature</td><td>Dashboard refresh; who-acted audit</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>ADM-CRT-01 Certify final grades</td><td>Pending section certifications</td><td>Clears the bottleneck that blocks transcripts</td></tr>
+    <tr><td>COO-FLG-01 Flag unstaffed sections</td><td>Sections without teachers</td><td>Staffing risk is visible before classes start</td></tr>
+    <tr><td>ADM-SCH-01 Scholarships and waivers</td><td>Cases awaiting approval</td><td>Money decisions do not sit in email</td></tr>
+    <tr><td>ADM-DSP-01 Disciplinary cases</td><td>Open case deadlines</td><td>Due-process clocks stay visible</td></tr>
+    <tr><td>Student and Faculty modules</td><td>Unlocked results, reopened gradebooks, cleared blockers</td><td>A cleared decision immediately changes what others can do</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Which decision types appear for each role (chair vs dean vs registrar).</li>
+    <li>How many days before a deadline a row turns “due today” versus “due this week”.</li>
+    <li>Whether returned grade sections stay listed until the teacher resubmits.</li>
+    <li>Department scope: chair sees own department; dean may see a school; registrar may see institution-wide result queues.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>The dashboard must never let anyone edit a mark from a shortcut — only open certify or return.</li>
+    <li>It must never invent a fee amount or imply the platform holds student money.</li>
+    <li>It must never hide a decision that blocks an admit card or registration without naming the owning office.</li>
+    <li>It must never show another department’s confidential disciplinary detail outside the viewer’s scope.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If two chairs share a dual appointment, each sees only cases in their assigned scope.</li>
+    <li>If a decision is completed in another tab, the list refreshes so a second person does not act twice.</li>
+    <li>If the term has no open decisions, the calm empty state appears — not a blank page.</li>
+    <li>If the coordinator raises a new unstaffed flag, it appears on the next refresh.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A chair can clear a morning queue without opening unrelated menus.</li>
+    <li>Every row that blocks a student names the next action in plain language.</li>
+    <li>Returned certifications and unstaffed sections stay visible until resolved.</li>
+    <li>Walking from a dashboard row into the feature and back updates the count.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-CRT-01">
+  <div class="spec-head"><h3>ADM-CRT-01 · Certify final grades</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Lets the chair review a section’s submitted finals — distribution, pass rate, flags — and either certify the whole section for the registrar or return it to the teacher with a written reason. The chair never changes a single mark.</p>
+  <h4>Why it exists</h4>
+  <p>A transcript line becomes permanent institutional truth. Teachers judge; chairs govern. Without a certify step, uneven distributions or incomplete columns reach the registrar unchecked. Without a hard ban on mark editing, chairs quietly “fix” numbers and destroy the audit trail. This feature inserts one governance gate — certify or return — and nothing else.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Chair / head of department</td><td>After teachers submit finals, usually in result week</td><td>Review fairness signals and decide certify or return</td></tr>
+    <tr><td>Dean (escalation)</td><td>When a returned section is disputed or chronically late</td><td>See return history without editing marks</td></tr>
+    <tr><td>Teacher (indirect)</td><td>When a section is returned</td><td>Read the reason and reopen the gradebook to correct and resubmit</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Queue</strong>
+      <p>Administrator → Certify grades. Filters: All · Flagged · Ready · Returned. Term selector. Pending count.</p>
+      <div class="copy">Grade certifications — Spring 2026</div>
+      <div class="copy">No sections awaiting certification for Spring 2026.</div>
+    </div>
+    <div class="zone">
+      <strong>Section review</strong>
+      <p>Course, section, teacher, enrolment, submitted time. Stats: median, mean, pass rate, difference from course average. Letter-band chart. Flags. Read-only grade table with no editable cells.</p>
+      <div class="copy">You can certify or return this section. Marks cannot be edited here.</div>
+    </div>
+    <div class="zone">
+      <strong>Decision footer</strong>
+      <p>Primary: Certify section. Secondary: Return to teacher with a minimum-length reason. Bulk certify only for unflagged rows if the university allows it.</p>
+      <div class="copy">Certify section</div>
+      <div class="copy">Return to teacher — please explain what must change</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Chair</span>Opens Administrator → Certify grades and selects the term.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Shows sections in submitted or returned status, highlighting flagged ones.</div></li>
+    <li><span class="n">3</span><div><span class="who">Chair</span>Opens a section, reviews stats, distribution, flags and the read-only table.</div></li>
+    <li><span class="n">4</span><div><span class="who">Chair</span>Either certifies, or returns with a clear written reason.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>On certify, releases the section to registrar export and applies student visibility rules. On return, reopens the teacher gradebook and notifies the teacher.</div></li>
+    <li><span class="n">6</span><div><span class="who">Chair</span>Continues until nothing remains due today.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Submitted finals and rollups</td><td>Faculty gradebook submission</td><td>Chair review table (read-only)</td></tr>
+    <tr><td>Distribution and flag summaries</td><td>Calculated from submitted marks and policy thresholds</td><td>Chair decision support</td></tr>
+    <tr><td>Certification or return decision</td><td>Chair action with reason if returned</td><td>Registrar export; teacher notification; student result visibility</td></tr>
+    <tr><td>Immutable audit of who certified or returned</td><td>This feature</td><td>Accreditation and dispute evidence</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Faculty gradebook</td><td>Submitted section package</td><td>Chair reviews what teachers actually submitted</td></tr>
+    <tr><td>COO-EXP-01 Send certified results</td><td>Only certified sections</td><td>Registrar never receives uncertified marks</td></tr>
+    <tr><td>Student grades &amp; standing</td><td>Final visibility after certify and any published result day</td><td>Students see institutional results, not drafts</td></tr>
+    <tr><td>ADM-HOME-01 Decisions dashboard</td><td>Pending certification count</td><td>Chair morning priority</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Whether bulk certify is allowed, and only for unflagged sections.</li>
+    <li>Minimum length and required fields for a return reason.</li>
+    <li>Which statistical flags appear (high fail rate, skew, incomplete marks, outliers).</li>
+    <li>Whether students see finals immediately on certify or after a published result day.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>The administrator must never edit, override, or type a mark — not even to correct a typo.</li>
+    <li>Certify must never accept a section with incomplete required columns if policy forbids it.</li>
+    <li>Return must never happen without a reason the teacher can read.</li>
+    <li>A certified section must never silently reopen for mark edits without a formal university reopening process.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If the teacher is on leave when returned, the co-teacher or department office is notified from the staffing record.</li>
+    <li>If flags exist, bulk certify is blocked; the chair opens each flagged section.</li>
+    <li>If two chairs try to certify the same section, only the first succeeds.</li>
+    <li>If course evaluation must finish before results open, certify still records governance but student visibility waits on that rule.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>No screen in this feature contains an editable mark field.</li>
+    <li>Every certified section appears in the coordinator’s registrar export list.</li>
+    <li>Every return lands in the teacher’s gradebook with the reason visible.</li>
+    <li>An auditor sees who certified which section and when — and never sees a mark changed by an administrator.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-ELG-01">
+  <div class="spec-head"><h3>ADM-ELG-01 · Exam eligibility from attendance</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Computes who may sit midterms and finals from attendance, using the university’s percentage or band rules, locks the list before exams, and lets authorised officers grant documented exceptions.</p>
+  <h4>Why it exists</h4>
+  <p>Private universities in Bangladesh commonly bar students below an attendance threshold from exams. When eligibility lives in a spreadsheet, students argue at the door and exceptions vanish without a trail. This feature turns attendance into a clear eligible / barred / exception list before admit cards print, with a lock so last-minute lobbying cannot rewrite history unnoticed.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Chair / exam committee</td><td>Before midterms and finals, at the configured lock date</td><td>Publish and lock eligibility; review exceptions</td></tr>
+    <tr><td>Department office</td><td>In the weeks before lock</td><td>Spot near-threshold students and chase attendance corrections with faculty</td></tr>
+    <tr><td>Student (indirect)</td><td>When checking exam information</td><td>See eligible, barred, or exception-granted status with the rule explained</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Rule summary</strong>
+      <p>Administrator → Exam eligibility. Active rule in plain language, lock date, which assessments it applies to.</p>
+      <div class="copy">Final exam eligibility — 75% of classes conducted in the section</div>
+      <div class="copy">Lock date: 3 days before the first final</div>
+    </div>
+    <div class="zone">
+      <strong>Section roster</strong>
+      <p>Per section: student, attendance %, band (Clear / Warning / Barred), exception status. Filters for barred and near-threshold.</p>
+      <div class="copy">12 students below 75% in CSE110 Section A</div>
+    </div>
+    <div class="zone">
+      <strong>Exception panel</strong>
+      <p>Reason, supporting note, approver, expiry. Exception records a governed override for sitting only — it does not rewrite raw attendance.</p>
+      <div class="copy">Exception granted for medical leave — valid for Midterm only · approved by Chair</div>
+    </div>
+    <div class="zone">
+      <strong>Lock control</strong>
+      <p>Lock eligibility for the assessment window. After lock, attendance edits do not change sitting rights unless formally unlocked.</p>
+      <div class="copy">Eligibility locked for Finals — Spring 2026</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Chair</span>Opens Administrator → Exam eligibility and confirms the published attendance rule.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Calculates each student’s standing from the faculty attendance ledger against the rule.</div></li>
+    <li><span class="n">3</span><div><span class="who">Chair</span>Reviews barred and warning lists; asks faculty to correct obvious ledger errors before lock.</div></li>
+    <li><span class="n">4</span><div><span class="who">Chair</span>Approves or denies exception requests with reasons.</div></li>
+    <li><span class="n">5</span><div><span class="who">Chair</span>Locks eligibility for the exam window.</div></li>
+    <li><span class="n">6</span><div><span class="who">System</span>Feeds status to admit cards and student exam screens; freezes sitting rights for that window.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Attendance sessions and joins</td><td>Faculty attendance ledger and live-class joins</td><td>Eligibility calculation</td></tr>
+    <tr><td>Eligibility rule and lock date</td><td>ADM-POL-01 Academic policy</td><td>This feature’s engine</td></tr>
+    <tr><td>Exception decisions</td><td>Chair / authorised officer</td><td>Exam admit logic; audit</td></tr>
+    <tr><td>Locked eligibility list</td><td>This feature after lock</td><td>Student exam information; invigilation lists</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Faculty attendance ledger</td><td>Present / absent / late per session</td><td>Truth for percentages</td></tr>
+    <tr><td>Student exam information</td><td>Eligible / barred / exception label</td><td>Student knows before exam day</td></tr>
+    <tr><td>ADM-EXM-01 Exam schedule</td><td>Who appears on room lists</td><td>Invigilators do not seat barred students</td></tr>
+    <tr><td>ADM-POL-01 Academic policy</td><td>Threshold, bands, lock offset</td><td>University rule, not a one-off spreadsheet</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Attendance threshold percentage, or named bands with cut-offs.</li>
+    <li>Whether late arrival counts as present, partial, or absent.</li>
+    <li>How many days before the exam eligibility locks.</li>
+    <li>Who may grant exceptions (chair only, or also dean / controller of exams).</li>
+    <li>Whether an exception applies to midterm only, final only, or the whole term.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Eligibility must never be invented without attendance data or a recorded exception.</li>
+    <li>A locked list must never change because someone edited attendance quietly after the lock.</li>
+    <li>An exception must never alter the historical attendance percentage — only sitting permission.</li>
+    <li>Students must never see eligible status if they are barred and no exception exists.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If a teacher corrects attendance before lock, eligibility recalculates automatically.</li>
+    <li>If correction arrives after lock, it queues as a formal unlock request — not a silent fix.</li>
+    <li>If a section never met, the system flags “insufficient sessions” instead of barring everyone at zero percent.</li>
+    <li>If sections are cross-listed, attendance follows the university’s cross-list counting rule.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Admit cards refuse barred students without a valid exception.</li>
+    <li>Lock timestamps and exception reasons are visible to auditors.</li>
+    <li>Near-threshold students can be listed for counselling before lock day.</li>
+    <li>A student barred in one section is not automatically barred in another without that section’s own result.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-STF-01">
+  <div class="spec-head"><h3>ADM-STF-01 · Compose offering and assign teachers</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Lets the chair build the term’s section offering and assign primary and secondary teachers. This is the only place teachers are assigned — coordinators load empty sections; chairs staff them.</p>
+  <h4>Why it exists</h4>
+  <p>An unstaffed section on day one is a student crisis and a reputation wound. Coordinators know the catalogue and the rooms; chairs know who can teach what. Separating record load from teacher assignment prevents a clerk from quietly placing a favourite teacher, and keeps academic judgement with the department head.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Chair / head of department</td><td>Before term start, and whenever a teacher leaves or a new section opens</td><td>Assign or reassign teachers to every section</td></tr>
+    <tr><td>Dean (oversight)</td><td>When a department is chronically understaffed</td><td>See unstaffed counts across departments</td></tr>
+    <tr><td>Coordinator (indirect)</td><td>After import, when flagging gaps</td><td>Cannot assign — only flag for the chair</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Offering grid</strong>
+      <p>Administrator → Compose offering. Rows: course, section, capacity, room hint, primary teacher, secondary / co-teacher, status Staffed or Unstaffed.</p>
+      <div class="copy">Spring 2026 offering — 4 sections still unstaffed</div>
+    </div>
+    <div class="zone">
+      <strong>Assign panel</strong>
+      <p>Search faculty by name or load; show teaching load this term; pick primary and optional co-teacher; save.</p>
+      <div class="copy">Assign teacher — CSE110 Section B</div>
+      <div class="copy">Dr A. Rahman · current load 3 sections · maximum 4</div>
+    </div>
+    <div class="zone">
+      <strong>Conflict hints</strong>
+      <p>Warns when the same teacher is double-booked against the class routine, without blocking save if the university allows override with a reason.</p>
+      <div class="copy">Time conflict with ENG201 Section A on Sunday 10:00 — save anyway with reason?</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Chair</span>Opens Administrator → Compose offering for the term.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Shows all sections from the coordinator’s offering load, with staffing status.</div></li>
+    <li><span class="n">3</span><div><span class="who">Chair</span>Opens an unstaffed section, searches faculty, checks load, assigns primary teacher.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Updates the section to Staffed and notifies the teacher of the assignment.</div></li>
+    <li><span class="n">5</span><div><span class="who">Chair</span>Repeats until unstaffed count is zero or remaining gaps are accepted with a plan.</div></li>
+    <li><span class="n">6</span><div><span class="who">System</span>Clears related flags on the decisions dashboard and the coordinator’s unstaffed list.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Section offering skeleton</td><td>Coordinator record load (students, faculty directory, offerings)</td><td>Staffing grid</td></tr>
+    <tr><td>Faculty directory and load</td><td>Faculty records and existing assignments</td><td>Assign panel</td></tr>
+    <tr><td>Teacher assignment</td><td>Chair decision</td><td>Faculty home; student roster of who teaches; live class host rights</td></tr>
+    <tr><td>Unstaffed status</td><td>Absence of assignment</td><td>COO-FLG-01 and ADM-HOME-01</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>COO-IMP-01 Load records</td><td>Empty sections without teachers</td><td>Chair receives something to staff</td></tr>
+    <tr><td>COO-FLG-01 Flag unstaffed sections</td><td>Gap list</td><td>Chair sees what still needs a person</td></tr>
+    <tr><td>Faculty module</td><td>Section assignment</td><td>Teacher sees courses on their home</td></tr>
+    <tr><td>Student course workspace</td><td>Teacher name on the section</td><td>Students know who teaches them</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Maximum teaching load per faculty rank.</li>
+    <li>Whether co-teachers are required for large sections.</li>
+    <li>Whether time-conflict overrides are allowed, and who must enter a reason.</li>
+    <li>Whether graduate teaching assistants may be assigned as secondary only.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>The coordinator role must never assign or change a teacher here or anywhere else.</li>
+    <li>Import must never carry a teacher column into a live assignment.</li>
+    <li>A section must never appear staffed without a named primary teacher on record.</li>
+    <li>Removing a teacher mid-term must never orphan live sessions without a replacement or explicit suspension.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If a teacher resigns mid-term, the chair reassigns; past sessions stay under the historical host for attendance integrity.</li>
+    <li>If faculty search finds no one with capacity, the section stays Unstaffed and remains on the dashboard.</li>
+    <li>If the same person is chair and teacher, assignment still requires an explicit action — no auto-self-assign surprise.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Every section students can register into has a primary teacher before the teaching week starts, or is explicitly marked deferred.</li>
+    <li>Teachers see new assignments on their faculty home the same day.</li>
+    <li>Coordinator unstaffed flags clear only after a real assignment, not after a note.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-XL-01">
+  <div class="spec-head"><h3>ADM-XL-01 · Cross-list sections</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Lets the chair link two or more sections so they share one teaching space, one content set and one gradebook view while keeping separate official rosters for each catalogue line.</p>
+  <h4>Why it exists</h4>
+  <p>Departments often run a combined lecture for CSE and EEE students under two course codes, or merge a low-enrolment evening section into a day section. Without formal cross-listing, teachers maintain duplicate content and attendance double-counts or vanishes. Cross-listing is a chair decision because it changes how credit, attendance and certification attach to each official section.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Chair</td><td>When building the offering or early in the term before gradebooks diverge</td><td>Link or unlink sections deliberately</td></tr>
+    <tr><td>Teacher (indirect)</td><td>After link</td><td>Teach and grade once across the combined roster view</td></tr>
+    <tr><td>Coordinator (indirect)</td><td>When publishing routines</td><td>See that rooms and times must align for linked sections</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Cross-list desk</strong>
+      <p>Administrator → Cross-list sections. Lists current links and a create flow: pick parent section, add child sections, confirm shared meeting pattern.</p>
+      <div class="copy">Cross-list — CSE410 Section A (parent) with CSE640 Section B (child)</div>
+    </div>
+    <div class="zone">
+      <strong>Impact summary</strong>
+      <p>Before confirm: combined enrolment, shared content warning, attendance counting rule, how certification will run (per official section or together).</p>
+      <div class="copy">48 + 12 students will share one teaching space. Final grades still certify per official section.</div>
+    </div>
+    <div class="zone">
+      <strong>Linked view</strong>
+      <p>After save: badge on each section, unlink control with confirmation if gradebook activity already exists.</p>
+      <div class="copy">Linked · Unlink requires chair confirmation if marks exist</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Chair</span>Opens Administrator → Cross-list sections.</div></li>
+    <li><span class="n">2</span><div><span class="who">Chair</span>Chooses the parent section and adds child sections that should share teaching.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Shows combined enrolment and the rules that will apply.</div></li>
+    <li><span class="n">4</span><div><span class="who">Chair</span>Confirms the link.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Gives the teacher one combined teaching view; keeps separate official rosters for records and certification.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Section identities and catalogues</td><td>Offering records</td><td>Link definition</td></tr>
+    <tr><td>Cross-list relationship</td><td>Chair confirmation</td><td>Faculty teaching view; attendance aggregation rule; student sees own section code</td></tr>
+    <tr><td>Unlink event</td><td>Chair confirmation</td><td>Separate teaching spaces restored; audit retained</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>ADM-STF-01 Compose offering</td><td>Which sections exist and who teaches</td><td>Only staffed, real sections can be linked</td></tr>
+    <tr><td>Faculty content and gradebook</td><td>Shared teaching space</td><td>Teacher does not duplicate uploads</td></tr>
+    <tr><td>ADM-CRT-01 Certify final grades</td><td>Per official section package</td><td>Registrar still receives correct course codes</td></tr>
+    <tr><td>ADM-ELG-01 Exam eligibility</td><td>Attendance counting across the link</td><td>Fair eligibility under the university rule</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Whether child sections must share the exact timetable.</li>
+    <li>How attendance percentages combine across the link.</li>
+    <li>Whether certification is one action for the combined view or still per official section (recommended: per official section).</li>
+    <li>Deadline after which unlink is forbidden without dean approval.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Cross-listing must never merge two different teachers’ gradebooks without an explicit re-staffing decision.</li>
+    <li>It must never erase which catalogue course a student officially registered for.</li>
+    <li>Students must never see another programme’s confidential roster beyond what teaching requires.</li>
+    <li>Unlink must never discard marks already posted; it must split or freeze per policy.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If enrolment later exceeds room capacity, the routine feature flags the room — cross-list does not silently ignore fire limits.</li>
+    <li>If one child section is cancelled, remaining links stay intact and the cancelled roster is closed.</li>
+    <li>If a teacher tries to submit finals for only part of a link when policy requires together, the system explains what is missing.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Teachers upload content once and both official sections receive it.</li>
+    <li>Certification still produces the correct course code on each student’s record.</li>
+    <li>Attendance eligibility matches the university’s published cross-list rule.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-POL-01">
+  <div class="spec-head"><h3>ADM-POL-01 · Academic policy settings</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Holds the university’s academic rules in one place: grade scale and letter bands, attendance rule, probation thresholds, credit limits per term, and retake caps — so every other feature enforces the same published truth.</p>
+  <h4>Why it exists</h4>
+  <p>When grade cut-offs live in a circular and attendance thresholds live in a chair’s head, students get contradictory answers from different offices. Policy settings exist so the catalogue year, the grade scale, probation and retake limits are configured once, versioned by term or catalogue, and readable by faculty, students and accreditation visitors alike.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Registrar / academic council delegate</td><td>Before a new catalogue year or term</td><td>Publish the rules that will govern that cohort</td></tr>
+    <tr><td>Chair (department overlays where allowed)</td><td>When department-specific attendance or credit rules apply</td><td>Set only what the university permits departments to vary</td></tr>
+    <tr><td>All other modules (consumers)</td><td>Continuously</td><td>Read the active policy — never invent local cut-offs</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Policy home</strong>
+      <p>Administrator → Academic policy. Cards for Grade scale · Attendance · Probation · Credit limits · Retakes, each showing active version and effective term.</p>
+      <div class="copy">Academic policy — Catalogue 2024–2025 · effective Spring 2026</div>
+    </div>
+    <div class="zone">
+      <strong>Grade scale editor</strong>
+      <p>Letter bands with numeric ranges, grade points, pass mark. Preview of how a sample score maps.</p>
+      <div class="copy">A = 80–100 (4.0) · B = 70–79 (3.0) · … · F = below 40 (0.0)</div>
+    </div>
+    <div class="zone">
+      <strong>Attendance &amp; standing</strong>
+      <p>Threshold or bands, probation GPA, max credits per term, max retakes per course or career.</p>
+      <div class="copy">Probation if cumulative GPA below 2.00 · max 15 credits while on probation</div>
+    </div>
+    <div class="zone">
+      <strong>Publish control</strong>
+      <p>Save draft · Publish with effective date · View history of previous versions.</p>
+      <div class="copy">Publish for Spring 2026 — teachers and students will see this scale on results</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Registrar or chair</span>Opens Administrator → Academic policy.</div></li>
+    <li><span class="n">2</span><div><span class="who">User</span>Edits the relevant card carefully, previews examples, saves a draft.</div></li>
+    <li><span class="n">3</span><div><span class="who">User</span>Publishes with an effective term or date.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Versions the old policy, activates the new one for the stated scope, and feeds dependent features.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Shows faculty and student surfaces the same bands and limits.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Policy drafts and published versions</td><td>This feature</td><td>Gradebook letter mapping; eligibility; registration credit checks; retake eligibility</td></tr>
+    <tr><td>Effective term / catalogue year</td><td>Registrar choice</td><td>Which cohort sees which rule</td></tr>
+    <tr><td>Change history</td><td>Each publish</td><td>Accreditation evidence</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Faculty gradebook</td><td>Letter scale and pass mark</td><td>Teachers mark against the official scale</td></tr>
+    <tr><td>ADM-ELG-01 Exam eligibility</td><td>Attendance threshold</td><td>Same rule chairs lock before exams</td></tr>
+    <tr><td>Student grades &amp; standing</td><td>GPA and probation label</td><td>Students see institutional standing</td></tr>
+    <tr><td>Student course add/drop</td><td>Credit limits</td><td>Registration cannot exceed published caps</td></tr>
+    <tr><td>ADM-QAC-01 Accreditation reports</td><td>Policy versions</td><td>Evidence pack includes what rule applied</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Whether departments may override attendance percentages.</li>
+    <li>Whether plus/minus letters are used.</li>
+    <li>Probation and dismissal GPA thresholds and review periods.</li>
+    <li>Retake: maximum attempts, whether the latest or best grade counts.</li>
+    <li>Credit limits for regular, probation, and final-term students.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Two live conflicting grade scales must never apply to the same section in the same term.</li>
+    <li>A draft must never affect student-visible results until published.</li>
+    <li>Policy publish must never silently rewrite already certified transcript lines for closed terms.</li>
+    <li>The platform must never invent a softer probation rule to “help” a student.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If someone tries to publish mid-result-week, the system warns about sections already submitted and requires confirmation of scope.</li>
+    <li>If a catalogue year has graduating students under old rules, those students stay on their catalogue policy.</li>
+    <li>If a number band overlaps (two letters claiming the same score), publish is blocked until fixed.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A sample score maps to the same letter in faculty and student views.</li>
+    <li>Eligibility and credit checks cite the same published percentages and limits.</li>
+    <li>Accreditation can retrieve the policy version that applied to a given term.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-FEE-01">
+  <div class="spec-head"><h3>ADM-FEE-01 · Fee policy and what unpaid dues block</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Defines which finance charge types exist for the university’s catalogue of fees, which unpaid dues create holds, and what those holds block — registration, admit cards, documents, graduation, and, where the university requires it, access to classes and course content — without ever taking or holding student money on the platform.</p>
+  <div class="callout">
+    <b>Decision — the tuition access gate</b>
+    In a private university, tuition is what makes the term real: a student who has not paid is not, in practice, taking the course. Shikho Campus supports that reality with a configurable <strong>access gate</strong> — unpaid tuition past its grace window can restrict live classes and new content, not only registration. It is designed to be firm but never a disaster: the student is warned well in advance, sees the exact amount and a one-tap way to pay, keeps read access to what they have already earned, and is never removed from a class that is in progress. A student who cannot pay is guided to an instalment, a waiver or the advisor — not dropped into a dead end.
+  </div>
+  <h4>Why it exists</h4>
+  <p>Finance raises amounts in the university’s finance system; this feature only decides academic consequences of non-payment. Without a clear block map, one office blocks transcripts while another still prints admit cards. The platform never becomes a wallet: money moves from student to the university’s merchant accounts; Shikho Campus only mirrors dues and applies the hold rules the university set.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Registrar with finance liaison</td><td>Before term billing opens</td><td>Map charge types to academic blocks</td></tr>
+    <tr><td>Chair / dean (view)</td><td>When students appeal</td><td>See why a hold exists and which unpaid item caused it</td></tr>
+    <tr><td>Coordinator (consumer)</td><td>When syncing invoices and verifying slips</td><td>Apply holds from policy — never invent amounts</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Fee policy desk</strong>
+      <p>Administrator → Fee policy. List of charge types (tuition, lab, retake, hostel, library fine) with “blocks what” tags.</p>
+      <div class="copy">Tuition instalment overdue → blocks registration and admit card</div>
+      <div class="copy">Library fine → blocks documents only</div>
+    </div>
+    <div class="zone">
+      <strong>Block matrix</strong>
+      <p>Rows of charge categories vs columns: Course registration · Admit card · Document requests · Graduation clearance · Class &amp; content access. Cells toggle allowed blocks.</p>
+      <div class="copy">Unpaid dues block — Spring 2026 rules</div>
+    </div>
+    <div class="zone">
+      <strong>Access gate settings</strong>
+      <p>For the class &amp; content column only: grace days after the due date, the warning schedule before the gate, and what stays readable when the gate is on.</p>
+      <div class="copy">7 grace days · warn at 7, 3 and 1 days before · already-graded work and receipts stay visible</div>
+    </div>
+    <div class="zone">
+      <strong>Hard reminder</strong>
+      <p>Persistent notice that amounts come from finance and the platform does not hold funds.</p>
+      <div class="copy">Amounts are set by the university finance office. Shikho Campus never holds student money.</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Authorised officer</span>Opens Administrator → Fee policy.</div></li>
+    <li><span class="n">2</span><div><span class="who">Officer</span>Reviews charge types mirrored from finance and sets which unpaid states create which academic blocks.</div></li>
+    <li><span class="n">3</span><div><span class="who">Officer</span>Publishes the matrix for the term.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>When dues are unpaid past grace, places named holds; when finance marks paid, releases the matching holds.</div></li>
+    <li><span class="n">5</span><div><span class="who">Student module</span>Shows the hold with the owning office and the amount finance reported — payment goes to the university, not the platform.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Charge type catalogue</td><td>Finance system (via coordinator sync)</td><td>Fee policy rows</td></tr>
+    <tr><td>Block matrix</td><td>This feature</td><td>Student hold centre; exam admit; registration; documents; clearance</td></tr>
+    <tr><td>Published policy version</td><td>Officer publish</td><td>Audit and student-facing explanations</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>COO-FEE-01 Sync invoices and dues</td><td>Invoice lines and balances</td><td>Holds appear from real finance balances</td></tr>
+    <tr><td>COO-REC-01 Verify payments</td><td>Verified payment events</td><td>Holds release when dues clear</td></tr>
+    <tr><td>Student fee dashboard &amp; hold centre</td><td>Hold reasons and amounts</td><td>Student knows what to pay and what is blocked</td></tr>
+    <tr><td>ADM-SCH-01 Scholarships</td><td>Waiver reductions</td><td>Reduced balance may clear a block</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Grace days after a due date before a hold appears.</li>
+    <li>Whether unpaid tuition gates class &amp; content access at all, and if so, after how many grace days and with what warning schedule.</li>
+    <li>What stays readable while the access gate is on — as a rule, already-graded work, receipts and the fee dashboard always stay visible so the student can act.</li>
+    <li>Which roles may temporarily lift the access gate for a named student (advisor or finance officer, audited) — for a student who has agreed a payment date.</li>
+    <li>Which roles may temporarily waive a block without marking the invoice paid (rare, audited).</li>
+    <li>Whether partial payment clears blocks proportionally or only in full.</li>
+    <li>Whether library and hostel dues use the same block matrix as tuition.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>This feature must never create or edit an invoice amount.</li>
+    <li>The platform must never hold, escrow, or intermediate student funds.</li>
+    <li>A hold must never appear without a finance-backed unpaid item or another office’s real flag.</li>
+    <li>The access gate must never switch on without the warnings and grace window the policy promised.</li>
+    <li>A student must never be removed from a live class that is already in progress because of the access gate.</li>
+    <li>The gate must never hide the fee dashboard, the pay action, receipts, or marks the student already earned.</li>
+    <li>Clearing a hold must never happen by deleting history — only by payment, waiver, or audited override.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If finance sends a corrected lower balance, holds re-evaluate immediately.</li>
+    <li>If a scholarship is approved, the reduced due may auto-clear a tuition block.</li>
+    <li>If offline bank slip is awaiting verification, the student sees “payment under review” and the access gate is held off until finance decides — a pending slip is never treated as non-payment.</li>
+    <li>If an instalment plan is active and on schedule, the access gate does not fire for the balance that is not yet due.</li>
+    <li>If the gate is due to fire mid-week, the student who opens a class gets a clear “access paused” screen with the amount and the pay action — not a silent empty course.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Unpaid tuition blocks exactly what the matrix says — no more, no less.</li>
+    <li>After verified payment, the matching hold disappears without a manual registrar phone call.</li>
+    <li>No screen implies a student wallet inside Shikho Campus.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-SCH-01">
+  <div class="spec-head"><h3>ADM-SCH-01 · Scholarships and waivers approval</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Lets authorised academic or scholarship committee officers approve, reject or condition merit waivers, need-based aid and special remissions that finance will apply as reductions — without the academic officer typing a new fee amount into existence.</p>
+  <h4>Why it exists</h4>
+  <p>Scholarships in Bangladeshi private universities are high-stakes and often delayed in email. Students lose registration windows waiting for a signature. This feature gives a governed queue: see the recommendation, approve or reject with reasons, and hand a clean decision to finance to apply the reduction. Academic staff decide entitlement; finance still owns the money figure.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Scholarship committee / chair / dean</td><td>Before billing milestones and on appeal</td><td>Approve or reject with conditions</td></tr>
+    <tr><td>Coordinator / finance liaison</td><td>After approval</td><td>See the decision so finance can apply the waiver amount</td></tr>
+    <tr><td>Student (indirect)</td><td>When aid is decided</td><td>See awarded / rejected / pending on the fee dashboard</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Approval queue</strong>
+      <p>Administrator → Scholarships and waivers. Filters by type (merit, sibling, staff ward, special), term, status.</p>
+      <div class="copy">Scholarship approvals — 6 waiting · 2 due before billing lock</div>
+    </div>
+    <div class="zone">
+      <strong>Case file</strong>
+      <p>Student identity, programme, CGPA or merit basis, recommended percentage or category, supporting notes, prior awards.</p>
+      <div class="copy">Merit waiver recommendation — 25% tuition · CGPA 3.85</div>
+    </div>
+    <div class="zone">
+      <strong>Decision footer</strong>
+      <p>Approve · Approve with condition · Reject with reason. No free-typing of arbitrary taka amounts by academic staff unless university policy explicitly maps categories to fixed percentages.</p>
+      <div class="copy">Approve 25% merit waiver for Spring 2026</div>
+      <div class="copy">Amounts are applied by finance from the approved category</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Officer</span>Opens Administrator → Scholarships and waivers.</div></li>
+    <li><span class="n">2</span><div><span class="who">Officer</span>Opens a case, reviews merit or need evidence and the recommended category.</div></li>
+    <li><span class="n">3</span><div><span class="who">Officer</span>Approves, conditions, or rejects with a reason.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Sends the decision to finance / fee sync to apply the reduction; updates the student fee view.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Re-evaluates fee holds if the new balance clears a block.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Scholarship applications and recommendations</td><td>Admission / student affairs / department nomination</td><td>Approval queue</td></tr>
+    <tr><td>Approval decision</td><td>Committee / chair</td><td>Finance waiver application; student fee dashboard</td></tr>
+    <tr><td>Rejection reason</td><td>Officer</td><td>Student notification; appeal trail</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>ADM-FEE-01 Fee policy</td><td>Which dues can be waived</td><td>Waiver applies to the right charge types</td></tr>
+    <tr><td>COO-FEE-01 Sync invoices</td><td>Reduced balances after finance posts waiver</td><td>Student sees correct due</td></tr>
+    <tr><td>Student fee dashboard</td><td>Award status and reduced total</td><td>Transparent aid</td></tr>
+    <tr><td>ADM-HOME-01 Decisions dashboard</td><td>Pending approvals</td><td>Committee does not miss billing lock</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Who sits on the approving role for each scholarship type.</li>
+    <li>Whether approval is single-officer or dual control.</li>
+    <li>Fixed percentage categories versus free-text amounts (prefer categories).</li>
+    <li>Stacking rules when two waivers might both apply.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Academic officers must never invent a random invoice amount; they approve categories finance knows how to price.</li>
+    <li>Approval must never silently clear unrelated holds (for example discipline).</li>
+    <li>A rejected waiver must never still appear as awarded on the student fee screen.</li>
+    <li>The platform must never pay scholarship money to students from its own accounts.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If finance has not yet posted the waiver, the student sees “approved — pending finance posting”.</li>
+    <li>If CGPA later falls below a continuing-merit rule, a renewal case opens rather than a silent cut mid-term without notice policy.</li>
+    <li>If duplicate applications exist, the queue shows a conflict warning before second approval.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Every awarded waiver has a named approver and timestamp.</li>
+    <li>Student due totals drop only after finance posts the reduction.</li>
+    <li>Billing lock cannot pass with unreviewed cases still marked urgent on the dashboard unless explicitly deferred.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-EXM-01">
+  <div class="spec-head"><h3>ADM-EXM-01 · Exam schedule and invigilation duty</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Publishes midterm and final exam timetables, assigns rooms and invigilators, and produces duty lists teachers and staff must follow.</p>
+  <h4>Why it exists</h4>
+  <p>Exam week chaos — double-booked rooms, missing invigilators, students at the wrong hall — is usually a coordination failure, not a teaching failure. This feature gives the controller of exams and chairs one schedule of record, with duty assignments that appear on faculty homes and student exam cards.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Controller of exams / chair</td><td>Two to four weeks before midterms and finals</td><td>Build and publish the schedule; assign duties</td></tr>
+    <tr><td>Faculty (indirect)</td><td>After publish</td><td>See invigilation duties on their calendar</td></tr>
+    <tr><td>Coordinator (rooms)</td><td>During scheduling</td><td>Confirm room capacity and avoid class-routine clashes</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Schedule grid</strong>
+      <p>Administrator → Exam schedule. Assessments by course/section, date, start, duration, room, capacity vs enrolment, invigilator slots.</p>
+      <div class="copy">Final exam schedule — Spring 2026 · draft</div>
+    </div>
+    <div class="zone">
+      <strong>Duty assign</strong>
+      <p>Pick invigilators from faculty/staff pools; show existing duties to avoid overload; mark chief invigilator.</p>
+      <div class="copy">Invigilation duty — Sunday 22 June · 9:00 · Room UB-201 · needs 2 invigilators</div>
+    </div>
+    <div class="zone">
+      <strong>Publish</strong>
+      <p>Publish to students and faculty; lock edits except via formal amendment.</p>
+      <div class="copy">Published — students can see seat and room on Exam information</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Officer</span>Opens Administrator → Exam schedule for the assessment window.</div></li>
+    <li><span class="n">2</span><div><span class="who">Officer</span>Places each exam in a room and time, watching capacity and clashes.</div></li>
+    <li><span class="n">3</span><div><span class="who">Officer</span>Assigns invigilators and chief invigilator.</div></li>
+    <li><span class="n">4</span><div><span class="who">Officer</span>Publishes the schedule.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Pushes times and rooms to student exam information and faculty calendars; uses eligibility lists so barred students are not seated.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Course sections and enrolment counts</td><td>Offering and registration</td><td>Capacity planning</td></tr>
+    <tr><td>Room catalogue</td><td>Coordinator routine / facilities</td><td>Room assignment</td></tr>
+    <tr><td>Exam slots and duty roster</td><td>This feature</td><td>Student exam cards; faculty duty list; invigilation attendance if used</td></tr>
+    <tr><td>Eligibility lists</td><td>ADM-ELG-01</td><td>Seating lists exclude barred students</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Student exam information</td><td>Date, room, seat, admit readiness</td><td>Students arrive at the right hall</td></tr>
+    <tr><td>Faculty home / calendar</td><td>Invigilation duties</td><td>Teachers know when they must serve</td></tr>
+    <tr><td>ADM-ELG-01 Exam eligibility</td><td>Eligible roster</td><td>No barred student on the roll sheet</td></tr>
+    <tr><td>COO-SCH-01 Class routine</td><td>Room free/busy</td><td>Avoids room collisions with teaching</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Minimum invigilators per headcount band.</li>
+    <li>Whether students receive seat numbers or only room numbers.</li>
+    <li>Amendment rules after publish (who may change, student notification required).</li>
+    <li>Clash rules for a teacher invigilating during their own exam.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>A published exam time must never change silently without notifying enrolled students.</li>
+    <li>Barred students must never appear as seated without a valid exception.</li>
+    <li>Duty must never be assigned to someone not in the staff directory.</li>
+    <li>Room capacity must never be ignored without an explicit override reason.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If a room is closed for maintenance, the schedule flags conflicts and suggests alternates.</li>
+    <li>If an invigilator reports sick, a reassignment flow keeps the slot covered.</li>
+    <li>If eligibility locks after schedule publish, seating lists refresh from the locked list.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Every scheduled exam has a room that fits and the required number of invigilators.</li>
+    <li>Students and teachers see the same published times.</li>
+    <li>Amendments leave a visible history.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-DSP-01">
+  <div class="spec-head"><h3>ADM-DSP-01 · Disciplinary cases</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Tracks academic and behavioural disciplinary cases from incident to decision — notice to student, response window, committee outcome, sanctions — with an audit trail suitable for university due process.</p>
+  <h4>Why it exists</h4>
+  <p>Discipline without a system becomes rumour and WhatsApp. Students deserve notice and time to respond; chairs deserve a structured case file; accreditation visitors ask for process evidence. This feature is the case register, not a court: it records what the university’s own code of conduct already defines.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Chair / disciplinary committee</td><td>When an incident is referred</td><td>Run notice, hearing schedule, and decision</td></tr>
+    <tr><td>Student (indirect)</td><td>When notified</td><td>Read the allegation, submit a response, see the outcome</td></tr>
+    <tr><td>Registrar (sanctions that affect records)</td><td>After decision</td><td>Apply transcript notations or suspensions the committee ordered</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Case list</strong>
+      <p>Administrator → Disciplinary cases. Statuses: Intake · Notice sent · Awaiting response · Hearing · Decided · Closed. Sensitive access limited by role.</p>
+      <div class="copy">Disciplinary cases — 3 awaiting response · 1 hearing this week</div>
+    </div>
+    <div class="zone">
+      <strong>Case file</strong>
+      <p>Incident summary, linked course if academic misconduct, evidence index, notice dates, student response, committee notes, decision and sanctions.</p>
+      <div class="copy">Notice sent 10 July · response due 17 July</div>
+    </div>
+    <div class="zone">
+      <strong>Decision panel</strong>
+      <p>Record outcome: warning, grade penalty referral back to teacher process, suspension, dismissal recommendation — per university code. No mark editing by the chair through this screen.</p>
+      <div class="copy">Decision recorded — written warning · no transcript notation</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Officer</span>Opens Administrator → Disciplinary cases and creates or opens a referral.</div></li>
+    <li><span class="n">2</span><div><span class="who">Officer</span>Sends notice to the student with the response deadline.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Notifies the student and tracks the response window.</div></li>
+    <li><span class="n">4</span><div><span class="who">Student</span>Submits a response or the window expires as recorded.</div></li>
+    <li><span class="n">5</span><div><span class="who">Committee</span>Records hearing and decision with sanctions.</div></li>
+    <li><span class="n">6</span><div><span class="who">System</span>Applies only those academic holds or record flags the sanction defines; never silently changes marks.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Incident referral</td><td>Faculty report, invigilator report, or office intake</td><td>Case file</td></tr>
+    <tr><td>Student notice and response</td><td>This feature ↔ Student module messaging</td><td>Due-process evidence</td></tr>
+    <tr><td>Decision and sanctions</td><td>Committee</td><td>Holds, suspension flags, registrar notations; audit</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Faculty module</td><td>Academic misconduct referrals</td><td>Teachers start from observed work</td></tr>
+    <tr><td>Student hold centre</td><td>Discipline holds when sanction says so</td><td>Registration or documents may pause</td></tr>
+    <tr><td>ADM-HOME-01 Decisions dashboard</td><td>Upcoming response and hearing deadlines</td><td>Process clocks do not slip unnoticed</td></tr>
+    <tr><td>ADM-QAC-01 Accreditation</td><td>Anonymised process metrics</td><td>Evidence that due process exists</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Response window length.</li>
+    <li>Who may open cases and who may decide.</li>
+    <li>Which sanctions create holds vs transcript notations.</li>
+    <li>Retention period for closed case files.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Discipline must never be a back door to edit marks — grade penalties go through faculty/academic processes the code defines.</li>
+    <li>Students must never be sanctioned without a recorded notice (except emergency interim measures the policy allows, which are labelled as interim).</li>
+    <li>Case detail must never be visible to unrelated teachers or students.</li>
+    <li>Closed cases must never vanish without archive — deletion is not a status.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If the student is already on exchange or leave, notice still records delivery to the official channel.</li>
+    <li>If a related criminal matter exists, the case can be paused with a visible “paused — external” state.</li>
+    <li>If the accused is about to graduate, clearance can show a discipline hold until the case closes.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Every decided case shows notice date, response, decision date and sanction.</li>
+    <li>Unauthorised roles cannot open case detail.</li>
+    <li>Sanctions that block registration appear as named holds, not mysterious locks.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-QAC-01">
+  <div class="spec-head"><h3>ADM-QAC-01 · Accreditation and outcome reports</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Assembles OBE and BAC/BAETE-ready evidence packs: course outcomes, assessment mapping, result distributions, policy versions and improvement actions — for programme self-assessment and visiting teams.</p>
+  <h4>Why it exists</h4>
+  <p>Bangladeshi engineering and business programmes live under BAC and BAETE expectations. Chairs scramble folders before a visit. This feature does not replace professional judgement; it pulls what the LMS already knows into structured reports so evidence is continuous, not a midnight PDF hunt.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Chair / programme coordinator for quality</td><td>Each term end and before accreditation visits</td><td>Generate packs and spot outcome gaps</td></tr>
+    <tr><td>Dean / QAC office</td><td>Semester quality review</td><td>Compare programmes and track actions</td></tr>
+    <tr><td>Faculty (indirect)</td><td>When outcome mapping is required on assessments</td><td>See which outcomes their assessments claim</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Quality desk</strong>
+      <p>Administrator → Accreditation &amp; outcomes. Programme selector, term range, framework tags (OBE, BAC, BAETE).</p>
+      <div class="copy">Outcome reports — B.Sc. in CSE · Spring 2025–Fall 2025</div>
+    </div>
+    <div class="zone">
+      <strong>Evidence pack builder</strong>
+      <p>Checklists: CLO/PLO maps, assessment coverage, grade distributions, attendance summaries, policy versions, teacher evaluation aggregates, improvement log.</p>
+      <div class="copy">Pack ready — 18 of 20 evidence items attached · 2 gaps</div>
+    </div>
+    <div class="zone">
+      <strong>Gap list</strong>
+      <p>Missing outcome links, sections without certified results, surveys below response threshold.</p>
+      <div class="copy">Gap: CSE411 Section B finals not yet certified</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Quality officer</span>Opens Administrator → Accreditation &amp; outcomes and selects programme and terms.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Pulls mappings, certified results, policy versions and survey aggregates.</div></li>
+    <li><span class="n">3</span><div><span class="who">Officer</span>Reviews gaps, assigns follow-ups, generates the pack.</div></li>
+    <li><span class="n">4</span><div><span class="who">Officer</span>Exports or shares the pack with the visiting team folder the university uses.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Keeps a snapshot so the pack remains reproducible later.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>CLO/PLO maps and assessment links</td><td>Faculty assessment design</td><td>Coverage matrices</td></tr>
+    <tr><td>Certified result distributions</td><td>ADM-CRT-01</td><td>Outcome achievement summaries</td></tr>
+    <tr><td>Policy and survey aggregates</td><td>ADM-POL-01, ADM-FDB-01</td><td>Process evidence</td></tr>
+    <tr><td>Evidence pack snapshot</td><td>This feature</td><td>Accreditation archive</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Faculty assessments</td><td>Outcome tags on quizzes and assignments</td><td>Maps are not empty</td></tr>
+    <tr><td>ADM-CRT-01 Certify grades</td><td>Certified distributions only</td><td>Draft marks never enter accreditation packs</td></tr>
+    <tr><td>ADM-FDB-01 Teacher evaluation</td><td>Aggregate scores</td><td>Teaching quality evidence</td></tr>
+    <tr><td>ADM-POL-01 Academic policy</td><td>Version history</td><td>Which rules applied in the review window</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Which framework templates the university uses.</li>
+    <li>Minimum survey response rate before aggregates appear.</li>
+    <li>Whether student-level data is excluded from packs by default (recommended: aggregates only).</li>
+    <li>Retention of snapshots across accreditation cycles.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Packs must never include uncertified or draft marks.</li>
+    <li>Individual student identities must never appear in visiting-team packs unless the university explicitly enables a rare identifiable mode with extra approval.</li>
+    <li>Teacher evaluation comments must never be re-identifiable where policy promises anonymity.</li>
+    <li>Gaps must never be hidden to make a pack look complete.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If a section is returned for recertification, the pack marks that evidence as stale until recertified.</li>
+    <li>If outcome maps are missing, the pack still builds and lists gaps first.</li>
+    <li>If two catalogues overlap a visit window, the officer can generate separate packs per catalogue year.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A chair can produce a term pack without rebuilding spreadsheets.</li>
+    <li>Every pack lists gaps honestly.</li>
+    <li>Snapshots opened a year later still match what was shared with the visit.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-FDB-01">
+  <div class="spec-head"><h3>ADM-FDB-01 · Teacher evaluation results</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Shows chairs and deans aggregate student course-evaluation results after surveys close — never individual student identities — so departments can coach teaching and feed accreditation.</p>
+  <h4>Why it exists</h4>
+  <p>End-of-term evaluations are useless if they stay locked in a survey tool only the IT office can export. Chairs need timely aggregates; teachers need their own section aggregates; nobody needs a witch-hunt list of who said what. This feature is the governed readout of STU-SRV-01.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Chair / dean</td><td>After survey close each term</td><td>Review aggregates and flag coaching needs</td></tr>
+    <tr><td>Teacher (own sections)</td><td>After university release rule</td><td>See their own aggregates only</td></tr>
+    <tr><td>QAC office</td><td>Accreditation windows</td><td>Pull aggregates into evidence packs</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Results desk</strong>
+      <p>Administrator → Teacher evaluation. Term selector, department filter, course/section table with response rate and mean scores per question theme.</p>
+      <div class="copy">Teacher evaluation — Spring 2026 · response rate 78%</div>
+    </div>
+    <div class="zone">
+      <strong>Section detail</strong>
+      <p>Theme scores, distribution, comparison to department mean. No student names. Optional anonymised comment themes if the university collects comments.</p>
+      <div class="copy">Section mean 4.2 / 5 · department mean 4.0 — comments are anonymised</div>
+    </div>
+    <div class="zone">
+      <strong>Release control</strong>
+      <p>Whether teachers see results only after they submit finals, or after certify — per university policy.</p>
+      <div class="copy">Teachers can view their results after finals are submitted</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Chair</span>Opens Administrator → Teacher evaluation after surveys close.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Shows aggregates only where response thresholds are met.</div></li>
+    <li><span class="n">3</span><div><span class="who">Chair</span>Opens a section, reviews themes, notes coaching follow-ups outside the system if needed.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Releases teacher self-views per policy.</div></li>
+    <li><span class="n">5</span><div><span class="who">QAC</span>Pulls aggregates into accreditation packs when needed.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Anonymous survey responses</td><td>Student course evaluation</td><td>Aggregate scores</td></tr>
+    <tr><td>Response rates</td><td>Survey completion</td><td>Threshold gating</td></tr>
+    <tr><td>Chair and teacher aggregate views</td><td>This feature</td><td>Coaching; ADM-QAC-01 packs</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Student course evaluation</td><td>Submitted anonymous responses</td><td>Raw input to aggregates</td></tr>
+    <tr><td>Faculty home</td><td>Own-section release</td><td>Teachers improve from feedback</td></tr>
+    <tr><td>ADM-QAC-01 Accreditation</td><td>Aggregate tables</td><td>Visit evidence</td></tr>
+    <tr><td>ADM-POL-01 / university survey policy</td><td>Release timing and thresholds</td><td>Fair process</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Minimum response rate before showing aggregates.</li>
+    <li>When teachers may see their results.</li>
+    <li>Whether comments are collected and how they are anonymised.</li>
+    <li>Whether department rankings are shown or suppressed.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Individual student identities must never appear on evaluation results.</li>
+    <li>Results must never be visible for a section below the minimum response rate (show “suppressed — low response” instead).</li>
+    <li>A chair must never see another department’s identifiable teacher comments outside scope.</li>
+    <li>Evaluation must never be used inside the certify screen to pressure a mark change.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If response rate is below threshold, suppress detail and explain why.</li>
+    <li>If a teacher teaches cross-listed sections, aggregates follow the university’s unit of analysis.</li>
+    <li>If a survey is still open, results show “collection in progress” not partial leaks.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Chairs see department aggregates within days of survey close.</li>
+    <li>Teachers never see who said what.</li>
+    <li>Accreditation packs can cite the same aggregates the chair sees.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-TOG-01">
+  <div class="spec-head"><h3>ADM-TOG-01 · Module entitlements on/off</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Lets the university switch licensed or phased modules and major feature bundles on or off per campus or faculty — for example live class, tutor, scholarships, alumni — without redeploying software.</p>
+  <h4>Why it exists</h4>
+  <p>Not every private university buys every capability on day one. Some start with records, grades and fees; live video and AI tutor come later. Entitlements prevent half-broken menus: if a module is off, students and teachers do not see dead ends.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>University IT admin / registrar product owner</td><td>At contract start and when expanding the licence</td><td>Turn bundles on or off safely</td></tr>
+    <tr><td>Chair (view)</td><td>When planning adoption</td><td>See what is available to their department</td></tr>
+    <tr><td>All users (indirect)</td><td>Continuously</td><td>Menus only show what is entitled</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Entitlements desk</strong>
+      <p>Administrator → Module entitlements. Toggles or status for Student learning extras, Live class, Tutor, Scholarships, Discipline, Accreditation packs, Alumni handover, etc.</p>
+      <div class="copy">Module entitlements — Main campus</div>
+    </div>
+    <div class="zone">
+      <strong>Impact preview</strong>
+      <p>Before turning something off, list who will lose the menu and what in-flight work could be affected.</p>
+      <div class="copy">Turning off Tutor hides the tutor for all students from the next login. Existing chat history remains archived.</div>
+    </div>
+    <div class="zone">
+      <strong>Save with reason</strong>
+      <p>Required note for audit when disabling a module mid-term.</p>
+      <div class="copy">Disable Live class — campus will use external links only this term</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Product owner</span>Opens Administrator → Module entitlements.</div></li>
+    <li><span class="n">2</span><div><span class="who">Owner</span>Reviews current on/off state and licence notes.</div></li>
+    <li><span class="n">3</span><div><span class="who">Owner</span>Changes a toggle, reads the impact preview, enters a reason if disabling.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Applies entitlement; menus across modules hide or show at next refresh.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Writes an audit entry of who changed what.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Licence / entitlement map</td><td>University contract configuration</td><td>This feature’s toggles</td></tr>
+    <tr><td>On/off decisions</td><td>Product owner</td><td>Navigation and feature availability across modules</td></tr>
+    <tr><td>Audit of changes</td><td>This feature</td><td>Support and commercial records</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>All four role modules</td><td>Feature visibility</td><td>No dead menu items</td></tr>
+    <tr><td>Platform operations</td><td>Tenant configuration</td><td>Same truth for support staff</td></tr>
+    <tr><td>ADM-AI-01 Ask the department</td><td>May itself be entitlement-gated</td><td>Analytics only where licensed</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Which roles may change entitlements.</li>
+    <li>Whether some modules are locked on by contract.</li>
+    <li>Grace behaviour when a licence expires (warn vs hard off).</li>
+    <li>Whether entitlements differ by campus in a multi-campus university.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Turning a module off must never delete academic history (grades, payments, certifications).</li>
+    <li>Entitlements must never be changeable by an ordinary chair if policy reserves that to IT/registrar.</li>
+    <li>A disabled payment path must never leave dues invisible — fee dashboards still show amounts finance owns.</li>
+    <li>The platform must never use entitlement changes to alter marks or fee amounts.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If a module is turned off while users are mid-flow, they finish a safe exit message on next action.</li>
+    <li>If licence expiry approaches, admins see a warning before hard off.</li>
+    <li>If a campus has a different bundle, users on that campus only see their campus entitlements.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Disabled features disappear from navigation within a session refresh.</li>
+    <li>Historical records remain readable for entitled auditors.</li>
+    <li>Every entitlement change has a who/when/why audit row.</li>
+  </ul>
+</article>
+
+<article class="spec" id="ADM-AI-01">
+  <div class="spec-head"><h3>ADM-AI-01 · Ask the department</h3><span class="tag p2">P2</span></div>
+  <p class="intent"><strong>What it does.</strong> Gives chairs and deans a read-only question box over departmental analytics — enrolment, grade distributions of certified sections, attendance trends, staffing gaps — that answers in plain language and never changes a record. This is Analyst — the administrator mode of <a href="./ai.html">Shikho Campus AI</a>. Every answer uses one uniform Answer Card (headline, stat, ranked rows, source, drill, note). Starter intents include worst attendance, lowest marks, at-risk, eligibility barred, certification pending, teacher load, term compare, department summary. Read-only; never exposes private Momentum. Full rules: <a href="./ai.html#AI-ASK-01">AI-ASK-01</a>. Department AI usage roll-up lives under Administrator → Usage (<a href="./ai.html#AI-USE-01">AI-USE-01</a>).</p>
+  <h4>Why it exists</h4>
+  <p>Leaders ask the same questions every term and wait on someone to build a pivot table. A carefully scoped assistant speeds insight but must not become a way to edit marks, approve waivers, or message students in bulk by accident. Read-only is the product.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Chair / dean</td><td>Planning weeks, result weeks, accreditation prep</td><td>Fast answers from data they are already allowed to see</td></tr>
+    <tr><td>QAC officer</td><td>When exploring outcome trends</td><td>Narrative summaries linked to underlying certified figures</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Ask panel</strong>
+      <p>Administrator → Ask the department. Question box, suggested prompts, scope badge (department / term).</p>
+      <div class="copy">Ask the department — CSE · Spring 2026</div>
+      <div class="copy">Try: Which sections have the highest fail rate among certified results?</div>
+    </div>
+    <div class="zone">
+      <strong>Answer card</strong>
+      <p>Plain-language answer with figures, links into the source screens (certify queue, staffing, eligibility). Clear label: Read-only — cannot change records.</p>
+      <div class="copy">Read-only answer · based on certified sections only</div>
+    </div>
+    <div class="zone">
+      <strong>Refusal states</strong>
+      <p>If asked to change a mark, approve a waiver, or show another department’s private discipline file, the assistant refuses and points to the correct feature.</p>
+      <div class="copy">I cannot change marks. Use Certify grades to certify or return a section.</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Chair</span>Opens Administrator → Ask the department.</div></li>
+    <li><span class="n">2</span><div><span class="who">Chair</span>Asks a question in plain language.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Interprets within the chair’s data scope and certified/allowed sources only.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Answers with figures and links; offers follow-up suggestions.</div></li>
+    <li><span class="n">5</span><div><span class="who">Chair</span>Clicks through to the operational screen if action is needed.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Certified analytics, staffing, attendance aggregates</td><td>Existing administrator and faculty-sourced records</td><td>Answer cards</td></tr>
+    <tr><td>Question and answer log (optional)</td><td>This feature</td><td>Improvement of prompts; not a decision audit substitute</td></tr>
+    <tr><td>Refusals</td><td>Safety rules</td><td>User guidance toward the right feature</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>ADM-CRT-01, ADM-STF-01, ADM-ELG-01</td><td>Underlying numbers</td><td>Answers stay grounded</td></tr>
+    <tr><td>ADM-QAC-01</td><td>Trends for quality narrative</td><td>Faster prep, same sources</td></tr>
+    <tr><td>ADM-HOME-01</td><td>May surface suggested questions from open risks</td><td>Insight meets action</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Whether answer logs are kept and for how long.</li>
+    <li>Which data domains the assistant may read.</li>
+    <li>Whether deans may query across departments.</li>
+    <li>Language preference (English / Bangla) for answers.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>The assistant must never edit marks, certify sections, assign teachers, create fees, or approve scholarships.</li>
+    <li>It must never reveal another department’s confidential disciplinary detail outside scope.</li>
+    <li>It must never invent statistics not present in source data.</li>
+    <li>It must never imply the platform holds student money or can move funds.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If data is incomplete (uncertified sections), the answer says so and excludes drafts.</li>
+    <li>If the question is out of scope, it refuses with a pointer to the right office or feature.</li>
+    <li>If entitlement for this assistant is off, the menu entry is hidden.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A chair gets a correct fail-rate answer that matches the certify reports.</li>
+    <li>A request to “set everyone to B+” is refused.</li>
+    <li>Links from answers land on the correct operational screens.</li>
+  </ul>
+</article>
+
+
+<footer>
+  <p><strong>Shikho Campus — Administrator module.</strong> Fourteen governance features for chairs, deans and registrar delegates at Bangladeshi private universities, written in plain English for product, design, engineering and academic readers together.</p>
+  <p>Related pages: <a href="./index.html">Overview</a> · <a href="./student.html">Student</a> · <a href="./faculty.html">Faculty</a> · <a href="./coordinator.html">Coordinator</a> · <a href="./platform.html">Platform &amp; loops</a></p>
+  <p>Hard rules on every page of this module: the administrator never edits a mark; the platform never holds student money; teacher assignment is an administrator act, not a coordinator import.</p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>

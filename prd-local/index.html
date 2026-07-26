@@ -1,0 +1,353 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shikho Campus — Product Requirements</title>
+<link rel="stylesheet" href="./pro.css?v=20"/>
+<link rel="stylesheet" href="./spec.css?v=20"/>
+<link rel="stylesheet" href="./dev.css?v=20"/>
+<script src="./nav.js?v=20" defer></script>
+</head>
+<body>
+<div class="layout">
+
+<nav>
+  <div class="brand">Shikho Campus</div>
+  <div class="sub">Product requirements</div>
+
+  <div class="g">On this page</div>
+  <a href="#what">What this is</a>
+  <a href="#flow">How a term runs</a>
+  <a href="#modules">Four modules</a>
+  <a href="#devices">Devices &amp; responsiveness</a>
+  <a href="#coverage">What is covered</a>
+  <a href="#rules">Rules we never break</a>
+  <a href="#config">What each university can change</a>
+  <a href="#editions">Three editions</a>
+  <a href="#ai-product">Campus AI</a>
+  <a href="#principles-ceo">Product principles</a>
+  <a href="#permissions">Who may do what</a>
+  <a href="#glossary">Glossary</a>
+  <a href="#references">LMS references</a>
+
+  <div class="g">Modules</div>
+  <a href="./student.html">Student</a>
+  <a href="./faculty.html">Faculty</a>
+  <a href="./admin.html">Administrator</a>
+  <a href="./coordinator.html">Coordinator</a>
+
+  <div class="g">More pages</div>
+  <a href="./ai.html">Campus AI</a>
+  <a href="./university-activities.html">All university activities</a>
+  <a href="./platform.html">How parts connect</a>
+
+  <div class="g">Resources</div>
+  <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
+</nav>
+
+<main>
+
+<header>
+  <h1>Shikho Campus</h1>
+  <p class="lede">One platform to run a private university: teaching, attendance, assignments, exams, results, fees, advising, records and governance.</p>
+</header>
+<aside class="demo-strip">
+  <strong>Live demo</strong>
+  <span>Try any role in the working campus demo.</span>
+  <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">shikho-brac-platform.vercel.app ↗</a>
+</aside>
+
+<section id="what">
+  <h2>What this product is</h2>
+  <p>A university department is one connected system. The attendance a teacher takes decides whether a student may sit the final exam. The fee a student pays decides whether they may register next term. The marks a teacher submits become a transcript only after the chairperson certifies them. Today these connections are held together by spreadsheets, WhatsApp groups, printed lists and memory.</p>
+  <p>Shikho Campus makes those connections part of the software. One event — a student joining a class, paying a bill, or a teacher submitting grades — updates every place that depends on it, for every person who needs to know.</p>
+  <p><strong>What the university gets:</strong> run a complete term online — teach, take attendance, assess, collect fees, advise students, certify results, and hand certified results to the registrar — at a cost a private university in Bangladesh can sustain, without the maintenance burden of running a self-hosted system.</p>
+</section>
+
+<section id="flow">
+  <h2>How a term runs</h2>
+  <p>One term, four roles, one chain of hand-offs.</p>
+  <div class="flow-board" aria-label="Term lifecycle flow">
+    <div class="flow-row">
+      <div class="flow-card"><span class="flow-who">Coordinator</span><strong>Load records</strong><p>Students, teachers, sections</p></div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div class="flow-card"><span class="flow-who">Administrator</span><strong>Staff &amp; publish</strong><p>Assign teachers, open the term</p></div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div class="flow-card"><span class="flow-who">Faculty · Students</span><strong>Teach &amp; learn</strong><p>Class, attendance, work, fees</p></div>
+    </div>
+    <div class="flow-row">
+      <div class="flow-card"><span class="flow-who">Faculty</span><strong>Submit finals</strong><p>Marks approved by the teacher</p></div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div class="flow-card"><span class="flow-who">Administrator</span><strong>Certify</strong><p>Accept or return — never edit a mark</p></div>
+      <span class="flow-arrow" aria-hidden="true">→</span>
+      <div class="flow-card"><span class="flow-who">Coordinator</span><strong>Export</strong><p>Results to the registrar</p></div>
+    </div>
+  </div>
+  <aside class="demo-strip">
+    <strong>Live demo</strong>
+    <span>Open the demo and switch roles to walk this chain.</span>
+    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
+  </aside>
+</section>
+
+<section id="structure">
+  <h2>How each module is written</h2>
+  <table>
+    <tr><th>Part</th><th>What it contains</th></tr>
+    <tr><td><strong>1 · Introduction</strong></td><td>What the module is, who uses it, and what it owns.</td></tr>
+    <tr><td><strong>2 · Feature list</strong></td><td>Every feature in one table, with what it connects to.</td></tr>
+    <tr><td><strong>3 · Feature details</strong></td><td>What it does, screens, steps, connections, rules, and edge cases.</td></tr>
+  </table>
+</section>
+
+<section id="modules">
+  <h2>The four modules</h2>
+  <aside class="demo-strip">
+    <strong>Live demo</strong>
+    <span>Pick Student, Faculty, Administrator or Coordinator on the welcome screen.</span>
+    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
+  </aside>
+
+  <p>Everything in the product belongs to one of four modules. There is no fifth. Payments, advising, examinations and reporting are not separate products — they are activities that live inside these four, seen from the point of view of the person doing them.</p>
+
+  <div class="hub-grid">
+    <a class="hub-card" href="./student.html">
+      <h3>1 · Student</h3>
+      <p>Attend class, study, submit work, take quizzes, see marks and attendance, pay fees, meet the advisor, register for courses, clear holds, request documents, use campus services.</p>
+      <span class="count">Read the Student module →</span>
+    </a>
+    <a class="hub-card" href="./faculty.html">
+      <h3>2 · Faculty</h3>
+      <p>Take classes live or in the classroom, share content and recordings, set assignments and quizzes, take attendance, mark work with AI assistance, submit final grades, advise students.</p>
+      <span class="count">Read the Faculty module →</span>
+    </a>
+    <a class="hub-card" href="./admin.html">
+      <h3>3 · Administrator</h3>
+      <p>Chairperson and dean work: assign teachers, publish the term, set academic and fee policy, decide exam eligibility, certify results, approve scholarships, review the department.</p>
+      <span class="count">Read the Administrator module →</span>
+    </a>
+    <a class="hub-card" href="./coordinator.html">
+      <h3>4 · Coordinator</h3>
+      <p>Department office work: load student and course records, build the class routine, sync dues from finance, verify payments, process documents and clearance, send results to the registrar.</p>
+      <span class="count">Read the Coordinator module →</span>
+    </a>
+  </div>
+
+  <h3>Who does what — the boundaries that matter</h3>
+  <table>
+    <tr><th>Activity</th><th>Student</th><th>Faculty</th><th>Administrator</th><th>Coordinator</th></tr>
+    <tr><td>Give a mark</td><td>No</td><td><strong>Yes</strong></td><td>Never</td><td>Never</td></tr>
+    <tr><td>Certify results to the registrar</td><td>No</td><td>No</td><td><strong>Yes</strong></td><td>No</td></tr>
+    <tr><td>Assign a teacher to a section</td><td>No</td><td>No</td><td><strong>Yes</strong></td><td>Raises the gap only</td></tr>
+    <tr><td>Decide a fee amount</td><td>No</td><td>No</td><td>No — finance decides</td><td>No — only syncs it</td></tr>
+    <tr><td>Pay a fee</td><td><strong>Yes</strong></td><td>No</td><td>No</td><td>Verifies offline payments</td></tr>
+    <tr><td>Set the attendance rule</td><td>No</td><td>No</td><td><strong>Yes</strong></td><td>No</td></tr>
+    <tr><td>Take attendance</td><td>Marks own presence by joining</td><td><strong>Yes</strong></td><td>No</td><td>No</td></tr>
+    <tr><td>Decide who may sit the exam</td><td>No</td><td>No</td><td><strong>Yes</strong></td><td>No</td></tr>
+  </table>
+</section>
+
+<section id="coverage">
+  <h2>Does it cover everything a university does?</h2>
+  <p>We wrote out every activity that happens in a private university — from enquiry and admission through classes, exams, fees, hostel and library, discipline, graduation and alumni — and marked each one as built now, built next, planned, or handled by a system the university already owns.</p>
+  <p><a href="./university-activities.html"><strong>Open the university activity map →</strong></a></p>
+  <table>
+    <tr><th>Area</th><th>Examples</th><th>Where it is covered</th></tr>
+    <tr><td>Admission and entry</td><td>Application, offer, student record created, ID card</td><td>Mostly the university's admission system; we receive the student record</td></tr>
+    <tr><td>Registration</td><td>Advising, add/drop, prerequisites, credit limits, late registration</td><td>Student module (or the university's own system, our choice per client)</td></tr>
+    <tr><td>Teaching</td><td>Routine, content, live class, recordings, announcements, syllabus, attendance</td><td>Faculty and Student modules</td></tr>
+    <tr><td>Assessment</td><td>Weightage, assignments, quizzes, moderation, marking, midterm and final</td><td>Faculty module</td></tr>
+    <tr><td>Exams</td><td>Eligibility from attendance, schedule, invigilation, retake, review</td><td>Administrator module</td></tr>
+    <tr><td>Results</td><td>Submission, certification, registrar handover, probation, transcript</td><td>Faculty → Administrator → Coordinator</td></tr>
+    <tr><td>Money</td><td>Dues, online payment, instalments, bank slips, waivers, holds</td><td>Student and Coordinator modules; amounts always from finance</td></tr>
+    <tr><td>Support</td><td>Advising, counselling referral, at-risk students</td><td>Student and Faculty modules</td></tr>
+    <tr><td>Campus services</td><td>Library, hostel, transport, medical, documents, clearance</td><td>Student requests; Coordinator processes; some stay in existing systems</td></tr>
+    <tr><td>Governance</td><td>Policy, discipline, quality, accreditation evidence, reporting</td><td>Administrator module</td></tr>
+    <tr><td>Exit</td><td>Degree audit, clearance, graduation, certificate, alumni</td><td>Student and Coordinator modules</td></tr>
+  </table>
+</section>
+
+<section id="rules">
+  <h2>Rules we never break</h2>
+  <p>These are not preferences. Every feature in every module obeys them, and a change that breaks one of them is a defect, not an improvement.</p>
+  <table>
+    <tr><th>#</th><th>Rule</th><th>What it means in practice</th></tr>
+    <tr><td>1</td><td>The chairperson certifies; the teacher marks</td><td>An administrator can accept a grade sheet or send it back with a reason. There is no screen, and no other route, that lets an administrator change a student's mark.</td></tr>
+    <tr><td>2</td><td>AI drafts; a person decides</td><td>AI may suggest a mark or write feedback. Nothing reaches a student until the teacher has looked at it and approved it under their own name.</td></tr>
+    <tr><td>3</td><td>We never hold university money</td><td>Payment goes from the student, through a licensed provider, into the university's account. We show the bill, start the payment, and record the result.</td></tr>
+    <tr><td>4</td><td>Fee amounts come from finance</td><td>No one inside the platform can create or edit a charge. We mirror what the finance office decided.</td></tr>
+    <tr><td>5</td><td>Nothing important is silently overwritten</td><td>Marks, attendance, payments, holds and approvals keep their full history, with who did it, when, and why.</td></tr>
+    <tr><td>6</td><td>Every number can be explained</td><td>If the system says a student is barred from an exam or has a certain grade, it can show the records that produced that result.</td></tr>
+    <tr><td>7</td><td>Differences between universities are settings, not new software</td><td>Grading scales, attendance thresholds, probation rules and fee gating are configured per university.</td></tr>
+    <tr><td>8</td><td>Teachers never invite students</td><td>Class lists come from the university's records. No class codes, no manual invitations.</td></tr>
+    <tr><td>9</td><td>Effort may be encouraged; students are never ranked publicly</td><td>No leaderboards, no public comparison of marks.</td></tr>
+    <tr><td>10</td><td>It must work on every device people actually use</td><td>Phone, tablet, laptop, desktop and classroom smart TV — one web product, responsive layouts, not separate broken experiences</td></tr>
+  </table>
+</section>
+
+<section id="devices">
+  <h2>Devices and responsiveness</h2>
+  <p>Shikho Campus is a <strong>web application</strong>. The same product runs in the browser on phone, tablet, laptop, desktop and classroom smart TV. Responsiveness is not optional — every role’s critical work must be usable on the device that person has in hand.</p>
+  <aside class="demo-strip">
+    <strong>Live demo</strong>
+    <span>Resize the browser or open the demo on a phone to check the layout.</span>
+    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
+  </aside>
+  <table>
+    <tr><th>Device</th><th>Who uses it most</th><th>What must work without compromise</th></tr>
+    <tr><td><strong>Phone</strong></td><td>Students · teachers on the move</td><td>Home cockpit, join class, submit work, pay fees, clear holds, advising, Tutor — readable without pinching; tap targets large enough</td></tr>
+    <tr><td><strong>Tablet</strong></td><td>Teachers marking · chairs reviewing</td><td>Grading queue, gradebook, certify, eligibility — usable in portrait and landscape</td></tr>
+    <tr><td><strong>Laptop / desktop</strong></td><td>Faculty · coordinator · administrator</td><td>Full gradebook, offering, directory, bulk records, fee policy, Analyst — dense tables that still scroll and filter cleanly</td></tr>
+    <tr><td><strong>Classroom smart TV</strong></td><td>Faculty in a live class</td><td>Live stage fills the display; materials and attendance stay usable from the front of the room</td></tr>
+  </table>
+  <h3>Hard requirements</h3>
+  <ul>
+    <li>One codebase and one design system scale across breakpoints — not a “mobile site” and a separate “desktop site” that drift apart.</li>
+    <li>Layouts reflow: sidebars become drawers on small screens; tables scroll horizontally or stack; video and live class never clip under chrome.</li>
+    <li>Touch and mouse both work. Nothing important requires hover-only.</li>
+    <li>Text remains readable on a 5-inch phone and on a 55-inch classroom display without a special “TV mode” that loses features.</li>
+    <li>Weak mobile data is assumed. Essential actions stay available when video quality must drop.</li>
+    <li>Orientation change (portrait ↔ landscape) does not lose form input, playback position, or draft marks.</li>
+  </ul>
+</section>
+
+<section id="config">
+  <h2>What each university can change without new software</h2>
+  <table>
+    <tr><th>Setting</th><th>Examples we have seen</th></tr>
+    <tr><td>Term shape</td><td>Two semesters; three trimesters; summer term optional</td></tr>
+    <tr><td>Grading scale</td><td>4.00 scale with A/A−/B+…; different mark boundaries per programme</td></tr>
+    <tr><td>Attendance rule</td><td>70% required to sit finals; or attendance carries marks; or both</td></tr>
+    <tr><td>Marks distribution</td><td>Quizzes 20 / Midterm 30 / Final 40 / Lab 10 — set per course or fixed by department</td></tr>
+    <tr><td>Late work</td><td>Not accepted; accepted and flagged; accepted with a daily penalty</td></tr>
+    <tr><td>When students see marks</td><td>Immediately after grading, or only when the teacher posts them</td></tr>
+    <tr><td>Probation and progression</td><td>GPA thresholds, warning levels, maximum credits when on probation</td></tr>
+    <tr><td>Retake and repeat</td><td>Whether a retake grade is capped, and which attempt counts</td></tr>
+    <tr><td>Payment methods</td><td>Which of bKash, Nagad, Rocket, card and bank transfer are offered; who pays the convenience charge</td></tr>
+    <tr><td>What unpaid dues block</td><td>Registration, exam entry, result view, transcript — each can be a hard block, a warning, or nothing</td></tr>
+    <tr><td>Registration ownership</td><td>Students register in our portal, or registration stays in the university's existing system</td></tr>
+    <tr><td>Which modules are switched on</td><td>Live classes, payments, advising, AI, accreditation — each can be off</td></tr>
+  </table>
+</section>
+
+
+<section id="editions">
+  <h2>Commercial model — three editions</h2>
+  <p>Editions gate capability, not integrity — every edition obeys every product rule.</p>
+  <table>
+    <tr><th>Edition</th><th>What it is</th><th>Includes</th></tr>
+    <tr><td><strong>Essentials</strong></td><td>The system of record</td><td>Courses, content, assessments, grades, directory, records operations</td></tr>
+    <tr><td><strong>Live</strong></td><td>Essentials + real-time teaching</td><td>Live classes (Green Room → broadcast), recorded lectures with synced transcripts</td></tr>
+    <tr><td><strong>AI</strong></td><td>The complete platform</td><td>Everything, plus Shikho Campus AI in all three modes (Tutor, Assistant, Analyst) and AI usage governance</td></tr>
+  </table>
+  <p>Pricing is agreed in the sales conversation and is never used as pressure inside the product. The editions screen states the tier the university is on; it does not block work with upgrade prompts.</p>
+</section>
+
+<section id="ai-product">
+  <h2>Campus AI — one product, three modes</h2>
+  <aside class="demo-strip">
+    <strong>Live demo</strong>
+    <span>In the demo: Tutor (student), Assistant (faculty), Analyst (administrator).</span>
+    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
+  </aside>
+
+  <p>One brand · one set of rules that stay on · one budget. Tutor (student), Assistant (faculty), Analyst (administrator). The Coordinator has no AI mode. Answers come only from real material or records; a teacher must approve anything that reaches a student; Analyst is read-only and never sees private Momentum. Usage is capped per user and rolls up to the department — capped, not surprised; never cut off mid-lesson.</p>
+  <p><a href="./ai.html"><strong>Open the full AI specification →</strong></a></p>
+</section>
+
+<section id="principles-ceo">
+  <h2>Product principles (binding)</h2>
+  <p>Every screen obeys these constraints.</p>
+  <table>
+    <tr><th>#</th><th>Principle</th><th>What it means</th></tr>
+    <tr><td>1</td><td>Every number traces to a real input</td><td>If a number cannot be traced, it is cut or honestly labelled — never fabricated</td></tr>
+    <tr><td>2</td><td>Gamify effort, never grades</td><td>Momentum is private; no leaderboard; compete only with your own last week</td></tr>
+    <tr><td>3</td><td>The AI drafts; the human decides</td><td>Grounded and/or human-approved; these controls stay on and cannot be switched off</td></tr>
+    <tr><td>4</td><td>The administrator certifies; they never author</td><td>Certify or return — never edit a mark</td></tr>
+    <tr><td>5</td><td>Oversight is aggregate, not surveillant</td><td>A teacher’s private Momentum is never visible to the administrator</td></tr>
+    <tr><td>6</td><td>Govern and operate are different jobs</td><td>Chair decides; coordinator operates; neither is cluttered with the other’s work</td></tr>
+    <tr><td>7</td><td>One object, one design</td><td>Directory, Offering, Profile, term cockpit are shared components with role-appropriate actions</td></tr>
+  </table>
+</section>
+
+<section id="permissions">
+  <h2>Who may do what (authority model)</h2>
+  <table>
+    <tr><th>Capability</th><th>Student</th><th>Faculty</th><th>Admin</th><th>Coord.</th></tr>
+    <tr><td>Attend / host live class</td><td>Attend</td><td>Host</td><td>—</td><td>—</td></tr>
+    <tr><td>Grade work (with AI assist)</td><td>—</td><td>Approves each</td><td>—</td><td>—</td></tr>
+    <tr><td>Submit final grades</td><td>—</td><td>Yes</td><td>—</td><td>—</td></tr>
+    <tr><td>Certify submitted grades</td><td>—</td><td>—</td><td>Yes</td><td>—</td></tr>
+    <tr><td>Edit an individual mark</td><td>—</td><td>Own only</td><td>Never</td><td>Never</td></tr>
+    <tr><td>Rule on exam eligibility</td><td>—</td><td>—</td><td>Yes</td><td>—</td></tr>
+    <tr><td>Staff a section</td><td>—</td><td>—</td><td>Yes</td><td>Flags only</td></tr>
+    <tr><td>Set academic policy</td><td>—</td><td>—</td><td>Yes</td><td>—</td></tr>
+    <tr><td>Compose / publish offering</td><td>—</td><td>—</td><td>Yes</td><td>Loads it</td></tr>
+    <tr><td>Import / export records</td><td>—</td><td>—</td><td>—</td><td>Yes</td></tr>
+    <tr><td>Ask the Analyst</td><td>—</td><td>—</td><td>Yes</td><td>—</td></tr>
+    <tr><td>Use AI (own mode)</td><td>Tutor</td><td>Assistant</td><td>Analyst</td><td>None (clerical)</td></tr>
+    <tr><td>See a teacher’s private Momentum</td><td>—</td><td>Own only</td><td>Never</td><td>Never</td></tr>
+  </table>
+</section>
+
+<section id="glossary">
+  <h2>Words we use, and what they mean here</h2>
+  <table>
+    <tr><th>Word</th><th>Meaning in this document</th></tr>
+    <tr><td>Offering</td><td>The list of courses actually running this term.</td></tr>
+    <tr><td>Section</td><td>One class group of a course, with its own teacher, room and timetable.</td></tr>
+    <tr><td>Cross-listed</td><td>Several section codes taught together as one class, sharing content.</td></tr>
+    <tr><td>Hold</td><td>A block on a student — unpaid dues, library fine, advising not done — that stops a specific action.</td></tr>
+    <tr><td>Certify</td><td>The chairperson's formal approval of a grade sheet so it can become an official record.</td></tr>
+    <tr><td>Eligibility</td><td>Whether a student's attendance allows them to sit the final examination.</td></tr>
+    <tr><td>Posting marks</td><td>The moment a teacher makes marks visible to students.</td></tr>
+    <tr><td>Moderation</td><td>Giving one student extra time or an extra attempt for a good reason.</td></tr>
+    <tr><td>Blueprint course</td><td>A master course whose content is copied and kept in step across many sections.</td></tr>
+    <tr><td>Clearance</td><td>Confirmation from every office that a student owes nothing before graduation.</td></tr>
+    <tr><td>Momentum</td><td>Private effort-consistency score (Absorb · Retrieve · Apply). Never grades, never a leaderboard, never visible to the administrator.</td></tr>
+    <tr><td>Tutor / Assistant / Analyst</td><td>The three modes of Shikho Campus AI — student, faculty, administrator.</td></tr>
+    <tr><td>Answer Card</td><td>The single uniform shape of every Analyst answer: headline, stat, rows, source, drill, note.</td></tr>
+    <tr><td>Green Room</td><td>The teacher’s pre-live checks before going on air.</td></tr>
+
+  </table>
+</section>
+
+<section id="references">
+  <h2>See a live university LMS</h2>
+  <p>These are public walkthroughs of LMS platforms already used by universities. Watch them as a shared reference for what “running a university online” looks like today — then compare against what Shikho Campus specifies in this document and in our live demo.</p>
+  <div class="ref-cards">
+    <a class="ref-card" href="https://youtu.be/IgHHeRYEqZM?si=UX2wM4qJGZ2c0JCX" target="_blank" rel="noopener">
+      <span class="ref-kicker">Docebo</span>
+      <strong>Getting started with your Docebo LMS platform</strong>
+      <span>A live university LMS tour — how a complete platform is organised for teaching and learning.</span>
+      <em>Watch on YouTube ↗</em>
+    </a>
+    <a class="ref-card" href="https://youtu.be/dwXwah-feFk?si=LHTlSJqGjqkOSzqj" target="_blank" rel="noopener">
+      <span class="ref-kicker">Canvas</span>
+      <strong>Canvas 101</strong>
+      <span>Official overview of Canvas — the LMS used by many universities worldwide.</span>
+      <em>Watch on YouTube ↗</em>
+    </a>
+    <a class="ref-card" href="https://youtu.be/IJIP0XCy9s0?si=KiELhbY7d-MMGDhl" target="_blank" rel="noopener">
+      <span class="ref-kicker">Canvas · teachers</span>
+      <strong>Complete Canvas tutorial for teachers</strong>
+      <span>From course setup to publishing — the teacher’s day-to-day workflow in a university LMS.</span>
+      <em>Watch on YouTube ↗</em>
+    </a>
+  </div>
+  <aside class="demo-strip">
+    <strong>Our live demo</strong>
+    <span>After the references, try the Shikho Campus working demo in any role.</span>
+    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">shikho-brac-platform.vercel.app ↗</a>
+  </aside>
+</section>
+
+<footer>
+  Shikho Campus · Product requirements v5 · Start at <a href="./index.html">Overview</a> · Modules: <a href="./student.html">Student</a> · <a href="./faculty.html">Faculty</a> · <a href="./admin.html">Administrator</a> · <a href="./coordinator.html">Coordinator</a> · <a href="./ai.html">AI</a> · <a href="./university-activities.html">All university activities</a> · <a href="#references">LMS references</a> · <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
+</footer>
+
+</main>
+</div>
+</body>
+</html>

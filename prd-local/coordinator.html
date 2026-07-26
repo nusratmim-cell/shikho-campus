@@ -1,0 +1,1026 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Coordinator module — Shikho Campus PRD</title>
+<link rel="stylesheet" href="./pro.css?v=20"/>
+<link rel="stylesheet" href="./spec.css?v=20"/>
+<link rel="stylesheet" href="./dev.css?v=20"/>
+<script src="./nav.js?v=20" defer></script>
+</head>
+<body>
+<div class="layout">
+
+<nav>
+  <div class="brand">Shikho Campus</div>
+  <div class="sub">Coordinator module</div>
+
+  <div class="g">On this page</div>
+  <a href="#introduction">Introduction</a>
+  <a href="#features">All features</a>
+
+  <div class="g">Features</div>
+  <a href="#COO-HOME-01">Records desk</a>
+  <a href="#COO-IMP-01">Load records</a>
+  <a href="#COO-FLG-01">Flag unstaffed</a>
+  <a href="#COO-SCH-01">Class routine</a>
+  <a href="#COO-FEE-01">Sync invoices</a>
+  <a href="#COO-REC-01">Verify payments</a>
+  <a href="#COO-DOC-01">Document requests</a>
+  <a href="#COO-CLR-01">Clearance</a>
+  <a href="#COO-EXP-01">Send results</a>
+  <a href="#COO-COM-01">Notices</a>
+  <a href="#COO-ALM-01">Graduation list</a>
+
+  <div class="g">Go to</div>
+  <a href="./ai.html">Shikho Campus AI (no coordinator mode)</a>
+  <a href="./university-activities.html">All university activities</a>
+  <a href="./platform.html">How parts connect</a>
+  <a href="./index.html">Overview</a>
+  <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
+  <a href="./student.html">Student</a>
+  <a href="./faculty.html">Faculty</a>
+  <a href="./admin.html">Administrator</a>
+  <a href="./platform.html">Platform &amp; loops</a>
+</nav>
+
+<main>
+<div class="page-bar">
+  <a class="page-bar-back" href="./index.html">← Back to overview</a>
+  <a class="page-bar-demo" href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open live demo ↗</a>
+</div>
+
+
+<header>
+  <h1>The Coordinator module</h1>
+  <p class="lede">The department office and records desk for a private university term: load clean records, flag unstaffed sections, publish the class routine, mirror finance dues, verify bank slips, process documents and clearances, send certified results to the registrar, and hand graduates to alumni.</p>
+</header>
+<aside class="demo-strip">
+  <strong>Live demo</strong>
+  <span>Open the live campus demo and try the Coordinator role.</span>
+  <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">shikho-brac-platform.vercel.app ↗</a>
+</aside>
+
+
+<section id="introduction">
+<h2>Introduction to the Coordinator module</h2>
+<p><strong>No AI mode.</strong> The Coordinator is clerical by design — import, verify, export, flag. There is no Tutor, Assistant or Analyst for this role. Faculty assignment and results certification stay with the Administrator. See <a href="./ai.html">Shikho Campus AI</a>.</p>
+
+<h3>What this module is</h3>
+<p>The Coordinator module is the clerical and records operations layer of Shikho Campus. It is where the department office keeps the term’s machine running: students and offerings are loaded correctly, rooms have a routine, finance dues are mirrored faithfully, slips are verified, documents move through a queue, clearances gather stamps, and certified results leave for the registrar on time.</p>
+<p>It does not govern academic judgement and it does not own money. The chair assigns teachers and certifies marks. Finance sets amounts and receives payment. The platform never holds student money. The coordinator’s question is: <strong>are the records ready, and what must I hand to whom?</strong></p>
+
+<h3>Who uses it</h3>
+<p>Primary users are department coordinators, programme officers and records assistants — people who sit at a counter or a shared office PC, switch between a parent with a bank slip and a registrar deadline, and need screens that speak in office language: validate, verify, flag, prepare, send. Accounts liaisons use invoice sync and slip verification. Graduation desks use clearance and the graduation list. Junior staff may see a subset of queues; senior officers see the full desk.</p>
+
+<h3>A day in the life</h3>
+<p>It is the week before finals. The CSE coordinator opens Coordinator → Records desk dashboard. Finance last synced twenty-five minutes ago; fourteen bank slips wait; two certified batches are ready for the registrar; three sections are still unstaffed and already flagged to the chair. She verifies slips under Coordinator → Verify payments, matching each photo to an open due — she cannot type a new tuition figure even when a parent insists. She runs Coordinator → Sync invoices after finance posts a waiver. She builds an export under Coordinator → Send certified results to registrar and sends only certified sections; drafts are not on the list. She prepares three transcript requests now that holds cleared. She does not assign a teacher to the unstaffed lab — she only confirms the flag is still visible on the chair’s dashboard. By late afternoon the desk counts are down, students with verified payments see holds release, and no mark or fee amount originated from her keyboard.</p>
+
+<h3>What this module owns, and what it does not</h3>
+  <table>
+    <tr><th>It owns</th><th>It does not own</th></tr>
+    <tr><td>Validate-then-commit loading of students, faculty directory and offering skeletons</td><td>Teacher assignment — chairs staff sections in the Administrator module</td></tr>
+    <tr><td>Flagging unstaffed sections to the chair</td><td>Choosing who teaches</td></tr>
+    <tr><td>Class routine and room allocation craft</td><td>Academic policy thresholds and grade scales</td></tr>
+    <tr><td>Mirroring invoices and dues from university finance</td><td>Creating or editing fee amounts</td></tr>
+    <tr><td>Verification of online payments and bank slips as records of university receipt</td><td>Holding, escrowing, or walleting student money on the platform</td></tr>
+    <tr><td>Document request processing and multi-office clearance shepherding</td><td>Inventing transcript marks or bypassing certify</td></tr>
+    <tr><td>Export batches of certified results to the registrar</td><td>Certifying or editing marks</td></tr>
+    <tr><td>Operational notices and graduation list / alumni handover packaging</td><td>Marketing campaigns or rewriting CGPA</td></tr>
+  </table>
+
+<div class="callout danger">
+  <b>Four lines nobody may cross</b>
+  The coordinator never assigns teachers. The coordinator never creates a fee amount. The coordinator never edits or certifies marks — export is certified-only. The platform never holds student money — verification records university payment, it does not take custody of funds.
+</div>
+
+<h3>How it connects with the other three modules</h3>
+  <table>
+    <tr><th>Other module</th><th>What flows from Coordinator</th><th>What flows into Coordinator</th></tr>
+    <tr><td>Student</td><td>Mirrored dues, verified payment outcomes, document and clearance status, routine times/rooms, official notices, graduation readiness</td><td>Slip uploads, document requests, clearance progress needs, payment attempts</td></tr>
+    <tr><td>Faculty</td><td>Published routine slots and rooms, directory records from import, notices</td><td>Nothing that assigns teaching — staffing comes from Administrator; attendance stays in Faculty</td></tr>
+    <tr><td>Administrator</td><td>Unstaffed flags, finance mirrors that drive holds, export acknowledgements, clearance and graduation readiness signals</td><td>Teacher assignments that clear flags, certify decisions that unlock export, fee-block policy, scholarship approvals awaiting finance post</td></tr>
+  </table>
+</section>
+
+<section id="features">
+<h2>Features at a glance</h2>
+<p>Eleven features. Priority marks what the office needs before a term can run without spreadsheet panic. The right-hand column names the handoffs that matter most.</p>
+  <table>
+    <tr><th>Feature ID</th><th>Feature name</th><th>One-line description</th><th>Priority</th><th>Connects with</th></tr>
+    <tr><td><strong>COO-HOME-01</strong></td><td>Records desk dashboard</td><td>One screen of clerical work waiting — imports, flags, slips, documents, clearances, exports.</td><td>P0</td><td>All coordinator features; chair flags; student queues</td></tr>
+    <tr><td><strong>COO-IMP-01</strong></td><td>Load students, faculty and offering records</td><td>Validate-then-commit bulk load; sections arrive unstaffed — never assigns teachers.</td><td>P0</td><td>ADM-STF-01; COO-FLG-01; student/faculty identity</td></tr>
+    <tr><td><strong>COO-FLG-01</strong></td><td>Flag unstaffed sections to the chair</td><td>Send staffing gaps to the chair’s queue without assigning anyone.</td><td>P0</td><td>COO-IMP-01; ADM-STF-01; ADM-HOME-01</td></tr>
+    <tr><td><strong>COO-SCH-01</strong></td><td>Class routine and room allocation</td><td>Weekly timetable and rooms with clash and capacity checks.</td><td>P1</td><td>ADM-STF-01; student timetable; faculty live; exam rooms</td></tr>
+    <tr><td><strong>COO-FEE-01</strong></td><td>Sync invoices and dues from finance</td><td>Mirror finance invoices and balances — never create a fee amount.</td><td>P0</td><td>ADM-FEE-01; student fees; COO-REC-01; scholarships</td></tr>
+    <tr><td><strong>COO-REC-01</strong></td><td>Verify payments and bank slips</td><td>Match online notices and slip uploads to dues; verify or reject with reasons.</td><td>P0</td><td>Student payments; fee sync; hold release</td></tr>
+    <tr><td><strong>COO-DOC-01</strong></td><td>Process student document requests</td><td>Transcripts, certificates and testimonials from request to collection/download.</td><td>P1</td><td>Student documents; certified results; fee/hold gates</td></tr>
+    <tr><td><strong>COO-CLR-01</strong></td><td>Clearance processing</td><td>Library, hostel, accounts and department clearances on one checklist.</td><td>P1</td><td>Student graduation; COO-ALM-01; fee/library blocks</td></tr>
+    <tr><td><strong>COO-EXP-01</strong></td><td>Send certified results to registrar</td><td>Export only chair-certified sections — no drafts, no mark edits.</td><td>P0</td><td>ADM-CRT-01; registrar; transcripts; quality packs</td></tr>
+    <tr><td><strong>COO-COM-01</strong></td><td>Notices and bulk communication</td><td>Official targeted notices with delivery tracking.</td><td>P1</td><td>Student/faculty inboxes; document and exam ops</td></tr>
+    <tr><td><strong>COO-ALM-01</strong></td><td>Graduation list and alumni handover</td><td>Eligible graduates from clearance and completion, handed to alumni/registrar.</td><td>P2</td><td>COO-CLR-01; certified completion; student graduation view</td></tr>
+  </table>
+</section>
+
+<h2 id="feature-details">Feature details</h2>
+<p>Each feature below uses the same structure: what it does, why it exists, who uses it, what they see, how the work runs, what information moves, what it connects with, configurable rules, hard prohibitions, unusual cases, and how we know it works.</p>
+
+<article class="spec" id="COO-HOME-01">
+  <div class="spec-head"><h3>COO-HOME-01 · Records desk dashboard</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Gives the department office one screen of clerical work waiting — imports to finish, unstaffed sections to flag, invoices to sync, bank slips to verify, document requests, clearances, and certified results ready to send to the registrar — without offering teacher assignment or fee authorship.</p>
+  <h4>Why it exists</h4>
+  <p>Coordinators are the operational backbone of a Bangladeshi private-university term. Their day is interruptions: a parent with a slip, a chair asking which sections lack teachers, a registrar deadline for results. Without a desk dashboard, urgent export sits behind routine filing. This screen answers: what must I hand to whom today?</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Department coordinator / records officer</td><td>Every working morning and before registrar deadlines</td><td>A ranked list of clerical tasks they can complete</td></tr>
+    <tr><td>Senior office assistant</td><td>Throughout the day</td><td>Same queue filtered to their assigned task types</td></tr>
+    <tr><td>Chair (indirect)</td><td>When reading flags the coordinator raised</td><td>Sees staffing gaps the office prepared</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Header</strong>
+      <p>Title “Records desk”, term selector, office/department label, last sync times for finance and SIS.</p>
+      <div class="copy">Records desk — Spring 2026 · CSE office</div>
+      <div class="copy">Finance last synced 25 minutes ago</div>
+    </div>
+    <div class="zone">
+      <strong>Work strip</strong>
+      <p>Tiles: Imports · Unstaffed to flag · Slips to verify · Documents · Clearances · Results to export.</p>
+      <div class="copy">14 bank slips waiting</div>
+      <div class="copy">2 certified batches ready for registrar</div>
+    </div>
+    <div class="zone">
+      <strong>Task list</strong>
+      <p>Rows with type, identity, age, deadline, and open action. No “assign teacher” or “create fee” actions appear.</p>
+      <div class="copy">Verify bank slip — STD2024-1182 · uploaded yesterday</div>
+      <div class="copy">Flag unstaffed — ENG201 Section C</div>
+    </div>
+    <div class="zone">
+      <strong>Hard boundaries</strong>
+      <p>Persistent reminder of what this role never does.</p>
+      <div class="copy">You load records and clear paperwork. Teacher assignment and fee amounts are not done here.</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Records desk dashboard.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Loads open clerical tasks for the office and term, with finance/SIS freshness.</div></li>
+    <li><span class="n">3</span><div><span class="who">Coordinator</span>Works the top urgent row (slip, flag, export, or document).</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Opens the owning feature with that item selected.</div></li>
+    <li><span class="n">5</span><div><span class="who">Coordinator</span>Completes the clerical step and returns.</div></li>
+    <li><span class="n">6</span><div><span class="who">System</span>Updates counts; items needing the chair remain as flags, not as assignments the coordinator can finish alone.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Open clerical tasks</td><td>Import jobs, unstaffed sections, slips, documents, clearances, export batches</td><td>Dashboard list</td></tr>
+    <tr><td>Sync freshness</td><td>Finance and SIS connectors</td><td>Stale-data warnings</td></tr>
+    <tr><td>Task completion</td><td>Owning coordinator features</td><td>Dashboard refresh</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>All other coordinator features</td><td>Task deep links</td><td>One desk drives the day’s work</td></tr>
+    <tr><td>ADM-STF-01 / ADM-HOME-01</td><td>Unstaffed flags only</td><td>Chair receives gaps; coordinator does not staff</td></tr>
+    <tr><td>Student document and clearance requests</td><td>Inbound queues</td><td>Students are not left without a tracker</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Which task types appear for junior vs senior office roles.</li>
+    <li>When a finance sync is considered stale.</li>
+    <li>Office scope in multi-department campuses.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>The dashboard must never offer assign-teacher or create-invoice actions.</li>
+    <li>It must never show editable marks.</li>
+    <li>It must never imply the office holds student cash in the platform.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If finance sync is stale, the dues tiles warn before the coordinator acts on balances.</li>
+    <li>If the chair staffs a section, the unstaffed flag clears on refresh.</li>
+    <li>If nothing is due, a calm empty state lists the next registrar deadline.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A coordinator can run the morning from this screen alone.</li>
+    <li>Forbidden actions are absent, not merely disabled without explanation.</li>
+    <li>Counts match the underlying queues.</li>
+  </ul>
+</article>
+
+<article class="spec" id="COO-IMP-01">
+  <div class="spec-head"><h3>COO-IMP-01 · Load students, faculty and offering records</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Loads students, faculty directory rows and term offering sections from the university’s student information files through a validate-then-commit path. Sections arrive unstaffed — this feature never assigns teachers.</p>
+  <h4>Why it exists</h4>
+  <p>Every term begins with bulk data. A bad import poisons rosters, billing mirrors and attendance. Coordinators must see errors before anything becomes live. Separating import from teacher assignment keeps academic staffing with the chair and prevents a spreadsheet column from quietly placing teachers.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Coordinator / records officer</td><td>Before term open and when late admits arrive</td><td>Validate files, fix errors, commit clean records</td></tr>
+    <tr><td>Chair (indirect)</td><td>After offerings load</td><td>Receives unstaffed sections to staff in Administrator → Compose offering</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Import desks</strong>
+      <p>Coordinator → Load records. Tabs: Students · Faculty · Offering · History.</p>
+      <div class="copy">Load records — Offering · Spring 2026</div>
+    </div>
+    <div class="zone">
+      <strong>Validate step</strong>
+      <p>Upload or pull file; see row counts, error list with line numbers, Bangla name encoding checks. No commit yet.</p>
+      <div class="copy">Validate only — 1,204 rows · 6 errors · 0 teacher assignments will be imported</div>
+    </div>
+    <div class="zone">
+      <strong>Commit step</strong>
+      <p>After errors cleared, commit. Offering commit explicitly states teachers are not assigned here.</p>
+      <div class="copy">Commit offering — sections will be Unstaffed until the chair assigns teachers</div>
+    </div>
+    <div class="zone">
+      <strong>History</strong>
+      <p>Past imports with who committed, counts, and downloadable error reports.</p>
+      <div class="copy">Committed by R. Akter · 12 June 2026 · 86 sections</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Load records and chooses Students, Faculty or Offering.</div></li>
+    <li><span class="n">2</span><div><span class="who">Coordinator</span>Uploads the file and runs Validate.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Reports clean rows and errors without saving.</div></li>
+    <li><span class="n">4</span><div><span class="who">Coordinator</span>Fixes source errors or mapping issues and re-validates.</div></li>
+    <li><span class="n">5</span><div><span class="who">Coordinator</span>Commits when clean.</div></li>
+    <li><span class="n">6</span><div><span class="who">System</span>Writes records; marks new sections Unstaffed; refuses any teacher-assignment column.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Source files from SIS / registry</td><td>University student information office</td><td>Validate report</td></tr>
+    <tr><td>Student, faculty, offering records</td><td>Successful commit</td><td>Registration, staffing grid, class lists</td></tr>
+    <tr><td>Import history</td><td>This feature</td><td>Audit and re-run support</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>ADM-STF-01 Compose offering</td><td>Unstaffed sections</td><td>Chair assigns teachers</td></tr>
+    <tr><td>COO-FLG-01 Flag unstaffed sections</td><td>Empty teaching assignments</td><td>Office can chase the chair</td></tr>
+    <tr><td>Student and Faculty modules</td><td>Identity and directory truth</td><td>Logins and class lists work</td></tr>
+    <tr><td>COO-SCH-01 Class routine</td><td>Sections that need rooms/times</td><td>Routine building starts from real offerings</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Accepted file columns for each desk.</li>
+    <li>Whether late admits use the same validate-then-commit path (yes).</li>
+    <li>Duplicate handling: reject, skip, or update with confirmation.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Import must never assign teachers — teacher columns are refused.</li>
+    <li>Commit must never proceed while blocking errors remain.</li>
+    <li>Import must never create fee amounts.</li>
+    <li>Import must never create marks or certifications.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If Bangla names are mis-encoded, those rows error with line numbers instead of saving mojibake.</li>
+    <li>If a student ID already exists, the tool shows a controlled update path rather than a silent overwrite.</li>
+    <li>If offering references an unknown course code, validate fails that row.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A validate report is available before any live write.</li>
+    <li>After offering commit, every new section shows Unstaffed for the chair.</li>
+    <li>History shows who loaded what and when.</li>
+  </ul>
+</article>
+
+<article class="spec" id="COO-FLG-01">
+  <div class="spec-head"><h3>COO-FLG-01 · Flag unstaffed sections to the chair</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Lets the coordinator mark sections that still have no teacher and send them to the chair’s decisions queue — without assigning anyone.</p>
+  <h4>Why it exists</h4>
+  <p>The office sees the gap first; the chair must fill it. Flagging is the handoff. If coordinators could assign teachers themselves, academic judgement would leak into clerical accounts. If nobody flags, day one arrives with orphan sections.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Coordinator</td><td>After offering load and throughout the first teaching weeks</td><td>Raise and refresh unstaffed flags</td></tr>
+    <tr><td>Chair</td><td>When clearing the decisions dashboard</td><td>Receive flags and assign teachers in ADM-STF-01</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Unstaffed list</strong>
+      <p>Coordinator → Flag unstaffed sections. Auto-list of sections with no primary teacher; optional note to the chair; flag / clear-flag.</p>
+      <div class="copy">Unstaffed sections — 4 · term starts in 6 days</div>
+    </div>
+    <div class="zone">
+      <strong>Flag action</strong>
+      <p>Select sections, add note (“priority — large first-year intake”), send to chair.</p>
+      <div class="copy">Flagged to chair — ENG201 Section C · note added</div>
+    </div>
+    <div class="zone">
+      <strong>Status</strong>
+      <p>Flagged · Staffed (cleared automatically when chair assigns) · Deferred with chair acknowledgement.</p>
+      <div class="copy">Staffed — cleared 08:40 today after chair assignment</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Flag unstaffed sections.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Lists sections with no primary teacher.</div></li>
+    <li><span class="n">3</span><div><span class="who">Coordinator</span>Selects urgent sections, adds a short note, flags them to the chair.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Places items on Administrator → Decisions dashboard and Compose offering highlights.</div></li>
+    <li><span class="n">5</span><div><span class="who">Chair</span>Assigns teachers in Administrator → Compose offering.</div></li>
+    <li><span class="n">6</span><div><span class="who">System</span>Clears flags when a primary teacher exists.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Unstaffed section list</td><td>Offering records minus teacher assignments</td><td>Flag queue</td></tr>
+    <tr><td>Flag and note</td><td>Coordinator</td><td>Chair decisions dashboard</td></tr>
+    <tr><td>Clear event</td><td>Chair assignment</td><td>Coordinator list refresh</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>COO-IMP-01 Load records</td><td>Sections created unstaffed</td><td>Something to monitor</td></tr>
+    <tr><td>ADM-STF-01 Compose offering</td><td>Assignment that clears the flag</td><td>Only path that staffs</td></tr>
+    <tr><td>ADM-HOME-01 Decisions dashboard</td><td>Flag visibility</td><td>Chair morning urgency</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Whether flags auto-create for every unstaffed section or only when the coordinator sends them.</li>
+    <li>Reminder cadence before term start.</li>
+    <li>Who may defer a flag.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>This feature must never assign or suggest a mandatory teacher pick that writes an assignment.</li>
+    <li>A flag must never disappear unless the section is staffed or explicitly deferred by policy.</li>
+    <li>Coordinators must never edit marks while “helping” on an unstaffed course.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If the chair assigns a co-teacher only without primary, the section may remain unstaffed per university rule (primary required).</li>
+    <li>If a teacher is removed mid-term, the section reappears as unstaffed and can be reflagged.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Chair sees flagged sections the same day.</li>
+    <li>Flags clear only after real staffing.</li>
+    <li>Coordinator never needs a side channel spreadsheet for gaps.</li>
+  </ul>
+</article>
+
+<article class="spec" id="COO-SCH-01">
+  <div class="spec-head"><h3>COO-SCH-01 · Class routine and room allocation</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Builds the weekly class routine: section meeting patterns, room allocation, and clash checks against room capacity and teacher availability once the chair has staffed sections.</p>
+  <h4>Why it exists</h4>
+  <p>Students and teachers live by the routine. Double-booked rooms and phantom classes are classic office failures. The coordinator owns the timetable craft; the chair still owns who teaches.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Coordinator / timetable officer</td><td>Before term start and when makeup classes appear</td><td>Publish a clash-checked routine</td></tr>
+    <tr><td>Faculty and students (indirect)</td><td>After publish</td><td>See times and rooms on their timetables</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Routine grid</strong>
+      <p>Coordinator → Class routine. Week grid by day and slot; drag or assign section to room; capacity vs enrolment; clash badges.</p>
+      <div class="copy">Class routine — Spring 2026 · draft</div>
+    </div>
+    <div class="zone">
+      <strong>Room panel</strong>
+      <p>Room list with capacity, equipment tags, unavailable blocks.</p>
+      <div class="copy">UB-201 · capacity 60 · projector · free Sunday 10:00</div>
+    </div>
+    <div class="zone">
+      <strong>Publish</strong>
+      <p>Publish routine; notify affected sections on change.</p>
+      <div class="copy">Published — students will see this on Timetable</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Class routine.</div></li>
+    <li><span class="n">2</span><div><span class="who">Coordinator</span>Places each staffed section into slots and rooms.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Warns on room capacity, room double-booking, and teacher double-booking.</div></li>
+    <li><span class="n">4</span><div><span class="who">Coordinator</span>Resolves clashes or records an approved override reason.</div></li>
+    <li><span class="n">5</span><div><span class="who">Coordinator</span>Publishes the routine.</div></li>
+    <li><span class="n">6</span><div><span class="who">System</span>Updates student and faculty timetables and feeds exam room planning.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Sections and enrolment</td><td>Offering and registration</td><td>Capacity checks</td></tr>
+    <tr><td>Teacher assignments</td><td>ADM-STF-01</td><td>Teacher clash detection</td></tr>
+    <tr><td>Room bookings and meeting patterns</td><td>This feature</td><td>Student/faculty timetables; exam planning inputs</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>ADM-STF-01 Compose offering</td><td>Who teaches</td><td>Clash checks need real teachers</td></tr>
+    <tr><td>Student timetable</td><td>Published meetings</td><td>Students know where to go</td></tr>
+    <tr><td>Faculty live class</td><td>Scheduled sessions</td><td>Hosts start from the right slot</td></tr>
+    <tr><td>ADM-EXM-01 Exam schedule</td><td>Room free/busy history</td><td>Exam rooms avoid teaching collisions where required</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Standard slot patterns (for example 90-minute blocks).</li>
+    <li>Whether overrides of clashes require chair approval.</li>
+    <li>Makeup class publishing rules.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Routine publish must never assign a teacher.</li>
+    <li>An unstaffed section must never be hidden as if ready — it shows as incomplete.</li>
+    <li>Capacity overrides must never be silent.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If a room goes offline, affected meetings flag for reallocation.</li>
+    <li>If cross-listed sections must share a meeting, the routine links them.</li>
+    <li>If enrolment grows past capacity, a warning appears even after publish.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Published routine matches what students see.</li>
+    <li>Clash-free for rooms unless an override reason exists.</li>
+    <li>Unstaffed sections cannot be marked complete.</li>
+  </ul>
+</article>
+
+<article class="spec" id="COO-FEE-01">
+  <div class="spec-head"><h3>COO-FEE-01 · Sync invoices and dues from finance</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Pulls invoice lines and balances from the university finance system into Shikho Campus so students and holds see the same dues finance owns. The coordinator never creates or edits a fee amount.</p>
+  <h4>Why it exists</h4>
+  <p>Academic systems that invent tuition figures drift from accounts and destroy trust. Finance is the system of record for money. This feature only mirrors. Payment still goes to the university; the platform never holds student money.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Coordinator / accounts liaison</td><td>Daily in billing season; after waiver postings</td><td>Run or monitor sync; resolve mapping errors</td></tr>
+    <tr><td>Student (indirect)</td><td>Continuously</td><td>See accurate dues on the fee dashboard</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Sync desk</strong>
+      <p>Coordinator → Sync invoices. Last sync time, success/failure, counts of new/updated/cancelled invoices.</p>
+      <div class="copy">Invoice sync — last success 10:14 · 38 updates</div>
+    </div>
+    <div class="zone">
+      <strong>Exception list</strong>
+      <p>Unmapped charge types, students not found, currency anomalies — for liaison follow-up with finance.</p>
+      <div class="copy">3 invoices waiting on charge-type mapping</div>
+    </div>
+    <div class="zone">
+      <strong>Read-only totals</strong>
+      <p>Sample student dues view for verification — no edit amount control.</p>
+      <div class="copy">Amounts come from university finance. You cannot edit them here.</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Sync invoices and dues.</div></li>
+    <li><span class="n">2</span><div><span class="who">Coordinator</span>Starts sync or reviews the automatic sync result.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Pulls invoice lines and balances from finance; updates mirrors.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Applies hold rules from Administrator → Fee policy based on unpaid items.</div></li>
+    <li><span class="n">5</span><div><span class="who">Coordinator</span>Works mapping exceptions with finance until clean.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Invoice lines and balances</td><td>University finance system</td><td>Student fee dashboard; hold engine</td></tr>
+    <tr><td>Sync run report</td><td>This feature</td><td>Operations audit</td></tr>
+    <tr><td>Mapping exceptions</td><td>Failed matches</td><td>Liaison queue</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>ADM-FEE-01 Fee policy</td><td>Which unpaid items block what</td><td>Holds match policy</td></tr>
+    <tr><td>COO-REC-01 Verify payments</td><td>Payments that will clear dues after posting</td><td>Closed loop with slips</td></tr>
+    <tr><td>ADM-SCH-01 Scholarships</td><td>Finance-posted waivers after approval</td><td>Reduced balances appear after finance posts</td></tr>
+    <tr><td>Student pay flows</td><td>Due truth</td><td>Students pay what finance says</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Sync frequency and who may trigger manual sync.</li>
+    <li>Behaviour when finance is unreachable (keep last good mirror, show stale warning).</li>
+    <li>Charge-type mapping ownership.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Coordinator must never create or edit a fee amount.</li>
+    <li>Sync must never invent dues not present in finance.</li>
+    <li>The platform must never hold or escrow student funds.</li>
+    <li>Stale mirrors must never be presented as freshly confirmed without a timestamp.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If finance reverses an invoice, the mirror shows cancelled/reversed and holds re-evaluate.</li>
+    <li>If a student ID mismatch occurs, the invoice sits in exceptions — not on a random student.</li>
+    <li>If scholarships were approved academically but not posted in finance, dues stay until finance posts.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Student fee totals match finance for sampled accounts after sync.</li>
+    <li>No screen allows typing a new tuition figure.</li>
+    <li>Hold changes follow unpaid balances automatically per fee policy.</li>
+  </ul>
+</article>
+
+<article class="spec" id="COO-REC-01">
+  <div class="spec-head"><h3>COO-REC-01 · Verify payments and bank slips</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Lets the accounts desk verify online payment notifications and uploaded bank deposit slips against finance, then mark payments verified so dues and holds update — without taking custody of cash inside the platform.</p>
+  <h4>Why it exists</h4>
+  <p>bKash/Nagad/card successes and bank-counter deposits both need reconciliation. Students upload slip photos; the office checks them. Until verification, dues should not pretend to be clear. The university receives the money; Shikho Campus records the verification event.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Coordinator / accounts assistant</td><td>Daily</td><td>Verify or reject slips and unmatched payment notices</td></tr>
+    <tr><td>Student (indirect)</td><td>After upload or online pay</td><td>Track under review → verified or rejected</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Verification queue</strong>
+      <p>Coordinator → Verify payments. Tabs: Online unmatched · Bank slips · Verified today. Each row: student, claimed amount, reference, evidence thumbnail.</p>
+      <div class="copy">Bank slips — 14 waiting</div>
+    </div>
+    <div class="zone">
+      <strong>Review pane</strong>
+      <p>Slip image, stated deposit date, bank reference, finance open dues for that student, match / reject with reason.</p>
+      <div class="copy">Match to tuition instalment 2 · ৳45,000 · verify payment</div>
+    </div>
+    <div class="zone">
+      <strong>Reject path</strong>
+      <p>Reason list: unreadable slip, amount mismatch, wrong account, duplicate.</p>
+      <div class="copy">Rejected — amount does not match any open due · student notified</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Verify payments.</div></li>
+    <li><span class="n">2</span><div><span class="who">Coordinator</span>Opens a bank slip or unmatched online item.</div></li>
+    <li><span class="n">3</span><div><span class="who">Coordinator</span>Compares evidence to open finance dues and reference rules.</div></li>
+    <li><span class="n">4</span><div><span class="who">Coordinator</span>Verifies match or rejects with reason.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>On verify, informs finance posting rules / marks dues cleared per integration; releases holds when balances allow.</div></li>
+    <li><span class="n">6</span><div><span class="who">System</span>Notifies the student of verified or rejected status.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Slip uploads and payment notifications</td><td>Student pay flows</td><td>Verification queue</td></tr>
+    <tr><td>Open dues</td><td>COO-FEE-01 finance mirror</td><td>Match targets</td></tr>
+    <tr><td>Verification decision</td><td>Coordinator</td><td>Payment history; hold release; finance reconciliation</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Student bank slip payment</td><td>Uploaded proof</td><td>Something to verify</td></tr>
+    <tr><td>Student receipts &amp; history</td><td>Verified payment record</td><td>Student proof</td></tr>
+    <tr><td>ADM-FEE-01 / hold centre</td><td>Cleared balances</td><td>Admit cards and registration unblock</td></tr>
+    <tr><td>COO-FEE-01 Sync invoices</td><td>Balances after finance acknowledges</td><td>Numbers stay aligned</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Maximum age of a slip before auto-escalate.</li>
+    <li>Dual control for amounts above a threshold.</li>
+    <li>Accepted banks and account numbers printed on generated slips.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Verification must never create a new fee amount.</li>
+    <li>Staff must never “verify” without evidence or finance match rules.</li>
+    <li>The platform must never store student money — verification is a record, not a wallet credit the platform owns.</li>
+    <li>Rejected slips must never leave the student without a reason.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If the slip is blurry, reject with “unreadable” and allow re-upload.</li>
+    <li>If amount matches but reference is wrong, follow university match rules (strict vs flexible).</li>
+    <li>If duplicate slip of an already verified payment, reject as duplicate.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Verified payments appear on the student receipt list.</li>
+    <li>Matching holds clear without a separate phone call when balances allow.</li>
+    <li>Queue age is visible so slips do not rot for weeks.</li>
+  </ul>
+</article>
+
+<article class="spec" id="COO-DOC-01">
+  <div class="spec-head"><h3>COO-DOC-01 · Process student document requests</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Runs the office queue for transcripts, certificates, testimonials and enrolment letters: fee check, record check, prepare, registrar sign-off handoff, and ready-for-collection or download.</p>
+  <h4>Why it exists</h4>
+  <p>Document desks are among the busiest counters on campus. Without a queue, requests are lost in email. This feature tracks each request from student submission to fulfilment, respecting holds and document fees finance already defined.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Coordinator / records desk</td><td>Throughout the term, heavy after results</td><td>Process the queue to ready/collected</td></tr>
+    <tr><td>Registrar (sign-off)</td><td>When policy requires registrar signature</td><td>Final authorisation step</td></tr>
+    <tr><td>Student (indirect)</td><td>After requesting</td><td>Track status to collection or download</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Document queue</strong>
+      <p>Coordinator → Document requests. Filters by type, status (Submitted · Fee pending · In preparation · With registrar · Ready · Collected).</p>
+      <div class="copy">Document requests — 22 open · 5 ready for collection</div>
+    </div>
+    <div class="zone">
+      <strong>Request file</strong>
+      <p>Student identity, document type, copies, purpose, fee status, academic holds, preview of record extracts.</p>
+      <div class="copy">Official transcript · 2 copies · fee verified · no blocking holds</div>
+    </div>
+    <div class="zone">
+      <strong>Fulfilment</strong>
+      <p>Mark prepared, send to registrar if required, mark ready, record collection or enable download.</p>
+      <div class="copy">Ready for collection — counter 2 · bring student ID</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Document requests.</div></li>
+    <li><span class="n">2</span><div><span class="who">Coordinator</span>Opens the next request; confirms fee and holds.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Blocks preparation if a blocking hold or unpaid document fee remains.</div></li>
+    <li><span class="n">4</span><div><span class="who">Coordinator</span>Prepares the document and routes for registrar sign-off when required.</div></li>
+    <li><span class="n">5</span><div><span class="who">Registrar or coordinator</span>Completes final status to Ready.</div></li>
+    <li><span class="n">6</span><div><span class="who">Student</span>Collects or downloads; system records fulfilment.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Document requests</td><td>Student documents feature</td><td>Office queue</td></tr>
+    <tr><td>Fee and hold status</td><td>Finance mirror and hold engine</td><td>Gate on preparation</td></tr>
+    <tr><td>Prepared document and status trail</td><td>This feature</td><td>Student tracker; collection audit</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Student documents</td><td>Request and status</td><td>Student-facing progress</td></tr>
+    <tr><td>COO-REC-01 / fee sync</td><td>Document fee payment</td><td>Paid requests move forward</td></tr>
+    <tr><td>COO-EXP-01 / certified results</td><td>Transcript content source</td><td>Only certified results appear on official transcripts</td></tr>
+    <tr><td>ADM-FEE-01</td><td>Whether unpaid other dues block documents</td><td>Policy-consistent gates</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Which document types need registrar countersignature.</li>
+    <li>Collection vs secure download per type.</li>
+    <li>Processing time service targets shown to students.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Transcripts must never include uncertified or draft marks.</li>
+    <li>Preparation must never bypass a blocking hold without audited override.</li>
+    <li>Staff must never invent grades on a testimonial.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If results are newly certified mid-queue, transcript preview refreshes before print.</li>
+    <li>If the student has a discipline hold that blocks documents, the request stays fee-aware but not prepared.</li>
+    <li>If download link expires, the student can re-authenticate for a fresh link per policy.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Every fulfilled request has a status history.</li>
+    <li>Students see why a request is waiting (fee, hold, preparation, registrar).</li>
+    <li>Official transcripts match certified results.</li>
+  </ul>
+</article>
+
+<article class="spec" id="COO-CLR-01">
+  <div class="spec-head"><h3>COO-CLR-01 · Clearance processing</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Coordinates graduation and leaving clearances across library, hostel, accounts and department — recording each office’s clear or blocked status until the student is free to graduate or obtain final documents.</p>
+  <h4>Why it exists</h4>
+  <p>Clearance is a multi-office relay. Students should not bounce between buildings without a single checklist. The coordinator desk often shepherds the case; each office still owns its own clear decision.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Coordinator / graduation desk</td><td>Final term and leaving students</td><td>Drive the checklist to completion</td></tr>
+    <tr><td>Library, hostel, accounts, department officers</td><td>When their queue item is pending</td><td>Mark clear or blocked with reason</td></tr>
+    <tr><td>Student (indirect)</td><td>Throughout</td><td>See which office still blocks them</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Clearance board</strong>
+      <p>Coordinator → Clearance. Student list with traffic lights per office: Library · Hostel · Accounts · Department · Registrar final.</p>
+      <div class="copy">Clearance — 18 students in progress · 4 fully clear</div>
+    </div>
+    <div class="zone">
+      <strong>Student checklist</strong>
+      <p>Each office row: status, officer, timestamp, blocker reason (overdue book, hostel dues, departmental equipment).</p>
+      <div class="copy">Library blocked — 1 overdue book · Fine mirrored from finance</div>
+    </div>
+    <div class="zone">
+      <strong>Complete</strong>
+      <p>When all required offices are clear, mark clearance complete for graduation / alumni handover eligibility.</p>
+      <div class="copy">All offices clear — ready for graduation list</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Clearance and selects a student.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Shows each office status from that office’s input and finance/library mirrors.</div></li>
+    <li><span class="n">3</span><div><span class="who">Offices</span>Mark clear or blocked with reasons as students resolve issues.</div></li>
+    <li><span class="n">4</span><div><span class="who">Coordinator</span>Follows up on blocked rows; does not fake a clear for another office.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>When all required are clear, unlocks graduation list inclusion and related document eligibility.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Office clear/blocked decisions</td><td>Library, hostel, accounts, department users</td><td>Checklist</td></tr>
+    <tr><td>Finance/library dues related to clearance</td><td>Fee sync and library systems</td><td>Blocker reasons</td></tr>
+    <tr><td>Clearance complete flag</td><td>This feature</td><td>Graduation list; final documents; student tracker</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Student graduation clearance</td><td>Status per office</td><td>Student knows where to go</td></tr>
+    <tr><td>COO-ALM-01 Graduation list</td><td>Fully cleared students</td><td>Only eligible names proceed</td></tr>
+    <tr><td>ADM-FEE-01</td><td>Accounts block rules</td><td>Money blocks are real</td></tr>
+    <tr><td>COO-DOC-01</td><td>Final certificates often need clearance</td><td>Documents wait fairly</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Which offices are mandatory for graduation vs simple leaving.</li>
+    <li>Whether coordinators may clear on behalf of an office (generally no).</li>
+    <li>Time limits for office response.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Coordinator must never mark library clear without library authority (unless university explicitly delegates with audit).</li>
+    <li>Clearance must never erase unpaid dues — accounts must clear properly.</li>
+    <li>Platform must never collect clearance fines as a wallet; fines are finance/library owned.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If a student re-borrows after library clear, library status can reopen per policy.</li>
+    <li>If only hostel applies to residential students, non-residents see hostel as not applicable.</li>
+    <li>If a disciplinary hold exists, department or registrar may stay blocked until ADM-DSP-01 closes.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Students always see the true blocking office.</li>
+    <li>Fully clear students appear for graduation listing.</li>
+    <li>No office is silently skipped.</li>
+  </ul>
+</article>
+
+<article class="spec" id="COO-EXP-01">
+  <div class="spec-head"><h3>COO-EXP-01 · Send certified results to registrar</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Packages only chair-certified section results into a batch for the university registrar — never drafts, never returned sections, never coordinator-edited marks.</p>
+  <h4>Why it exists</h4>
+  <p>The registrar prints transcripts and gazette sheets from institutional truth. Exporting early destroys trust. This feature is the last mile from department certification to registrar systems, with a hard filter: certified only.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Coordinator</td><td>After certification progresses each result week</td><td>Build and send clean batches</td></tr>
+    <tr><td>Registrar office</td><td>On receipt</td><td>Import into registrar-of-record processes</td></tr>
+    <tr><td>Chair (indirect)</td><td>By certifying</td><td>Controls what is eligible to export</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Export desk</strong>
+      <p>Coordinator → Send results to registrar. Lists certified sections not yet exported; hides uncertified.</p>
+      <div class="copy">Certified results ready — 12 sections · 2 already exported</div>
+    </div>
+    <div class="zone">
+      <strong>Batch builder</strong>
+      <p>Select sections or “all certified since date”, see student/result counts, confirm recipients.</p>
+      <div class="copy">Batch for Registrar · Spring 2026 finals · 12 sections · 540 result lines</div>
+    </div>
+    <div class="zone">
+      <strong>Confirmation</strong>
+      <p>Explicit statement that marks were not edited in this step.</p>
+      <div class="copy">Sending certified results only. Marks cannot be changed here.</div>
+    </div>
+    <div class="zone">
+      <strong>History</strong>
+      <p>Past batches with timestamps and section lists.</p>
+      <div class="copy">Sent 20 July 2026 · 12 sections · received acknowledgement</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Send results to registrar.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Shows certified, not-yet-exported sections only.</div></li>
+    <li><span class="n">3</span><div><span class="who">Coordinator</span>Builds a batch and confirms.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Sends to registrar destination and records the batch.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Marks sections exported; keeps audit of contents.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Certified section results</td><td>ADM-CRT-01</td><td>Export batch</td></tr>
+    <tr><td>Batch manifest</td><td>This feature</td><td>Registrar; history</td></tr>
+    <tr><td>Acknowledgements</td><td>Registrar import if available</td><td>Desk status</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>ADM-CRT-01 Certify final grades</td><td>Certification gate</td><td>Nothing uncertified leaves</td></tr>
+    <tr><td>Student grades visibility</td><td>May already show per policy</td><td>Export still needed for registrar of record</td></tr>
+    <tr><td>COO-DOC-01 Transcripts</td><td>Certified lines</td><td>Documents match registrar truth</td></tr>
+    <tr><td>ADM-QAC-01</td><td>Exported certified distributions</td><td>Quality evidence</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Registrar destination (system or secure file drop) per university.</li>
+    <li>Whether partial course exports are allowed or whole-department batches preferred.</li>
+    <li>Re-export rules when a section is formally reopened and recertified.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Uncertified or returned sections must never be included.</li>
+    <li>Coordinator must never edit a mark during export.</li>
+    <li>Export must never silently drop failed students.</li>
+    <li>Failed send must never mark sections as exported.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If certification is revoked under formal reopen, a prior export is flagged superseded and a new export is required.</li>
+    <li>If registrar acknowledgement fails, the batch stays “sent — awaiting acknowledgement” not “done”.</li>
+    <li>If some selected sections lose certification mid-build, they are removed before send.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Spot checks match certified gradebooks to exported lines.</li>
+    <li>Uncertified sections cannot be selected.</li>
+    <li>History can prove what left the department and when.</li>
+  </ul>
+</article>
+
+<article class="spec" id="COO-COM-01">
+  <div class="spec-head"><h3>COO-COM-01 · Notices and bulk communication</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Sends official office notices to targeted student or faculty groups — by section, programme, level, or custom list — with delivery tracking, without becoming a marketing tool or a mark-change channel.</p>
+  <h4>Why it exists</h4>
+  <p>Departments still need to announce routine changes, document counter hours, and exam instructions. Coordinators already run those desks. This feature replaces unstructured SMS lists with auditable, scoped messages.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Coordinator / department office</td><td>Whenever official operational notices are needed</td><td>Compose, target, send, track</td></tr>
+    <tr><td>Recipients (indirect)</td><td>On delivery</td><td>Read notice in portal/app and email/SMS per university channels</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Compose</strong>
+      <p>Coordinator → Notices. Title, body, channel choices, audience builder (sections, programmes, cohorts).</p>
+      <div class="copy">Notice — Document counter closed Friday · audience: all CSE undergraduates</div>
+    </div>
+    <div class="zone">
+      <strong>Preview</strong>
+      <p>Estimated recipients, sample rendering, warning if audience is very large.</p>
+      <div class="copy">About to reach 1,120 students · continue?</div>
+    </div>
+    <div class="zone">
+      <strong>Tracking</strong>
+      <p>Sent counts, failed deliveries, open rates if available — no reply-thread grading actions.</p>
+      <div class="copy">Sent 1,118 · failed 2 · view failures</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Notices and bulk communication.</div></li>
+    <li><span class="n">2</span><div><span class="who">Coordinator</span>Writes the notice and builds the audience.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Shows estimated reach and channel options.</div></li>
+    <li><span class="n">4</span><div><span class="who">Coordinator</span>Sends.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Delivers via configured channels and records the audit.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Notice content and audience</td><td>Coordinator</td><td>Delivery services; recipient inboxes</td></tr>
+    <tr><td>Delivery results</td><td>Channel providers</td><td>Tracking desk</td></tr>
+    <tr><td>Audit of who sent what</td><td>This feature</td><td>Office accountability</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Student and Faculty homes</td><td>Notice display</td><td>People actually see it</td></tr>
+    <tr><td>COO-DOC-01 / exam ops</td><td>Operational announcements</td><td>Counters and exams run smoother</td></tr>
+    <tr><td>ADM-TOG-01</td><td>Whether SMS channels are entitled</td><td>Licence-aware channels</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Which roles may send to whole-faculty vs whole-university audiences.</li>
+    <li>Required approval above a recipient threshold.</li>
+    <li>Retention of notice content.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Notices must never alter marks, fees, or eligibility.</li>
+    <li>Audiences must never silently include students outside the office’s scope.</li>
+    <li>Bulk send must never be used to phish for passwords or payment to personal accounts.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If SMS entitlement is off, only in-app/email remain.</li>
+    <li>If a recipient has opted out of SMS under university policy, they still get in-app notice.</li>
+    <li>If send partially fails, failures are listed for retry.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A test send to staff works before a large audience send.</li>
+    <li>Audit shows sender, time, audience rule, and content.</li>
+    <li>Students can find past official notices later.</li>
+  </ul>
+</article>
+
+<article class="spec" id="COO-ALM-01">
+  <div class="spec-head"><h3>COO-ALM-01 · Graduation list and alumni handover</h3><span class="tag p2">P2</span></div>
+  <p class="intent"><strong>What it does.</strong> Builds the eligible graduation list from clearance and academic completion, then hands a clean graduate cohort to alumni/records continuation — without inventing degrees or clearing uncleared students.</p>
+  <h4>Why it exists</h4>
+  <p>Convocation planning and alumni offices need a definitive list. The coordinator assembles it from rules already satisfied elsewhere: certified results, degree audit, clearance. Handover starts the alumni chapter; it does not rewrite academic history.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Who</th><th>When</th><th>What they need</th></tr>
+    <tr><td>Coordinator / graduation desk</td><td>Late final term through convocation</td><td>Confirm list and hand over</td></tr>
+    <tr><td>Registrar / alumni office</td><td>On handover</td><td>Receive graduate cohort for alumni systems</td></tr>
+    <tr><td>Student (indirect)</td><td>When listed</td><td>See graduation-ready status</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Graduation list</strong>
+      <p>Coordinator → Graduation list. Filters: academically complete · clearance complete · pending · handed to alumni.</p>
+      <div class="copy">Graduation list — Fall 2026 candidates · 126 ready · 18 pending clearance</div>
+    </div>
+    <div class="zone">
+      <strong>Candidate file</strong>
+      <p>Degree, CGPA, certified completion, clearance status, holds, exceptions.</p>
+      <div class="copy">Ready — B.Sc. CSE · CGPA 3.41 · all offices clear</div>
+    </div>
+    <div class="zone">
+      <strong>Handover</strong>
+      <p>Package selected ready graduates to alumni/registrar continuation with timestamp.</p>
+      <div class="copy">Handed to alumni office — 126 graduates · 21 July 2026</div>
+    </div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Graduation list.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Lists candidates from academic completion and clearance states.</div></li>
+    <li><span class="n">3</span><div><span class="who">Coordinator</span>Reviews pending rows; chases clearance or missing certifications.</div></li>
+    <li><span class="n">4</span><div><span class="who">Coordinator</span>Selects ready graduates and performs handover.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Sends cohort to alumni/registrar continuation and locks the handed snapshot.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Academic completion signals</td><td>Certified results + degree requirements</td><td>Candidate academic readiness</td></tr>
+    <tr><td>Clearance complete flag</td><td>COO-CLR-01</td><td>Candidate clearance readiness</td></tr>
+    <tr><td>Graduation list and handover package</td><td>This feature</td><td>Alumni office; convocation planning</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>COO-CLR-01 Clearance</td><td>Clear flags</td><td>No uncleared graduate slips through</td></tr>
+    <tr><td>ADM-CRT-01 / COO-EXP-01</td><td>Certified completion</td><td>Degrees rest on certified truth</td></tr>
+    <tr><td>Student graduation view</td><td>Ready / pending reasons</td><td>Transparent status</td></tr>
+    <tr><td>ADM-QAC-01</td><td>Completion cohorts</td><td>Quality metrics</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Degree audit source of truth (registrar rules).</li>
+    <li>Whether Latin honours are calculated here or only displayed from registrar rules.</li>
+    <li>Handover destinations and whether re-handover after late clears is allowed.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Uncleared or academically incomplete students must never be marked graduated here.</li>
+    <li>Handover must never edit CGPA or marks.</li>
+    <li>Alumni handover must never expose unrelated student finance secrets beyond what alumni office is entitled to receive.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li>If a student clears after handover, a supplemental handover batch is created.</li>
+    <li>If certification arrives late for a final retake, the candidate moves from pending to ready automatically when rules pass.</li>
+    <li>If convocation registration is separate, handover does not force attendance.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Ready list matches clearance and certification checks on sample audit.</li>
+    <li>Alumni office acknowledges receipt of the package.</li>
+    <li>Students who are pending see the true blocker.</li>
+  </ul>
+</article>
+
+
+<footer>
+  <p><strong>Shikho Campus — Coordinator module.</strong> Eleven operations features for department offices and records desks at Bangladeshi private universities, written in plain English for product, design, engineering and office readers together.</p>
+  <p>Related pages: <a href="./index.html">Overview</a> · <a href="./student.html">Student</a> · <a href="./faculty.html">Faculty</a> · <a href="./admin.html">Administrator</a> · <a href="./platform.html">Platform &amp; loops</a></p>
+  <p>Hard rules on every page of this module: never assign teachers, never create fee amounts, never edit marks, and never treat the platform as a place that holds student money.</p>
+</footer>
+
+</main>
+</div>
+</body>
+</html>

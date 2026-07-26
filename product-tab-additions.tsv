@@ -1,0 +1,37 @@
+Module	Section	Feedback/Query
+Faculty Identity	Two-Identity Rule	Once Kamrul is findable in the picker, verify selecting any OTHER faculty member changes only the displayed name/title — never re-filters the teaching data underneath. This is the rule the "find yourself" pitch depends on; the picker fix was specced but this corollary was never verified live.
+Admin Certify	Return Path	Only "Certify" was exercised. "Return for revision" — the other half of "certify or return, never edit" — is untested. Click through a Return on a flagged section before this ships to a demo.
+Admin Eligibility	Lock Eligibility (untested)	Entire /chair/reports surface never opened, including "Lock eligibility" — reversible only until finals begin per PRD. A consequential, one-way-feeling control that needs a hands-on check before anyone demos it.
+Admin Program	This Term / Curriculum / Policy (untested)	Entire 3-tab surface never opened — staffing a section, editing the 70% rule, publishing a term. This is where governance actually happens, not just Home. Audit all three tabs.
+Admin Directory	Untested	Scope filters (Teaching now / Full directory) and drill-to-scorecard never confirmed to work.
+Admin Usage	Untested	Department AI-budget rollup — the deck's "AI you can afford" proof point (slide 13) — never opened.
+Admin Drill-throughs	Back Navigation	PRD promises "back never dead-ends" from course/student/faculty drill-throughs. Easy to silently break; never deliberately tested.
+Shell / Stacking Law	Systematic Modal Sweep	3 known z-index bugs fixed, but no sweep of every modal (syllabus, both faculty pickers, import, notifications, account menu, search). PRD calls this bug class "a permanent review checkpoint" — fix the pattern, not just the 3 known instances.
+Shell / Determinism	Untested	Pinned clock (10 Jul 2026, 14:20), no Math.random, no hydration mismatch — the rule that makes the demo "identical every time it's shown." Never checked.
+Shell / Notifications	Untested	Whether the bell is a real dynamic feed or a static icon was never confirmed either way.
+Shell / Avatar Upload	Untested	"Upload once, updates everywhere" (profile, ID card, header) is a specific testable claim in the PRD — never tested.
+Shell / Editions Surface	Untested	Whether the tier badge reads as "celebrates the tier" or "paywall in your face" (the PRD's own stated worry) — never checked live.
+Coordinator Offering	Untested	Read + import/export rendering, and the "imported sections always left unstaffed" honesty claim — never checked.
+Coordinator Directory	Bulk Actions & Validation	Import-preview flow was fixed, but bulk-select/bulk-action bar and the add/edit form's uniqueness validation were never exercised.
+Student Schedule	Untested	Timetable rendering against the pinned clock never confirmed, even after being folded into the Courses tab.
+Student Catalog	Untested	"Browse all 26 courses" is referenced as a destination but was never actually opened.
+Student Practice	Untested	The adaptive quiz engine that closes the Retrieve ring has never been exercised — quality unknown, not just the entry point.
+Student Assignment Detail	Untested	Submission flow never touched.
+Student Profile / Settings / Usage	Untested	Photo-upload propagation, the locked "grounded answers only" toggle, and the "never cut off mid-lesson" AI-cap promise — none verified.
+Faculty Momentum	Privacy Check	PRD states a teacher's Momentum must never be visible to the administrator. Worth spot-checking precisely because it's invisible when working and only shows up when broken.
+Faculty Schedule / Catalog / Courses	Untested	Never opened.
+Faculty Student Detail	Untested	The read view a teacher uses to check one student's standing — never opened.
+Faculty Profile / Settings / Usage	Untested	Never opened.
+Student Registration	Missing entirely	No course registration / add-drop flow anywhere in the product. This is the highest-anxiety, highest-frequency task a student does every term. If students still need BRACU's existing portal to register, they never fully leave it. Build or deep-link registration — likely the single biggest gap in the whole product.
+Student Group Work	Missing entirely	No team formation, shared submission, or peer evaluation anywhere in the domain model. CSE courses run on labs and projects — this is a functional hole, not a polish item.
+Student Grades	What-If Calculator	No "what do I need on the final to get a B+" tool. The single most-wanted feature on any grades page a student actually uses.
+Student Momentum	Metric-Gaming Risk	The Absorb ring rewards passive video-watching (even at 2x speed with no attention) with no way to catch it. Not a bug — a design risk in how effort is measured.
+Student Discussions	Not Competitive	A generic forum loses to the WhatsApp/Facebook groups students already use. Only wins with something WhatsApp can't do — e.g. instant AI answers — or if faculty make it the one sanctioned channel for questions.
+Cross-Cutting Notifications	No Push Channel	In-app bell only — no push, SMS, or email digest. A "quiz due in 3 hours" alert loses to a WhatsApp buzz every time it depends on a browser tab being open.
+Cross-Cutting Mobile	No Installable App	No PWA or native app; students are mobile-first with patchy campus wifi. A bookmarked tab is a much weaker daily-habit mechanic than a home-screen icon with push.
+AI Tutor	No Correction Loop	No way for a student to flag a wrong Tutor answer and see it get fixed. For a CS audience that will actively hunt for AI mistakes, a visible correction loop earns more trust than pretending errors don't happen.
+Student Exam Prep	Question Bank Missing	No past-exam or question-bank feature — culturally the most-wanted exam-prep tool at BRAC, absent from both the PRD and the deck.
+Go-to-Market	Faculty Content Adoption Plan	Home, Momentum, and Tutor are only real if faculty actually teach live and upload material on-platform instead of beside it (Google Drive, WhatsApp, physical handouts). No UI fix solves this — needs training, incentives, and a mandate from the chair before launch.
+Admin Governance	Audit Log UI Missing	"Every decision is logged" is claimed 3+ times in the PRD (certification, staffing, policy) but no screen shows that log to anyone. A registrar will ask where.
+Product	Accessibility Stance Missing	No mention anywhere — PRD, deck, or prior audit — of contrast ratios, keyboard navigation, or screen-reader labels, despite the "registrar-grade" quality bar. A university IT/accessibility office will ask before signing.
+Product	Migration Path Missing	Neither document says what happens to whatever BRACU uses today — existing content, rosters, grade history. Usually the first practical question a real buyer asks after the demo lands.

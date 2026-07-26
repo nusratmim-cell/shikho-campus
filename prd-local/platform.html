@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>How everything connects — Shikho Campus</title>
+<link rel="stylesheet" href="./pro.css?v=20"/>
+<link rel="stylesheet" href="./spec.css?v=20"/>
+<link rel="stylesheet" href="./dev.css?v=20"/>
+<script src="./nav.js?v=20" defer></script>
+</head>
+<body>
+<div class="layout">
+
+<nav>
+  <div class="brand">Shikho Campus</div>
+  <div class="sub">How everything connects</div>
+  <div class="g">Modules</div>
+  <a href="./index.html">Overview</a>
+  <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
+  <a href="./student.html">1 · Student</a>
+  <a href="./faculty.html">2 · Faculty</a>
+  <a href="./admin.html">3 · Administrator</a>
+  <a href="./coordinator.html">4 · Coordinator</a>
+  <a href="./university-activities.html">All university activities</a>
+  <div class="g">On this page</div>
+  <a href="#idea">The one idea</a>
+  <a href="#signals">The signals that travel</a>
+  <a href="#loop-term">Chain 1 · Running a term</a>
+  <a href="#loop-money">Chain 2 · Money and holds</a>
+  <a href="#loop-attendance">Chain 3 · Attendance to exam hall</a>
+  <a href="#loop-grades">Chain 4 · Mark to transcript</a>
+  <a href="#loop-advising">Chain 5 · Advising and rescue</a>
+  <a href="#outside">Outside systems we connect to</a>
+  <a href="#access">Who can see what</a>
+  <a href="#reality">Bangladesh reality</a>
+  <a href="#loop-ai">Chain 6 · AI</a>
+  <a href="#term-phases">Term phases</a>
+  <a href="#shared-objects">Shared objects</a>
+  <a href="./ai.html">AI specification</a>
+  <a href="#devices">Devices</a>
+  <a href="#failures">When something goes wrong</a>
+</nav>
+
+<main>
+<div class="page-bar">
+  <a class="page-bar-back" href="./index.html">← Back to overview</a>
+  <a class="page-bar-demo" href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open live demo ↗</a>
+</div>
+<p class="crumb"><a href="./index.html">Overview</a> · How everything connects</p>
+
+
+<header>
+  <h1>How everything connects</h1>
+  <p class="lede">The module documents describe features one at a time. This page describes what happens <em>between</em> them — the chains of consequence that make a university run, and the outside systems we depend on.</p>
+</header>
+<aside class="demo-strip">
+  <strong>Live demo</strong>
+  <span>Open the live campus demo and try any role.</span>
+  <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">shikho-brac-platform.vercel.app ↗</a>
+</aside>
+
+
+<section id="idea">
+  <h2>The one idea</h2>
+  <p>A university is a chain of consequences. Attendance decides exam eligibility. Exam eligibility decides who appears on the mark sheet. The mark sheet decides the grade. The grade decides progression. Payment decides registration. Registration decides class lists.</p>
+  <p>In most universities these links are made by a person carrying information from one office to another — a printed list, an email, a phone call. Each hand-off is a place where things get delayed, lost or disputed.</p>
+  <p>In Shikho Campus the link is made by the system itself. When a teacher saves attendance, the student's eligibility figure changes in the same moment, on the student's phone, on the teacher's register, and on the chairperson's eligibility screen. Nobody carries anything.</p>
+  <div class="callout">
+    <b>Why this matters commercially</b>
+    A university can buy a video tool, a quiz tool and an accounting tool separately. What they cannot buy separately is the chain. The chain is the product.
+  </div>
+</section>
+
+<section id="signals">
+  <h2>The signals that travel between modules</h2>
+  <p>These are the moments where something in one module changes something in another. Everything on this list is recorded permanently with who caused it and when.</p>
+  <table>
+    <tr><th>When this happens</th><th>Caused by</th><th>What changes elsewhere</th></tr>
+    <tr><td>Student records loaded</td><td>Coordinator</td><td>Class lists appear for teachers; students can sign in; sections show their strength</td></tr>
+    <tr><td>Teacher assigned to a section</td><td>Administrator</td><td>The section leaves the coordinator's unstaffed list; the teacher's dashboard shows the class</td></tr>
+    <tr><td>Term published</td><td>Administrator</td><td>Students see their courses; registration and fee windows open</td></tr>
+    <tr><td>Class attended or missed</td><td>Faculty (or joining a live class)</td><td>Student's attendance figure; eligibility forecast; at-risk flag on the advisor's list</td></tr>
+    <tr><td>Work submitted</td><td>Student</td><td>Item appears in the teacher's marking queue; late flag applied by policy</td></tr>
+    <tr><td>Mark approved and posted</td><td>Faculty</td><td>Student sees the mark; running total and standing update</td></tr>
+    <tr><td>Eligibility locked</td><td>Administrator</td><td>Barred students are removed from the exam list; students and advisors are told, with the reason</td></tr>
+    <tr><td>Final grades submitted</td><td>Faculty</td><td>Grade sheet enters the chairperson's certification queue; teacher can no longer edit</td></tr>
+    <tr><td>Grade sheet certified</td><td>Administrator</td><td>Results become official; coordinator can send them to the registrar; students see final grades once published</td></tr>
+    <tr><td>Grade sheet returned</td><td>Administrator</td><td>The sheet reopens for the teacher with the chairperson's reason attached</td></tr>
+    <tr><td>Payment confirmed</td><td>Payment provider</td><td>Bill balance falls; receipt created; matching hold clears; blocked action becomes available</td></tr>
+    <tr><td>Offline payment verified</td><td>Coordinator</td><td>Same as above, but with the verifier's name recorded</td></tr>
+    <tr><td>Hold placed or cleared</td><td>Finance, library, advisor or chair</td><td>Specific actions are blocked or released for that student</td></tr>
+    <tr><td>Advising completed</td><td>Faculty advisor</td><td>Advising hold clears; registration opens for that student</td></tr>
+    <tr><td>Policy changed</td><td>Administrator</td><td>New rule applies from its effective date; past decisions keep the rule they were made under</td></tr>
+  </table>
+  <div class="callout danger">
+    <b>Past decisions never change retroactively</b>
+    If a university raises the attendance requirement from 70% to 75% in the middle of a term, students already cleared under 70% stay cleared. Every decision remembers the rule that produced it.
+  </div>
+</section>
+
+<section id="loop-term">
+  <h2>Chain 1 · Getting a term running</h2>
+  <div class="mono">Coordinator loads records → gaps appear → Coordinator flags unstaffed sections
+   → Chair assigns teachers → Coordinator sets routine and rooms
+   → Chair publishes the term → students and teachers see their classes</div>
+  <table>
+    <tr><th>Step</th><th>Who</th><th>What happens</th><th>If it goes wrong</th></tr>
+    <tr><td>1</td><td>Coordinator</td><td>Loads students, teachers and the course offering from the university's records</td><td>Bad rows are rejected with the reason and the row number; good rows still load</td></tr>
+    <tr><td>2</td><td>System</td><td>Compares sections against assignments and finds sections with no teacher</td><td>—</td></tr>
+    <tr><td>3</td><td>Coordinator</td><td>Sends the gap list to the chairperson</td><td>Coordinator cannot assign a teacher — only raise the gap</td></tr>
+    <tr><td>4</td><td>Chairperson</td><td>Assigns teachers, watching each teacher's total load</td><td>Overload is warned about, not silently allowed</td></tr>
+    <tr><td>5</td><td>Coordinator</td><td>Builds the class routine and allocates rooms</td><td>Room and teacher clashes are shown before saving</td></tr>
+    <tr><td>6</td><td>Chairperson</td><td>Publishes the term</td><td>Publishing is blocked while any section has no teacher</td></tr>
+  </table>
+</section>
+
+<section id="loop-money">
+  <h2>Chain 2 · Money and holds</h2>
+  <div class="mono">Finance decides the amount → Coordinator syncs it → Student sees the bill
+   → Student pays (bKash / Nagad / Rocket / card / bank slip)
+   → University's account receives the money → confirmation arrives
+   → Receipt issued → hold clears → blocked action becomes available</div>
+  <table>
+    <tr><th>Question</th><th>Answer</th></tr>
+    <tr><td>Who decides how much a student owes?</td><td>The university's finance office. The platform only mirrors it.</td></tr>
+    <tr><td>Where does the money go?</td><td>Straight into the university's own account through a licensed payment provider. It never passes through us.</td></tr>
+    <tr><td>What if the student's internet drops mid-payment?</td><td>The bill page shows "checking with the bank" and resolves itself when confirmation arrives. Paying twice for the same bill is prevented.</td></tr>
+    <tr><td>What if money left the wallet but nothing updated?</td><td>The student raises it with the payment reference; the coordinator matches it manually and the reason is recorded.</td></tr>
+    <tr><td>What can unpaid dues block?</td><td>Whatever the university chooses — registration, exam entry, seeing results, getting a transcript, and, where the university turns it on, access to classes and new content — each set separately as a hard block, a warning, or nothing.</td></tr>
+    <tr><td>Can unpaid tuition really stop a student attending class?</td><td>Yes, if the university enables the access gate — because an unpaid student is not truly enrolled. But it is deliberately humane: the student is warned days ahead, keeps what they have already earned, sees the exact amount and a one-tap pay, is never removed from a class in progress, and can have the gate lifted by an advisor or finance for an agreed payment date.</td></tr>
+    <tr><td>Who can waive a due?</td><td>Nobody in the platform. A waiver is decided in finance or by the scholarship committee and arrives as a changed amount.</td></tr>
+    <tr><td>What about students who pay at a bank counter?</td><td>They upload the slip, the coordinator verifies it, and from that point everything behaves exactly like an online payment.</td></tr>
+  </table>
+</section>
+
+<section id="loop-attendance">
+  <h2>Chain 3 · From attendance to the exam hall</h2>
+  <div class="mono">Class held → teacher saves the register (joining a live class marks presence automatically)
+   → student's attendance figure updates immediately
+   → student sees "you may miss 2 more classes"
+   → advisor sees an at-risk flag if the student is close to the line
+   → before finals the chair reviews everyone below the line
+   → chair grants exceptions with reasons, then locks eligibility
+   → barred students are removed from the exam list and told why</div>
+  <table>
+    <tr><th>Rule</th><th>Behaviour</th></tr>
+    <tr><td>The student always knows where they stand</td><td>Attendance is never a surprise at the end of term. The number and the remaining allowance are visible from week one.</td></tr>
+    <tr><td>Disputes are handled with evidence</td><td>Every attendance record shows who marked it, when, and every later change.</td></tr>
+    <tr><td>Exceptions are allowed but never invisible</td><td>Medical and official-duty exemptions require a reason and are attached to the student's record permanently.</td></tr>
+    <tr><td>Once locked, the list is stable</td><td>After locking, changing one student's eligibility is a separate, recorded decision — not an edit.</td></tr>
+  </table>
+</section>
+
+<section id="loop-grades">
+  <h2>Chain 4 · From a mark to a transcript</h2>
+  <div class="mono">Student submits → teacher marks (AI may draft, teacher approves)
+   → teacher posts marks → student sees them
+   → teacher submits the final grade sheet → sheet locks for the teacher
+   → chair certifies, or returns it with a reason
+   → certified results go to the registrar → results published to students
+   → any later change is an amendment with a reason and approval</div>
+  <table>
+    <tr><th>Safeguard</th><th>Why it exists</th></tr>
+    <tr><td>Only the teacher gives marks</td><td>Academic judgement belongs to the person who taught the course. Nothing in the administrator's screens can change a mark.</td></tr>
+    <tr><td>The chairperson can only certify or return</td><td>Governance is approval, not editing. Returning a sheet requires a written reason that the teacher sees.</td></tr>
+    <tr><td>AI never grades alone</td><td>Suggested marks and feedback are drafts. The teacher's approval is what makes them real, and the record shows what the AI proposed and what the teacher changed.</td></tr>
+    <tr><td>Nothing disappears</td><td>Every version of a mark is kept. A student asking "why did my grade change?" can be answered from the record.</td></tr>
+    <tr><td>Corrections after publication are formal</td><td>A published grade can be amended, but only as a new approved decision with a reason attached.</td></tr>
+  </table>
+</section>
+
+<section id="loop-advising">
+  <h2>Chain 5 · Advising and rescuing students</h2>
+  <div class="mono">System sees the warning signs (low attendance, missed work, failing marks, unpaid dues)
+   → advisee list highlights the student → advisor reaches out or the student books a meeting
+   → meeting notes and agreed plan recorded → advising hold cleared
+   → student registers for the right courses → progress tracked next term</div>
+  <table>
+    <tr><th>Signal</th><th>Where it comes from</th><th>What the advisor does</th></tr>
+    <tr><td>Attendance approaching the limit</td><td>Faculty attendance register</td><td>Contacts the student before eligibility is lost</td></tr>
+    <tr><td>Work not submitted</td><td>Assignments and quizzes</td><td>Checks for a personal or financial problem behind it</td></tr>
+    <tr><td>Failing marks so far</td><td>Gradebook running totals</td><td>Advises on withdrawal timing or extra support</td></tr>
+    <tr><td>Unpaid dues blocking registration</td><td>Fee holds</td><td>Refers to finance for an instalment or waiver route</td></tr>
+    <tr><td>Off the degree plan</td><td>Degree plan comparison</td><td>Corrects the course choice for next term</td></tr>
+  </table>
+</section>
+
+<section id="outside">
+  <h2>Outside systems we connect to</h2>
+  <p>We do not replace systems the university already runs well. We connect to them, and each connection can be turned off for a university that does not have that system.</p>
+  <table>
+    <tr><th>System</th><th>What we take from it</th><th>What we give back</th><th>If it is missing</th></tr>
+    <tr><td>Student information / registrar system</td><td>Students, teachers, programmes, courses, sections, enrolments</td><td>Certified results, attendance summaries</td><td>The coordinator loads and maintains records by file upload</td></tr>
+    <tr><td>Finance / accounts software</td><td>What each student owes, and why</td><td>Confirmed payments and receipts</td><td>The coordinator uploads the dues list each term</td></tr>
+    <tr><td>Payment providers (bKash, Nagad, Rocket, cards)</td><td>Confirmation that a payment succeeded</td><td>The payment request itself</td><td>Bank slip upload and manual verification only</td></tr>
+    <tr><td>Video meeting tools (the university's Meet or Zoom)</td><td>Attendance from the meeting, recording when available</td><td>The class schedule and the join link</td><td>Our own built-in live class is used</td></tr>
+    <tr><td>University email and SMS</td><td>—</td><td>Notices, reminders, receipts, results announcements</td><td>In-product notifications only</td></tr>
+    <tr><td>University sign-in (single sign-on)</td><td>Who the person is</td><td>—</td><td>Username and password issued by the university</td></tr>
+    <tr><td>Library system</td><td>Outstanding fines as a hold</td><td>—</td><td>Library holds entered by the coordinator</td></tr>
+  </table>
+</section>
+
+<section id="access">
+  <h2>Who can see what</h2>
+  <table>
+    <tr><th>Information</th><th>Student</th><th>Teacher</th><th>Chairperson</th><th>Coordinator</th></tr>
+    <tr><td>Own marks</td><td>Yes, after posting</td><td>All students in own sections</td><td>Summaries and grade sheets</td><td>No</td></tr>
+    <tr><td>Other students' marks</td><td>Never</td><td>Only own sections</td><td>Department level</td><td>No</td></tr>
+    <tr><td>Attendance</td><td>Own only</td><td>Own sections</td><td>Department level</td><td>Reports only</td></tr>
+    <tr><td>Fees and dues</td><td>Own only</td><td>No</td><td>Aggregate only, not individual bills</td><td>Yes, for verification</td></tr>
+    <tr><td>Advising notes</td><td>Own, except notes marked private</td><td>Own advisees</td><td>Only when handling a case</td><td>No</td></tr>
+    <tr><td>Disciplinary cases</td><td>Own case only</td><td>No</td><td>Committee members only</td><td>No</td></tr>
+    <tr><td>Personal contact details</td><td>Own</td><td>Limited, for teaching purposes</td><td>Yes</td><td>Yes</td></tr>
+  </table>
+  <p>A university may see only its own data. Nothing is shared between universities on the platform, ever, including for analysis or improvement of the product.</p>
+</section>
+
+<section id="reality">
+  <h2>Bangladesh reality the product is designed around</h2>
+  <table>
+    <tr><th>Reality</th><th>What we do about it</th></tr>
+    <tr><td>Most students use a mid-range Android phone on mobile data</td><td>Every essential task works on a phone. Video quality drops automatically instead of freezing. Recordings can be downloaded for offline watching.</td></tr>
+    <tr><td>Electricity and internet drop without warning</td><td>Quiz answers and attendance survive a disconnection. A student returning after a drop resumes where they left off, and the teacher can see it happened.</td></tr>
+    <tr><td>Mobile wallets are the normal way to pay</td><td>bKash, Nagad and Rocket are first-class payment options, not an afterthought behind card payment.</td></tr>
+    <tr><td>Many students still pay at a bank counter</td><td>Bank slip upload and verification is a proper feature with the same outcome as an online payment.</td></tr>
+    <tr><td>Attendance rules are strictly enforced and often disputed</td><td>Attendance is transparent to the student from day one, and every record carries its own history.</td></tr>
+    <tr><td>Accreditation visits demand paper evidence</td><td>Evidence is produced from the real records already in the system, not assembled by hand at the last minute.</td></tr>
+    <tr><td>Personal data protection law applies</td><td>Data stays where the university requires, students can see what is held about them, and access is limited by role.</td></tr>
+  </table>
+</section>
+<section id="devices">
+  <h2>Devices — one web app everywhere</h2>
+  <p>Shikho Campus is a responsive web app. Phone, tablet, laptop, desktop and classroom smart TV all use the same product. Layouts reflow; critical actions stay reachable; live class and video scale to the screen without losing controls.</p>
+  <table>
+    <tr><th>Must</th><th>Meaning</th></tr>
+    <tr><td>Phone-first student journeys</td><td>Home, class join, submit, pay, advising work in one column with large taps</td></tr>
+    <tr><td>Laptop-grade office work</td><td>Gradebook, certify, records import remain usable with tables and filters</td></tr>
+    <tr><td>Classroom display</td><td>Live session readable from the back of a room on a smart TV or projector</td></tr>
+    <tr><td>No hover-only actions</td><td>Every important control works with touch</td></tr>
+  </table>
+  <aside class="demo-strip">
+    <strong>Live demo</strong>
+    <span>Check the same screen on phone width and full desktop width.</span>
+    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
+  </aside>
+</section>
+
+
+<section id="failures">
+  <h2>When something goes wrong</h2>
+  <table>
+    <tr><th>Situation</th><th>What the person sees</th><th>What the system does</th></tr>
+    <tr><td>Payment provider is down</td><td>"bKash is not responding right now. Try Nagad, a card, or a bank slip."</td><td>Offers the other methods; nothing is charged; the bill is untouched</td></tr>
+    <tr><td>Student's connection drops during a quiz</td><td>On return: "You have 12 minutes left. Your answers were saved."</td><td>Answers already given are kept; the teacher sees the interruption</td></tr>
+    <tr><td>Live class fails for the teacher</td><td>"Class link not working — students have been told the class is delayed."</td><td>Notifies the class; offers to reschedule or switch to a recording</td></tr>
+    <tr><td>Finance system unreachable</td><td>"Your dues were last updated on 3 May."</td><td>Shows the last known figures with the date; never invents a number</td></tr>
+    <tr><td>Two people edit the same record</td><td>"This was changed by someone else while you were working."</td><td>Shows both versions rather than silently overwriting</td></tr>
+    <tr><td>Records import contains bad rows</td><td>"412 of 430 rows loaded. 18 rows rejected — see the list."</td><td>Loads valid rows, reports each rejected row with its reason</td></tr>
+  </table>
+</section>
+
+
+<section id="loop-ai">
+  <h2>Chain 6 · Shikho Campus AI</h2>
+  <div class="mono">One brand → three modes (Tutor · Assistant · Analyst)
+   → every answer grounded (cite or defer)
+   → every student-facing output approved by a named teacher
+   → every turn counted against a weekly cap
+   → caps roll up to the department (“capped, not surprised”)
+   → Coordinator has no AI mode</div>
+  <table>
+    <tr><th>Rule</th><th>Behaviour</th></tr>
+    <tr><td>AI last in navigation</td><td>Same slot for Student (Tutor), Faculty (Assistant), Admin (Analyst)</td></tr>
+    <tr><td>Never cut off mid-lesson</td><td>Current answer finishes, then the limit is explained</td></tr>
+    <tr><td>Private Momentum</td><td>Never visible to the administrator — including through Analyst phrasing</td></tr>
+    <tr><td>Answer Card</td><td>Analyst always returns one uniform card: headline, stat, rows, source, drill, note</td></tr>
+  </table>
+  <p><a href="./ai.html">Full AI specification →</a></p>
+</section>
+
+<section id="term-phases">
+  <h2>Term phases — one frame, state changes</h2>
+  <p>A term moves setup → current → closed. Administrator and Coordinator homes keep the same three-part rhythm (Needs you · Timeline · Records/Performance) and change content by phase — not three different pages. Publishing the term, certifying grades, and exporting to the registrar are the hand-offs between phases.</p>
+</section>
+
+<section id="shared-objects">
+  <h2>One object, one design</h2>
+  <table>
+    <tr><th>Shared object</th><th>Administrator</th><th>Coordinator</th></tr>
+    <tr><td>Directory</td><td>Read + drill to scorecards</td><td>Maintain (import, edit, export)</td></tr>
+    <tr><td>Offering</td><td>Compose, staff, publish</td><td>Load / import; sections arrive unstaffed</td></tr>
+    <tr><td>Profile / ID card</td><td>Chairperson card</td><td>Coordinator card with operations stats</td></tr>
+    <tr><td>Term cockpit</td><td>Decisions first</td><td>Hand-offs first</td></tr>
+  </table>
+</section>
+<footer>
+  How everything connects · Read the modules: <a href="./student.html">Student</a> · <a href="./faculty.html">Faculty</a> · <a href="./admin.html">Administrator</a> · <a href="./coordinator.html">Coordinator</a>
+</footer>
+</main>
+</div>
+</body>
+</html>

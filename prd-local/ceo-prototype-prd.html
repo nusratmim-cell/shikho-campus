@@ -1,0 +1,770 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Shikho Campus — the definitive Product Requirements Document for the AI university learning platform for BRAC University.">
+<title>Shikho Campus — Product Requirements Document</title>
+</head>
+<body>
+<style>
+  :root{
+    --ground:#FCFCFE; --paper:#FFFFFF; --raise:#F6F7FB;
+    --ink-900:#161A2B; --ink-700:#33384C; --ink-500:#5A6079; --ink-400:#8A8FA6; --ink-300:#B4B8CB;
+    --hair:#E7E8F1; --hair-soft:#EFF0F6;
+    --indigo:#4F46E5; --navy:#262F74; --indigo-soft:#EEEEFB;
+    --magenta:#C0208A; --sunrise:#D98A00; --coral:#E0304F; --success:#1C9C68;
+    --spine:linear-gradient(180deg,#4F46E5,#C0208A 42%,#E0A010 72%,#E0304F);
+    --shadow:0 1px 2px rgba(20,22,45,.04),0 8px 30px rgba(20,22,45,.06);
+    --measure:68ch;
+    --sans:-apple-system,BlinkMacSystemFont,"Segoe UI",system-ui,Roboto,sans-serif;
+    --mono:"SF Mono",ui-monospace,"JetBrains Mono",Menlo,Consolas,monospace;
+  }
+  @media (prefers-color-scheme:dark){
+    :root{
+      --ground:#0B0F2A; --paper:#12162E; --raise:#171C38;
+      --ink-900:#ECEEF6; --ink-700:#C4C8DC; --ink-500:#9297B2; --ink-400:#6E7391; --ink-300:#565B7C;
+      --hair:#242A49; --hair-soft:#1C2140;
+      --indigo:#8A92F7; --navy:#AEB4F0; --indigo-soft:#1B2148;
+      --magenta:#E77BC0; --sunrise:#E6B24A; --coral:#F0788C; --success:#4CC898;
+      --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.35);
+    }
+  }
+  :root[data-theme="light"]{
+    --ground:#FCFCFE; --paper:#FFFFFF; --raise:#F6F7FB;
+    --ink-900:#161A2B; --ink-700:#33384C; --ink-500:#5A6079; --ink-400:#8A8FA6; --ink-300:#B4B8CB;
+    --hair:#E7E8F1; --hair-soft:#EFF0F6;
+    --indigo:#4F46E5; --navy:#262F74; --indigo-soft:#EEEEFB;
+    --magenta:#C0208A; --sunrise:#D98A00; --coral:#E0304F; --success:#1C9C68;
+    --shadow:0 1px 2px rgba(20,22,45,.04),0 8px 30px rgba(20,22,45,.06);
+  }
+  :root[data-theme="dark"]{
+    --ground:#0B0F2A; --paper:#12162E; --raise:#171C38;
+    --ink-900:#ECEEF6; --ink-700:#C4C8DC; --ink-500:#9297B2; --ink-400:#6E7391; --ink-300:#565B7C;
+    --hair:#242A49; --hair-soft:#1C2140;
+    --indigo:#8A92F7; --navy:#AEB4F0; --indigo-soft:#1B2148;
+    --magenta:#E77BC0; --sunrise:#E6B24A; --coral:#F0788C; --success:#4CC898;
+    --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 40px rgba(0,0,0,.35);
+  }
+
+  *{box-sizing:border-box}
+  body{margin:0;background:var(--ground);color:var(--ink-700);font-family:var(--sans);
+    font-size:16.5px;line-height:1.68;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+  ::selection{background:color-mix(in srgb,var(--indigo) 24%,transparent)}
+  a{color:var(--indigo);text-decoration:none}
+  a:hover{text-decoration:underline;text-underline-offset:3px}
+  :focus-visible{outline:2px solid var(--indigo);outline-offset:3px;border-radius:4px}
+
+  /* ---- layout ---- */
+  .wrap{max-width:1180px;margin:0 auto;padding:0 clamp(18px,4vw,48px)}
+  .grid{display:grid;grid-template-columns:248px minmax(0,1fr);gap:clamp(32px,5vw,72px);align-items:start}
+  main{min-width:0;padding-bottom:16vh}
+  .measure{max-width:var(--measure)}
+
+  /* ---- toc rail ---- */
+  aside{position:sticky;top:0;height:100vh;overflow-y:auto;padding:40px 0;border-right:1px solid var(--hair);
+    scrollbar-width:thin}
+  aside::-webkit-scrollbar{width:6px}
+  aside::-webkit-scrollbar-thumb{background:var(--hair);border-radius:6px}
+  .brandmark{display:flex;align-items:center;gap:10px;margin-bottom:26px;padding-left:16px}
+  .brandmark .spine{width:5px;height:34px;border-radius:5px;background:var(--spine)}
+  .brandmark b{font-size:15px;font-weight:750;color:var(--ink-900);letter-spacing:-.01em;line-height:1.1}
+  .brandmark span{display:block;font-family:var(--mono);font-size:9.5px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-400);margin-top:2px}
+  .toc{list-style:none;margin:0;padding:0}
+  .toc .part{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-400);
+    padding:18px 16px 6px;margin-top:6px}
+  .toc a{display:block;color:var(--ink-500);font-size:13.5px;line-height:1.35;padding:5px 16px;border-left:2px solid transparent;transition:color .15s,border-color .15s}
+  .toc a:hover{color:var(--ink-900);text-decoration:none}
+  .toc a.on{color:var(--indigo);border-left-color:var(--indigo);font-weight:600}
+
+  .theme{position:fixed;top:16px;right:16px;z-index:50;display:inline-flex;align-items:center;gap:7px;
+    background:var(--paper);border:1px solid var(--hair);color:var(--ink-500);border-radius:999px;
+    padding:7px 13px;font-size:12px;font-weight:600;cursor:pointer;box-shadow:var(--shadow)}
+  .theme:hover{color:var(--ink-900)}
+
+  /* ---- cover ---- */
+  .cover{padding:64px 0 30px;border-bottom:1px solid var(--hair);margin-bottom:44px}
+  .cover .eyebrow{margin-bottom:20px}
+  .cover h1{font-size:clamp(34px,5.6vw,60px);line-height:1.02;letter-spacing:-.03em;font-weight:800;
+    color:var(--ink-900);margin:0 0 18px;text-wrap:balance;max-width:16ch}
+  .cover .lede{font-size:clamp(17px,2.4vw,21px);color:var(--ink-500);max-width:52ch;line-height:1.5;margin:0}
+  .cover .meta{display:flex;flex-wrap:wrap;gap:10px 24px;margin-top:30px;font-size:12.5px;color:var(--ink-400)}
+  .cover .meta b{color:var(--ink-700);font-weight:600}
+
+  .eyebrow{font-family:var(--mono);font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--indigo);font-weight:600}
+
+  /* ---- sections ---- */
+  section{scroll-margin-top:24px;padding-top:14px}
+  .part-head{margin:72px 0 8px;padding-top:26px;border-top:2px solid var(--ink-900)}
+  .part-head .k{font-family:var(--mono);font-size:11px;letter-spacing:.18em;text-transform:uppercase;color:var(--ink-400)}
+  .part-head h2{font-size:clamp(24px,3.4vw,34px);letter-spacing:-.025em;font-weight:800;color:var(--ink-900);margin:6px 0 0;text-wrap:balance}
+  h3{font-size:22px;letter-spacing:-.02em;font-weight:750;color:var(--ink-900);margin:52px 0 4px;text-wrap:balance;scroll-margin-top:24px}
+  h3 .num{font-family:var(--mono);font-size:14px;color:var(--indigo);font-weight:600;margin-right:12px;letter-spacing:0}
+  h4{font-size:16px;font-weight:700;color:var(--ink-900);margin:30px 0 2px;letter-spacing:-.01em}
+  p{margin:14px 0;max-width:var(--measure)}
+  .lead{font-size:18.5px;color:var(--ink-700);line-height:1.55}
+  strong,b{color:var(--ink-900);font-weight:650}
+  em{color:var(--ink-700)}
+  ul,ol{max-width:var(--measure);padding-left:22px;margin:14px 0}
+  li{margin:7px 0}
+  li::marker{color:var(--ink-300)}
+  code{font-family:var(--mono);font-size:.86em;background:var(--raise);border:1px solid var(--hair-soft);
+    padding:1px 6px;border-radius:5px;color:var(--ink-700);white-space:nowrap}
+
+  /* ---- callouts ---- */
+  .why{border-left:3px solid var(--indigo);background:linear-gradient(90deg,var(--indigo-soft),transparent 90%);
+    padding:14px 20px;margin:20px 0;border-radius:0 10px 10px 0;max-width:var(--measure)}
+  .why .t{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--indigo);font-weight:700;display:block;margin-bottom:4px}
+  .why p{margin:0;font-size:14.5px;color:var(--ink-600)}
+  .rule{border:1px solid var(--hair);border-left:3px solid var(--coral);background:var(--paper);
+    padding:14px 18px;margin:20px 0;border-radius:0 10px 10px 0;max-width:var(--measure);box-shadow:var(--shadow)}
+  .rule .t{font-family:var(--mono);font-size:10px;letter-spacing:.16em;text-transform:uppercase;color:var(--coral);font-weight:700;display:block;margin-bottom:4px}
+  .rule p{margin:0;font-size:14.5px}
+
+  /* ---- tables ---- */
+  .twrap{overflow-x:auto;margin:22px 0;border:1px solid var(--hair);border-radius:12px;box-shadow:var(--shadow)}
+  table{border-collapse:collapse;width:100%;font-size:13.5px;background:var(--paper);min-width:520px}
+  th,td{text-align:left;padding:11px 15px;border-bottom:1px solid var(--hair-soft);vertical-align:top;line-height:1.45}
+  thead th{font-family:var(--mono);font-size:10px;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-400);
+    font-weight:600;background:var(--raise);border-bottom:1px solid var(--hair);position:sticky;top:0}
+  tbody tr:last-child td{border-bottom:none}
+  tbody tr:hover{background:var(--raise)}
+  td b{color:var(--ink-900)}
+  .yes{color:var(--success);font-weight:700}
+  .no{color:var(--coral);font-weight:700}
+  .dash{color:var(--ink-300)}
+  td.mono,.rt{font-family:var(--mono);font-size:12px;color:var(--ink-500)}
+
+  /* ---- surfaces (part III) ---- */
+  .surf{border:1px solid var(--hair);background:var(--paper);border-radius:12px;padding:16px 18px;margin:12px 0;box-shadow:var(--shadow)}
+  .surf .h{display:flex;flex-wrap:wrap;align-items:baseline;gap:8px 12px;margin-bottom:6px}
+  .surf .h b{font-size:15.5px;color:var(--ink-900);font-weight:700}
+  .surf .h .rt{background:var(--raise);border:1px solid var(--hair-soft);padding:2px 8px;border-radius:6px}
+  .surf p{margin:6px 0;font-size:14px;max-width:none}
+  .surf .note{font-size:12.5px;color:var(--ink-500)}
+  .surf .note b{font-family:var(--mono);font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-400);margin-right:6px}
+
+  /* ---- diagrams ---- */
+  .fig{margin:26px 0;border:1px solid var(--hair);background:var(--paper);border-radius:16px;padding:26px 24px;box-shadow:var(--shadow)}
+  .fig .cap{font-family:var(--mono);font-size:10.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-400);margin-top:18px;text-align:center}
+  .node{border:1px solid var(--hair);background:var(--paper);border-radius:11px;padding:11px 14px;text-align:center}
+  .node b{display:block;font-size:13.5px;color:var(--ink-900);font-weight:650;letter-spacing:-.01em}
+  .node span{display:block;font-size:11.5px;color:var(--ink-500);margin-top:2px}
+
+  .roles{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+  .role{border:1px solid var(--hair);border-radius:13px;overflow:hidden;background:var(--paper)}
+  .role .bar{height:5px}
+  .role .in{padding:13px 14px 15px}
+  .role b{display:block;font-size:15px;color:var(--ink-900);font-weight:750}
+  .role .p{font-size:11.5px;color:var(--ink-400);margin:2px 0 8px}
+  .role .q{font-size:13px;color:var(--ink-600);font-style:italic}
+
+  .ai{display:grid;gap:16px;justify-items:center}
+  .ai .hub{background:linear-gradient(135deg,var(--indigo),var(--magenta));color:#fff;border:none;border-radius:14px;padding:14px 22px;text-align:center;box-shadow:0 10px 30px color-mix(in srgb,var(--magenta) 30%,transparent)}
+  .ai .hub b{color:#fff;font-size:16px}
+  .ai .hub span{color:rgba(255,255,255,.8);font-size:11.5px}
+  .ai .modes{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;width:100%}
+  .ai .guard{display:flex;flex-wrap:wrap;gap:8px;justify-content:center;margin-top:4px}
+  .chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:600;color:var(--ink-600);
+    background:var(--raise);border:1px solid var(--hair);border-radius:999px;padding:5px 12px}
+  .chip .dot{width:6px;height:6px;border-radius:50%;background:var(--success)}
+
+  .flow{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding-bottom:4px}
+  .phase{flex:1;min-width:150px;position:relative;padding:0 8px}
+  .phase .top{display:flex;align-items:center;gap:8px;margin-bottom:9px}
+  .phase .dot{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-family:var(--mono);font-size:12px;font-weight:700;flex-shrink:0;color:#fff}
+  .phase .line{position:absolute;left:calc(13px + 8px);right:-8px;top:13px;height:2px;background:var(--hair);z-index:0}
+  .phase .lbl{font-weight:700;color:var(--ink-900);font-size:14.5px}
+  .phase .who{font-size:12px;color:var(--ink-500);margin-top:1px}
+  .phase ul{font-size:12.5px;color:var(--ink-600);padding-left:16px;margin:8px 0 0;max-width:none}
+  .phase ul li{margin:3px 0}
+
+  .seq{display:grid;gap:2px}
+  .seq .step{display:grid;grid-template-columns:120px 1fr;gap:14px;align-items:start;padding:11px 0;border-bottom:1px dashed var(--hair)}
+  .seq .step:last-child{border-bottom:none}
+  .seq .actor{font-family:var(--mono);font-size:11px;letter-spacing:.04em;text-transform:uppercase;color:var(--indigo);font-weight:700;text-align:right;padding-top:2px}
+  .seq .msg{font-size:14px;color:var(--ink-700)}
+  .seq .msg .m{font-size:12px;color:var(--ink-400);margin-top:2px}
+  .seq .alt{color:var(--coral);font-weight:600}
+
+  .loop{display:grid;grid-template-columns:repeat(auto-fit,minmax(140px,1fr));gap:10px}
+  .loop .n{border:1px solid var(--hair);border-radius:11px;padding:12px;background:var(--paper);position:relative}
+  .loop .n .r{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-400);font-weight:700}
+  .loop .n b{display:block;font-size:13.5px;color:var(--ink-900);margin-top:3px}
+  .loop .n span{font-size:12px;color:var(--ink-500)}
+
+  .ia{display:grid;grid-template-columns:1fr;gap:10px;max-width:520px;margin:0 auto}
+  .ia .band{border:1px solid var(--hair);border-radius:11px;padding:12px 15px;background:var(--paper)}
+  .ia .band .r{font-family:var(--mono);font-size:9.5px;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-400);font-weight:700}
+  .ia .band b{color:var(--ink-900)}
+  .ia .band span{color:var(--ink-500);font-size:13px}
+
+  .navmap{display:grid;gap:12px}
+  .navrow{display:flex;flex-wrap:wrap;align-items:center;gap:8px}
+  .navrow .role-k{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;font-weight:700;width:120px;flex-shrink:0}
+  .navrow .nc{font-size:12.5px;font-weight:600;color:var(--ink-700);background:var(--raise);border:1px solid var(--hair);border-radius:8px;padding:5px 11px}
+  .navrow .nc.ai{color:#fff;background:linear-gradient(135deg,var(--indigo),var(--magenta));border:none}
+  .arrow{color:var(--ink-300);font-size:12px}
+
+  .essence{border:1px solid var(--hair);border-radius:16px;padding:30px 32px;margin:26px 0;background:var(--paper);
+    box-shadow:var(--shadow);position:relative;overflow:hidden}
+  .essence::before{content:"";position:absolute;left:0;top:0;bottom:0;width:5px;background:var(--spine)}
+  .essence p{font-size:17px;line-height:1.6;color:var(--ink-700);margin:0;max-width:60ch}
+
+  .end{margin:80px 0 40px;padding-top:24px;border-top:1px solid var(--hair);font-family:var(--mono);font-size:11px;letter-spacing:.16em;text-transform:uppercase;color:var(--ink-400);text-align:center}
+
+  @media (max-width:900px){
+    .grid{grid-template-columns:1fr}
+    aside{position:static;height:auto;border-right:none;border-bottom:1px solid var(--hair);padding:20px 0}
+    .toc{display:grid;grid-template-columns:repeat(2,1fr);gap:0 8px}
+    .toc .part{grid-column:1/-1}
+    .roles{grid-template-columns:repeat(2,1fr)}
+    .ai .modes{grid-template-columns:1fr}
+    .seq .step{grid-template-columns:1fr;gap:2px}
+    .seq .actor{text-align:left}
+  }
+  @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important}}
+</style>
+
+<button class="theme" id="tg" aria-label="Toggle colour theme">◐ Theme</button>
+
+<div class="wrap">
+<div class="grid">
+
+<aside>
+  <div class="brandmark"><div class="spine"></div><div><b>Shikho Campus</b><span>Product Requirements</span></div></div>
+  <nav><ul class="toc" id="toc">
+    <li class="part">Front matter</li>
+    <li><a href="#read">How to read this</a></li>
+    <li class="part">I — The Product</li>
+    <li><a href="#vision">1 · Vision</a></li>
+    <li><a href="#mission">2 · Mission</a></li>
+    <li><a href="#principles">3 · Product principles</a></li>
+    <li><a href="#roles">4 · The four roles</a></li>
+    <li><a href="#ai-model">5 · One AI, three modes</a></li>
+    <li><a href="#editions">6 · Editions</a></li>
+    <li class="part">II — Foundations</li>
+    <li><a href="#shell">7 · Information architecture</a></li>
+    <li><a href="#identity">8 · Identity & permissions</a></li>
+    <li><a href="#domain">9 · The domain model</a></li>
+    <li><a href="#design">10 · Design system</a></li>
+    <li><a href="#determinism">11 · Determinism</a></li>
+    <li><a href="#notifs">12 · Notifications & search</a></li>
+    <li class="part">III — Roles & surfaces</li>
+    <li><a href="#student">14 · Student</a></li>
+    <li><a href="#faculty">15 · Faculty</a></li>
+    <li><a href="#admin">16 · Administrator</a></li>
+    <li><a href="#coord">17 · Coordinator</a></li>
+    <li class="part">IV — Shikho Campus AI</li>
+    <li><a href="#ai">18 · The AI</a></li>
+    <li class="part">V — Cross-role workflows</li>
+    <li><a href="#loops">22 · The loops</a></li>
+    <li class="part">VI — Operations</li>
+    <li><a href="#ops">27 · Ops & the road ahead</a></li>
+    <li class="part">Appendices</li>
+    <li><a href="#appendix">Routes · glossary · essence</a></li>
+  </ul></nav>
+</aside>
+
+<main>
+
+  <header class="cover">
+    <div class="eyebrow">Definitive Product Document · Canonical Source of Truth</div>
+    <h1>Shikho Campus</h1>
+    <p class="lede">The AI university learning platform for BRAC University — where four roles, built on a real department's real data, become one product.</p>
+    <div class="meta">
+      <span><b>For</b> engineering · design · QA · product · sales · leadership</span>
+      <span><b>Read only this</b> and you can own the product</span>
+      <span><b>Status</b> High-fidelity product definition</span>
+    </div>
+  </header>
+
+  <section id="read">
+    <h3><span class="num">·</span>How to read this</h3>
+    <p class="measure">This is a product document — not a technical specification, not marketing. It defines <em>what the product is, why it exists, and how every part must behave.</em> Implementation detail appears only where it clarifies behaviour, at the level needed and no lower.</p>
+    <p class="measure">Understanding is meant to compound. Part I establishes why the product exists and the principles that govern every later decision. Part II defines the foundations every screen inherits. Part III documents each role and surface. Part IV defines the AI. Part V documents the workflows that cross roles. Part VI covers operations and the road ahead. Where a decision could have gone more than one way, this document explains why the chosen way is correct — <em>that reasoning is the most valuable thing here.</em></p>
+    <div class="essence"><p>Every sentence should increase clarity. If a sentence did not, it was removed.</p></div>
+  </section>
+
+  <!-- ============ PART I ============ -->
+  <div class="part-head" id="p1"><div class="k">Part I</div><h2>The Product</h2></div>
+
+  <section id="vision">
+    <h3><span class="num">1</span>Vision</h3>
+    <p class="lead measure">Shikho Campus is the learning platform for a university that behaves like a living system rather than a filing cabinet.</p>
+    <p class="measure">A university department is not a database of records. It is a living organism: students learning, faculty teaching, a chair governing, coordinators keeping the machine supplied. Every part depends on every other. Most academic software ignores this. It stores rows. It makes each role log into a different, disconnected tool. It treats a grade as a cell to be edited rather than a decision to be certified.</p>
+    <p class="measure">Shikho Campus is built on the opposite belief: <strong>the same reality, seen from four vantage points, should be one product.</strong> A student's attendance is the chair's eligibility ruling. A teacher's submitted grades are the chair's certification queue. A coordinator's loaded roster is what the whole term runs on. When these are one system, the university stops fighting its tools and starts running on them.</p>
+    <p class="measure">The product is built by <strong>Shikho</strong>, a Bangladeshi education company, as the flagship deliverable in its bid to become the technology platform for <strong>BRAC University</strong>. It is grounded in the real Computer Science & Engineering department: 267 real faculty, 26 real courses, the real 70%-attendance rule, the real trisemester calendar. When an evaluator opens it, they find themselves in the faculty list and their own curriculum on the screen. That is the thesis made literal: <em>software should be built on your reality, not a vendor's abstraction.</em></p>
+  </section>
+
+  <section id="mission">
+    <h3><span class="num">2</span>Mission</h3>
+    <p class="measure">Give every person in a department the one surface that makes their job obvious — and make those four surfaces provably the same product.</p>
+    <ul class="measure">
+      <li><strong>The student</strong> should feel personally known and gently propelled — never surveilled, never reduced to a rank.</li>
+      <li><strong>The faculty member</strong> should feel that AI does the drafting and they do the deciding — always.</li>
+      <li><strong>The administrator</strong> should govern the department without ever fabricating or manually assembling a number.</li>
+      <li><strong>The coordinator</strong> should feel that the clerical machine is calm, fast, and always handing off cleanly to the people who decide.</li>
+    </ul>
+  </section>
+
+  <section id="principles">
+    <h3><span class="num">3</span>Product principles</h3>
+    <p class="measure">These are constraints, not slogans. Every screen, number, and animation obeys them. When a future decision is unclear, resolve it here.</p>
+
+    <h4>3.1 · Every number traces to a real input</h4>
+    <p class="measure">Nothing on any screen is invented. A pass rate is computed from real marks; an eligibility count from real attendance; a department figure is an aggregation of the same section data a teacher already sees. If a number cannot be traced to a real input, it is cut or honestly labelled — never fabricated to look impressive.</p>
+    <div class="why"><span class="t">Why</span><p>Trust is the entire product. A registrar who catches one invented figure never trusts the platform again. Integrity of data is not a feature; it is the foundation the sale rests on.</p></div>
+
+    <h4>3.2 · Gamify effort, never grades</h4>
+    <p class="measure">The student's motivation system — <strong>Momentum</strong> — measures consistency of effort. It never gamifies the grade. There is no leaderboard. A student competes only with their own last week.</p>
+    <div class="why"><span class="t">Why</span><p>Gamifying grades produces anxiety and gaming. Gamifying effort produces habits. And a private motivation must never become a public ranking — the moment it does, it stops motivating and starts shaming.</p></div>
+
+    <h4>3.3 · The AI drafts; the human decides</h4>
+    <p class="measure">Every AI output that touches a record or a student's mind is <strong>grounded</strong> (answers only from real material, cites or defers) or <strong>human-approved</strong> (a teacher reviews before a student sees it) — usually both. These guardrails are not toggles a user can disable; they are shown as <strong>Locked</strong>.</p>
+    <div class="why"><span class="t">Why</span><p>An AI platform in a computer-science department is interrogated by the smartest possible skeptics. The only durable answer is architectural: the AI is structurally incapable of inventing a grade or publishing an unreviewed answer.</p></div>
+
+    <h4>3.4 · The administrator certifies; they never author</h4>
+    <p class="measure">A chair reviews the <em>shape</em> of submitted grades and certifies to the registrar, or returns for revision. A chair never edits a mark. Every decision is logged.</p>
+    <div class="why"><span class="t">Why</span><p>The integrity of a grade comes from the person who assigned it. Governance means ruling on process, not overwriting outcomes.</p></div>
+
+    <h4>3.5–3.9 · The rest of the doctrine</h4>
+    <ul class="measure">
+      <li><strong>Oversight is aggregate, not surveillant.</strong> A teacher's private Momentum is never visible to the administrator. Watching people is not the same as governing a department.</li>
+      <li><strong>Govern and operate are different jobs.</strong> Decisions belong to the chair; clerical operations belong to the coordinator. Neither role is cluttered with the other's work.</li>
+      <li><strong>One object, one design.</strong> The same object — directory, offering, profile, term cockpit — is drawn by one shared component with role-appropriate affordances passed in. Consistency is achieved by architecture, not vigilance.</li>
+      <li><strong>Deterministic and honest about time.</strong> The world is pinned to <em>Friday, 10 July 2026, 14:20</em>. No randomness or live clock in any render path.</li>
+      <li><strong>The aesthetic doctrine.</strong> Apple-clean · Duolingo-alive · Whoop-personal · registrar-grade. Anything not instantly self-explanatory is killed.</li>
+    </ul>
+  </section>
+
+  <section id="roles">
+    <h3><span class="num">4</span>The four roles</h3>
+    <p class="measure">The product is built around four people, given faces so every decision can be tested against a human.</p>
+    <div class="fig">
+      <div class="roles">
+        <div class="role"><div class="bar" style="background:linear-gradient(90deg,#4F46E5,#4F46E5)"></div><div class="in"><b>Student</b><div class="p">Anika Rahman · 3rd yr</div><div class="q">"I learn."</div></div></div>
+        <div class="role"><div class="bar" style="background:linear-gradient(90deg,#C0208A,#7A1C8C)"></div><div class="in"><b>Faculty</b><div class="p">Dr. Kamrul Hasan · 267</div><div class="q">"I teach — AI drafts, I approve."</div></div></div>
+        <div class="role"><div class="bar" style="background:linear-gradient(90deg,#E0A010,#E0304F)"></div><div class="in"><b>Administrator</b><div class="p">Dr. Sadia Hamid Kazi</div><div class="q">"I govern."</div></div></div>
+        <div class="role"><div class="bar" style="background:linear-gradient(90deg,#1E9E6A,#12805A)"></div><div class="in"><b>Coordinator</b><div class="p">Farzana Haque</div><div class="q">"I operate."</div></div></div>
+      </div>
+      <div class="cap">The four roles — each a real archetype in the CSE department</div>
+    </div>
+    <div class="rule"><span class="t">Terminology — deliberate divergence</span><p>Internally the codebase names the administrator <code>chair</code> and calls the roles "altitudes." The product surface uses <strong>Administrator</strong> and <strong>roles</strong>. This is intentional: the public word must be clear to a stakeholder; the internal identifier must stay stable to avoid a costly refactor. Her real job title — Chairperson — still appears on her own profile, because that is who she is. Do not "fix" one to match the other without understanding the scope.</p></div>
+  </section>
+
+  <section id="ai-model">
+    <h3><span class="num">5</span>One AI, three modes</h3>
+    <p class="measure">There is one AI product — <strong>Shikho Campus AI</strong> — expressed as three modes, one per altitude, each grounded and each metered.</p>
+    <div class="fig">
+      <div class="ai">
+        <div class="hub node"><b>Shikho Campus AI</b><span>one brand · one set of guardrails · one budget</span></div>
+        <div class="modes">
+          <div class="node"><b>Tutor</b><span>Student · learn</span></div>
+          <div class="node"><b>Copilot</b><span>Faculty · create</span></div>
+          <div class="node"><b>Analyst</b><span>Administrator · oversee</span></div>
+        </div>
+        <div class="guard">
+          <span class="chip"><span class="dot"></span>Grounded — cite or defer</span>
+          <span class="chip"><span class="dot"></span>Human-in-the-loop</span>
+          <span class="chip"><span class="dot"></span>Metered — caps roll up</span>
+        </div>
+      </div>
+      <div class="cap">The one AI, three faces — "AI you can trust and afford"</div>
+    </div>
+  </section>
+
+  <section id="editions">
+    <h3><span class="num">6</span>Commercial model — three editions</h3>
+    <p class="measure">The platform ships in three editions. They gate capability, not integrity — every edition obeys every principle above.</p>
+    <div class="twrap"><table>
+      <thead><tr><th>Edition</th><th>What it is</th><th>Includes</th></tr></thead>
+      <tbody>
+        <tr><td><b>Essentials</b></td><td>The system of record</td><td>Courses, content, assessments, grades, directory, records operations.</td></tr>
+        <tr><td><b>Live</b></td><td>+ real-time teaching</td><td>Live classes (Green Room → broadcast), recorded lectures with synced transcripts.</td></tr>
+        <tr><td><b>AI</b></td><td>The complete platform</td><td>Everything, plus Shikho Campus AI in all three modes and AI governance. <b>BRAC's phase-1 deployment.</b></td></tr>
+      </tbody>
+    </table></div>
+    <p class="measure">The editions surface celebrates the tier the customer is on — it is not a paywall in their face. Price is presented in the conversation, not weaponised in the UI.</p>
+  </section>
+
+  <!-- ============ PART II ============ -->
+  <div class="part-head" id="p2"><div class="k">Part II</div><h2>Foundations</h2></div>
+
+  <section id="shell">
+    <h3><span class="num">7</span>Information architecture</h3>
+    <p class="measure">Every authenticated screen is rendered inside one <strong>Shell</strong> — the product's chrome and the guarantor of consistency.</p>
+    <div class="fig">
+      <div class="ia">
+        <div class="band"><span class="r">Header</span> <b>Title · ⌘K Search · Notifications · Account menu</b> <span>— out-ranks all content</span></div>
+        <div class="band"><span class="r">Sidebar</span> <b>Shikho Campus · BRAC seal · persona nav · editions · AI-usage meter</b></div>
+        <div class="band"><span class="r">Main</span> <b>The page</b> <span>— content up to z-30</span></div>
+        <div class="band"><span class="r">Mobile</span> <b>Bottom navigation</b> <span>— below the lg breakpoint</span></div>
+      </div>
+      <div class="cap">The Shell — brand hierarchy: Shikho Campus (quiet) · BRAC (leads) · CSE (department)</div>
+    </div>
+    <div class="rule"><span class="t">Stacking law — a hard rule</span><p>The sticky header must out-rank all page content. Content may use up to <code>z-30</code>; the header is <code>z-40</code>; modals are <code>z-50</code>/<code>z-60</code>. Any element with a <code>transform</code> (including entrance animations) creates a stacking context and must obey this ordering, or content bleeds through open menus.</p></div>
+
+    <h4>Navigation per role — the AI mode always sits last</h4>
+    <div class="fig">
+      <div class="navmap">
+        <div class="navrow"><span class="role-k" style="color:var(--indigo)">Student</span><span class="nc">Home</span><span class="arrow">›</span><span class="nc">Schedule</span><span class="arrow">›</span><span class="nc">Courses</span><span class="arrow">›</span><span class="nc">Grades</span><span class="arrow">›</span><span class="nc ai">Tutor</span></div>
+        <div class="navrow"><span class="role-k" style="color:var(--magenta)">Faculty</span><span class="nc">Home</span><span class="arrow">›</span><span class="nc">Schedule</span><span class="arrow">›</span><span class="nc">Courses</span><span class="arrow">›</span><span class="nc">Grading</span><span class="arrow">›</span><span class="nc ai">Copilot</span></div>
+        <div class="navrow"><span class="role-k" style="color:var(--sunrise)">Admin</span><span class="nc">Home</span><span class="arrow">›</span><span class="nc">Program</span><span class="arrow">›</span><span class="nc">Directory</span><span class="arrow">›</span><span class="nc">Certify</span><span class="arrow">›</span><span class="nc">Eligibility</span><span class="arrow">›</span><span class="nc ai">Analyst</span></div>
+        <div class="navrow"><span class="role-k" style="color:var(--success)">Coord.</span><span class="nc">Records</span><span class="arrow">›</span><span class="nc">Directory</span><span class="arrow">›</span><span class="nc">Offering</span></div>
+      </div>
+      <div class="cap">Short by design · the intelligence lives in one uniform slot</div>
+    </div>
+
+    <h4>The welcome threshold</h4>
+    <p class="measure">The entry (<code>/</code>) is the one moment that says "this is BRAC University": the seal, "Welcome to your university," and four consistent role modes. Choosing a role opens a modal — <strong>Faculty</strong> opens a searchable picker over all 267 real faculty (you <em>find yourself</em>); the others show a demo-account card; all offer an "or use your BRACU email" field. The extra click buys a clear mental model and makes the faculty "find yourself" moment — the emotional core of the pitch — a first-class path.</p>
+  </section>
+
+  <section id="identity">
+    <h3><span class="num">8</span>Identity & permissions</h3>
+    <h4>The two teacher identities — subtle but load-bearing</h4>
+    <p class="measure">There are two notions of "teacher." Confusing them breaks the product.</p>
+    <ul class="measure">
+      <li><strong>The wired demo teacher — Dr. Kamrul Hasan.</strong> He <em>owns the sample data.</em> All teaching data is filtered by his identity. This never changes.</li>
+      <li><strong>The active ("signed-in-as") teacher.</strong> On welcome you may sign in as any of the 267. This changes only the <em>displayed</em> identity — name, title, email, avatar. It never re-filters the data.</li>
+    </ul>
+    <div class="rule"><span class="t">Rule</span><p>Never filter teaching data by the active identity. The faculty experience always renders the shared sample term; your chosen identity rides on top. This is why an evaluator can "be" any professor and still see a complete class.</p></div>
+
+    <h4>Permission matrix — the authority model</h4>
+    <p class="measure">Permissions are role-scoped and, above all, <em>decision-scoped.</em></p>
+    <div class="twrap"><table>
+      <thead><tr><th>Capability</th><th>Student</th><th>Faculty</th><th>Admin</th><th>Coord.</th></tr></thead>
+      <tbody>
+        <tr><td>Attend / host live class</td><td class="yes">attend</td><td class="yes">host</td><td class="dash">—</td><td class="dash">—</td></tr>
+        <tr><td>Grade work (with AI assist)</td><td class="dash">—</td><td class="yes">approves each</td><td class="dash">—</td><td class="dash">—</td></tr>
+        <tr><td>Submit final grades</td><td class="dash">—</td><td class="yes">✓</td><td class="dash">—</td><td class="dash">—</td></tr>
+        <tr><td><b>Certify</b> submitted grades</td><td class="dash">—</td><td class="dash">—</td><td class="yes">✓</td><td class="dash">—</td></tr>
+        <tr><td><b>Edit</b> an individual mark</td><td class="dash">—</td><td class="yes">own</td><td class="no">never</td><td class="no">never</td></tr>
+        <tr><td>Rule on <b>eligibility</b> (70%)</td><td class="dash">—</td><td class="dash">—</td><td class="yes">✓</td><td class="dash">—</td></tr>
+        <tr><td><b>Staff</b> a section</td><td class="dash">—</td><td class="dash">—</td><td class="yes">✓</td><td class="no">flags it</td></tr>
+        <tr><td>Set academic <b>policy</b></td><td class="dash">—</td><td class="dash">—</td><td class="yes">✓</td><td class="dash">—</td></tr>
+        <tr><td>Compose / <b>publish</b> offering</td><td class="dash">—</td><td class="dash">—</td><td class="yes">✓</td><td class="no">loads it</td></tr>
+        <tr><td><b>Import / export</b> records</td><td class="dash">—</td><td class="dash">—</td><td class="dash">—</td><td class="yes">✓</td></tr>
+        <tr><td>Ask the <b>Analyst</b></td><td class="dash">—</td><td class="dash">—</td><td class="yes">✓</td><td class="dash">—</td></tr>
+        <tr><td>Use AI (own mode)</td><td class="yes">Tutor</td><td class="yes">Copilot</td><td class="yes">Analyst</td><td class="dash">clerical</td></tr>
+        <tr><td>See a teacher's private Momentum</td><td class="dash">—</td><td class="yes">own</td><td class="no">never</td><td class="no">never</td></tr>
+      </tbody>
+    </table></div>
+    <p class="measure">The single most important cell: <strong>no one but the assigning teacher may edit a mark.</strong> The administrator's power over grades is to certify or return — never to change.</p>
+  </section>
+
+  <section id="domain">
+    <h3><span class="num">9</span>The domain model</h3>
+    <p class="measure">Underneath, Shikho Campus is a small set of entities that mirror how a department actually works. Today these are deterministic in-memory objects; the relationships below are the schema a real backend must honour.</p>
+    <div class="fig">
+      <div class="loop">
+        <div class="n"><span class="r">structures</span><b>Department → Term</b><span>governed unit; term has a phase</span></div>
+        <div class="n"><span class="r">runs as</span><b>Course → Offering → Section</b><span>the term's living shape</span></div>
+        <div class="n"><span class="r">holds</span><b>Section → Enrolment → Student</b><span>162 unique · 4 cross-enrolled</span></div>
+        <div class="n"><span class="r">earns</span><b>Section → Gradebook rows</b><span>real marks: CSE110 + CSE321</span></div>
+        <div class="n"><span class="r">derives</span><b>Certification · Eligibility</b><span>from marks + attendance</span></div>
+        <div class="n"><span class="r">meters</span><b>Persona → AI usage</b><span>capped · rolls up</span></div>
+      </div>
+      <div class="cap">The core entities and the direction dependencies flow</div>
+    </div>
+
+    <div class="twrap"><table>
+      <thead><tr><th>Entity</th><th>Meaning</th><th>What matters</th></tr></thead>
+      <tbody>
+        <tr><td><b>Term</b></td><td>A trisemester</td><td>Has a phase: <code>setup</code> / <code>current</code> / <code>closed</code>. The pinned "now" makes Summer 2026 current.</td></tr>
+        <tr><td><b>Faculty</b></td><td>A directory member (267)</td><td>Name, BRAC code, rank, role label, email. Rank order + plural labels are shared product-wide.</td></tr>
+        <tr><td><b>Course</b></td><td>One of 26 catalogue courses</td><td>Code, title, credits, prerequisites, academic year — the year drives its colour crest.</td></tr>
+        <tr><td><b>Offering / Section</b></td><td>A course as it runs</td><td>Courses → sections. A section has a teacher (or a staffing gap), room, capacity, enrolment.</td></tr>
+        <tr><td><b>Student</b></td><td>A learner</td><td>The roster de-duplicates to 162 unique; four are genuinely cross-enrolled.</td></tr>
+        <tr><td><b>Gradebook row</b></td><td>One student's marks</td><td>Only CSE110 + CSE321 have real gradebooks (~166 rows). Everything "real" the admin sees derives from these.</td></tr>
+        <tr><td><b>Certification</b></td><td>The chair's ruling</td><td>Derived from the gradebook: median, pass rate, distribution, flags, delta vs. course average.</td></tr>
+        <tr><td><b>Eligibility flag</b></td><td>Standing vs. the 70% rule</td><td>From attendance: barred (&lt;70), approaching (70–74), clear (≥75).</td></tr>
+        <tr><td><b>Recording</b></td><td>A recorded lecture</td><td>Carries a synced, searchable transcript and clips.</td></tr>
+        <tr><td><b>AI usage</b></td><td>Consumption vs. cap</td><td>Each user is capped; the department total is the sum.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="why"><span class="t">The honest grain</span><p>The department speaks in two grains: registry scale (≈6,113 enrolled, 148 sections — institution-owned inputs) and graded grain (162 students, ~166 rows — the only place real marks exist). Where they meet, the product <em>explains</em> the gap rather than papering over it. This honesty demonstrates that the platform grows as courses come online, and never pretends to data it lacks.</p></div>
+  </section>
+
+  <section id="design">
+    <h3><span class="num">10</span>Design system</h3>
+    <p class="measure">Colour is CSS-variable-backed neutrals, brand tints, and semantics — so <strong>dark mode is real</strong> (a class, not a filter). Every surface is verified in both themes. Academic years carry a gradient crest (Year 1 indigo → Year 4 coral). Type is a geometric sans; motion is purposeful and calm; a shared reveal animates content in on mount.</p>
+    <h4>The shared component library — the moat against drift</h4>
+    <p class="measure">The product is assembled from shared components so that "one object, one design" is structural. The administrator and coordinator directories are the same <code>Directory</code>; their offerings the same <code>Offering</code>; their homes the same <code>Cockpit</code> primitives; all four profiles the same <code>ProfileKit</code>; both faculty pickers the same <code>FacultyPicker</code>; all three AI surfaces the same <code>CampusAI</code> lockup. Two bespoke pages always diverge; one shared component cannot.</p>
+    <div class="rule"><span class="t">The <code>cn</code> caution — a recurring trap</span><p>The class-merging helper is plain concatenation, <strong>not</strong> Tailwind-merge. A later utility does not override an earlier one of the same property. Map to the correct variant; never rely on last-class-wins. This has caused real bugs (a corrupted ring mask on a timeline node) and is a permanent review checkpoint.</p></div>
+    <h4>Avatars & the photo model</h4>
+    <p class="measure">Avatars are deterministic illustrated portraits derived from a name — same person, same face everywhere, no randomness (so no hydration drift). Faculty use monogram tiles. Any user may upload a real photo: downscaled and centre-cropped in the browser, it overrides the illustrated avatar <em>everywhere that identity appears at once</em> — profile hero, ID card, header — through one shared store. Removing it returns the face. One upload, consistent everywhere, instant, removable — that behaviour is the requirement.</p>
+  </section>
+
+  <section id="determinism">
+    <h3><span class="num">11</span>The deterministic-data doctrine</h3>
+    <p class="measure">The demo world is a single, internally consistent moment — a hard constraint with a product purpose.</p>
+    <ul class="measure">
+      <li><strong>Pinned clock:</strong> Friday, 10 July 2026, 14:20 — makes CSE110 "live now" for student and teacher, and frames the administrator's home at end-of-term.</li>
+      <li><strong>No <code>Math.random</code>, <code>Date.now</code>, or argless <code>new Date()</code></strong> in any render or data path. Variation comes from a stable hash and fixed anchors.</li>
+      <li><strong>Client-only reads</strong> (theme, active teacher, uploaded photo) are gated behind mount effects, so the server and first client render match.</li>
+    </ul>
+    <p class="measure">The payoff: the simulation never contradicts itself, and a demo is identical every time it is shown.</p>
+  </section>
+
+  <section id="notifs">
+    <h3><span class="num">12–13</span>Notifications & search</h3>
+    <p class="measure">Notifications are role-scoped and reinforce the cross-role loops. The coordinator's and administrator's notifications form a chain — submit (Aug 22) → certify (Aug 28) → post (Sep 1) — with dates that agree across the product. Notifications never surprise; they narrate the term. A global <strong>⌘K search</strong> spans the current persona's world — a shortcut, never the only path — and renders above all content.</p>
+  </section>
+
+  <!-- ============ PART III ============ -->
+  <div class="part-head" id="p3"><div class="k">Part III</div><h2>Roles & surfaces</h2></div>
+  <p class="measure">Every screen, documented. For each area: purpose, mental model, behaviour, states, validation, permissions, empty states, edge cases, success criteria, extensibility — at the depth the surface warrants.</p>
+
+  <section id="student">
+    <h3><span class="num">14</span>The Student</h3>
+    <p class="measure"><strong>The question the product answers at every moment:</strong> "What should I do next, and am I keeping pace?" The mental model is a personal cockpit — <em>my</em> classes, <em>my</em> momentum, <em>my</em> next action. Philosophy: Whoop-personal. The data is intimate and about <em>you</em>. Gamify effort, never grades. Never a leaderboard.</p>
+
+    <div class="surf"><div class="h"><b>Home</b><span class="rt">/student</span></div>
+      <p>The single glance that orients the day: identity line with live chips ("Live now · CSE110," "N due today"), a Momentum summary, a live-class card (join in one tap) when a class is live, a jump-back-in card for the last recording, enrolled courses, and a right rail with today's rings and the tutor.</p>
+      <p class="note"><b>States</b> Live-now vs. no-class-live · rings incomplete vs. all closed (bonus). <b>Empty</b> A quiet home centred on momentum — never blank. <b>Success</b> A student knows within two seconds whether something needs them now.</p></div>
+
+    <div class="surf"><div class="h"><b>Momentum</b><span class="rt">/student/momentum</span></div>
+      <p>The private motivation system — the emotional heart of the student product. Measures <em>how consistently you keep pace across your four courses</em>, rolled over two weeks. <strong>Effort, never grade. Yours alone, never a leaderboard.</strong> A green hero (deep and legible in both themes), a seven-day trend, "how it works," and <strong>today's three rings</strong> — Absorb, Retrieve, Apply — that reset at midnight. Any one ring keeps the streak; all three earn an XP bonus.</p>
+      <p class="note"><b>Edge</b> A missed day reduces but never zeroes the score; the streak survives on any single closed ring. <b>Success</b> The student feels propelled, never judged or ranked.</p></div>
+
+    <div class="surf"><div class="h"><b>Course detail</b><span class="rt">/student/course/[id]</span></div>
+      <p>Everything about one course: content, syllabus (opens in a modal), discussions, grades, and the recorded-lecture player — a synced, searchable transcript, clips, a <strong>Smart Class</strong> AI panel grounded in that segment's transcript, and autoplay to the next lesson.</p>
+      <p class="note"><b>Empty</b> A course with no recordings shows a warm "ready to be filled" state, not a void.</p></div>
+
+    <div class="surf"><div class="h"><b>Grades</b><span class="rt">/student/grades</span></div>
+      <p>Where the student stands, calm: cumulative GPA vs. 4.00, Dean's-List standing, a GPA-trend chart, credits and progress to graduation, a term switcher, and per-course cards with a grade ring and breakdown (final withheld until it exists).</p>
+      <p class="note"><b>Edge (QA)</b> The GPA-trend renders in a real browser but not under headless capture — which is why product screenshots use the teacher gradebook's CSS distribution. Users are unaffected.</p></div>
+
+    <div class="surf"><div class="h"><b>Practice · Tutor</b><span class="rt">/student/practice · /student/tutor</span></div>
+      <p>Practice is adaptive AI quizzing that targets weakest topics first. Tutor is the student's mode of Shikho Campus AI — a course-scoped grounded chat that cites the material or defers; it never invents. Both carry the <strong>Locked</strong> guardrail.</p></div>
+
+    <div class="surf"><div class="h"><b>Schedule · Live</b><span class="rt">/student/schedule · /student/live</span></div>
+      <p>Schedule renders the real timetable, pinned to the demo clock. Live is the class experience — broadcast stage, attendance, adaptive quality, raise-hand, chat/poll. When no class is live, the surface is honest: it shows the next scheduled class rather than faking a session.</p>
+      <p class="note"><b>Behaviour (fixed)</b> The chat auto-scrolls within its own pane, never by scrolling the page — which would clip the video hero on the stacked layout.</p></div>
+
+    <div class="surf"><div class="h"><b>Profile · Settings · Usage</b><span class="rt">/student/{profile,settings,usage}</span></div>
+      <p>Profile (shared ProfileKit): a BRAC Student ID card with the change-photo control. Settings: SSO account (no password), stateful notification toggles, and Learning &amp; AI where <strong>Grounded answers only</strong> is <strong>Always on</strong> — locked, by design. Usage: own AI consumption vs. a weekly cap, with the promise <em>you are never cut off mid-lesson.</em></p></div>
+  </section>
+
+  <section id="faculty">
+    <h3><span class="num">15</span>The Faculty</h3>
+    <p class="measure"><strong>The question:</strong> "What needs my judgement, and how do I teach with AI without surrendering control?" The mental model is a teaching cockpit where <em>AI drafts and the teacher decides</em> — every mark, every published question.</p>
+
+    <div class="surf"><div class="h"><b>Grading — the human-in-the-loop flagship</b><span class="rt">/teacher/grading</span></div>
+      <p>Grade a queue of student work with AI assistance, approving every mark. Stated on the surface: <em>"The decision is always the teacher's. AI runs the code tests and drafts feedback — no grade reaches a student without your approval."</em> Code items are auto-tested with an AI-drafted score; essays carry a rubric suggestion. The teacher reviews, edits, approves. Nothing publishes unreviewed.</p>
+      <p class="note"><b>States</b> <code>needs_review</code> → approved. <b>Validation</b> An AI score is a draft; the teacher's approval is the authoritative event.</p></div>
+
+    <div class="surf"><div class="h"><b>Gradebook</b><span class="rt">/teacher/gradebook</span></div>
+      <p>The class at a glance, drillable by section: course tabs, section filter, a class summary (median, average, pass rate, at-risk), a per-section breakdown, and a grade distribution as CSS bars. <strong>Export CSV</strong> downloads a real, Excel-friendly file — the one genuinely functional data export.</p></div>
+
+    <div class="surf"><div class="h"><b>Copilot</b><span class="rt">/teacher/copilot</span></div>
+      <p>The teacher's mode of Shikho Campus AI, grounded in the teacher's own material (RAG over slides, recordings, transcripts). Generates quizzes and lecture notes as <em>drafts the teacher edits and approves before publishing.</em> Guardrail — <em>grounded, you approve</em> — present and locked.</p></div>
+
+    <div class="surf"><div class="h"><b>Live · Record</b><span class="rt">/teacher/live · /teacher/record</span></div>
+      <p>Live is the broadcast experience (Green Room → live), the mirror of the student's class. Record is a studio: it captures a class, saves it to the course library, and publishes to any tagged curriculum topics — <em>no students are notified</em> (an intentional quiet publish). An untagged recording is simply a general session for that course; the surface never implies a missing action.</p></div>
+
+    <div class="surf"><div class="h"><b>Home · Momentum · Courses · Profile · Schedule · Usage · Student detail</b><span class="rt">/teacher/…</span></div>
+      <p>Home orients the teaching day. <strong>Momentum is private by law — never visible to the administrator.</strong> Courses are filtered by the wired demo teacher's identity (see §8). Profile (ProfileKit): a Faculty ID card, this term's stats, courses taught, teaching history across the trisemester. Student detail is a read view of one student's standing.</p></div>
+  </section>
+
+  <section id="admin">
+    <h3><span class="num">16</span>The Administrator</h3>
+    <p class="measure"><strong>The question:</strong> "What needs my decision right now, and is the department healthy — without my ever fabricating a number?" The mental model is a cockpit: decisions first, the term as a pipeline, performance explorable in place. She governs; she does not operate; she never authors a mark.</p>
+    <div class="why"><span class="t">Design decision — one frame, state changes</span><p>The home is one frame whose state changes, not three pages per term phase. Whether the term is setup, current, or closed, the home shows the same three sections — <strong>Needs you · Timeline · Performance</strong> — with phase-appropriate content. Switching terms keeps the same view. This is why the administrator never feels lost.</p></div>
+
+    <div class="surf"><div class="h"><b>Home cockpit</b><span class="rt">/chair</span></div>
+      <p><b>Needs you (current):</b> three grounded decision cards — Certify final grades, Finals eligibility, Staff a section (the real unstaffed gap). Closed → "nothing needs you." Setup → "compose the offering · publish." <b>Timeline:</b> the closing term as a pipeline from real deadlines, with certification marked "your step now." <b>Performance:</b> a worst-first, explorable-in-place panel with a Courses / Teachers / Students lens; every row drills to a record; a fixed footprint so switching never lurches. An <b>Ask bar</b> opens the Analyst.</p>
+      <p class="note"><b>Edge (honest)</b> Real pass rates cluster high (≈97–100%), so "worst first" may lead with 97% — and is labelled as such.</p></div>
+
+    <div class="surf"><div class="h"><b>Certify — the flagship governance act</b><span class="rt">/chair/approvals</span></div>
+      <p>Certify submitted grades to the registrar, or return them. Promise on the surface: <em>"You never change a mark. Every decision is logged."</em> Each section card shows median, pass rate, delta vs. course average, a distribution histogram, and any flags (attendance anomaly, below-norm distribution). Actions: <strong>Certify to registrar</strong> or <strong>Return</strong>.</p>
+      <p class="note"><b>States</b> submitted → certified / returned. <b>Grounding</b> The queue is derived entirely from the two real gradebooks (the five sections of CSE110 + CSE321). <b>Permission</b> Editing a mark is impossible here by design.</p></div>
+
+    <div class="surf"><div class="h"><b>Eligibility</b><span class="rt">/chair/reports</span></div>
+      <p>Rule on the BRAC 70%-attendance finals rule. A hero ("N of M clear to sit finals"), three bands (Eligible ≥75 / Approaching 70–74 / Barred &lt;70 · appeals), a worst-first "students on the line" list with Warn + drill, and <strong>Lock eligibility</strong> (freezes the roster before finals; reversible until they begin). Every flag is a real student from real attendance; the admin rules on exceptions — she never invents the list.</p></div>
+
+    <div class="surf"><div class="h"><b>Program</b><span class="rt">/chair/program</span></div>
+      <p>Three tabs, one calm frame: <b>This term</b> (compose the offering — staff, seats, add/remove sections, publish), <b>Curriculum</b> (the 26-course catalogue + OBE), <b>Policy</b> (the 70% threshold, the grade scale, term deadlines). Editing policy applies term-wide and is logged; detail expands on demand, never a spreadsheet at rest.</p></div>
+
+    <div class="surf"><div class="h"><b>Directory</b><span class="rt">/chair/people</span></div>
+      <p>The admin's mode of the shared Directory: Faculty &amp; Students, searchable, with scope filters (Teaching now / Full directory; With records / All enrolled). Faculty grouped by rank, students by course. Every row drills to a read-only scorecard. The footer acknowledges: <em>records maintained by the coordinator.</em></p></div>
+
+    <div class="surf"><div class="h"><b>Analyst / Ask — the killer feature</b><span class="rt">/chair/ask</span></div>
+      <p>Ask the department anything; get an answer computed from real records. One uniform <strong>Answer Card</strong> for every question (headline, stat, ranked rows, source, drill, note) — adding a question is one compute function, never a bespoke screen. A grounded engine with ten intents (worst-attendance, lowest-marks, top-marks, at-risk, weakest-course, eligibility-barred, certification-pending, teacher-load, term-compare, department-summary). A free-text scorer routes the question; no match returns a graceful defer + suggestion chips. Every answer cites its source; nothing is invented; it is read-only.</p>
+      <p class="note"><b>Why the wow</b> The administrator asks a natural question and the department's own reality answers, instantly, without a report being built. Governance-grade intelligence — grounded, cited, read-only.</p></div>
+
+    <div class="surf"><div class="h"><b>Drill-throughs · Profile · Usage</b><span class="rt">/chair/{course,student,faculty}/[id] · /chair/{profile,usage}</span></div>
+      <p>Read-only, context-aware look-throughs — every catalogue course opens a real page (sections, staffing, results, or an honest "not offered this term"). A context-aware back control retraces the true origin and restores scroll, so back never dead-ends. Profile (ProfileKit): a Chairperson ID card. Usage: the department AI roll-up — the sum of every capped user, with the "capped, not surprised" story.</p></div>
+  </section>
+
+  <section id="coord">
+    <h3><span class="num">17</span>The Coordinator</h3>
+    <p class="measure"><strong>The question:</strong> "Are the records ready, and what must I hand to whom?" The mental model is a records desk and a clean set of hand-offs. She operates; she does not decide. No AI mode (clerical, by design) and no academic authority — faculty assignment and results are the administrator's.</p>
+    <div class="why"><span class="t">Design decision</span><p>The coordinator home is a cockpit that <em>mirrors the administrator's</em> — the same three-part rhythm and the same shared primitives — so the two roles are provably one product. Not a thinner, different page; the same design expressing a different job.</p></div>
+
+    <div class="surf"><div class="h"><b>Records home</b><span class="rt">/coordinator</span></div>
+      <p>Phase-aware via the shared term switcher. <b>Term prep (current):</b> Flag to the Chair (the unstaffed section — she surfaces it, the chair assigns), Export to registrar (the Sep-1 deadline), Records loaded. <b>Closed:</b> "certified and posted on &lt;date&gt;." <b>Setup:</b> "loading the rosters &amp; offering." <b>Pipeline:</b> the same three deadlines the admin sees, but her "your step" sits on Export while certification is "awaiting the Chair." <b>Records:</b> three import/export desks; import genuinely appends and confirms; export downloads a real CSV; the registry-vs-loaded gap is stated honestly.</p>
+      <p class="note"><b>Why the switcher must work</b> A control that looks interactive but is not is a broken promise. Hers is the real shared component; her cockpit adapts per phase — because consistency across roles is a principle.</p></div>
+
+    <div class="surf"><div class="h"><b>Directory</b><span class="rt">/coordinator/directory</span></div>
+      <p>The coordinator's mode of the shared Directory — identical header, search, segmentation, and grouping (faculty by rank, students by course) as the admin's — with maintenance affordances: a New / Import / Export toolbar, per-row edit and delete, per-group and bulk selection with a bulk action bar. Changes are session-local ("saved to this session only"). One add/edit form is built from the same field configuration that validates an import.</p>
+      <p class="note"><b>Validation</b> Required fields enforced; identity fields locked when editing and uniqueness-checked on create ("already in the directory," Add disabled); rank is a controlled dropdown.</p></div>
+
+    <div class="surf"><div class="h"><b>Offering · Profile</b><span class="rt">/coordinator/offering · /coordinator/profile</span></div>
+      <p>Offering: the coordinator's mode of the shared Offering — the identical rendering the admin edits, here read + import/export. Imported sections are <em>always left unstaffed</em>, because staffing is the administrator's decision. Footer: <em>faculty assignment and publishing are the Chair's.</em> Profile (ProfileKit): full parity — a Coordinator ID card, a records-desk stat grid (Students, Faculty, Sections, <strong>Unstaffed</strong> — the operations counterpart to the admin's Pass-rate tile), and a role card naming her reporting line to the Chair.</p></div>
+  </section>
+
+  <!-- ============ PART IV ============ -->
+  <div class="part-head" id="p4"><div class="k">Part IV</div><h2>Shikho Campus AI</h2></div>
+  <section id="ai">
+    <h3><span class="num">18–21</span>The AI</h3>
+    <p class="measure">One AI product, three modes, one brand lockup, one usage model. The mode always sits last in navigation, in the same slot, for every role. The message to the university is singular: <strong>AI you can trust and afford.</strong></p>
+    <h4>The three modes</h4>
+    <ul class="measure">
+      <li><strong>Tutor (student).</strong> Course-scoped grounded chat; cites or defers. Powers adaptive Practice and the transcript-grounded Smart Class panel.</li>
+      <li><strong>Copilot (teacher).</strong> Grounded in the teacher's material; drafts quizzes, notes, grading feedback; everything reviewed and approved before a student sees it.</li>
+      <li><strong>Analyst (administrator).</strong> The grounded query engine over the department's real records (§16). Cite-or-defer; read-only.</li>
+    </ul>
+    <h4>The guardrails — shown as Locked</h4>
+    <ol class="measure">
+      <li><strong>Grounded answers only.</strong> Answers only from real material; cites it or says it is not covered. Never invents.</li>
+      <li><strong>Human review required.</strong> Any AI output that reaches a student passes through a teacher's approval.</li>
+      <li><strong>Administrator integrity.</strong> The Analyst is read-only; certifies-not-authors; every drill is logged; a teacher's private momentum is never exposed.</li>
+    </ol>
+    <div class="why"><span class="t">Why usage is a first-class surface</span><p>A procurement office's first fear about AI is an unbounded bill. Every user has a weekly cap; usage rolls up; the administrator sees the department total. "Capped, not surprised" — students are never cut off mid-lesson; grounded answers cost a fraction of open-ended generation. This is the "AI you can afford" half of the pitch, and it answers the fear before it is asked.</p></div>
+  </section>
+
+  <!-- ============ PART V ============ -->
+  <div class="part-head" id="p5"><div class="k">Part V</div><h2>Cross-role workflows</h2></div>
+  <section id="loops">
+    <h3><span class="num">22</span>The loops — where the thesis becomes real</h3>
+    <p class="measure">The product's deepest idea is that the four roles are ends of shared loops. These workflows are where "one living system" stops being a slogan.</p>
+
+    <h4>The term lifecycle</h4>
+    <div class="fig">
+      <div class="flow">
+        <div class="phase"><span class="line"></span><div class="top"><span class="dot" style="background:var(--indigo)">1</span><span class="lbl">Setup</span></div><div class="who">Coordinator → Chair</div><ul><li>Load rosters &amp; offering</li><li>Compose sections</li><li>Publish the term</li></ul></div>
+        <div class="phase"><span class="line"></span><div class="top"><span class="dot" style="background:var(--magenta)">2</span><span class="lbl">Current</span></div><div class="who">Faculty · Students</div><ul><li>Teach live · record</li><li>Assess with AI assist</li><li>Submit final grades</li></ul></div>
+        <div class="phase"><div class="top"><span class="dot" style="background:var(--success)">3</span><span class="lbl">Closed</span></div><div class="who">Chair → Registrar</div><ul><li>Certify grades</li><li>Rule eligibility</li><li>Export &amp; post</li></ul></div>
+      </div>
+      <div class="cap">A term moves setup → current → closed · every home adapts to the selected phase</div>
+    </div>
+
+    <h4>The grade-certification loop</h4>
+    <div class="fig">
+      <div class="seq">
+        <div class="step"><div class="actor">Faculty</div><div class="msg">Grade with AI assist, approve every mark; submit finals by Aug 22.</div></div>
+        <div class="step"><div class="actor">System</div><div class="msg">Section appears in the Certify queue.<div class="m">Derived from real marks: median, pass rate, distribution, flags.</div></div></div>
+        <div class="step"><div class="actor">Administrator</div><div class="msg">Reviews the <em>shape</em>.<div class="m">Sound → certify to registrar (Aug 28) · Anomaly → <span class="alt">return for revision.</span></div></div></div>
+        <div class="step"><div class="actor">Registrar</div><div class="msg">Grades posted to transcripts by Sep 1.</div></div>
+      </div>
+      <div class="cap">Never edits a mark · every decision logged</div>
+    </div>
+
+    <h4>The staffing loop — the strongest expression of the thesis</h4>
+    <div class="fig">
+      <div class="seq">
+        <div class="step"><div class="actor">Coordinator</div><div class="msg">Loads / imports the offering; flags the unstaffed section (CSE221 Sec 2) to the Chair.</div></div>
+        <div class="step"><div class="actor">Administrator</div><div class="msg">Assigns a teacher — searchable over 267 faculty — and publishes the term.</div></div>
+        <div class="step"><div class="actor">Everywhere</div><div class="msg">The same section object updates across both homes, the notifications, and the offering.<div class="m">One gap · four consistent views.</div></div></div>
+      </div>
+      <div class="cap">The coordinator surfaces · the administrator decides · one truth</div>
+    </div>
+    <p class="measure"><strong>The eligibility loop</strong> and <strong>the records loop</strong> follow the same shape: attendance → the 70% rule → bands → the administrator rules on exceptions → lock; and coordinator loads → chair governs → faculty submit → chair certifies → coordinator exports. The loop closes where it began.</p>
+  </section>
+
+  <!-- ============ PART VI ============ -->
+  <div class="part-head" id="p6"><div class="k">Part VI</div><h2>Operations & the road ahead</h2></div>
+  <section id="ops">
+    <h3><span class="num">27</span>Hosting</h3>
+    <p class="measure">A Next.js 14 (App Router) application deployed to <strong>Vercel</strong> at <code>shikho-brac-platform.vercel.app</code>. The production build must remain type-clean — there is <strong>no error-suppression</strong> in the build config, because a system of record must not ship on a build allowed to lie about its own correctness. Deploys are verified by health-checking live routes and metadata assets.</p>
+
+    <h3><span class="num">28</span>Prototype status — stated plainly, because honesty is the product</h3>
+    <p class="measure">This document defines the product as it must be. The current build is a <strong>high-fidelity, front-end-only prototype</strong> — the definitive demonstration that this product can exist and should be built.</p>
+    <ul class="measure">
+      <li>No backend, database, authentication, or real LLM. Data is deterministic mock; "auth" is a role picker; the AI is grounded, canned, and animated to demonstrate the exact intended behaviour.</li>
+      <li><strong>CSV export is genuinely functional</strong> (real files). <strong>Photo upload is genuinely functional</strong> (persists locally, updates every avatar at once). Theme and identity persist locally.</li>
+      <li>Everything else resets on reload, by contract.</li>
+    </ul>
+    <p class="measure">Where the platform is still a prototype (hosting at scale, live SSO, SIS integration, a real model), it is positioned as <em>designed-for / the next step</em> — never as done. This honesty is not a weakness in the pitch; it is the reason the pitch is believed.</p>
+
+    <h3><span class="num">29</span>Quality bar — for the incoming Head of Engineering</h3>
+    <p class="measure">Held to a world-class visual and interaction bar, verified in light and dark across every persona. Two defect classes are specifically hunted and must stay fixed:</p>
+    <ul class="measure">
+      <li><strong>Stacking bugs.</strong> The header/content/modal z-ordering law (§7). Any element with a <code>transform</code> creates a stacking context and must obey it.</li>
+      <li><strong>False affordances.</strong> Nothing may look interactive and do nothing. Every toggle is stateful; every close control works; every "switcher" switches. (A gradient-header close control must sit above the header's content layer, or the transparent content swallows the click — a real, fixed bug; audit every modal against it.)</li>
+    </ul>
+    <p class="measure">The definitive "clean" check is a fresh dev-server restart. Retained console errors from rapid edits are not authoritative — the server's compile log, the type-checker, and whether the page renders are.</p>
+
+    <h3><span class="num">30</span>Future extensibility</h3>
+    <p class="measure">The path to a real backend is wiring, not redesign. The entity model is the schema; the shared components are the seams.</p>
+    <div class="twrap"><table>
+      <thead><tr><th>Extension</th><th>Unlocks</th><th>Design already in place</th></tr></thead>
+      <tbody>
+        <tr><td>Backend + database</td><td>Persistence, multi-user, real terms</td><td>The entity model and helper signatures are the contracts.</td></tr>
+        <tr><td>Live SSO (BRACU)</td><td>Real identity</td><td>The role model and "sign in as" layer are the seam.</td></tr>
+        <tr><td>Real LLM + RAG</td><td>Genuine Tutor / Copilot / Analyst</td><td>Cite-or-defer, human-in-the-loop, and the uniform Answer Card are the interface.</td></tr>
+        <tr><td>SIS / registrar integration</td><td>Real rosters, real posting</td><td>Import/export field configs and the certification/eligibility derivations define the exchange.</td></tr>
+        <tr><td>OBE outcome attainment</td><td>Accreditation reporting</td><td>Curriculum topics exist; assessment→outcome tagging is the next tag.</td></tr>
+        <tr><td>Attendance ledger + audit log</td><td>A true system of record</td><td>Eligibility already derives from attendance; certification already claims logging.</td></tr>
+      </tbody>
+    </table></div>
+    <div class="rule"><span class="t">The rule for every extension</span><p>It must honour every principle in Part I. A backend that let the administrator edit a mark, or an LLM that invented an answer, is a regression no matter how advanced.</p></div>
+  </section>
+
+  <!-- ============ APPENDIX ============ -->
+  <div class="part-head" id="appendix"><div class="k">Appendices</div><h2>Reference</h2></div>
+  <section>
+    <h4>A · Route map</h4>
+    <div class="twrap"><table>
+      <thead><tr><th>Role</th><th>Routes</th></tr></thead>
+      <tbody>
+        <tr><td><b>Welcome</b></td><td class="mono">/ &nbsp;— four role modes</td></tr>
+        <tr><td><b>Student</b></td><td class="mono">/student · momentum · schedule · courses · course/[id] · catalog · practice · grades · tutor · live · profile · settings · assignment/[id] · usage</td></tr>
+        <tr><td><b>Faculty</b></td><td class="mono">/teacher · momentum · schedule · courses · course/[id] · catalog · grading · gradebook · copilot · live · record · student/[id] · profile · settings · usage</td></tr>
+        <tr><td><b>Administrator</b></td><td class="mono">/chair · program · people(Directory) · approvals(Certify) · reports(Eligibility) · ask(Analyst) · usage · profile · course/[id] · student/[id]/[cid] · faculty/[id]</td></tr>
+        <tr><td><b>Coordinator</b></td><td class="mono">/coordinator · directory · offering · profile</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>B · Glossary</h4>
+    <div class="twrap"><table>
+      <thead><tr><th>Term</th><th>Meaning</th></tr></thead>
+      <tbody>
+        <tr><td><b>Altitude</b></td><td>Internal name for a role. Public word: <b>role</b>.</td></tr>
+        <tr><td><b>Chair</b></td><td>Internal identifier &amp; route for the <b>Administrator</b>.</td></tr>
+        <tr><td><b>Momentum</b></td><td>The effort-consistency metric. Never grades, never ranked.</td></tr>
+        <tr><td><b>The offering</b></td><td>Courses × sections a term runs. Composed by the admin, loaded by the coordinator.</td></tr>
+        <tr><td><b>Certification</b></td><td>The admin's ruling on submitted grades: certify or return, never edit.</td></tr>
+        <tr><td><b>Eligibility</b></td><td>Standing against the 70% finals-attendance rule.</td></tr>
+        <tr><td><b>Answer Card</b></td><td>The single uniform schema for every Analyst answer.</td></tr>
+        <tr><td><b>Grounded</b></td><td>The AI answers only from real material; cites or defers.</td></tr>
+      </tbody>
+    </table></div>
+
+    <h4>C · The one-page essence</h4>
+    <div class="essence"><p>Shikho Campus is one product seen from four vantage points — student, faculty, administrator, coordinator — built on a real department's real data. Every number traces to a real input. The AI drafts; the human decides. The administrator certifies but never authors. Effort is gamified; grades never are; nothing is a leaderboard. The same object is drawn by one shared component in every role. Time is pinned so the world is always coherent. It is Apple-clean, Duolingo-alive, Whoop-personal, and registrar-grade — and it exists to prove that a university department is a living system, and its software should behave like one.</p></div>
+  </section>
+
+  <div class="end">End of document · Shikho Campus × BRAC University</div>
+
+</main>
+</div>
+</div>
+
+<script>
+(function(){
+  var root=document.documentElement, tg=document.getElementById('tg');
+  function cur(){var t=root.getAttribute('data-theme');if(t)return t;return matchMedia('(prefers-color-scheme:dark)').matches?'dark':'light';}
+  tg.addEventListener('click',function(){root.setAttribute('data-theme',cur()==='dark'?'light':'dark');});
+  // scrollspy
+  var links=[].slice.call(document.querySelectorAll('#toc a'));
+  var map={};links.forEach(function(a){var el=document.getElementById(a.getAttribute('href').slice(1));if(el)map[a.getAttribute('href').slice(1)]=a;});
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){links.forEach(function(l){l.classList.remove('on');});var a=map[e.target.id];if(a)a.classList.add('on');}});},{rootMargin:'-10% 0px -80% 0px',threshold:0});
+  Object.keys(map).forEach(function(id){var el=document.getElementById(id);if(el)obs.observe(el);});
+  links.forEach(function(a){a.addEventListener('click',function(e){var el=document.getElementById(a.getAttribute('href').slice(1));if(el){e.preventDefault();el.scrollIntoView({behavior:'smooth',block:'start'});history.replaceState(null,'',a.getAttribute('href'));}});});
+})();
+</script>
+</body>
+</html>

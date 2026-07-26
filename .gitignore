@@ -1,0 +1,13 @@
+# Local editor and agent state
+.claude/
+.cursor/
+
+# LibreOffice lock files
+.~lock*#
+
+# OS noise
+.DS_Store
+Thumbs.db
+
+# Third-party reference manuals — not ours to redistribute
+prd-local/nsu-manuals/

@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>Shikho Campus AI — Product Requirements</title>
+<link rel="stylesheet" href="./pro.css?v=20"/>
+<link rel="stylesheet" href="./spec.css?v=20"/>
+<link rel="stylesheet" href="./dev.css?v=20"/>
+<script src="./nav.js?v=20" defer></script>
+</head>
+<body>
+<div class="layout">
+
+<nav>
+  <div class="brand">Shikho Campus</div>
+  <div class="sub">Shikho Campus AI</div>
+
+  <div class="g">On this page</div>
+  <a href="#intro">What this product is</a>
+  <a href="#build">How it is built</a>
+  <a href="#modes">The three modes</a>
+  <a href="#ai-rules">Rules that stay on</a>
+  <a href="#usage">Usage and caps</a>
+  <a href="#nav">Where it sits</a>
+  <a href="#features">All features</a>
+
+  <div class="g">Features</div>
+  <a href="#AI-TUTOR-01">Tutor</a>
+  <a href="#AI-PRA-01">Practice</a>
+  <a href="#AI-SMART-01">Smart Class</a>
+  <a href="#AI-AST-01">Assistant</a>
+  <a href="#AI-GRD-01">Draft grading</a>
+  <a href="#AI-ASK-01">Analyst</a>
+  <a href="#AI-USE-01">Usage &amp; caps</a>
+
+  <div class="g">Modules</div>
+  <a href="./index.html">Overview</a>
+  <a href="./student.html">Student</a>
+  <a href="./faculty.html">Faculty</a>
+  <a href="./admin.html">Administrator</a>
+  <a href="./coordinator.html">Coordinator</a>
+  <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
+</nav>
+
+<main>
+<div class="page-bar">
+  <a class="page-bar-back" href="./index.html">← Back to overview</a>
+  <a class="page-bar-demo" href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open live demo ↗</a>
+</div>
+<p class="crumb"><a href="./index.html">Overview</a> · Shikho Campus AI</p>
+
+
+<header>
+  <h1>Shikho Campus AI</h1>
+  <p class="lede">One brand, one budget, three modes: Tutor for the student, Assistant for the teacher, Analyst for the chairperson. The Coordinator has no AI mode.</p>
+</header>
+<aside class="demo-strip">
+  <strong>Live demo</strong>
+  <span>Open the live campus demo and try Tutor, Assistant or Analyst.</span>
+  <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">shikho-brac-platform.vercel.app ↗</a>
+</aside>
+
+
+<section id="intro">
+  <h2>What this product is</h2>
+  <p>Shikho Campus AI is not three separate tools. It is one product that changes face by role. Every mode is grounded in real university material or records. Every mode is metered against a weekly cap that rolls up to the department. Every mode that can affect a student record requires a named human to approve before anything becomes real.</p>
+  <p>This page is the binding description of that product. The Student, Faculty and Administrator modules each own the screens where their mode appears; this page owns the rules that all three must obey, so a university buying the AI edition gets one coherent promise.</p>
+  <div class="callout">
+    <b>What this page owns</b>
+    The three modes, the rules that stay on, the usage model, the uniform Answer Card for Analyst, and the rule that AI always sits last in navigation. Engineering, product and a university buyer should be able to agree on this page without reading anything else about AI.
+  </div>
+</section>
+
+<section id="build">
+  <h2>How it is built</h2>
+  <div class="callout">
+    <b>Decision</b>
+    Campus AI is built in-house, using the same approach Shikho already proved in Teacher OS. We do not embed a third-party assistant product and we are not dependent on any external “copilot”. Shikho owns the retrieval, the prompts, the rules that stay on, the evaluation and the cost controls; the underlying language model is a replaceable component behind Shikho’s own service.
+  </div>
+  <p>The reason to write this down is that “which AI do you use?” is the second question every university and every faculty senate asks. The answer must be the same in every meeting: it is ours, it is grounded in your material, and your content and student records never leave the platform’s control to train someone else’s product.</p>
+  <p>The approach reuses the pieces Teacher OS already runs in production:</p>
+  <table>
+    <tr><th>Layer</th><th>What it does</th><th>Same as Teacher OS</th></tr>
+    <tr><td><strong>Ingest</strong></td><td>Takes the teacher’s slides, readings, recordings and the university’s policies and turns recordings into searchable transcripts.</td><td>The Teacher OS media pipeline — record, transcribe, store — is reused, not rebuilt.</td></tr>
+    <tr><td><strong>Ground (retrieval)</strong></td><td>Before answering, the system retrieves the exact passages from that course’s own material and answers only from them, with a citation.</td><td>Retrieval-grounded answering is the core Teacher OS technique.</td></tr>
+    <tr><td><strong>Draft</strong></td><td>Produces a draft — an answer, a quiz, a mark, an announcement — never a published result.</td><td>Draft-then-approve is how Teacher OS keeps a human in charge.</td></tr>
+    <tr><td><strong>Approve</strong></td><td>A named human uses, edits or discards the draft. Only their action makes it real.</td><td>Identical human-in-the-loop rule.</td></tr>
+    <tr><td><strong>Meter</strong></td><td>Every turn counts against a weekly cap that rolls up to the department, so the bill is predictable.</td><td>Same cost discipline, applied per university.</td></tr>
+    <tr><td><strong>Model</strong></td><td>The language model sits behind Shikho’s own service and can be swapped without changing any of the rules above.</td><td>No lock-in to one vendor’s assistant.</td></tr>
+  </table>
+  <h4>What this means for each mode</h4>
+  <p>Tutor, Assistant and Analyst are not three integrations. They are one in-house engine pointed at three different sets of material with three different permissions. That is why the rules that stay on, the caps and the citations are worded once on this page and inherited by all three — and why replacing the underlying model later changes nothing a student, teacher or chair can see.</p>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Campus AI must never send a university’s content or student records to an outside product to be trained on.</li>
+    <li>No mode may answer from the open internet instead of the institution’s own material.</li>
+    <li>Swapping the underlying model must never quietly turn off grounding, human approval, or the usage cap.</li>
+  </ul>
+</section>
+
+<section id="modes">
+  <h2>The three modes</h2>
+  <table>
+    <tr><th>Mode</th><th>Who uses it</th><th>What it does</th><th>What it is grounded in</th></tr>
+    <tr><td><strong>Tutor</strong></td><td>Student</td><td>Course-scoped study chat; powers adaptive Practice; powers the Smart Class panel beside a recording</td><td>That course’s published materials, syllabus, and lecture transcripts</td></tr>
+    <tr><td><strong>Assistant</strong></td><td>Faculty</td><td>Drafts quizzes, lecture notes, announcements and grading feedback; teacher reviews and approves before anything reaches a student</td><td>That teacher’s own course materials, recordings and transcripts</td></tr>
+    <tr><td><strong>Analyst</strong></td><td>Administrator</td><td>Ask the department a natural question; get an answer computed from real records, with sources and drill-downs</td><td>Department records the chair already has authority to see — never a teacher’s private Momentum</td></tr>
+    <tr><td><em>None</em></td><td>Coordinator</td><td>No AI mode. Clerical work by design — import, verify, export, flag.</td><td>—</td></tr>
+  </table>
+  <div class="flow-board" aria-label="AI modes by role">
+    <div class="flow-row">
+      <div class="flow-card"><span class="flow-who">Student</span><strong>Tutor</strong><p>Ask about this course</p></div>
+      <span class="flow-arrow" aria-hidden="true">·</span>
+      <div class="flow-card"><span class="flow-who">Faculty</span><strong>Assistant</strong><p>Draft · teacher approves</p></div>
+      <span class="flow-arrow" aria-hidden="true">·</span>
+      <div class="flow-card"><span class="flow-who">Administrator</span><strong>Analyst</strong><p>Ask · read-only answer</p></div>
+    </div>
+  </div>
+  <aside class="demo-strip">
+    <strong>Live demo</strong>
+    <span>Open each role and use the AI item last in the side menu.</span>
+    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
+  </aside>
+</section>
+
+<section id="ai-rules">
+  <h2>Rules that stay on</h2>
+  <p>These are not settings a user can turn off. Each is shown on the AI screens as Always on.</p>
+  <table>
+    <tr><th>Rule</th><th>What it means</th><th>What must never happen</th></tr>
+    <tr><td><strong>Grounded answers only</strong></td><td>Answers only from real material or real records. The answer cites its source, or the system says the topic is not covered and suggests what to ask instead.</td><td>Inventing a fact, a mark, a policy, or a student who does not exist</td></tr>
+    <tr><td><strong>Human review required</strong></td><td>Any AI output that reaches a student — a mark, feedback, a quiz question, a published note — passes through a named teacher’s approval first.</td><td>Auto-publishing drafts; “approve all”; accepting a draft after a delay with no human click</td></tr>
+    <tr><td><strong>Administrator integrity</strong></td><td>The Analyst is read-only. The chair certifies; they never author a mark. Every Analyst drill is logged. A teacher’s private Momentum is never exposed.</td><td>An Analyst answer that changes a record; surfacing a teacher’s private effort score to the chair</td></tr>
+  </table>
+</section>
+
+<section id="usage">
+  <h2>Usage and caps — AI you can afford</h2>
+  <p>A procurement office’s first fear about AI is an unbounded bill. Every user has a weekly cap. Usage rolls up. The administrator sees the department total. Students are never cut off mid-lesson — when the cap is reached, the current answer finishes, then the surface explains the limit and when it resets. Grounded answers are designed to cost a fraction of open-ended generation. The story is “capped, not surprised.”</p>
+  <table>
+    <tr><th>Who sees what</th><th>What they see</th></tr>
+    <tr><td>Student · Faculty</td><td>Own consumption against the weekly cap, on Student → Settings → Usage and Faculty → Settings → Usage, and as a quiet meter near the AI entry</td></tr>
+    <tr><td>Administrator</td><td>Department roll-up — the sum of every capped user — on Administrator → Usage, with the same “capped, not surprised” promise</td></tr>
+    <tr><td>Coordinator</td><td>Nothing — no AI mode, no usage surface</td></tr>
+  </table>
+</section>
+
+<section id="nav">
+  <h2>Where it sits</h2>
+  <p>The AI mode always sits last in navigation, in the same slot, for every role that has one. Short by design — the intelligence lives in one uniform place.</p>
+  <table>
+    <tr><th>Role</th><th>Navigation (AI last)</th></tr>
+    <tr><td>Student</td><td>Home › Schedule › Courses › Grades › <strong>Tutor</strong></td></tr>
+    <tr><td>Faculty</td><td>Home › Schedule › Courses › Grading › <strong>Assistant</strong></td></tr>
+    <tr><td>Administrator</td><td>Home › Program › Directory › Certify › Eligibility › <strong>Analyst</strong></td></tr>
+    <tr><td>Coordinator</td><td>Records › Directory › Offering — no AI slot</td></tr>
+  </table>
+</section>
+
+<section id="features">
+  <h2>Features at a glance</h2>
+  <table>
+    <tr><th>ID</th><th>Feature</th><th>What it does</th><th>Lives in</th></tr>
+    <tr><td><a href="#AI-TUTOR-01">AI-TUTOR-01</a></td><td>Tutor</td><td>Course-scoped grounded chat for the student; cites or defers</td><td>Student module</td></tr>
+    <tr><td><a href="#AI-PRA-01">AI-PRA-01</a></td><td>Practice</td><td>Adaptive AI quizzing that targets weakest topics first</td><td>Student module</td></tr>
+    <tr><td><a href="#AI-SMART-01">AI-SMART-01</a></td><td>Smart Class</td><td>Panel beside a recording, grounded in that segment’s transcript</td><td>Student · Faculty recording</td></tr>
+    <tr><td><a href="#AI-AST-01">AI-AST-01</a></td><td>Assistant</td><td>Drafts quizzes, notes and announcements from the teacher’s material</td><td>Faculty module</td></tr>
+    <tr><td><a href="#AI-GRD-01">AI-GRD-01</a></td><td>Draft grading</td><td>Drafts marks and feedback; teacher approves every one</td><td>Faculty grading queue</td></tr>
+    <tr><td><a href="#AI-ASK-01">AI-ASK-01</a></td><td>Analyst</td><td>Ask the department; uniform Answer Card; read-only; cited</td><td>Administrator module</td></tr>
+    <tr><td><a href="#AI-USE-01">AI-USE-01</a></td><td>Usage &amp; caps</td><td>Weekly caps, never cut off mid-lesson, department roll-up</td><td>All AI roles + Admin Usage</td></tr>
+  </table>
+</section>
+
+<!-- AI-TUTOR-01 -->
+<article class="spec" id="AI-TUTOR-01">
+  <div class="spec-head"><h3>AI-TUTOR-01 · Tutor</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Tutor is the student’s mode of Shikho Campus AI. It is a course-scoped chat that answers only from that course’s published materials, syllabus and lecture transcripts. Every answer either cites where it came from or says the topic was not covered. It refuses to write graded work for the student. It is the same product as Assistant and Analyst — different altitude, same rules.</p>
+  <h4>Why it exists</h4>
+  <p>Students study at midnight on a phone. A tutor that invents an answer is worse than no tutor. A tutor that can only speak from the course the student is actually enrolled in is the only kind a computer-science department will trust, and the only kind that keeps the university’s licence bill predictable.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Person</th><th>When</th><th>What they achieve</th></tr>
+    <tr><td>Student</td><td>While revising, after a lecture, before a quiz</td><td>Understands a concept from their own course material</td></tr>
+    <tr><td>Student stuck on a recording</td><td>From Smart Class</td><td>Asks about the exact segment they are watching</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone"><strong>Course picker</strong><p>Only enrolled courses. The chat is always scoped to one course at a time.</p><div class="copy">“Asking about CSE110 · Programming Language I”</div></div>
+    <div class="zone"><strong>Chat</strong><p>Student question and Tutor answer. Each answer shows its sources as short citations the student can open.</p><div class="copy">“From Week 4 lecture, 12:40–14:10 · and the syllabus §3”</div></div>
+    <div class="zone"><strong>Deferral</strong><p>When the material does not cover the question.</p><div class="copy">“This is not covered in CSE110’s published material. Try asking about loops, arrays, or the Week 4 lab.”</div></div>
+    <div class="zone"><strong>rules that stay on</strong><p>Always visible, not toggleable.</p><div class="copy">“Grounded answers only · Always on · Locked”</div></div>
+    <div class="zone"><strong>Refusal of graded work</strong><p>If the student asks Tutor to write an assignment or take a quiz for them.</p><div class="copy">“I can help you understand the topic. I cannot write the assignment for you.”</div></div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Student</span>Opens Student → Tutor (last item in navigation) and picks a course.</div></li>
+    <li><span class="n">2</span><div><span class="who">Student</span>Asks a question in plain language.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Searches only that course’s published material and transcripts; drafts an answer with citations, or defers.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Counts the turn against the student’s weekly AI cap; if the cap is reached mid-answer, finishes the current answer then explains the limit.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Course materials and transcripts</td><td>Faculty content and recordings</td><td>Grounding for the answer</td></tr>
+    <tr><td>Student question and answer</td><td>This feature</td><td>Usage meter; optional Practice topic weakness signals</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>AI-PRA-01 Practice</td><td>Weak topics</td><td>Practice aims questions where Tutor conversations show struggle</td></tr>
+    <tr><td>AI-SMART-01 Smart Class</td><td>Current transcript segment</td><td>Same Tutor, scoped to what is on screen</td></tr>
+    <tr><td>AI-USE-01 Usage</td><td>Turns consumed</td><td>Cap is honest and visible</td></tr>
+    <tr><td>Student STU-AI-01</td><td>The student-facing screen</td><td>Module owns the screen; this page owns the rules</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Weekly Tutor cap per student, and whether unused capacity rolls over.</li>
+    <li>Whether Tutor may see only published materials, or also unpublished drafts the teacher has marked shareable with AI.</li>
+    <li>Whether conversation history is kept for the term or wiped more often.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Tutor must never invent a fact that is not in the course material.</li>
+    <li>Tutor must never write graded work or reveal another student’s answers.</li>
+    <li>Tutor must never pull material from a course the student is not enrolled in.</li>
+    <li>The Grounded answers only control must never become a toggle the student can switch off.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li><strong>Material has not been published yet.</strong> Tutor says the course has no published material yet, rather than guessing.</li>
+    <li><strong>Two sections of the same course have different teachers.</strong> Tutor uses the materials of the section the student is enrolled in.</li>
+    <li><strong>Cap reached mid-answer.</strong> The current answer finishes; the next question is blocked with a clear reset time — never cut off mid-lesson.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A chairperson can open any Tutor answer and see the citation that produced it.</li>
+    <li>A student asking something outside the course always gets a deferral, never a confident invention.</li>
+    <li>A request to “write my assignment” is refused in plain language every time.</li>
+  </ul>
+</article>
+
+<!-- AI-PRA-01 -->
+<article class="spec" id="AI-PRA-01">
+  <div class="spec-head"><h3>AI-PRA-01 · Practice</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Practice is adaptive AI quizzing for the student. It targets the weakest topics first, using what the student has missed in earlier Practice runs and what Tutor conversations show they struggle with. Practice is not a graded exam — it is effort. Closing a Practice set contributes to the student’s private Momentum rings (Retrieve / Apply). Marks from Practice never enter the gradebook.</p>
+  <h4>Why it exists</h4>
+  <p>Practice and Tutor are the two student faces of Campus AI. Without Practice, Tutor is only chat. With Practice, the product can measure effort — consistency of study — without ever gamifying the grade.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Person</th><th>When</th><th>What they achieve</th></tr>
+    <tr><td>Student</td><td>Daily revision, especially before quizzes and midterms</td><td>Practises the topics they are weakest on</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone"><strong>Start Practice</strong><p>Course picker and “practise my weak topics” as the default.</p><div class="copy">“CSE110 · Focusing on arrays and loops — your weakest topics this week”</div></div>
+    <div class="zone"><strong>Question card</strong><p>One question at a time, drawn from course material; immediate explanation after answering, with a citation.</p></div>
+    <div class="zone"><strong>Session end</strong><p>What improved, what is still weak, and a link back into Tutor for the weak topic.</p><div class="copy">“Retrieve ring closed for today · Practice never affects your grade”</div></div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Student</span>Opens Student → Practice (or from Tutor / Momentum).</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Builds a short set aimed at weak topics from prior Practice and Tutor signals.</div></li>
+    <li><span class="n">3</span><div><span class="who">Student</span>Answers; sees an explanation with a citation after each item.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Updates weak-topic map; closes the relevant Momentum ring if the day’s effort threshold is met; counts usage against the AI cap.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Course material</td><td>Faculty content</td><td>Question grounding</td></tr>
+    <tr><td>Weak-topic map</td><td>Prior Practice and Tutor</td><td>Next Practice set; Momentum Retrieve/Apply</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>AI-TUTOR-01</td><td>Topic struggle signals</td><td>Practice aims where chat showed confusion</td></tr>
+    <tr><td>STU-MOM-01 Momentum</td><td>Ring progress</td><td>Effort is rewarded; grades are not</td></tr>
+    <tr><td>Gradebook</td><td>Nothing</td><td>Practice never writes a mark</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Whether Practice is on for a programme or course.</li>
+    <li>How many Practice questions count as closing a Momentum ring.</li>
+    <li>Whether teachers can see anonymised weak-topic heatmaps for their section (never individual Practice scores as grades).</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Practice results must never appear in the gradebook or on a transcript.</li>
+    <li>Practice must never become a public leaderboard.</li>
+    <li>Practice must never invent questions from outside the course material.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li><strong>New student with no history.</strong> Practice starts from the current week’s published topics, not from a fake “weakness.”</li>
+    <li><strong>Cap reached mid-set.</strong> Current question finishes; the set pauses with a clear resume time.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A student can show that Practice never changed a grade.</li>
+    <li>Weak topics in Practice match what the student actually struggles with in Tutor and in graded quizzes.</li>
+  </ul>
+</article>
+
+<!-- AI-SMART-01 -->
+<article class="spec" id="AI-SMART-01">
+  <div class="spec-head"><h3>AI-SMART-01 · Smart Class</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Smart Class is the Tutor panel that sits beside a recorded lecture. It is grounded in the transcript of the segment the student is currently watching — not the whole internet, and not another course. The student can ask “what did the teacher just say about X?” and get an answer that cites the timestamp. Clips and a searchable transcript live on the same screen.</p>
+  <h4>Why it exists</h4>
+  <p>The recording player is a first-class surface: synced searchable transcript, clips, Smart Class AI panel, autoplay to the next lesson. Without Smart Class, a recording is only video. With it, a missed class becomes recoverable study time.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Person</th><th>When</th><th>What they achieve</th></tr>
+    <tr><td>Student who missed class</td><td>Watching the recording</td><td>Understands the segment without scrubbing blindly</td></tr>
+    <tr><td>Student revising</td><td>Before an exam</td><td>Jumps to clips and asks targeted questions</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone"><strong>Player</strong><p>Video with remembered position, low-data mode, and autoplay to the next lesson when enabled.</p></div>
+    <div class="zone"><strong>Transcript</strong><p>Synced and searchable; clicking a line seeks the video.</p><div class="copy">“Search this lecture”</div></div>
+    <div class="zone"><strong>Clips</strong><p>Short segments the teacher or the system marked as topics.</p></div>
+    <div class="zone"><strong>Smart Class panel</strong><p>Tutor scoped to the current transcript window.</p><div class="copy">“Asking about 12:40–14:10 of this lecture”</div></div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Teacher</span>Publishes a recording with a transcript (from live class or studio record).</div></li>
+    <li><span class="n">2</span><div><span class="who">Student</span>Opens the recording from the course page.</div></li>
+    <li><span class="n">3</span><div><span class="who">Student</span>Asks Smart Class a question; the answer cites the timestamp.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Transcript and clips</td><td>Faculty record &amp; publish</td><td>Grounding for Smart Class</td></tr>
+    <tr><td>Playback position</td><td>Student device</td><td>Resume across sessions</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Faculty record &amp; publish</td><td>Recording + transcript</td><td>No transcript means Smart Class explains it is unavailable, not invents</td></tr>
+    <tr><td>AI-TUTOR-01</td><td>Same Tutor engine</td><td>One product, one set of rules</td></tr>
+    <tr><td>STU-MOM-01</td><td>Absorb ring progress</td><td>Watching and engaging counts as effort</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Whether transcripts are automatic, teacher-approved before publish, or optional.</li>
+    <li>Whether Smart Class is available on mobile data by default or only on Wi-Fi.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Smart Class must never answer from a different lecture or course than the one on screen.</li>
+    <li>A missing transcript must never be silently replaced with a guessed summary.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li><strong>Transcript failed.</strong> Player still works; Smart Class says transcript is not ready and offers Tutor on published slides instead.</li>
+    <li><strong>Quiet publish.</strong> Teacher published without notifying students — recording appears in the library when the student opens the course, with no push storm.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A student can find a spoken phrase in the transcript and jump to that second.</li>
+    <li>Every Smart Class answer shows a timestamp citation from the lecture being watched.</li>
+  </ul>
+</article>
+
+<!-- AI-AST-01 -->
+<article class="spec" id="AI-AST-01">
+  <div class="spec-head"><h3>AI-AST-01 · Assistant</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Assistant is the teacher’s mode of Shikho Campus AI. It is grounded in the teacher’s own materials — slides, readings, recordings and transcripts. It drafts quizzes, lecture notes and announcements. Everything is a draft until the teacher edits and approves it. The notice “grounded — you approve” is always on and cannot be switched off.</p>
+  <h4>Why it exists</h4>
+  <p>Teachers will not use AI that publishes behind their back. They will use AI that saves them an hour of drafting and leaves the decision in their hands. That is the faculty half of “AI you can trust.”</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Person</th><th>When</th><th>What they achieve</th></tr>
+    <tr><td>Teacher</td><td>Before class, while building a quiz, while writing an announcement</td><td>A draft they can edit in minutes instead of writing from a blank page</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone"><strong>Assistant home</strong><p>Faculty → Assistant (last in nav). Suggested actions: draft a quiz from this week’s material, draft lecture notes, draft an announcement.</p></div>
+    <div class="zone"><strong>Draft review</strong><p>Side-by-side draft and edit. Primary action is Approve &amp; publish or Approve &amp; save as draft — never “publish all.”</p><div class="copy">“Grounded in your material · You approve · Locked”</div></div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Teacher</span>Opens Assistant and chooses what to draft.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Drafts from the teacher’s materials for the selected course.</div></li>
+    <li><span class="n">3</span><div><span class="who">Teacher</span>Edits, then approves. Only then can the item reach students.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Teacher materials</td><td>Course content and recordings</td><td>Draft grounding</td></tr>
+    <tr><td>Approved item</td><td>Teacher approval</td><td>Quizzes, announcements, notes — as if the teacher wrote them</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>AI-GRD-01</td><td>Same approval rule</td><td>One rule for every AI output that touches students</td></tr>
+    <tr><td>Faculty create quiz / announcement</td><td>Approved drafts</td><td>AI never bypasses those features’ publish rules</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Whether Assistant may use only published materials or also the teacher’s private drafts.</li>
+    <li>Weekly Assistant cap per teacher.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>No bulk “approve all drafts.”</li>
+    <li>No publish without a named teacher’s action.</li>
+    <li>No draft built from another teacher’s private materials.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li><strong>Course has almost no materials.</strong> Assistant says it needs more material, rather than inventing a quiz.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Every published AI-assisted item shows who approved it and when.</li>
+    <li>A draft that was never approved never appears to a student.</li>
+  </ul>
+</article>
+
+<!-- AI-GRD-01 -->
+<article class="spec" id="AI-GRD-01">
+  <div class="spec-head"><h3>AI-GRD-01 · Draft grading</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Inside the Faculty grading queue, AI can run automated checks (for example code tests) and draft a score and feedback. The surface states clearly: “The decision is always the teacher’s. AI drafts — no grade reaches a student without your approval.” States move needs_review → approved. The AI score is a draft; the teacher’s approval is the authoritative event.</p>
+  <h4>Why it exists</h4>
+  <p>This is the human-in-the-loop flagship. It is also the feature a sceptical faculty senate will interrogate first. The only durable answer is architectural: the AI is structurally incapable of publishing an unreviewed mark.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Person</th><th>When</th><th>What they achieve</th></tr>
+    <tr><td>Teacher</td><td>Marking assignments and quizzes</td><td>Faster first pass without surrendering judgement</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone"><strong>Queue item</strong><p>Student work, rubric, AI draft score and draft comment clearly labelled as draft.</p><div class="copy">“AI draft · not visible to the student until you approve”</div></div>
+    <div class="zone"><strong>Actions</strong><p>Edit mark, edit feedback, Approve, Skip. No Approve-all.</p></div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">System</span>Produces a draft for items where AI assist is enabled.</div></li>
+    <li><span class="n">2</span><div><span class="who">Teacher</span>Reviews, edits if needed, approves under their name.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Only then applies posting rules (immediate or hidden until Post marks).</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Submission + rubric</td><td>Student work; teacher setup</td><td>Draft engine</td></tr>
+    <tr><td>Draft vs approved mark</td><td>This feature</td><td>Audit trail; gradebook only after approval</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Faculty grading queue</td><td>The screen</td><td>Module owns UX; this page owns the approval law</td></tr>
+    <tr><td>Administrator certify</td><td>Submitted finals</td><td>Chair still never edits a mark</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Which assignment types may receive AI drafts.</li>
+    <li>Whether the draft is shown to the teacher by default or only on request.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>A draft mark must never be visible to a student.</li>
+    <li>Approve-all must never exist.</li>
+    <li>The record must never lose what the AI proposed versus what the teacher changed.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li><strong>AI fails to draft.</strong> Queue still works; teacher marks by hand.</li>
+    <li><strong>Teacher disagrees completely.</strong> They overwrite freely; both versions stay in the audit trail.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>For every AI-assisted mark, the audit shows draft → teacher action → posted state.</li>
+    <li>Turning AI off leaves a fully usable manual grading queue.</li>
+  </ul>
+</article>
+
+<!-- AI-ASK-01 -->
+<article class="spec" id="AI-ASK-01">
+  <div class="spec-head"><h3>AI-ASK-01 · Analyst</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Analyst is the administrator’s mode of Shikho Campus AI — “Ask the department.” The chair asks a natural question and gets an answer computed from real records. Every answer uses one uniform Answer Card: headline, stat, ranked rows, source, drill, and note. Adding a new question is one compute function, never a bespoke screen. The engine is read-only, cites its source, and never invents. Ten starter intents cover the department’s real questions: worst attendance, lowest marks, top marks, at-risk students, weakest course, eligibility barred, certification pending, teacher load, term compare, department summary. A free-text scorer routes the question; no match returns a graceful deferral with suggestion chips.</p>
+  <h4>Why it exists</h4>
+  <p>Governance-grade intelligence without a report factory. The administrator asks, and the department’s own reality answers — instantly, grounded and cited.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Person</th><th>When</th><th>What they achieve</th></tr>
+    <tr><td>Chair / dean</td><td>Any time a decision needs a number</td><td>An answer with a source and a drill path, without waiting on a spreadsheet</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone"><strong>Ask bar</strong><p>On Administrator home and on Administrator → Analyst.</p><div class="copy">“Ask the department…”</div></div>
+    <div class="zone"><strong>Answer Card</strong><p>Headline · main stat · ranked rows · source citation · drill links · honesty note when the grain of data is limited.</p><div class="copy">“Source: attendance register, CSE110 Sec 1–5, Spring 2026”</div></div>
+    <div class="zone"><strong>Deferral</strong><p>When the question does not match a known intent.</p><div class="copy">“I cannot answer that from department records. Try: who is barred from finals? · which sections are unstaffed?”</div></div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Chair</span>Types or picks a question.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Routes to an intent, computes from real records, returns one Answer Card.</div></li>
+    <li><span class="n">3</span><div><span class="who">Chair</span>Drills into a row; the drill is logged.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Marks, attendance, staffing, certifications</td><td>Department records the chair may already see</td><td>Answer Card</td></tr>
+    <tr><td>Drill log</td><td>This feature</td><td>Audit — who asked what, when</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>Certify / Eligibility / Staffing</td><td>Same underlying records</td><td>Analyst never invents a parallel truth</td></tr>
+    <tr><td>Faculty Momentum</td><td>Nothing — blocked</td><td>Oversight is aggregate, not surveillant</td></tr>
+    <tr><td>AI-USE-01</td><td>Department usage roll-up</td><td>Admin also sees AI cost, not only academic stats</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Which intents are enabled.</li>
+    <li>Who may use Analyst (chair only, or dean too).</li>
+    <li>How long Ask history is retained.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>Analyst must never change a record.</li>
+    <li>Analyst must never show a teacher’s private Momentum.</li>
+    <li>Analyst must never fabricate a number when data is missing — it labels the gap.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li><strong>Only some courses have gradebooks online.</strong> The Answer Card states the grain honestly (“based on N graded sections”).</li>
+    <li><strong>Question is ambiguous.</strong> Suggestion chips; no invented interpretation.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Every Answer Card shows a source a human can open.</li>
+    <li>A question outside the intent set always defers gracefully.</li>
+    <li>A chair cannot reach private teacher Momentum through any Ask phrasing.</li>
+  </ul>
+</article>
+
+<!-- AI-USE-01 -->
+<article class="spec" id="AI-USE-01">
+  <div class="spec-head"><h3>AI-USE-01 · Usage and caps</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Makes AI affordable and predictable. Every Tutor, Practice, Smart Class, Assistant and Analyst turn counts against a weekly cap. The user sees their own meter. The administrator sees the department roll-up — the sum of every capped user — with the story “capped, not surprised.” Students and teachers are never cut off mid-lesson: the current answer finishes, then the limit is explained with the reset time.</p>
+  <h4>Why it exists</h4>
+  <p>Usage is a first-class surface because a procurement office’s first fear about AI is an unbounded bill. “AI you can afford” is half the pitch. Grounded answers are meant to cost a fraction of open-ended generation — the product should be designed so the useful path is also the cheap path.</p>
+  <h4>Who uses it and when</h4>
+  <table>
+    <tr><th>Person</th><th>When</th><th>What they achieve</th></tr>
+    <tr><td>Student / teacher</td><td>Anytime on Settings → Usage, and as a quiet meter near AI</td><td>Knows how much capacity remains this week</td></tr>
+    <tr><td>Administrator</td><td>Administrator → Usage</td><td>Sees the department total and can explain the bill</td></tr>
+  </table>
+  <h4>What the user sees</h4>
+  <div class="screen">
+    <div class="zone"><strong>Own usage</strong><p>Used vs weekly cap, reset date, breakdown by Tutor / Practice / Assistant as relevant.</p><div class="copy">“You will never be cut off mid-lesson. If you reach the cap, the current answer finishes first.”</div></div>
+    <div class="zone"><strong>Department usage</strong><p>Sum of all users, trend, heaviest courses — no list that singles out individual students by default.</p><div class="copy">“Capped, not surprised”</div></div>
+    <div class="zone"><strong>At the limit</strong><p>After the current answer completes.</p><div class="copy">“Weekly AI limit reached. Resets Sunday 00:00. Grounded Practice still available if your university enabled the overflow pool.”</div></div>
+  </div>
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">System</span>Counts each completed AI turn against the user’s weekly cap.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>If the next turn would exceed the cap, finishes any in-flight answer, then blocks with a clear message.</div></li>
+    <li><span class="n">3</span><div><span class="who">Administrator</span>Reviews department roll-up when planning capacity or explaining cost.</div></li>
+  </ol>
+  <h4>Information it uses and creates</h4>
+  <table>
+    <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
+    <tr><td>Per-turn usage</td><td>Every AI mode</td><td>User meter; department roll-up</td></tr>
+    <tr><td>Cap policy</td><td>University / edition settings</td><td>Enforcement</td></tr>
+  </table>
+  <h4>What it connects with</h4>
+  <table>
+    <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
+    <tr><td>All AI modes</td><td>Turn counts</td><td>One budget, one brand</td></tr>
+    <tr><td>Commercial editions</td><td>Whether AI is included</td><td>Essentials has no AI meter; AI edition does</td></tr>
+  </table>
+  <h4>Rules the university can set</h4>
+  <ul>
+    <li>Weekly caps by role and by edition.</li>
+    <li>Whether unused capacity rolls over.</li>
+    <li>Whether a small overflow pool exists for Practice so revision is not blocked on exam week.</li>
+  </ul>
+  <h4>What must never happen</h4>
+  <ul>
+    <li>A student must never lose an answer half-way through because the cap hit mid-stream.</li>
+    <li>Usage must never be presented as a public ranking of students.</li>
+    <li>The administrator must never be surprised by an uncapped departmental bill if caps were advertised.</li>
+  </ul>
+  <h4>Unusual situations and how we handle them</h4>
+  <ul>
+    <li><strong>Exam week spike.</strong> University may raise caps for a dated window; the change is logged.</li>
+    <li><strong>Shared family phone.</strong> Usage follows the signed-in student, not the device.</li>
+  </ul>
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A procurement officer can be shown the department roll-up and the per-user cap in one meeting.</li>
+    <li>No support ticket exists for “AI cut me off mid-sentence.”</li>
+  </ul>
+</article>
+
+<footer>
+  Shikho Campus AI · One product, three modes, rules that stay on, metered usage · <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
+</footer>
+</main>
+</div>
+</body>
+</html>
