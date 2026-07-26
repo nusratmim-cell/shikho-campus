@@ -1,7 +1,7 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/prd-local/index.html" },
+    { "source": "/", "destination": "/prd-local" },
     { "source": "/:path*", "destination": "/prd-local/:path*" }
   ]
 }
