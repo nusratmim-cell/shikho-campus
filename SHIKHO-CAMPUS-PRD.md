@@ -17,14 +17,14 @@ Then open http://localhost:8000/
 | --- | --- |
 | `index.html` | Product overview, rules, devices, permissions |
 | `student.html` / `faculty.html` / `admin.html` / `coordinator.html` | Feature specs for that role |
-| `wireframes.html` | Screen layouts |
+| `wireframes.html` | Reference wireframes — not fixed UI |
 | `build.html` | Cross-cutting UI & engineering contracts |
 | `ai.html` | Campus AI |
 | `platform.html` | Signals between modules |
 | `university-activities.html` | University activity coverage map |
 | Live demo | https://shikho-brac-platform.vercel.app/ |
 
-**Modules = behaviour.** **Wireframes = layout.** **Build = shared contracts** (breakpoints, toasts, print/PDF, RBAC, session, PDPA).
+**Modules = behaviour.** **Wireframes = reference layout (not fixed).** **Build = shared contracts** (breakpoints, toasts, print/PDF, RBAC, session, PDPA).
 
 Every module has the same three parts:
 

@@ -13,7 +13,7 @@ Open http://localhost:8000/
 | --- | --- |
 | `prd-local/index.html` | Overview |
 | `prd-local/student.html` … `coordinator.html` | Module feature specs |
-| `prd-local/wireframes.html` | Layouts |
+| `prd-local/wireframes.html` | Reference wireframes (not fixed UI) |
 | `prd-local/build.html` | UI & engineering contracts |
 | `prd-local/ai.html` | Campus AI |
 | `prd-local/platform.html` | Cross-module signals |
