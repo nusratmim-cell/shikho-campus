@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>UI &amp; engineering build specs — Shikho Campus PRD</title>
-<link rel="stylesheet" href="./pro.css?v=21"/>
-<link rel="stylesheet" href="./spec.css?v=21"/>
-<link rel="stylesheet" href="./dev.css?v=21"/>
-<script src="./nav.js?v=21" defer></script>
+<link rel="stylesheet" href="./pro.css?v=22"/>
+<link rel="stylesheet" href="./spec.css?v=22"/>
+<link rel="stylesheet" href="./dev.css?v=22"/>
+<script src="./nav.js?v=22" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -17,7 +17,6 @@
   <div class="sub">UI &amp; engineering build</div>
 
   <div class="g">On this page</div>
-  <a href="#orient">How to use this page</a>
   <a href="#breakpoints">Breakpoints</a>
   <a href="#toast">Toasts &amp; notifications</a>
   <a href="#motion">Motion &amp; loading</a>
@@ -47,32 +46,19 @@
 
 <header>
   <h1>UI &amp; engineering build specs</h1>
-  <p class="lede">The numbers, permissions, deletion rules and layout contracts that module briefs assume but do not repeat. UI and engineering both build from this page. Product rules stay in <a href="./index.html">Overview</a>; feature behaviour stays in the four modules.</p>
+  <p class="lede">Cross-cutting contracts for UI and engineering. Module pages own product behaviour. Wireframes own layout. This page owns breakpoints, notifications, print/PDF, permissions, session, and deletion.</p>
 </header>
 
 <aside class="demo-strip">
-  <strong>Wireframes</strong>
-  <span>Screen layouts for each module live in the handover pack.</span>
-  <a href="./wireframes.html">Open module wireframes →</a>
+  <strong>Related</strong>
+  <span>Layouts and how modules connect.</span>
+  <a href="./wireframes.html">Wireframes →</a>
+  <a href="./platform.html">How parts connect →</a>
 </aside>
-
-<section id="orient">
-  <h2>How to use this page</h2>
-  <table>
-    <tr><th>Audience</th><th>Read first</th><th>Then</th></tr>
-    <tr><td><strong>UI / design</strong></td><td>Breakpoints · Toasts · Motion · Error states · Print/PDF · Wireframes</td><td>Module briefs for copy and flows</td></tr>
-    <tr><td><strong>Engineering</strong></td><td>RBAC · Multi-role · Session · PDPA deletion · <a href="./platform.html">How parts connect</a></td><td>Module feature IDs for API ownership</td></tr>
-    <tr><td><strong>Both</strong></td><td>Overview rules + this page</td><td>Live demo for behaviour checks</td></tr>
-  </table>
-  <div class="callout">
-    <b>Orientation rule</b>
-    If a decision affects every module (breakpoints, session length, who may delete data), it belongs here — not repeated in four module docs. If it is role-specific behaviour, it belongs in that module.
-  </div>
-</section>
 
 <section id="breakpoints">
   <h2>Breakpoints (binding)</h2>
-  <p>One web product. These ranges are the contract for layout. The wireframe pack draws desktop; the same components must reflow at every range below.</p>
+  <p>One web product. Wireframes draw desktop; components reflow at every range below.</p>
   <table>
     <tr><th>Range</th><th>Width</th><th>Chrome behaviour</th><th>Content behaviour</th></tr>
     <tr><td><strong>Phone</strong></td><td>0–767px</td><td>Sidebar is a drawer; bottom or top primary actions for key student loops</td><td>Single column; tables stack or horizontal-scroll; cards full width</td></tr>

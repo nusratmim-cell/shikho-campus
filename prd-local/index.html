@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Shikho Campus — Product Requirements</title>
-<link rel="stylesheet" href="./pro.css?v=21"/>
-<link rel="stylesheet" href="./spec.css?v=21"/>
-<link rel="stylesheet" href="./dev.css?v=21"/>
-<script src="./nav.js?v=21" defer></script>
+<link rel="stylesheet" href="./pro.css?v=22"/>
+<link rel="stylesheet" href="./spec.css?v=22"/>
+<link rel="stylesheet" href="./dev.css?v=22"/>
+<script src="./nav.js?v=22" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -50,24 +50,18 @@
 
 <main>
 
-<header>
-  <h1>Shikho Campus</h1>
-  <p class="lede">One platform to run a private university: teaching, attendance, assignments, exams, results, fees, advising, records and governance.</p>
-</header>
+<header></header>
 <aside class="demo-strip">
   <strong>Live demo</strong>
   <span>Try any role in the working campus demo.</span>
   <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">shikho-brac-platform.vercel.app ↗</a>
 </aside>
 <aside class="demo-strip">
-  <strong>Module wireframes</strong>
-  <span>Desktop layout specification for all four modules — shell, flows, blocking states, and PRD copy.</span>
-  <a href="./wireframes.html">Open wireframe handover pack →</a>
-</aside>
-<aside class="demo-strip">
-  <strong>UI &amp; engineering build</strong>
-  <span>Breakpoints, toasts, print/PDF, RBAC permissions, multi-role, session duration, PDPA deletion.</span>
-  <a href="./build.html">Open build specs →</a>
+  <strong>Related</strong>
+  <span>Layouts, build contracts, and how modules connect.</span>
+  <a href="./wireframes.html">Wireframes →</a>
+  <a href="./build.html">UI &amp; engineering build →</a>
+  <a href="./platform.html">How parts connect →</a>
 </aside>
 
 <section id="what">
@@ -96,12 +90,7 @@
       <div class="flow-card"><span class="flow-who">Coordinator</span><strong>Export</strong><p>Results to the registrar</p></div>
     </div>
   </div>
-  <aside class="demo-strip">
-    <strong>Live demo</strong>
-    <span>Open the demo and switch roles to walk this chain.</span>
-    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
-  </aside>
-</section>
+  </section>
 
 <section id="structure">
   <h2>How each module is written</h2>
@@ -115,12 +104,7 @@
 
 <section id="modules">
   <h2>The four modules</h2>
-  <aside class="demo-strip">
-    <strong>Live demo</strong>
-    <span>Pick Student, Faculty, Administrator or Coordinator on the welcome screen.</span>
-    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
-  </aside>
-
+  
   <p>Everything in the product belongs to one of four modules. There is no fifth. Payments, advising, examinations and reporting are not separate products — they are activities that live inside these four, seen from the point of view of the person doing them.</p>
 
   <div class="hub-grid">
@@ -201,12 +185,7 @@
 <section id="devices">
   <h2>Devices and responsiveness</h2>
   <p>Shikho Campus is a <strong>web application</strong>. The same product runs in the browser on phone, tablet, laptop, desktop and classroom smart TV. Responsiveness is not optional — every role’s critical work must be usable on the device that person has in hand.</p>
-  <aside class="demo-strip">
-    <strong>Live demo</strong>
-    <span>Resize the browser or open the demo on a phone to check the layout.</span>
-    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
-  </aside>
-  <table>
+    <table>
     <tr><th>Device</th><th>Who uses it most</th><th>What must work without compromise</th></tr>
     <tr><td><strong>Phone</strong></td><td>Students · teachers on the move</td><td>Home cockpit, join class, submit work, pay fees, clear holds, advising, Tutor — readable without pinching; tap targets large enough</td></tr>
     <tr><td><strong>Tablet</strong></td><td>Teachers marking · chairs reviewing</td><td>Grading queue, gradebook, certify, eligibility — usable in portrait and landscape</td></tr>
@@ -269,12 +248,7 @@
 
 <section id="ai-product">
   <h2>Campus AI — one product, three modes</h2>
-  <aside class="demo-strip">
-    <strong>Live demo</strong>
-    <span>In the demo: Tutor (student), Assistant (faculty), Analyst (administrator).</span>
-    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open demo ↗</a>
-  </aside>
-
+  
   <p>One brand · one set of rules that stay on · one budget. Tutor (student), Assistant (faculty), Analyst (administrator). The Coordinator has no AI mode. Answers come only from real material or records; a teacher must approve anything that reaches a student; Analyst is read-only and never sees private Momentum. Usage is capped per user and rolls up to the department — capped, not surprised; never cut off mid-lesson.</p>
   <p><a href="./ai.html"><strong>Open the full AI specification →</strong></a></p>
 </section>
@@ -312,8 +286,7 @@
     <tr><td>Use AI (own mode)</td><td>Tutor</td><td>Assistant</td><td>Analyst</td><td>None (clerical)</td></tr>
     <tr><td>See a teacher’s private Momentum</td><td>—</td><td>Own only</td><td>Never</td><td>Never</td></tr>
   </table>
-  <p><strong>Multi-role:</strong> one account, role switcher when a person is both student and faculty/TA. A person must not grade a section they are enrolled in. <strong>Session:</strong> idle 30 min (warn at 2 min), absolute 12 h — configurable. <strong>Erasure:</strong> registrar/DPO path only; certified marks are retained or anonymised per policy, never self-wipe.</p>
-  <p><a href="./build.html#rbac"><strong>Full RBAC permission list</strong></a> · <a href="./build.html#multirole">Multi-role model</a> · <a href="./build.html#session">Session duration</a> · <a href="./build.html#pdpa">PDPA deletion cascade</a></p>
+  <p>Multi-role, session, and erasure rules: <a href="./build.html#rbac">RBAC</a> · <a href="./build.html#multirole">Multi-role</a> · <a href="./build.html#session">Session</a> · <a href="./build.html#pdpa">PDPA deletion</a></p>
 </section>
 
 <section id="glossary">
@@ -361,12 +334,7 @@
       <em>Watch on YouTube ↗</em>
     </a>
   </div>
-  <aside class="demo-strip">
-    <strong>Our live demo</strong>
-    <span>After the references, try the Shikho Campus working demo in any role.</span>
-    <a href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">shikho-brac-platform.vercel.app ↗</a>
-  </aside>
-</section>
+  </section>
 
 <footer>
   Shikho Campus · Product requirements v5 · Start at <a href="./index.html">Overview</a> · Modules: <a href="./student.html">Student</a> · <a href="./faculty.html">Faculty</a> · <a href="./admin.html">Administrator</a> · <a href="./coordinator.html">Coordinator</a> · <a href="./wireframes.html">Wireframes</a> · <a href="./build.html">UI &amp; eng build</a> · <a href="./ai.html">AI</a> · <a href="./university-activities.html">All university activities</a> · <a href="#references">LMS references</a> · <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
