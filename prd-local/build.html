@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>UI &amp; engineering build specs — Shikho Campus PRD</title>
-<link rel="stylesheet" href="./pro.css?v=22"/>
-<link rel="stylesheet" href="./spec.css?v=22"/>
-<link rel="stylesheet" href="./dev.css?v=22"/>
-<script src="./nav.js?v=22" defer></script>
+<link rel="stylesheet" href="./pro.css?v=23"/>
+<link rel="stylesheet" href="./spec.css?v=23"/>
+<link rel="stylesheet" href="./dev.css?v=23"/>
+<script src="./nav.js?v=23" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -157,47 +157,57 @@
   <p>The overview table is the human summary. This list is what engineering implements. Capability codes are stable identifiers for checks and audit.</p>
 
   <h3>Roles</h3>
+  <p>Four <em>modules</em>; seven <em>roles</em> as dated appointments — see <a href="./platform.html#roles">Platform · Seven roles</a>.</p>
   <table>
     <tr><th>Role code</th><th>Product name</th><th>Typical people</th></tr>
     <tr><td><code>student</code></td><td>Student</td><td>Enrolled learner</td></tr>
-    <tr><td><code>faculty</code></td><td>Faculty</td><td>Teacher, section owner, advisor</td></tr>
-    <tr><td><code>admin</code></td><td>Administrator</td><td>Chair, dean, exam controller delegate</td></tr>
+    <tr><td><code>faculty</code></td><td>Faculty</td><td>Teacher of record, co-teacher</td></tr>
+    <tr><td><code>ta</code></td><td>Teaching assistant</td><td>Section appointment under faculty; expires with the term</td></tr>
+    <tr><td><code>advisor</code></td><td>Advisor</td><td>Advisee cohort; may also be <code>faculty</code></td></tr>
+    <tr><td><code>admin</code></td><td>Administrator / chair</td><td>Chair, dean, exam controller delegate</td></tr>
     <tr><td><code>coordinator</code></td><td>Coordinator</td><td>Department office / records desk</td></tr>
-    <tr><td><code>ta</code></td><td>Teaching assistant</td><td>Assists a section under faculty; never certifies; never edits finance</td></tr>
+    <tr><td><code>ra</code></td><td>Research assistant</td><td>Hours and deliverables under a supervisor; no course access</td></tr>
     <tr><td><code>platform_admin</code></td><td>Shikho platform admin</td><td>Tenant provisioning only — outside university day-to-day</td></tr>
   </table>
 
   <h3>Permission matrix</h3>
-  <p>Y = allowed · — = not allowed · Own = only for own section / own record · Scoped = only within assigned department / sections.</p>
+  <p>Y = allowed · — = not allowed · Own = only for own section / own record · Scoped = only within assigned department / sections / appointment. Advisor and RA columns are grants on the same person, not separate products.</p>
   <table>
-    <tr><th>Permission</th><th>Code</th><th>Student</th><th>Faculty</th><th>TA</th><th>Admin</th><th>Coord.</th></tr>
-    <tr><td>Sign in / view own profile</td><td><code>auth.session</code></td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr>
-    <tr><td>Join live class</td><td><code>live.join</code></td><td>Y</td><td>—</td><td>Y*</td><td>—</td><td>—</td></tr>
-    <tr><td>Host live class</td><td><code>live.host</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td></tr>
-    <tr><td>Publish / edit section content</td><td><code>content.publish</code></td><td>—</td><td>Own</td><td>Scoped†</td><td>—</td><td>—</td></tr>
-    <tr><td>Take attendance</td><td><code>attendance.write</code></td><td>—</td><td>Own</td><td>Scoped†</td><td>—</td><td>—</td></tr>
-    <tr><td>Create assessment</td><td><code>assess.create</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td></tr>
-    <tr><td>Draft grade (AI or manual)</td><td><code>grade.draft</code></td><td>—</td><td>Own</td><td>Scoped†</td><td>—</td><td>—</td></tr>
-    <tr><td>Approve / post mark to student</td><td><code>grade.post</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td></tr>
-    <tr><td>Submit finals for certification</td><td><code>grade.submit_finals</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td></tr>
-    <tr><td>Certify or return grade sheet</td><td><code>grade.certify</code></td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td></tr>
-    <tr><td>Edit another person’s mark</td><td><code>grade.edit_any</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-    <tr><td>Set exam eligibility / exceptions</td><td><code>exam.eligibility</code></td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td></tr>
-    <tr><td>Staff a section</td><td><code>offering.staff</code></td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td></tr>
-    <tr><td>Publish offering / term</td><td><code>offering.publish</code></td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td></tr>
-    <tr><td>Set academic / fee policy</td><td><code>policy.write</code></td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td></tr>
-    <tr><td>Load / validate records import</td><td><code>records.import</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Y</td></tr>
-    <tr><td>Export certified results</td><td><code>records.export_certified</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Y</td></tr>
-    <tr><td>Verify bank slip</td><td><code>finance.verify_slip</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Y</td></tr>
-    <tr><td>Create or edit a fee amount</td><td><code>finance.mutate_charge</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-    <tr><td>Pay own dues</td><td><code>finance.pay_own</code></td><td>Y</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-    <tr><td>Use Tutor</td><td><code>ai.tutor</code></td><td>Y</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-    <tr><td>Use Assistant</td><td><code>ai.assistant</code></td><td>—</td><td>Y</td><td>—</td><td>—</td><td>—</td></tr>
-    <tr><td>Use Analyst</td><td><code>ai.analyst</code></td><td>—</td><td>—</td><td>—</td><td>Y</td><td>—</td></tr>
-    <tr><td>See another’s private Momentum</td><td><code>momentum.read_any</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
-    <tr><td>Trigger PDPA erasure (see below)</td><td><code>privacy.erasure_request</code></td><td>—</td><td>—</td><td>—</td><td>Registrar path</td><td>Package only</td></tr>
+    <tr><th>Permission</th><th>Code</th><th>Student</th><th>Faculty</th><th>TA</th><th>Advisor</th><th>Admin</th><th>Coord.</th><th>RA</th></tr>
+    <tr><td>Sign in / view own profile</td><td><code>auth.session</code></td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr>
+    <tr><td>Join live class</td><td><code>live.join</code></td><td>Y</td><td>—</td><td>Y*</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Host live class</td><td><code>live.host</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Publish / edit section content</td><td><code>content.publish</code></td><td>—</td><td>Own</td><td>Scoped†</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Take attendance</td><td><code>attendance.write</code></td><td>—</td><td>Own</td><td>Scoped†</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Create assessment</td><td><code>assess.create</code></td><td>—</td><td>Own</td><td>Draft†</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Draft grade (AI or manual)</td><td><code>grade.draft</code></td><td>—</td><td>Own</td><td>Scoped†</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Approve / post mark to student</td><td><code>grade.post</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Submit finals for certification</td><td><code>grade.submit_finals</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Certify or return grade sheet</td><td><code>grade.certify</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td><td>—</td></tr>
+    <tr><td>Edit another person’s mark</td><td><code>grade.edit_any</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Set exam eligibility / exceptions</td><td><code>exam.eligibility</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td><td>—</td></tr>
+    <tr><td>Staff section / appoint TA</td><td><code>offering.staff</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td><td>—</td></tr>
+    <tr><td>Publish offering / term</td><td><code>offering.publish</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td><td>—</td></tr>
+    <tr><td>Set academic / fee policy</td><td><code>policy.write</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td><td>—</td></tr>
+    <tr><td>Recommend scholarship</td><td><code>scholarship.recommend</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td><td>—</td></tr>
+    <tr><td>Commit scholarship award</td><td><code>scholarship.commit</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Finance path</td><td>—</td><td>—</td></tr>
+    <tr><td>Approve / return registration plan</td><td><code>advise.approve_plan</code></td><td>—</td><td>—</td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Override prereq / credit limit</td><td><code>advise.override</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td><td>—</td></tr>
+    <tr><td>Open integrity case to chair</td><td><code>integrity.escalate</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>Receive</td><td>—</td><td>—</td></tr>
+    <tr><td>Log RA hours / timesheet</td><td><code>ra.timesheet</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Own</td></tr>
+    <tr><td>Approve RA timesheet</td><td><code>ra.approve</code></td><td>—</td><td>Supervisor</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Load / validate records import</td><td><code>records.import</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Y</td><td>—</td></tr>
+    <tr><td>Export certified results</td><td><code>records.export_certified</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Y</td><td>—</td></tr>
+    <tr><td>Verify bank slip</td><td><code>finance.verify_slip</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Y</td><td>—</td></tr>
+    <tr><td>Create or edit a fee amount</td><td><code>finance.mutate_charge</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Pay own dues</td><td><code>finance.pay_own</code></td><td>Y</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Use Tutor</td><td><code>ai.tutor</code></td><td>Y</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Use Assistant</td><td><code>ai.assistant</code></td><td>—</td><td>Y</td><td>—</td><td>Y‡</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Use Analyst</td><td><code>ai.analyst</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Y</td><td>—</td><td>—</td></tr>
+    <tr><td>See another’s private Momentum</td><td><code>momentum.read_any</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Trigger PDPA erasure (see below)</td><td><code>privacy.erasure_request</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Registrar path</td><td>Package only</td><td>—</td></tr>
   </table>
-  <p>* TA may join as participant when assigned. † TA capabilities only when the section owner grants them; never certify, never post marks as the teacher of record, never mutate finance.</p>
+  <p>* TA may join as participant when assigned. † Only powers listed on the <a href="./admin.html#ADM-STF-01">ADM-STF-01</a> appointment (e.g. draft marks to rubric, lab attendance, discussion) — never post, never finals, never finance. ‡ Advisor Assistant is limited to advising scope.</p>
   <div class="callout">
     <b>Hard denials (always —)</b>
     <code>grade.edit_any</code> for admin and coordinator · <code>finance.mutate_charge</code> for everyone in-product · <code>momentum.read_any</code> for admin · any AI mode for coordinator.
@@ -205,16 +215,18 @@
 </section>
 
 <section id="multirole">
-  <h2>Multi-role model (TA = student + faculty)</h2>
-  <p>One person may hold more than one role in the same university (common: teaching assistant who is also enrolled; rare: faculty enrolled in another programme).</p>
+  <h2>Multi-role model</h2>
+  <p>One person may hold more than one role in the same university (common: TA who is also enrolled; advisor who also teaches; RA under a supervisor). Appointments expire; the profile keeps history — <a href="./student.html#STU-PRF-01">STU-PRF-01</a>.</p>
   <table>
     <tr><th>Rule</th><th>Behaviour</th></tr>
-    <tr><td>One account</td><td>One identity, one sign-in. Roles are grants on that person, not separate logins.</td></tr>
+    <tr><td>One account</td><td>One identity, one sign-in. Roles are dated appointments on that person, not separate logins.</td></tr>
     <tr><td>Active role</td><td>Masthead shows a role switcher when the person has 2+ roles. Switching changes sidebar, home cockpit, and AI entry — not the identity.</td></tr>
     <tr><td>Default role</td><td>Last used role for this device, else the role with the most urgent blockers.</td></tr>
     <tr><td>Conflict of interest</td><td>A person must not grade, take attendance, or access submissions for a section where they are enrolled as a student. The system refuses those actions with a named reason.</td></tr>
-    <tr><td>TA vs faculty</td><td>TA never appears as teacher of record on the certified sheet. Draft help is allowed only if faculty granted it.</td></tr>
-    <tr><td>AI mode</td><td>Follows the active role: student → Tutor, faculty/TA-as-helper → Assistant (if granted), admin → Analyst. No AI when coordinator is active.</td></tr>
+    <tr><td>TA vs faculty</td><td>TA never appears as teacher of record on the certified sheet. Powers come only from the appointment; posting remains faculty-only.</td></tr>
+    <tr><td>Advisor vs chair</td><td>Advisor may approve a plan inside policy; prerequisite override, overload and eligibility appeal escalate via <a href="./student.html#STU-ADV-04">STU-ADV-04</a> chair serial — advisor cannot override alone.</td></tr>
+    <tr><td>RA</td><td>RA grants no course workspace. Timesheets need supervisor approval; closed appointments remain on the profile.</td></tr>
+    <tr><td>AI mode</td><td>Follows the active role: student → Tutor, faculty/advisor → Assistant (scoped), admin → Analyst. No AI for TA, RA or coordinator.</td></tr>
     <tr><td>Audit</td><td>Every privileged action records both person id and active role at the time.</td></tr>
   </table>
   <div class="copy">

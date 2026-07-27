@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>How everything connects — Shikho Campus</title>
-<link rel="stylesheet" href="./pro.css?v=22"/>
-<link rel="stylesheet" href="./spec.css?v=22"/>
-<link rel="stylesheet" href="./dev.css?v=22"/>
-<script src="./nav.js?v=22" defer></script>
+<link rel="stylesheet" href="./pro.css?v=23"/>
+<link rel="stylesheet" href="./spec.css?v=23"/>
+<link rel="stylesheet" href="./dev.css?v=23"/>
+<script src="./nav.js?v=23" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -25,6 +25,9 @@
   <a href="./university-activities.html">All university activities</a>
   <div class="g">On this page</div>
   <a href="#idea">The one idea</a>
+  <a href="#model">Objects the platform runs on</a>
+  <a href="#roles">Seven roles</a>
+  <a href="#controls">Control rules</a>
   <a href="#signals">The signals that travel</a>
   <a href="#loop-term">Chain 1 · Running a term</a>
   <a href="#loop-money">Chain 2 · Money and holds</a>
@@ -70,6 +73,48 @@
     <b>Why this matters commercially</b>
     A university can buy a video tool, a quiz tool and an accounting tool separately. What they cannot buy separately is the chain. The chain is the product.
   </div>
+</section>
+
+<section id="model">
+  <h2>Objects the platform runs on</h2>
+  <p>Every screen is a view onto one of these. If a thing is not here, it is not in the product. Left column is set up once; right column is built each term; the third accumulates and is never overwritten.</p>
+  <table>
+    <tr><th>Permanent (versioned)</th><th>Per term (then frozen)</th><th>Per person (accumulates)</th></tr>
+    <tr><td><strong>University</strong> — faculties, departments, offices (each office owns the holds and notices it issues)</td><td><strong>Academic year → Term</strong> — milestones every deadline reads from</td><td><strong>Enrolment</strong> — one student in one section: attendance, submissions, marks, final grade forever</td></tr>
+    <tr><td><strong>Programme</strong> — degree requirements, credit total, per-credit fee, term pattern</td><td><strong>Offering</strong> — a catalogue course as run this term (may be shorter than the term, e.g. 8-week intensive)</td><td><strong>Appointment</strong> — teacher of record, TA, RA, advisor, invigilator — dated, expires by itself</td></tr>
+    <tr><td><strong>Catalogue course</strong> — credits, prerequisites, outcomes, default duration, master resource library</td><td><strong>Section</strong> — schedule, room, seats, teacher of record, co-teachers, TAs</td><td><strong>Award</strong> — scholarship/waiver for a period; appears as a reduction on the invoice</td></tr>
+    <tr><td><strong>Person</strong> — one human, one record; roles attach and may overlap</td><td><strong>Assessment plan</strong> — components and weights; locked when syllabus publishes</td><td><strong>Hold</strong> — an office preventing something; names what it blocks and what clears it</td></tr>
+    <tr><td><strong>Policy</strong> — every configurable rule, each dated — see <a href="./index.html#config">Overview · settings</a> and <a href="#controls">control rules</a></td><td><strong>Invoice</strong> — computed from credits × cohort rate + fee heads − awards; never typed by a clerk</td><td><strong>Transcript</strong> — certified enrolments with the grading scale in force at the time, not today’s</td></tr>
+  </table>
+  <p><strong>Academic chain:</strong> Programme → Catalogue course → Offering → Section → Enrolment → attendance · submissions · marks → Final grade → certified → Transcript.</p>
+  <p><strong>Money chain:</strong> Enrolment credits → Invoice → payment → hold released. See <a href="#loop-money">Chain 2 · Money and holds</a>.</p>
+</section>
+
+<section id="roles">
+  <h2>Seven roles, not four</h2>
+  <p>The product has four <em>modules</em> (Student, Faculty, Administrator, Coordinator). People hold <em>roles</em> as dated appointments. A person can hold several at once; the interface switches context — it does not become a different product. Teaching assistant, advisor and research assistant are first-class; version-one wireframes that skipped them were incomplete.</p>
+  <table>
+    <tr><th>Role</th><th>Decides</th><th>Cannot do</th><th>AI</th><th>Lives in</th></tr>
+    <tr><td><strong>Student</strong></td><td>What to register, submit, pay, when to seek advising</td><td>Change a mark; see an unposted mark; break credit or clash rules</td><td>Tutor</td><td><a href="./student.html">Student</a></td></tr>
+    <tr><td><strong>Faculty</strong></td><td>Marks and feedback, published content, attendance corrections, when marks become visible</td><td>Change weights after publication; edit a submitted sheet; place holds; see other sections</td><td>Assistant</td><td><a href="./faculty.html">Faculty</a></td></tr>
+    <tr><td><strong>Teaching assistant</strong></td><td>Nothing alone — first-pass marks to the teacher’s rubric, discussion, lab attendance (all visible to the teacher)</td><td>Post a mark; see finals; act outside the appointed section</td><td>None</td><td>Faculty screens, scoped by <a href="./admin.html#ADM-STF-01">ADM-STF-01</a> appointment</td></tr>
+    <tr><td><strong>Advisor</strong></td><td>Approve or return a registration plan; advising flags; appointment slots</td><td>Override prerequisites, seats or credit limits — those escalate to the chair</td><td>Assistant (advising scope)</td><td><a href="./student.html#STU-ADV-01">STU-ADV-*</a> · Faculty advisees</td></tr>
+    <tr><td><strong>Chairperson</strong></td><td>Offering and who teaches it; TA appointments; department policy; eligibility exceptions; certify sheets; scholarship recommendations</td><td>Change any mark — accept or return only</td><td>Analyst</td><td><a href="./admin.html">Administrator</a></td></tr>
+    <tr><td><strong>Coordinator</strong></td><td>Load records; routine; verify bank payments; office notices; registrar handover</td><td>Create a charge; assign a teacher; certify; academic judgement</td><td>None</td><td><a href="./coordinator.html">Coordinator</a></td></tr>
+    <tr><td><strong>Research assistant</strong></td><td>Log hours and deliverables; supervisor approves timesheets</td><td>Anything academic — RA grants no course access</td><td>None</td><td>Profile appointments · supervisor desk</td></tr>
+  </table>
+  <p>Appointments expire by themselves when the term closes. A student who was a TA keeps that line on their profile as history — see <a href="./student.html#STU-PRF-01">STU-PRF-01</a> and <a href="./build.html#multirole">Multi-role</a>.</p>
+</section>
+
+<section id="controls">
+  <h2>Control rules (how settings behave)</h2>
+  <p>Configurable settings live in <a href="./index.html#config">Overview · What each university can change</a>. Three rules apply to every one of them:</p>
+  <ol>
+    <li><strong>Nothing is retroactive.</strong> A change carries the term (or date) it starts from. Anything already computed under the old value keeps it — that is what makes an old transcript defensible years later.</li>
+    <li><strong>Every change previews its impact.</strong> Before saving, the screen states how many students, sections or invoices the new value would touch. Live calendar moves that affect running terms need a second confirmer and a signed history entry.</li>
+    <li><strong>The narrowest scope wins.</strong> Department overrides university; a section’s marks distribution sits inside department bounds; each screen shows which level a value came from.</li>
+  </ol>
+  <p>If a rule is not in the settings list, it is hard-coded and needs engineering. Permission codes for who may change what: <a href="./build.html#rbac">RBAC</a>.</p>
 </section>
 
 <section id="signals">

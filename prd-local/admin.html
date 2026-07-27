@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Administrator module — Shikho Campus PRD</title>
-<link rel="stylesheet" href="./pro.css?v=22"/>
-<link rel="stylesheet" href="./spec.css?v=22"/>
-<link rel="stylesheet" href="./dev.css?v=22"/>
-<script src="./nav.js?v=22" defer></script>
+<link rel="stylesheet" href="./pro.css?v=23"/>
+<link rel="stylesheet" href="./spec.css?v=23"/>
+<link rel="stylesheet" href="./dev.css?v=23"/>
+<script src="./nav.js?v=23" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -25,9 +25,9 @@
   <a href="#ADM-HOME-01">Decisions dashboard</a>
   <a href="#ADM-CRT-01">Certify grades</a>
   <a href="#ADM-ELG-01">Exam eligibility</a>
-  <a href="#ADM-STF-01">Compose offering</a>
+  <a href="#ADM-STF-01">Compose offering &amp; TAs</a>
   <a href="#ADM-XL-01">Cross-list sections</a>
-  <a href="#ADM-POL-01">Academic policy</a>
+  <a href="#ADM-POL-01">Academic policy &amp; calendar</a>
   <a href="#ADM-FEE-01">Fee policy</a>
   <a href="#ADM-SCH-01">Scholarships</a>
   <a href="#ADM-EXM-01">Exam schedule</a>
@@ -121,8 +121,9 @@
     <tr><th>Decision</th><th>What the chair may do</th><th>What the chair may not do</th></tr>
     <tr><td>Final grades</td><td>Certify a submitted sheet, or return it with a written reason</td><td>Edit any individual mark</td></tr>
     <tr><td>Exam eligibility</td><td>Lock who may sit finals from attendance and fee rules; grant named exceptions with reasons</td><td>Invent attendance figures or hide the rule that produced a bar</td></tr>
-    <tr><td>Staffing</td><td>Assign teachers to sections so an unstaffed offering can open</td><td>Teach or mark on a colleague’s behalf from this module</td></tr>
-    <tr><td>Fee consequences</td><td>Publish which unpaid dues block registration, admit cards, documents, or class access</td><td>Create invoice amounts or hold student money</td></tr>
+    <tr><td>Fee consequences</td><td>Publish which unpaid dues block registration, admit cards, documents, or class access; protect per-credit rates by admission cohort</td><td>Create invoice amounts or hold student money; rewrite an existing student’s cohort rate when raising tuition</td></tr>
+    <tr><td>Scholarships</td><td>Recommend awards from scheme data</td><td>Commit finance reductions alone; invent taka amounts</td></tr>
+    <tr><td>Staffing</td><td>Assign teachers and TAs; set qualification and load</td><td>Teach or mark on a colleague’s behalf from this module</td></tr>
     <tr><td>Analyst (AI)</td><td>Ask read-only questions against records the chair may already see</td><td>Change a record, or see a teacher’s private Momentum</td></tr>
   </table>
   </section>
@@ -136,11 +137,11 @@
     <tr><td><strong>ADM-HOME-01</strong></td><td>Decisions dashboard</td><td>One morning screen of decisions waiting, ranked by how soon they block students or the calendar.</td><td>P0</td><td>All administrator features; coordinator unstaffed flags; student/faculty unlocks</td></tr>
     <tr><td><strong>ADM-CRT-01</strong></td><td>Certify final grades</td><td>Review submitted finals and certify or return — never edit a mark.</td><td>P0</td><td>Faculty gradebook; COO-EXP-01; student results; ADM-HOME-01</td></tr>
     <tr><td><strong>ADM-ELG-01</strong></td><td>Exam eligibility from attendance</td><td>Compute eligible/barred lists from attendance, lock before exams, record exceptions.</td><td>P0</td><td>Faculty attendance; ADM-POL-01; student exam info; ADM-EXM-01</td></tr>
-    <tr><td><strong>ADM-STF-01</strong></td><td>Compose offering and assign teachers</td><td>Build the term offering and assign teachers — the only place staffing happens.</td><td>P0</td><td>COO-IMP-01; COO-FLG-01; Faculty home; student course headers</td></tr>
+    <tr><td><strong>ADM-STF-01</strong></td><td>Compose offering, assign teachers &amp; TAs</td><td>Build the term offering; assign teachers; appoint TAs with powers; mid-term handover — the only place staffing happens.</td><td>P0</td><td>COO-IMP-01; COO-FLG-01; Faculty home; STU-PRF-01; student course headers</td></tr>
     <tr><td><strong>ADM-XL-01</strong></td><td>Cross-list sections</td><td>Link sections to share teaching while keeping official rosters separate.</td><td>P1</td><td>ADM-STF-01; Faculty content/gradebook; ADM-CRT-01; ADM-ELG-01</td></tr>
-    <tr><td><strong>ADM-POL-01</strong></td><td>Academic policy settings</td><td>Grade scale, attendance rule, probation, credit limits, retake caps — one published truth.</td><td>P0</td><td>Gradebook; eligibility; registration; accreditation</td></tr>
+    <tr><td><strong>ADM-POL-01</strong></td><td>Academic policy &amp; calendar</td><td>Grade scale, attendance, similarity thresholds, term milestones — versioned; live calendar moves need impact preview + second confirmer.</td><td>P0</td><td>Gradebook; eligibility; registration; FAC-ASM-01; accreditation</td></tr>
     <tr><td><strong>ADM-FEE-01</strong></td><td>Fee policy and what unpaid dues block</td><td>Map finance charge types to academic holds — platform never holds money.</td><td>P0</td><td>COO-FEE-01; COO-REC-01; student holds; scholarships</td></tr>
-    <tr><td><strong>ADM-SCH-01</strong></td><td>Scholarships and waivers approval</td><td>Approve aid categories for finance to apply — officers do not invent invoice amounts.</td><td>P1</td><td>ADM-FEE-01; finance via coordinator sync; student fee dashboard</td></tr>
+    <tr><td><strong>ADM-SCH-01</strong></td><td>Scholarships and waivers</td><td>Chair recommends; finance commits awards from scheme data — officers do not invent invoice amounts.</td><td>P1</td><td>ADM-FEE-01; finance via coordinator sync; student fee dashboard; STU-PRF-01</td></tr>
     <tr><td><strong>ADM-EXM-01</strong></td><td>Exam schedule and invigilation duty</td><td>Publish exam timetable, rooms and invigilator duties.</td><td>P1</td><td>Eligibility lists; student exam info; faculty calendar; class routine</td></tr>
     <tr><td><strong>ADM-DSP-01</strong></td><td>Disciplinary cases</td><td>Track notice, response, hearing and sanctions with due-process audit.</td><td>P1</td><td>Faculty referrals; student holds; ADM-HOME-01; accreditation metrics</td></tr>
     <tr><td><strong>ADM-QAC-01</strong></td><td>Accreditation and outcome reports</td><td>Assemble OBE / BAC / BAETE evidence packs from certified data.</td><td>P1</td><td>Faculty outcomes; ADM-CRT-01; ADM-FDB-01; ADM-POL-01</td></tr>
@@ -212,7 +213,7 @@
     <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
     <tr><td>ADM-CRT-01 Certify final grades</td><td>Pending section certifications</td><td>Clears the bottleneck that blocks transcripts</td></tr>
     <tr><td>COO-FLG-01 Flag unstaffed sections</td><td>Sections without teachers</td><td>Staffing risk is visible before classes start</td></tr>
-    <tr><td>ADM-SCH-01 Scholarships and waivers</td><td>Cases awaiting approval</td><td>Money decisions do not sit in email</td></tr>
+    <tr><td>ADM-SCH-01 Scholarships and waivers</td><td>Cases awaiting recommendation / commit</td><td>Money decisions do not sit in email</td></tr>
     <tr><td>ADM-DSP-01 Disciplinary cases</td><td>Open case deadlines</td><td>Due-process clocks stay visible</td></tr>
     <tr><td>Student and Faculty modules</td><td>Unlocked results, reopened gradebooks, cleared blockers</td><td>A cleared decision immediately changes what others can do</td></tr>
   </table>
@@ -426,14 +427,14 @@
 </article>
 
 <article class="spec" id="ADM-STF-01">
-  <div class="spec-head"><h3>ADM-STF-01 · Compose offering and assign teachers</h3><span class="tag p0">P0</span></div>
-  <p class="intent"><strong>What it does.</strong> Lets the chair build the term’s section offering and assign primary and secondary teachers. This is the only place teachers are assigned — coordinators load empty sections; chairs staff them.</p>
+  <div class="spec-head"><h3>ADM-STF-01 · Compose offering, assign teachers &amp; TAs</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Lets the chair build the term’s section offering, assign primary and co-teachers from the course qualification list, appoint teaching assistants with explicit powers and hours, set seats (including reserved), and hand over a section mid-term without orphaning history. This is the only place staffing happens — coordinators load empty sections; chairs staff them. Offering duration may shorten the catalogue default (e.g. 8-week intensive inside a 14-week term) — narrowest scope wins; see <a href="./platform.html#controls">control rules</a>.</p>
   <h4>Why it exists</h4>
-  <p>An unstaffed section on day one is a student crisis and a reputation wound. Coordinators know the catalogue and the rooms; chairs know who can teach what. Separating record load from teacher assignment prevents a clerk from quietly placing a favourite teacher, and keeps academic judgement with the department head.</p>
+  <p>An unstaffed section on day one is a student crisis and a reputation wound. Coordinators know the catalogue and the rooms; chairs know who can teach what. Qualification and load limits stop informal favouritism. TAs are first-class appointments (not informal WhatsApp helpers): powers are listed, posting stays with the teacher, and the line appears on the student’s profile when the term closes.</p>
   <h4>Who uses it and when</h4>
   <table>
     <tr><th>Who</th><th>When</th><th>What they need</th></tr>
-    <tr><td>Chair / head of department</td><td>Before term start, and whenever a teacher leaves or a new section opens</td><td>Assign or reassign teachers to every section</td></tr>
+    <tr><td>Chair / head of department</td><td>Before term start, and whenever a teacher leaves or a new section opens</td><td>Assign or reassign teachers and TAs; set seats</td></tr>
     <tr><td>Dean (oversight)</td><td>When a department is chronically understaffed</td><td>See unstaffed counts across departments</td></tr>
     <tr><td>Coordinator (indirect)</td><td>After import, when flagging gaps</td><td>Cannot assign — only flag for the chair</td></tr>
   </table>
@@ -441,14 +442,30 @@
   <div class="screen">
     <div class="zone">
       <strong>Offering grid</strong>
-      <p>Administrator → Compose offering. Rows: course, section, capacity, room hint, primary teacher, secondary / co-teacher, status Staffed or Unstaffed.</p>
+      <p>Administrator → Compose offering. Rows: course, section, duration (term default or shortened), capacity, reserved seats, primary teacher, co-teacher, TAs, status Staffed or Unstaffed.</p>
+      <div class="copy">Summer 2026 · CSE 215 · three sections · 61 students have this in their degree plan · 8-week intensive</div>
       <div class="copy">Spring 2026 offering — 4 sections still unstaffed</div>
     </div>
     <div class="zone">
-      <strong>Assign panel</strong>
-      <p>Search faculty by name or load; show teaching load this term; pick primary and optional co-teacher; save.</p>
-      <div class="copy">Assign teacher — CSE110 Section B</div>
-      <div class="copy">Dr A. Rahman · current load 3 sections · maximum 4</div>
+      <strong>Assign teacher</strong>
+      <p>Search faculty by name or load; prefer those on the course qualification list; show load against rank limit; ineligible people appear disabled with the reason (load, clash, not qualified).</p>
+      <div class="copy">Assign teacher — CSE215 Section 1</div>
+      <div class="copy">Dr F. Rahman · carrying 3 of 3 sections — at the load limit for her rank</div>
+    </div>
+    <div class="zone">
+      <strong>Appoint a teaching assistant</strong>
+      <p>Eligible students (CGPA / prior grade per policy); hours per week; powers checkbox: draft marks to the teacher’s rubric · lab attendance · discussion. Cannot post a mark or see finals. Appointment ends when the term closes.</p>
+      <div class="copy">Students who passed CSE 215 with A− or better and hold CGPA 3.50+</div>
+      <div class="copy">Sadia Islam · A in CSE 215 · CGPA 3.88 · already TA on Sec 1, 10 h — at hour limit</div>
+    </div>
+    <div class="zone">
+      <strong>Seats</strong>
+      <p>Raising a cap takes effect at once. Lowering below current enrolment is refused, naming who would be displaced. Reserved seats for retakes, scholarship intakes or cross-list partners release on a dated milestone.</p>
+    </div>
+    <div class="zone">
+      <strong>Mid-term handover</strong>
+      <p>Changing a teacher is a handover, not an edit: gradebook, content and attendance move intact; both names stay in section history; students are told once.</p>
+      <div class="copy">Handover CSE215-1 from Dr Jahan to Dr Rahman — past sessions keep historical host</div>
     </div>
     <div class="zone">
       <strong>Conflict hints</strong>
@@ -458,19 +475,20 @@
   </div>
   <h4>How it works, step by step</h4>
   <ol class="journey">
-    <li><span class="n">1</span><div><span class="who">Chair</span>Opens Administrator → Compose offering for the term.</div></li>
-    <li><span class="n">2</span><div><span class="who">System</span>Shows all sections from the coordinator’s offering load, with staffing status.</div></li>
-    <li><span class="n">3</span><div><span class="who">Chair</span>Opens an unstaffed section, searches faculty, checks load, assigns primary teacher.</div></li>
-    <li><span class="n">4</span><div><span class="who">System</span>Updates the section to Staffed and notifies the teacher of the assignment.</div></li>
-    <li><span class="n">5</span><div><span class="who">Chair</span>Repeats until unstaffed count is zero or remaining gaps are accepted with a plan.</div></li>
-    <li><span class="n">6</span><div><span class="who">System</span>Clears related flags on the decisions dashboard and the coordinator’s unstaffed list.</div></li>
+    <li><span class="n">1</span><div><span class="who">Chair</span>Opens Administrator → Compose offering for the term; sets offering duration if shorter than the catalogue default.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Shows all sections from the coordinator’s offering load, with staffing status and degree-plan demand where known.</div></li>
+    <li><span class="n">3</span><div><span class="who">Chair</span>Opens an unstaffed section, searches qualified faculty, checks load, assigns primary teacher (and optional co-teacher).</div></li>
+    <li><span class="n">4</span><div><span class="who">Chair</span>Optionally appoints TAs with hours and powers; ineligible candidates stay visible but disabled.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Updates the section to Staffed, notifies teachers and TAs, opens workspaces, writes appointments that will appear on <a href="./student.html#STU-PRF-01">STU-PRF-01</a>.</div></li>
+    <li><span class="n">6</span><div><span class="who">Chair</span>Repeats until unstaffed count is zero or remaining gaps are accepted with a plan; publishes when ready (blocked while any required section has no teacher).</div></li>
+    <li><span class="n">7</span><div><span class="who">System</span>Clears related flags on the decisions dashboard and the coordinator’s unstaffed list.</div></li>
   </ol>
   <h4>Information it uses and creates</h4>
   <table>
     <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
     <tr><td>Section offering skeleton</td><td>Coordinator record load (students, faculty directory, offerings)</td><td>Staffing grid</td></tr>
-    <tr><td>Faculty directory and load</td><td>Faculty records and existing assignments</td><td>Assign panel</td></tr>
-    <tr><td>Teacher assignment</td><td>Chair decision</td><td>Faculty home; student roster of who teaches; live class host rights</td></tr>
+    <tr><td>Course qualification list &amp; load limits</td><td>Department registry / <a href="./index.html#config">settings</a></td><td>Assign panel eligibility</td></tr>
+    <tr><td>Teacher / TA appointment</td><td>Chair decision</td><td>Faculty home; TA desk; student roster; profile history</td></tr>
     <tr><td>Unstaffed status</td><td>Absence of assignment</td><td>COO-FLG-01 and ADM-HOME-01</td></tr>
   </table>
   <h4>What it connects with</h4>
@@ -478,33 +496,38 @@
     <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
     <tr><td>COO-IMP-01 Load records</td><td>Empty sections without teachers</td><td>Chair receives something to staff</td></tr>
     <tr><td>COO-FLG-01 Flag unstaffed sections</td><td>Gap list</td><td>Chair sees what still needs a person</td></tr>
-    <tr><td>Faculty module</td><td>Section assignment</td><td>Teacher sees courses on their home</td></tr>
+    <tr><td>Faculty module / TA desk</td><td>Section assignment and powers</td><td>Teacher and TA see the right workspace</td></tr>
+    <tr><td>STU-PRF-01 Student profile</td><td>Dated TA appointments</td><td>History survives when the term closes</td></tr>
     <tr><td>Student course workspace</td><td>Teacher name on the section</td><td>Students know who teaches them</td></tr>
+    <tr><td><a href="./build.html#rbac">RBAC</a> <code>offering.staff</code></td><td>Who may appoint</td><td>Coordinator cannot staff</td></tr>
   </table>
   <h4>Rules the university can set</h4>
   <ul>
-    <li>Maximum teaching load per faculty rank.</li>
+    <li>Maximum teaching load per faculty rank; TA weekly hour cap.</li>
+    <li>Course qualification list — who may be assigned which catalogue courses.</li>
+    <li>TA eligibility (prior grade, CGPA) and which powers may be granted.</li>
     <li>Whether co-teachers are required for large sections.</li>
-    <li>Whether time-conflict overrides are allowed, and who must enter a reason.</li>
-    <li>Whether graduate teaching assistants may be assigned as secondary only.</li>
+    <li>Whether time-conflict or qualification overrides are allowed, and who must enter a reason.</li>
   </ul>
   <h4>What must never happen</h4>
   <ul>
-    <li>The coordinator role must never assign or change a teacher here or anywhere else.</li>
+    <li>The coordinator role must never assign or change a teacher or TA here or anywhere else.</li>
     <li>Import must never carry a teacher column into a live assignment.</li>
     <li>A section must never appear staffed without a named primary teacher on record.</li>
-    <li>Removing a teacher mid-term must never orphan live sessions without a replacement or explicit suspension.</li>
+    <li>A TA appointment must never grant posting marks, seeing finals, or acting outside the appointed section.</li>
+    <li>Removing a teacher mid-term must never orphan live sessions without a replacement or explicit suspension — handover keeps history.</li>
   </ul>
   <h4>Unusual situations and how we handle them</h4>
   <ul>
-    <li>If a teacher resigns mid-term, the chair reassigns; past sessions stay under the historical host for attendance integrity.</li>
-    <li>If faculty search finds no one with capacity, the section stays Unstaffed and remains on the dashboard.</li>
+    <li>If a teacher resigns mid-term, the chair runs handover; past sessions stay under the historical host for attendance integrity; students are notified once.</li>
+    <li>If faculty search finds no one with capacity, the section stays Unstaffed and remains on the dashboard — ineligible people stay visible with reasons.</li>
     <li>If the same person is chair and teacher, assignment still requires an explicit action — no auto-self-assign surprise.</li>
+    <li>If lowering seats would displace enrolled students, save is refused with names.</li>
   </ul>
   <h4>We know it works when</h4>
   <ul>
     <li>Every section students can register into has a primary teacher before the teaching week starts, or is explicitly marked deferred.</li>
-    <li>Teachers see new assignments on their faculty home the same day.</li>
+    <li>Teachers and TAs see new appointments on their home the same day; closed TA lines appear on the student profile.</li>
     <li>Coordinator unstaffed flags clear only after a real assignment, not after a note.</li>
   </ul>
 </article>
@@ -591,28 +614,44 @@
 </article>
 
 <article class="spec" id="ADM-POL-01">
-  <div class="spec-head"><h3>ADM-POL-01 · Academic policy settings</h3><span class="tag p0">P0</span></div>
-  <p class="intent"><strong>What it does.</strong> Holds the university’s academic rules in one place: grade scale and letter bands, attendance rule, probation thresholds, credit limits per term, and retake caps — so every other feature enforces the same published truth.</p>
+  <div class="spec-head"><h3>ADM-POL-01 · Academic policy &amp; calendar</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>What it does.</strong> Holds the university’s academic rules and the term calendar in one place: grade scale and letter bands, attendance rule, probation and credit limits, retake caps, dual similarity thresholds (review vs auto-escalate), and milestones every other deadline reads from — so every feature enforces the same published truth. Behaviour of changes: <a href="./platform.html#controls">control rules</a> (not retroactive · impact preview · narrowest scope wins).</p>
   <h4>Why it exists</h4>
-  <p>When grade cut-offs live in a circular and attendance thresholds live in a chair’s head, students get contradictory answers from different offices. Policy settings exist so the catalogue year, the grade scale, probation and retake limits are configured once, versioned by term or catalogue, and readable by faculty, students and accreditation visitors alike.</p>
+  <p>When grade cut-offs live in a circular and attendance thresholds live in a chair’s head, students get contradictory answers from different offices. When exam dates live in a separate spreadsheet, moving one date silently breaks admit cards and fee grace windows. Policy and calendar exist so rules and milestones are configured once, versioned, and readable by faculty, students and accreditation visitors alike.</p>
   <h4>Who uses it and when</h4>
   <table>
     <tr><th>Who</th><th>When</th><th>What they need</th></tr>
-    <tr><td>Registrar / academic council delegate</td><td>Before a new catalogue year or term</td><td>Publish the rules that will govern that cohort</td></tr>
-    <tr><td>Chair (department overlays where allowed)</td><td>When department-specific attendance or credit rules apply</td><td>Set only what the university permits departments to vary</td></tr>
-    <tr><td>All other modules (consumers)</td><td>Continuously</td><td>Read the active policy — never invent local cut-offs</td></tr>
+    <tr><td>Registrar / academic council delegate</td><td>Before a new catalogue year or term</td><td>Publish the rules and milestones that will govern that cohort</td></tr>
+    <tr><td>Chair (department overlays where allowed)</td><td>When department-specific attendance, credit or similarity rules apply</td><td>Set only what the university permits departments to vary</td></tr>
+    <tr><td>All other modules (consumers)</td><td>Continuously</td><td>Read the active policy and calendar — never invent local cut-offs or dates</td></tr>
   </table>
   <h4>What the user sees</h4>
   <div class="screen">
     <div class="zone">
       <strong>Policy home</strong>
-      <p>Administrator → Academic policy. Cards for Grade scale · Attendance · Probation · Credit limits · Retakes, each showing active version and effective term.</p>
+      <p>Administrator → Academic policy. Cards for Grade scale · Attendance · Probation · Credit limits · Retakes · Similarity, each showing active version, scope and effective term.</p>
       <div class="copy">Academic policy — Catalogue 2024–2025 · effective Spring 2026</div>
     </div>
     <div class="zone">
+      <strong>Academic calendar</strong>
+      <p>One screen per term: draft → published → running → archived. Milestones: registration, classes begin, add/drop, fee instalments, withdrawal, eligibility lock, finals, grades due. Derived week count and holiday imports are read-only.</p>
+      <div class="copy">Summer 2026 Draft — nobody outside this screen can see it</div>
+      <div class="copy">Exam notice policy requires schedule 21 days ahead — publishing later than 11 Aug will be refused</div>
+    </div>
+    <div class="zone">
+      <strong>Moving a live date</strong>
+      <p>Before save: impact list (sections, admit cards, fee grace windows). A second confirmer must approve; history is signed. Nothing silently reschedules underneath students.</p>
+      <div class="copy">Shifting Spring’s exam start would move 46 section schedules, invalidate 4 downloaded admit cards and reopen 2 fee grace windows</div>
+    </div>
+    <div class="zone">
       <strong>Grade scale editor</strong>
-      <p>Letter bands with numeric ranges, grade points, pass mark. Preview of how a sample score maps.</p>
+      <p>Letter bands with numeric ranges, grade points, pass mark. Preview of how a sample score maps. Transcripts keep the scale in force at the time — never today’s.</p>
       <div class="copy">A = 80–100 (4.0) · B = 70–79 (3.0) · … · F = below 40 (0.0)</div>
+    </div>
+    <div class="zone">
+      <strong>Similarity thresholds</strong>
+      <p>Two bands, not one: review threshold (teacher must look) and case threshold (auto-open integrity case to the chair). Sources compared are configurable.</p>
+      <div class="copy">Review at 20% · auto-escalate case at 50% · compared against web, course archive, publisher databases</div>
     </div>
     <div class="zone">
       <strong>Attendance &amp; standing</strong>
@@ -621,47 +660,52 @@
     </div>
     <div class="zone">
       <strong>Publish control</strong>
-      <p>Save draft · Publish with effective date · View history of previous versions.</p>
+      <p>Save draft · Publish with effective date · View history of previous versions. Shows which scope level a value came from.</p>
       <div class="copy">Publish for Spring 2026 — teachers and students will see this scale on results</div>
     </div>
   </div>
   <h4>How it works, step by step</h4>
   <ol class="journey">
-    <li><span class="n">1</span><div><span class="who">Registrar or chair</span>Opens Administrator → Academic policy.</div></li>
-    <li><span class="n">2</span><div><span class="who">User</span>Edits the relevant card carefully, previews examples, saves a draft.</div></li>
-    <li><span class="n">3</span><div><span class="who">User</span>Publishes with an effective term or date.</div></li>
-    <li><span class="n">4</span><div><span class="who">System</span>Versions the old policy, activates the new one for the stated scope, and feeds dependent features.</div></li>
-    <li><span class="n">5</span><div><span class="who">System</span>Shows faculty and student surfaces the same bands and limits.</div></li>
+    <li><span class="n">1</span><div><span class="who">Registrar or chair</span>Opens Administrator → Academic policy / calendar.</div></li>
+    <li><span class="n">2</span><div><span class="who">User</span>Edits the relevant card carefully, previews examples or impact, saves a draft.</div></li>
+    <li><span class="n">3</span><div><span class="who">User</span>Publishes with an effective term or date. Live calendar moves require a second confirmer.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Versions the old policy, activates the new one for the stated scope, and feeds dependent features. Past decisions keep the rule they were made under.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Shows faculty and student surfaces the same bands, limits and milestones.</div></li>
   </ol>
   <h4>Information it uses and creates</h4>
   <table>
     <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
-    <tr><td>Policy drafts and published versions</td><td>This feature</td><td>Gradebook letter mapping; eligibility; registration credit checks; retake eligibility</td></tr>
+    <tr><td>Policy drafts and published versions</td><td>This feature</td><td>Gradebook letter mapping; eligibility; registration credit checks; retake eligibility; similarity review</td></tr>
+    <tr><td>Term milestones</td><td>Calendar publish</td><td>Every deadline in the product (registration, fees, exams, locks)</td></tr>
     <tr><td>Effective term / catalogue year</td><td>Registrar choice</td><td>Which cohort sees which rule</td></tr>
-    <tr><td>Change history</td><td>Each publish</td><td>Accreditation evidence</td></tr>
+    <tr><td>Change history &amp; second-confirmer log</td><td>Each publish / live move</td><td>Accreditation evidence; audit</td></tr>
   </table>
   <h4>What it connects with</h4>
   <table>
     <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
-    <tr><td>Faculty gradebook</td><td>Letter scale and pass mark</td><td>Teachers mark against the official scale</td></tr>
-    <tr><td>ADM-ELG-01 Exam eligibility</td><td>Attendance threshold</td><td>Same rule chairs lock before exams</td></tr>
+    <tr><td>Faculty gradebook / FAC-ASM-01</td><td>Letter scale; similarity bands</td><td>Teachers mark and review against official rules</td></tr>
+    <tr><td>ADM-ELG-01 Exam eligibility</td><td>Attendance threshold; lock date</td><td>Same rule chairs lock before exams</td></tr>
     <tr><td>Student grades &amp; standing</td><td>GPA and probation label</td><td>Students see institutional standing</td></tr>
-    <tr><td>Student course add/drop</td><td>Credit limits</td><td>Registration cannot exceed published caps</td></tr>
+    <tr><td>Student course add/drop</td><td>Credit limits; window dates</td><td>Registration cannot exceed published caps</td></tr>
+    <tr><td>ADM-DSP-01 / integrity</td><td>Case-threshold escalations</td><td>Serious similarity cannot be buried by a teacher</td></tr>
     <tr><td>ADM-QAC-01 Accreditation reports</td><td>Policy versions</td><td>Evidence pack includes what rule applied</td></tr>
   </table>
   <h4>Rules the university can set</h4>
   <ul>
-    <li>Whether departments may override attendance percentages.</li>
+    <li>Whether departments may override attendance percentages or similarity bands (narrowest scope wins).</li>
     <li>Whether plus/minus letters are used.</li>
     <li>Probation and dismissal GPA thresholds and review periods.</li>
     <li>Retake: maximum attempts, whether the latest or best grade counts.</li>
     <li>Credit limits for regular, probation, and final-term students.</li>
+    <li>Review vs case similarity thresholds and comparison sources.</li>
+    <li>Exam-notice lead time and who may act as second confirmer on live calendar moves.</li>
   </ul>
   <h4>What must never happen</h4>
   <ul>
     <li>Two live conflicting grade scales must never apply to the same section in the same term.</li>
     <li>A draft must never affect student-visible results until published.</li>
     <li>Policy publish must never silently rewrite already certified transcript lines for closed terms.</li>
+    <li>A live calendar move must never save without an impact list and second confirmer.</li>
     <li>The platform must never invent a softer probation rule to “help” a student.</li>
   </ul>
   <h4>Unusual situations and how we handle them</h4>
@@ -674,13 +718,14 @@
   <ul>
     <li>A sample score maps to the same letter in faculty and student views.</li>
     <li>Eligibility and credit checks cite the same published percentages and limits.</li>
+    <li>Moving a live exam date produces an impact list and a signed second confirmation before anything changes.</li>
     <li>Accreditation can retrieve the policy version that applied to a given term.</li>
   </ul>
 </article>
 
 <article class="spec" id="ADM-FEE-01">
   <div class="spec-head"><h3>ADM-FEE-01 · Fee policy and what unpaid dues block</h3><span class="tag p0">P0</span></div>
-  <p class="intent"><strong>What it does.</strong> Defines which finance charge types exist for the university’s catalogue of fees, which unpaid dues create holds, and what those holds block — registration, admit cards, documents, graduation, and, where the university requires it, access to classes and course content — without ever taking or holding student money on the platform.</p>
+  <p class="intent"><strong>What it does.</strong> Defines which finance charge types exist for the university’s catalogue of fees, per-credit tuition rates by admission cohort (raising a rate never rewrites existing students), which unpaid dues create holds, and what those holds block — registration, admit cards, documents, graduation, and, where the university requires it, access to classes and course content — without ever taking or holding student money on the platform.</p>
   <div class="callout">
     <b>Decision — the tuition access gate</b>
     In a private university, tuition is what makes the term real: a student who has not paid is not, in practice, taking the course. Shikho Campus supports that reality with a configurable <strong>access gate</strong> — unpaid tuition past its grace window can restrict live classes and new content, not only registration. It is designed to be firm but never a disaster: the student is warned well in advance, sees the exact amount and a one-tap way to pay, keeps read access to what they have already earned, and is never removed from a class that is in progress. A student who cannot pay is guided to an instalment, a waiver or the advisor — not dropped into a dead end.
@@ -698,9 +743,10 @@
   <div class="screen">
     <div class="zone">
       <strong>Fee policy desk</strong>
-      <p>Administrator → Fee policy. List of charge types (tuition, lab, retake, hostel, library fine) with “blocks what” tags.</p>
+      <p>Administrator → Fee policy. List of charge types (tuition, lab, retake, hostel, library fine) with “blocks what” tags. Per-credit tuition rows by admission cohort with student counts; adding a new cohort rate leaves earlier cohorts untouched.</p>
       <div class="copy">Tuition instalment overdue → blocks registration and admit card</div>
       <div class="copy">Library fine → blocks documents only</div>
+      <div class="copy">Admitted 2024–2025 · ৳4,750/credit · 602 students — raising 2026 rate does not touch them</div>
     </div>
     <div class="zone">
       <strong>Block matrix</strong>
@@ -744,6 +790,7 @@
   <h4>Rules the university can set</h4>
   <ul>
     <li>Grace days after a due date before a hold appears.</li>
+    <li>Per-credit rates by admission cohort; editing a past cohort’s rate requires a written reason and shows how many invoices would change.</li>
     <li>Whether unpaid tuition gates class &amp; content access at all, and if so, after how many grace days and with what warning schedule.</li>
     <li>What stays readable while the access gate is on — as a rule, already-graded work, receipts and the fee dashboard always stay visible so the student can act.</li>
     <li>Which roles may temporarily lift the access gate for a named student (advisor or finance officer, audited) — for a student who has agreed a payment date.</li>
@@ -778,83 +825,92 @@
 </article>
 
 <article class="spec" id="ADM-SCH-01">
-  <div class="spec-head"><h3>ADM-SCH-01 · Scholarships and waivers approval</h3><span class="tag p1">P1</span></div>
-  <p class="intent"><strong>What it does.</strong> Lets authorised academic or scholarship committee officers approve, reject or condition merit waivers, need-based aid and special remissions that finance will apply as reductions — without the academic officer typing a new fee amount into existence.</p>
+  <div class="spec-head"><h3>ADM-SCH-01 · Scholarships and waivers</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>What it does.</strong> Defines scholarship <em>schemes as data</em> (eligibility, award %, seats, renewal, stacking), lets the chair <em>recommend</em> awards, and lets finance <em>commit</em> them so reductions appear on the invoice — without academic officers typing a new fee amount into existence. Recommend ≠ commit.</p>
   <h4>Why it exists</h4>
-  <p>Scholarships in Bangladeshi private universities are high-stakes and often delayed in email. Students lose registration windows waiting for a signature. This feature gives a governed queue: see the recommendation, approve or reject with reasons, and hand a clean decision to finance to apply the reduction. Academic staff decide entitlement; finance still owns the money figure.</p>
+  <p>Scholarships in Bangladeshi private universities are high-stakes and often delayed in email. Students lose registration windows waiting for a signature. A new donor scheme must not require engineering. Separating recommendation from commitment keeps academic judgement with the chair and money figures with finance — one award object, three views (invoice, student profile, department report).</p>
   <h4>Who uses it and when</h4>
   <table>
     <tr><th>Who</th><th>When</th><th>What they need</th></tr>
-    <tr><td>Scholarship committee / chair / dean</td><td>Before billing milestones and on appeal</td><td>Approve or reject with conditions</td></tr>
-    <tr><td>Coordinator / finance liaison</td><td>After approval</td><td>See the decision so finance can apply the waiver amount</td></tr>
-    <tr><td>Student (indirect)</td><td>When aid is decided</td><td>See awarded / rejected / pending on the fee dashboard</td></tr>
+    <tr><td>Finance / student affairs</td><td>When a new donor or university scheme is created</td><td>Define scheme criteria, seats, award %, renewal</td></tr>
+    <tr><td>Chair / scholarship committee</td><td>Before billing milestones and on appeal</td><td>Recommend or reject with reasons — not invent amounts</td></tr>
+    <tr><td>Finance (commit)</td><td>After recommendation</td><td>Commit the award so the invoice reduction posts</td></tr>
+    <tr><td>Student (indirect)</td><td>When aid is decided</td><td>See awarded / rejected / pending on the fee dashboard and profile</td></tr>
   </table>
   <h4>What the user sees</h4>
   <div class="screen">
     <div class="zone">
-      <strong>Approval queue</strong>
-      <p>Administrator → Scholarships and waivers. Filters by type (merit, sibling, staff ward, special), term, status.</p>
-      <div class="copy">Scholarship approvals — 6 waiting · 2 due before billing lock</div>
+      <strong>Scheme desk</strong>
+      <p>Administrator → Scholarships. Scheme definition: award (e.g. 50% of tuition, not other heads), eligibility (CGPA, credits, discipline), seats, renewal, stacking.</p>
+      <div class="copy">Merit Scholarship · Summer 2026 · CGPA 3.75+, min 12 credits, no disciplinary case · 50% of tuition</div>
+    </div>
+    <div class="zone">
+      <strong>Recommendation queue</strong>
+      <p>Cases awaiting chair/committee review. Filters by type, term, status.</p>
+      <div class="copy">Scholarship recommendations — 6 waiting · 2 due before billing lock</div>
     </div>
     <div class="zone">
       <strong>Case file</strong>
-      <p>Student identity, programme, CGPA or merit basis, recommended percentage or category, supporting notes, prior awards.</p>
+      <p>Student identity, programme, CGPA or merit basis, recommended scheme/category, supporting notes, prior awards.</p>
       <div class="copy">Merit waiver recommendation — 25% tuition · CGPA 3.85</div>
     </div>
     <div class="zone">
       <strong>Decision footer</strong>
-      <p>Approve · Approve with condition · Reject with reason. No free-typing of arbitrary taka amounts by academic staff unless university policy explicitly maps categories to fixed percentages.</p>
-      <div class="copy">Approve 25% merit waiver for Spring 2026</div>
+      <p>Recommend · Recommend with condition · Reject with reason. Commit is a separate finance action. No free-typing of arbitrary taka amounts by academic staff.</p>
+      <div class="copy">Recommend 25% merit waiver for Spring 2026 — finance will commit</div>
       <div class="copy">Amounts are applied by finance from the approved category</div>
     </div>
   </div>
   <h4>How it works, step by step</h4>
   <ol class="journey">
-    <li><span class="n">1</span><div><span class="who">Officer</span>Opens Administrator → Scholarships and waivers.</div></li>
-    <li><span class="n">2</span><div><span class="who">Officer</span>Opens a case, reviews merit or need evidence and the recommended category.</div></li>
-    <li><span class="n">3</span><div><span class="who">Officer</span>Approves, conditions, or rejects with a reason.</div></li>
-    <li><span class="n">4</span><div><span class="who">System</span>Sends the decision to finance / fee sync to apply the reduction; updates the student fee view.</div></li>
-    <li><span class="n">5</span><div><span class="who">System</span>Re-evaluates fee holds if the new balance clears a block.</div></li>
+    <li><span class="n">1</span><div><span class="who">Finance</span>Creates or updates a scheme as data (not a code change).</div></li>
+    <li><span class="n">2</span><div><span class="who">Chair / committee</span>Opens the recommendation queue, reviews evidence, recommends or rejects with a reason.</div></li>
+    <li><span class="n">3</span><div><span class="who">Finance</span>Commits the award; the same object appears on the invoice, student profile and department report.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Re-evaluates fee holds if the new balance clears a block; student sees “approved — pending finance posting” until commit.</div></li>
   </ol>
   <h4>Information it uses and creates</h4>
   <table>
     <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
-    <tr><td>Scholarship applications and recommendations</td><td>Admission / student affairs / department nomination</td><td>Approval queue</td></tr>
-    <tr><td>Approval decision</td><td>Committee / chair</td><td>Finance waiver application; student fee dashboard</td></tr>
+    <tr><td>Scheme definitions</td><td>Finance / student affairs</td><td>Application and recommendation flows</td></tr>
+    <tr><td>Scholarship applications and recommendations</td><td>Admission / student affairs / department nomination</td><td>Recommendation queue</td></tr>
+    <tr><td>Committed award</td><td>Finance commit</td><td>Invoice reduction; student fee dashboard; STU-PRF-01</td></tr>
     <tr><td>Rejection reason</td><td>Officer</td><td>Student notification; appeal trail</td></tr>
   </table>
   <h4>What it connects with</h4>
   <table>
     <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
-    <tr><td>ADM-FEE-01 Fee policy</td><td>Which dues can be waived</td><td>Waiver applies to the right charge types</td></tr>
+    <tr><td>ADM-FEE-01 Fee policy</td><td>Which dues can be waived; cohort tuition rates</td><td>Waiver applies to the right charge types; rates stay cohort-protected</td></tr>
     <tr><td>COO-FEE-01 Sync invoices</td><td>Reduced balances after finance posts waiver</td><td>Student sees correct due</td></tr>
-    <tr><td>Student fee dashboard</td><td>Award status and reduced total</td><td>Transparent aid</td></tr>
-    <tr><td>ADM-HOME-01 Decisions dashboard</td><td>Pending approvals</td><td>Committee does not miss billing lock</td></tr>
+    <tr><td>Student fee dashboard / STU-PRF-01</td><td>Award status and reduced total</td><td>Transparent aid on one profile</td></tr>
+    <tr><td>ADM-HOME-01 Decisions dashboard</td><td>Pending recommendations</td><td>Committee does not miss billing lock</td></tr>
+    <tr><td><a href="./build.html#rbac">RBAC</a></td><td><code>scholarship.recommend</code> vs <code>scholarship.commit</code></td><td>Roles cannot collapse into one click</td></tr>
   </table>
   <h4>Rules the university can set</h4>
   <ul>
-    <li>Who sits on the approving role for each scholarship type.</li>
-    <li>Whether approval is single-officer or dual control.</li>
+    <li>Who may recommend vs who may commit for each scheme type.</li>
+    <li>Whether recommendation is single-officer or dual control.</li>
     <li>Fixed percentage categories versus free-text amounts (prefer categories).</li>
-    <li>Stacking rules when two waivers might both apply.</li>
+    <li>Stacking rules when two waivers might both apply; renewal criteria.</li>
   </ul>
   <h4>What must never happen</h4>
   <ul>
-    <li>Academic officers must never invent a random invoice amount; they approve categories finance knows how to price.</li>
-    <li>Approval must never silently clear unrelated holds (for example discipline).</li>
+    <li>Academic officers must never invent a random invoice amount or commit an award without finance.</li>
+    <li>Recommendation must never silently clear unrelated holds (for example discipline).</li>
     <li>A rejected waiver must never still appear as awarded on the student fee screen.</li>
+    <li>Raising a tuition rate must never rewrite an existing student’s cohort rate (see fee structure / ADM-FEE-01).</li>
     <li>The platform must never pay scholarship money to students from its own accounts.</li>
   </ul>
   <h4>Unusual situations and how we handle them</h4>
   <ul>
-    <li>If finance has not yet posted the waiver, the student sees “approved — pending finance posting”.</li>
+    <li>If finance has not yet committed, the student sees “recommended — pending finance commit”.</li>
     <li>If CGPA later falls below a continuing-merit rule, a renewal case opens rather than a silent cut mid-term without notice policy.</li>
-    <li>If duplicate applications exist, the queue shows a conflict warning before second approval.</li>
+    <li>If duplicate applications exist, the queue shows a conflict warning before second recommendation.</li>
   </ul>
   <h4>We know it works when</h4>
   <ul>
-    <li>Every awarded waiver has a named approver and timestamp.</li>
-    <li>Student due totals drop only after finance posts the reduction.</li>
+    <li>Every awarded waiver has a named recommender, committer and timestamp.</li>
+    <li>Student due totals drop only after finance commits the reduction.</li>
+    <li>A new scheme can be created by finance without an engineering ticket.</li>
     <li>Billing lock cannot pass with unreviewed cases still marked urgent on the dashboard unless explicitly deferred.</li>
   </ul>
 </article>

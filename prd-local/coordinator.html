@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Coordinator module — Shikho Campus PRD</title>
-<link rel="stylesheet" href="./pro.css?v=22"/>
-<link rel="stylesheet" href="./spec.css?v=22"/>
-<link rel="stylesheet" href="./dev.css?v=22"/>
-<script src="./nav.js?v=22" defer></script>
+<link rel="stylesheet" href="./pro.css?v=23"/>
+<link rel="stylesheet" href="./spec.css?v=23"/>
+<link rel="stylesheet" href="./dev.css?v=23"/>
+<script src="./nav.js?v=23" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -384,9 +384,9 @@
 
 <article class="spec" id="COO-SCH-01">
   <div class="spec-head"><h3>COO-SCH-01 · Class routine and room allocation</h3><span class="tag p1">P1</span></div>
-  <p class="intent"><strong>What it does.</strong> Builds the weekly class routine: section meeting patterns, room allocation, and clash checks against room capacity and teacher availability once the chair has staffed sections.</p>
+  <p class="intent"><strong>What it does.</strong> Builds the weekly class routine: section meeting patterns, room allocation, and continuous clash checks for room double-booking, teacher double-booking, <em>cohort overlap</em> (students who must take two courses in the same term), and room capacity vs enrolment — with a suggested free slot/room for each conflict. Publishing is blocked while any remain (unless an approved override exists).</p>
   <h4>Why it exists</h4>
-  <p>Students and teachers live by the routine. Double-booked rooms and phantom classes are classic office failures. The coordinator owns the timetable craft; the chair still owns who teaches.</p>
+  <p>Students and teachers live by the routine. Double-booked rooms and phantom classes are classic office failures. Cohort overlap is the clash people forget: two required courses for the same semester cohort cannot share a slot even when room and teacher are free. The coordinator owns the timetable craft; the chair still owns who teaches.</p>
   <h4>Who uses it and when</h4>
   <table>
     <tr><th>Who</th><th>When</th><th>What they need</th></tr>
@@ -397,67 +397,79 @@
   <div class="screen">
     <div class="zone">
       <strong>Routine grid</strong>
-      <p>Coordinator → Class routine. Week grid by day and slot; drag or assign section to room; capacity vs enrolment; clash badges.</p>
-      <div class="copy">Class routine — Spring 2026 · draft</div>
+      <p>Coordinator → Class routine. Week grid by day and slot; drag a section onto a free cell; capacity vs enrolment; clash badges.</p>
+      <div class="copy">Class routine — Summer 2026 · draft</div>
+      <div class="copy">CSE 310 · s1 — cohort clash</div>
+    </div>
+    <div class="zone">
+      <strong>Conflict panel</strong>
+      <p>Lists every conflict with a suggested fix (specific free room and time). Types: cohort clash · room too small · teacher double-book · room double-book · lab before first lecture week.</p>
+      <div class="copy">Cohort clash. CSE 310 s1 and CSE 215 s1 both sit at Sunday 10:00, and 34 sixth-semester students need both this term.</div>
+      <div class="copy">Suggested · move CSE 310 s1 to Sunday 13:00, SAC 302 is free</div>
     </div>
     <div class="zone">
       <strong>Room panel</strong>
       <p>Room list with capacity, equipment tags, unavailable blocks.</p>
-      <div class="copy">UB-201 · capacity 60 · projector · free Sunday 10:00</div>
+      <div class="copy">NAC 502 · 45 · free Sunday 13:00</div>
     </div>
     <div class="zone">
       <strong>Publish</strong>
-      <p>Publish routine; notify affected sections on change.</p>
-      <div class="copy">Published — students will see this on Timetable</div>
+      <p>Publish is blocked while unresolved conflicts remain. On publish, notify affected sections on change. The published routine is what students register against.</p>
+      <div class="copy">Three conflicts to resolve — publishing blocked</div>
     </div>
   </div>
   <h4>How it works, step by step</h4>
   <ol class="journey">
     <li><span class="n">1</span><div><span class="who">Coordinator</span>Opens Coordinator → Class routine.</div></li>
     <li><span class="n">2</span><div><span class="who">Coordinator</span>Places each staffed section into slots and rooms.</div></li>
-    <li><span class="n">3</span><div><span class="who">System</span>Warns on room capacity, room double-booking, and teacher double-booking.</div></li>
-    <li><span class="n">4</span><div><span class="who">Coordinator</span>Resolves clashes or records an approved override reason.</div></li>
-    <li><span class="n">5</span><div><span class="who">Coordinator</span>Publishes the routine.</div></li>
-    <li><span class="n">6</span><div><span class="who">System</span>Updates student and faculty timetables and feeds exam room planning.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Continuously checks room capacity, room double-booking, teacher double-booking, and cohort overlap for students who must take both.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Offers a suggested fix with a free room and time for each conflict.</div></li>
+    <li><span class="n">5</span><div><span class="who">Coordinator</span>Accepts suggestions or records an approved override reason where policy allows.</div></li>
+    <li><span class="n">6</span><div><span class="who">Coordinator</span>Publishes the routine when the conflict list is clear.</div></li>
+    <li><span class="n">7</span><div><span class="who">System</span>Updates student and faculty timetables and feeds exam room planning and registration clash checks.</div></li>
   </ol>
   <h4>Information it uses and creates</h4>
   <table>
     <tr><th>Information</th><th>Comes from</th><th>Goes to</th></tr>
     <tr><td>Sections and enrolment</td><td>Offering and registration</td><td>Capacity checks</td></tr>
     <tr><td>Teacher assignments</td><td>ADM-STF-01</td><td>Teacher clash detection</td></tr>
-    <tr><td>Room bookings and meeting patterns</td><td>This feature</td><td>Student/faculty timetables; exam planning inputs</td></tr>
+    <tr><td>Cohort / degree-plan co-requirements</td><td>Programme rules and degree plans</td><td>Cohort-overlap clash</td></tr>
+    <tr><td>Room bookings and meeting patterns</td><td>This feature</td><td>Student/faculty timetables; exam planning; STU-REG-01 clash engine</td></tr>
   </table>
   <h4>What it connects with</h4>
   <table>
     <tr><th>Connects with</th><th>What passes</th><th>Why it matters</th></tr>
     <tr><td>ADM-STF-01 Compose offering</td><td>Who teaches</td><td>Clash checks need real teachers</td></tr>
-    <tr><td>Student timetable</td><td>Published meetings</td><td>Students know where to go</td></tr>
+    <tr><td>Student timetable / STU-REG-01</td><td>Published meetings</td><td>Students know where to go; registration can promise a clean timetable</td></tr>
     <tr><td>Faculty live class</td><td>Scheduled sessions</td><td>Hosts start from the right slot</td></tr>
     <tr><td>ADM-EXM-01 Exam schedule</td><td>Room free/busy history</td><td>Exam rooms avoid teaching collisions where required</td></tr>
   </table>
   <h4>Rules the university can set</h4>
   <ul>
-    <li>Standard slot patterns (for example 90-minute blocks).</li>
-    <li>Whether overrides of clashes require chair approval.</li>
+    <li>Standard slot patterns (for example 90-minute blocks); blocked break/prayer times.</li>
+    <li>Whether overrides of clashes (including cohort) require chair approval.</li>
     <li>Makeup class publishing rules.</li>
   </ul>
   <h4>What must never happen</h4>
   <ul>
     <li>Routine publish must never assign a teacher.</li>
     <li>An unstaffed section must never be hidden as if ready — it shows as incomplete.</li>
-    <li>Capacity overrides must never be silent.</li>
+    <li>Capacity, teacher, room or cohort overrides must never be silent.</li>
+    <li>Publish must never succeed while unresolved cohort clashes remain unless an explicit approved override exists.</li>
   </ul>
   <h4>Unusual situations and how we handle them</h4>
   <ul>
     <li>If a room goes offline, affected meetings flag for reallocation.</li>
     <li>If cross-listed sections must share a meeting, the routine links them.</li>
     <li>If enrolment grows past capacity, a warning appears even after publish.</li>
+    <li>If a lab is scheduled before the section’s first lecture week, it appears as its own conflict type with a suggested later slot.</li>
   </ul>
   <h4>We know it works when</h4>
   <ul>
     <li>Published routine matches what students see.</li>
-    <li>Clash-free for rooms unless an override reason exists.</li>
+    <li>Clash-free for rooms, teachers and cohorts unless an override reason exists.</li>
     <li>Unstaffed sections cannot be marked complete.</li>
+    <li>Resolving a cohort clash is one click on a suggested free slot, not a hunt.</li>
   </ul>
 </article>
 

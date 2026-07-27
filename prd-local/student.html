@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Student module — Shikho Campus PRD</title>
-<link rel="stylesheet" href="./pro.css?v=22"/>
-<link rel="stylesheet" href="./spec.css?v=22"/>
-<link rel="stylesheet" href="./dev.css?v=22"/>
-<script src="./nav.js?v=22" defer></script>
+<link rel="stylesheet" href="./pro.css?v=23"/>
+<link rel="stylesheet" href="./spec.css?v=23"/>
+<link rel="stylesheet" href="./dev.css?v=23"/>
+<script src="./nav.js?v=23" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -51,8 +51,10 @@
   <a href="#STU-ADV-01">Advisor &amp; degree plan</a>
   <a href="#STU-ADV-02">Book advising</a>
   <a href="#STU-ADV-03">Ask my advisor</a>
+  <a href="#STU-ADV-04">Chair serial</a>
   <a href="#STU-REG-01">Course add/drop</a>
   <a href="#STU-REG-02">Hold centre</a>
+  <a href="#STU-PRF-01">My profile</a>
   <a href="#STU-REC-01">Documents</a>
   <a href="#STU-SRV-01">Course evaluation</a>
   <a href="#STU-SRV-02">Campus services</a>
@@ -198,11 +200,13 @@
   <tr><td><strong>STU-PAY-03</strong></td><td>Installments</td><td>Shows the university's instalment plan, what is paid, what is next, and what happens if a date is missed.</td><td>STU-PAY-01, STU-PAY-02, STU-REG-02, STU-EXAM-01</td></tr>
   <tr><td><strong>STU-PAY-04</strong></td><td>Receipts &amp; history</td><td>A permanent, downloadable record of every payment, refund and waiver applied to the student.</td><td>STU-PAY-02, STU-PAY-05, STU-REC-01, finance reconciliation</td></tr>
   <tr><td><strong>STU-PAY-05</strong></td><td>Bank slip / offline payment</td><td>Generates a bank deposit slip and lets the student upload proof, then tracks the accounts office verification.</td><td>STU-PAY-01, STU-PAY-04, Coordinator reconciliation, STU-REG-02</td></tr>
-  <tr><td><strong>STU-ADV-01</strong></td><td>My advisor &amp; degree plan</td><td>Names the advisor and shows the degree as a checklist: requirements done, in progress, remaining, under the correct catalogue year.</td><td>Faculty advisees, registrar catalogue, STU-REG-01, STU-GRD-01, STU-ASMT-02</td></tr>
+  <tr><td><strong>STU-ADV-01</strong></td><td>My advisor &amp; degree plan</td><td>Names the advisor and shows the degree as a checklist — the same object registration reads; a course added there updates this timeline.</td><td>Faculty advisees, registrar catalogue, STU-REG-01, STU-ADV-04, STU-GRD-01, STU-ASMT-02</td></tr>
   <tr><td><strong>STU-ADV-02</strong></td><td>Book advising appointment</td><td>Books a real slot in the advisor's published availability, on campus or online, with reminders.</td><td>STU-ADV-01, Faculty availability, STU-TIME-01, STU-HOME-01</td></tr>
   <tr><td><strong>STU-ADV-03</strong></td><td>Ask my advisor</td><td>An asynchronous question thread with the advisor, with sensitive topics routed to the right office instead.</td><td>STU-ADV-01, STU-ADV-02, student welfare and registrar offices</td></tr>
-  <tr><td><strong>STU-REG-01</strong></td><td>Course add/drop</td><td>Adds or drops a course during the university's window, showing the exact refund or charge consequence before confirming.</td><td>STU-REG-02, STU-PAY-01, STU-ADV-01, STU-TIME-01, Coordinator offering data</td></tr>
+  <tr><td><strong>STU-ADV-04</strong></td><td>Take a serial with the chairperson</td><td>Escalation queue when the advisor cannot decide — prerequisite override, overload, eligibility appeal — with the advisor note attached.</td><td>STU-ADV-01, ADM-HOME-01, Faculty advisees, STU-REG-01, STU-EXAM-01</td></tr>
+  <tr><td><strong>STU-REG-01</strong></td><td>Course add/drop</td><td>Adds or drops a course during the university's window; advisor-suggested courses come first from the degree plan; money consequence shown before confirm.</td><td>STU-REG-02, STU-PAY-01, STU-ADV-01, STU-ADV-04, STU-TIME-01, COO-SCH-01</td></tr>
   <tr><td><strong>STU-REG-02</strong></td><td>Hold centre</td><td>Lists every hold on the record — finance, advising, library, discipline — with the owning office and the exact way each one clears.</td><td>STU-PAY-01, STU-ADV-02, STU-REG-01, STU-EXAM-01, STU-REC-01, STU-GRD-01</td></tr>
+  <tr><td><strong>STU-PRF-01</strong></td><td>My profile</td><td>One person record: academic standing, awards, and every TA/RA/advisor appointment as dated history — visibility scoped by viewer.</td><td>ADM-STF-01, ADM-SCH-01, STU-ADV-01, STU-ONB-01, build multi-role</td></tr>
   <tr><td><strong>STU-REC-01</strong></td><td>Documents</td><td>Requests transcripts, enrolment letters and certificates: pay the fee, then follow the registrar queue to collection or download.</td><td>STU-PAY-01, STU-PAY-04, STU-REG-02, registrar office, STU-ASMT-02</td></tr>
   <tr><td><strong>STU-SRV-01</strong></td><td>Course evaluation survey</td><td>Collects anonymous end-of-term feedback for each course, and at some universities gates result viewing until it is done.</td><td>STU-LEARN-03, STU-ASMT-02, Faculty (aggregates only), Administrator policy</td></tr>
     <tr><td><strong>STU-SRV-02</strong></td><td>Campus service requests</td><td>One place to ask the offices for something — ID card, hostel, transport pass, library issue, medical, IT help — and watch it progress.</td><td>Coordinator processing, STU-REG-02 holds, STU-REC-01, STU-HOME-01</td></tr>
@@ -2010,7 +2014,7 @@
 
 <article class="spec" id="STU-ADV-01">
   <div class="spec-head"><h3>STU-ADV-01 · My advisor &amp; degree plan</h3><span class="tag p0">P0</span></div>
-  <p class="intent"><strong>In one line.</strong> Who her advisor is, and the whole degree as an honest checklist: requirements finished, in progress and remaining, under the catalogue year she was admitted under, with transfer credit counted where the university accepted it. <em>As a student, I want to know exactly how many courses stand between me and my degree.</em></p>
+  <p class="intent"><strong>In one line.</strong> Who her advisor is, and the whole degree as an honest checklist: requirements finished, in progress and remaining, under the catalogue year she was admitted under, with transfer credit counted where the university accepted it. This is the same object <a href="#STU-REG-01">STU-REG-01</a> reads — advisor-suggested courses appear first on registration; a course added there updates this timeline; nothing is entered twice. <em>As a student, I want to know exactly how many courses stand between me and my degree.</em></p>
 
   <h4>What this feature does</h4>
   <p>A four-year degree at a private university in Bangladesh is typically a hundred and thirty or more credits arranged into general education, core, major, elective and capstone requirements, with prerequisites and a minimum grade in some courses. Students navigate this almost blind. The rules live in a catalogue nobody reads, the progress lives in a spreadsheet the department keeps, and the only reliable interpreter is an advisor who has ninety advisees and two weeks of advising period.</p>
@@ -2046,8 +2050,9 @@
     </div>
     <div class="zone">
       <strong>What to take next term</strong>
-      <p>A suggestion, clearly labelled as a suggestion and not an approval: courses that are available next term, whose prerequisites she has met, and which satisfy remaining requirements. The advisor's approval remains the real decision.</p>
+      <p>A suggestion, clearly labelled as a suggestion and not an approval: courses that are available next term, whose prerequisites she has met, and which satisfy remaining requirements. This ordered list is exactly what registration shows as “advisor-suggested first.” The advisor's approval remains the real decision; overrides the advisor cannot grant go to <a href="#STU-ADV-04">STU-ADV-04</a>.</p>
       <div class="copy">These are suggestions based on your remaining requirements. Your advisor's approval is what registers you.</div>
+      <div class="copy">This is the plan registration reads — a course added there updates this timeline</div>
     </div>
     <div class="zone">
       <strong>Risks and warnings</strong>
@@ -2084,7 +2089,8 @@
   <ul>
     <li><strong>Administrator module — catalogue and programme rules.</strong> Requirements, prerequisites, minimum grades and catalogue years are published there; this screen reads them and never reinterprets them.</li>
     <li><strong>STU-ASMT-02 Grades &amp; standing.</strong> Completed courses and their grades mark requirements satisfied, and a grade below a required minimum leaves the requirement unsatisfied with that reason stated.</li>
-    <li><strong>STU-REG-01 Course add/drop.</strong> Suggestions feed the registration screen, and any change to registration immediately changes what shows as in progress.</li>
+    <li><strong>STU-REG-01 Course add/drop.</strong> Suggestions feed the registration screen as the same object (advisor-suggested first); any change to registration immediately changes what shows as in progress.</li>
+    <li><strong>STU-ADV-04 Chair serial.</strong> When the advisor cannot override a prerequisite, credit limit or eligibility ruling, the student takes a number with the chair — advisor note travels with the request.</li>
     <li><strong>STU-ADV-02 Book advising appointment.</strong> The advisor card is the natural place a booking starts.</li>
     <li><strong>STU-ADV-03 Ask my advisor.</strong> A question about the plan carries the context of the plan so the advisor is not asked to guess which requirement is meant.</li>
     <li><strong>Faculty module — advisees.</strong> The advisor sees the same plan and records her approval there; approval is an advisor action, never a student one.</li>
@@ -2376,9 +2382,72 @@
   </ul>
 </article>
 
+<article class="spec" id="STU-ADV-04">
+  <div class="spec-head"><h3>STU-ADV-04 · Take a serial with the chairperson</h3><span class="tag p1">P1</span></div>
+  <p class="intent"><strong>In one line.</strong> When the advisor cannot decide — prerequisite override, credit overload, eligibility appeal, or another departmental matter — the student takes a real queue number with the chairperson, with the advisor’s note attached automatically. The same queue is a tile on <a href="./admin.html#ADM-HOME-01">ADM-HOME-01</a>.</p>
+
+  <h4>What this feature does</h4>
+  <p>Advisors approve plans inside policy. They cannot override prerequisites, seats or credit limits alone — those escalate to the chair. Without a product queue, students wait in corridors and chairs hear cases cold. This feature makes escalation a dated queue object: reason chosen, advisor note attached, position and estimate shown, and the chair’s decisions dashboard counts the same waiting list.</p>
+
+  <h4>What the student sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Request the chairperson</strong>
+      <p>Reasons: prerequisite override · credit overload beyond the term limit · appeal an exam eligibility ruling · other departmental matter.</p>
+      <div class="copy">Your advisor's note on this case is attached automatically: "Student needs CSE 420 without the prerequisite; strong record otherwise."</div>
+    </div>
+    <div class="zone">
+      <strong>Queue position</strong>
+      <p>Position in line and estimated window before confirm.</p>
+      <div class="copy">4 of 7 waiting · Estimated · Tuesday, before 2:00 pm</div>
+      <div class="copy">Confirm and take a number</div>
+    </div>
+    <div class="zone">
+      <strong>Status</strong>
+      <p>Waiting · called · decided (approved / returned with reason). Decision lands on the degree plan and registration where relevant.</p>
+    </div>
+  </div>
+
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Student or advisor</span>Starts an escalation from the degree plan, registration refusal, or advising thread.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Attaches the advisor’s note and the relevant record (plan, eligibility figure, load).</div></li>
+    <li><span class="n">3</span><div><span class="who">Student</span>Confirms and takes a serial number.</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Adds the case to the chair’s ADM-HOME-01 queue (“waiting on other offices”).</div></li>
+    <li><span class="n">5</span><div><span class="who">Chair</span>Decides; student and advisor see the outcome; registration or eligibility updates if granted.</div></li>
+  </ol>
+
+  <h4>What it connects with</h4>
+  <ul>
+    <li><strong>STU-ADV-01 / Faculty advisees.</strong> Context and advisor note travel with the request.</li>
+    <li><strong>STU-REG-01 / STU-EXAM-01.</strong> Override outcomes unlock the blocked action.</li>
+    <li><strong>ADM-HOME-01.</strong> Same queue object the chair works.</li>
+    <li><strong><a href="./build.html#rbac">RBAC</a></strong> <code>advise.override</code> — chair only; advisor cannot self-approve an override.</li>
+  </ul>
+
+  <h4>Rules in plain words</h4>
+  <ul>
+    <li>Escalation always carries the advisor note when one exists — the chair never hears a case cold by default.</li>
+    <li>A serial is a real queue position, not a support ticket in another system.</li>
+    <li>Advisor cannot grant overrides that policy reserves for the chair.</li>
+  </ul>
+
+  <h4>What can go wrong and what happens</h4>
+  <ul>
+    <li><strong>No advisor assigned.</strong> The student can still escalate; the department office is named as the note source.</li>
+    <li><strong>Chair returns the request.</strong> Reason is visible to student and advisor; registration stays unchanged.</li>
+  </ul>
+
+  <h4>We know it works when</h4>
+  <ul>
+    <li>Every chair serial appears on ADM-HOME-01 with the same count the student sees.</li>
+    <li>A granted prerequisite override unlocks STU-REG-01 for that course without a second form.</li>
+  </ul>
+</article>
+
 <article class="spec" id="STU-REG-01">
   <div class="spec-head"><h3>STU-REG-01 · Course add/drop</h3><span class="tag p1">P1</span></div>
-  <p class="intent"><strong>In one line.</strong> Adding or dropping a course inside the university's window, with the seat, the clash, the prerequisite and — above all — the exact money consequence shown before she confirms. <em>As a student thinking about dropping a course, I want to know what it will cost me before I tap the button, not afterwards.</em></p>
+  <p class="intent"><strong>In one line.</strong> Adding or dropping a course inside the university's window, with the seat, the clash, the prerequisite and — above all — the exact money consequence shown before she confirms. Advisor-suggested courses from <a href="#STU-ADV-01">STU-ADV-01</a> appear first; adding or dropping updates that same degree-plan timeline. <em>As a student thinking about dropping a course, I want to know what it will cost me before I tap the button, not afterwards.</em></p>
 
   <h4>What this feature does</h4>
   <p>Every term opens with a short window in which a student may adjust her registration: swap a section whose timing does not work, add a course a friend recommended, drop one that is too heavy alongside a job. The window is usually one to two weeks, and the rules attached to it are unforgiving. Drop in week one and the fee comes back; drop in week three and it does not; drop after the deadline and a withdrawal notation goes on the transcript.</p>
@@ -2400,8 +2469,8 @@
     </div>
     <div class="zone">
       <strong>Finding a course to add</strong>
-      <p>Search and filter by code, title, requirement group, day and time. Each result shows section, schedule, room, teacher, seats remaining, and — stated in words — whether she is eligible.</p>
-      <div class="copy">CSE 373 Design and Analysis of Algorithms · Section 2 · Sun &amp; Tue 1:00–2:30 · 4 seats left · You meet the prerequisite.</div>
+      <p>Search and filter by code, title, requirement group, day and time. Advisor-suggested courses from the degree plan appear first. Each result shows section, schedule, room, teacher, seats remaining, and — stated in words — whether she is eligible. Overrides the advisor cannot grant link to <a href="#STU-ADV-04">STU-ADV-04</a>.</p>
+      <div class="copy">Suggested from your degree plan · CSE 373 Design and Analysis of Algorithms · Section 2 · Sun &amp; Tue 1:00–2:30 · 4 seats left · You meet the prerequisite.</div>
     </div>
     <div class="zone">
       <strong>Why she cannot add</strong>
@@ -2459,7 +2528,9 @@
   <h4>What it connects with</h4>
   <ul>
     <li><strong>Coordinator module — course offerings.</strong> Sections, schedules, rooms, teachers and seat counts come from the offering data imported and maintained there.</li>
-    <li><strong>STU-ADV-01 My advisor &amp; degree plan.</strong> Suggestions come from the plan, and every change immediately changes what the plan shows as in progress.</li>
+    <li><strong>STU-ADV-01 My advisor &amp; degree plan.</strong> Suggestions come from the plan as the same object (advisor-suggested first); every change immediately changes what the plan shows as in progress.</li>
+    <li><strong>STU-ADV-04 Chair serial.</strong> Prerequisite or overload refusals the advisor cannot clear escalate with the advisor note attached.</li>
+    <li><strong>COO-SCH-01 Class routine.</strong> Clash checking reads the published routine (including cohort-safe slots).</li>
     <li><strong>STU-ADV-02 Book advising appointment.</strong> Where approval is needed, the appointment or the advisor's recorded approval is what releases the change.</li>
     <li><strong>STU-PAY-01 Fee dashboard.</strong> An add raises a charge and a drop produces a refund or credit, each appearing as its own line with the rule named.</li>
     <li><strong>STU-REG-02 Hold centre.</strong> A hold blocks registration entirely; the screen names it and links there, and clearing it makes registration possible immediately.</li>
@@ -3918,6 +3989,67 @@
     <li>A student can use Momentum for a full term without ever seeing another student’s score.</li>
     <li>A chair searching Analyst cannot retrieve Momentum for any person.</li>
     <li>Closing rings never changes a grade or a transcript line.</li>
+  </ul>
+</article>
+
+<article class="spec" id="STU-PRF-01">
+  <div class="spec-head"><h3>STU-PRF-01 · My profile</h3><span class="tag p0">P0</span></div>
+  <p class="intent"><strong>In one line.</strong> One person, one record: academic standing, awards, and every appointment beyond being a student — TA, RA, advisor — as dated history that expires by itself and never becomes a second account. Visibility is scoped by viewer. See <a href="./platform.html#roles">Seven roles</a> and <a href="./build.html#multirole">Multi-role</a>.</p>
+
+  <h4>What this feature does</h4>
+  <p>Being a TA in one term and a plain student the next is not a separate login — it is the same profile with an appointment that closed. Without this screen, appointment history is retyped for CVs and chairs cannot see staffing-relevant standing. Each appointment is the same object created in <a href="./admin.html#ADM-STF-01">ADM-STF-01</a> (TA) or logged by a supervisor (RA); awards are the same object from <a href="./admin.html#ADM-SCH-01">ADM-SCH-01</a>.</p>
+
+  <h4>What the student sees</h4>
+  <div class="screen">
+    <div class="zone">
+      <strong>Identity</strong>
+      <p>Name, student ID, programme, admission term, photograph — sealed fields request correction via registrar, never self-edit.</p>
+      <div class="copy">Sadia Islam · 22304418 · BSc CSE · admitted Fall 2023 · CGPA 3.88</div>
+    </div>
+    <div class="zone">
+      <strong>Academic record summary</strong>
+      <p>Credits earned / required, expected graduation, scholarship line, disciplinary flag if any (detail via ADM-DSP-01).</p>
+      <div class="copy">76 of 136 credits · on track for Spring 2028 · Merit scholarship · 50% of tuition · renewed Summer 2026</div>
+    </div>
+    <div class="zone">
+      <strong>Appointments · beyond being a student</strong>
+      <p>Active and closed lines: role, section or project, appointing person, term, hours/week, status.</p>
+      <div class="copy">Teaching assistant · CSE 215 Section 1 · Appointed by Dr. Jahan · Summer 2026 · active · 10 h / wk</div>
+      <div class="copy">Research assistant · Dr. A. Chowdhury's project · Spring 2026 · closed, timesheets approved · 6 h / wk</div>
+    </div>
+    <div class="zone">
+      <strong>Who sees what</strong>
+      <p>The student sees everything here. A supervising teacher sees the TA appointment and hours, not grades in other courses. The chair sees appointments and academic standing for staffing. A future employer, with consent, may see appointments as experience — never marks.</p>
+    </div>
+  </div>
+
+  <h4>How it works, step by step</h4>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">System</span>Creates the profile from orientation / registry; appointments and awards attach as they are created elsewhere.</div></li>
+    <li><span class="n">2</span><div><span class="who">Student</span>Opens Profile and sees standing, awards and appointment history.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>When a term closes, active TA/RA appointments expire and remain as closed history.</div></li>
+    <li><span class="n">4</span><div><span class="who">Viewer</span>Sees only the scope their role allows — never another student’s marks via this screen.</div></li>
+  </ol>
+
+  <h4>What it connects with</h4>
+  <ul>
+    <li><strong>ADM-STF-01 / RA timesheets.</strong> Appointment objects appear here without retyping.</li>
+    <li><strong>ADM-SCH-01.</strong> Committed awards appear on the same profile.</li>
+    <li><strong>STU-ONB-01.</strong> First photograph and identity card render from this record.</li>
+    <li><strong>Role switcher.</strong> Active appointments drive which roles appear in the masthead.</li>
+  </ul>
+
+  <h4>Rules in plain words</h4>
+  <ul>
+    <li>One account; appointments expire; history stays.</li>
+    <li>Visibility is scoped per viewer, not a single editable field form.</li>
+    <li>RA grants no course access; TA powers remain those on the appointment.</li>
+  </ul>
+
+  <h4>We know it works when</h4>
+  <ul>
+    <li>A closed TA line from last term still appears after the student is no longer acting as TA.</li>
+    <li>A supervising teacher cannot open other-course grades from the appointment view.</li>
   </ul>
 </article>
 

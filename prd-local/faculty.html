@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Faculty module — Shikho Campus PRD</title>
-<link rel="stylesheet" href="./pro.css?v=22"/>
-<link rel="stylesheet" href="./spec.css?v=22"/>
-<link rel="stylesheet" href="./dev.css?v=22"/>
-<script src="./nav.js?v=22" defer></script>
+<link rel="stylesheet" href="./pro.css?v=23"/>
+<link rel="stylesheet" href="./spec.css?v=23"/>
+<link rel="stylesheet" href="./dev.css?v=23"/>
+<script src="./nav.js?v=23" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -282,6 +282,11 @@
       <div class="copy">"CSE 115 Section 4 · 53 students · content ready to week 9 · published"</div>
     </div>
     <div class="zone">
+      <strong>TA desk (when the active role is Teaching assistant)</strong>
+      <p>Scoped to appointed sections only. Shows draft-mark queue (to the teacher’s rubric), lab attendance to take, and discussion threads — never posting, never finals, never other courses. Powers come from the <a href="./admin.html#ADM-STF-01">ADM-STF-01</a> appointment. Role switcher returns to Student when the person is also enrolled.</p>
+      <div class="copy">Acting as TA · CSE 215 Section 1 · 12 drafts waiting for your first pass · teacher posts</div>
+    </div>
+    <div class="zone">
       <strong>Coordination strip (coordinators only)</strong>
       <p>Visible only to a teacher who coordinates a multi-section course: which sections have not published this week's content, which are behind on marking, and where a section has drifted from the master course.</p>
     </div>
@@ -321,7 +326,7 @@
     <tr><td>My advisees (FAC-ADV-01)</td><td>Advisee appointments today and advisees flagged as at risk</td><td>Advising duties are easy to forget because they are not on the timetable; the dashboard makes them as visible as a class.</td></tr>
     <tr><td>Announcements (FAC-ANN-01)</td><td>The short message a teacher sends to non-submitters or absentees</td><td>Lets a teacher act on a problem in the same breath as noticing it, which is the only time they reliably will.</td></tr>
     <tr><td>Coordinator module</td><td>Roster changes, section allocations, and the coordination strip for multi-section courses</td><td>A teacher must learn about a new student or a dropped student from the dashboard rather than from an empty seat.</td></tr>
-    <tr><td>Administrator module</td><td>The academic calendar, result deadlines, and departmental requests</td><td>Institutional deadlines and the teacher's own deadlines appear in the same list, so neither gets forgotten.</td></tr>
+    <tr><td>Administrator module / ADM-STF-01</td><td>The academic calendar, result deadlines, departmental requests, and TA appointment powers</td><td>Institutional deadlines and the teacher's own deadlines appear in the same list; TA desk only shows granted powers.</td></tr>
   </table>
 
   <h4>Rules the university can set</h4>
@@ -1333,7 +1338,7 @@
     <li><span class="n">3</span><div><span class="who">System</span>Builds the weekly plan from the course's weeks and topics and places every assessment date into its week.</div></li>
     <li><span class="n">4</span><div><span class="who">System</span>Compares what is written against what is configured, and reports every disagreement in plain language.</div></li>
     <li><span class="n">5</span><div><span class="who">Teacher</span>Resolves the disagreements, which usually means correcting the written text rather than the settings.</div></li>
-    <li><span class="n">6</span><div><span class="who">Teacher</span>Publishes the syllabus, at which point every student in the section can read it.</div></li>
+    <li><span class="n">6</span><div><span class="who">Teacher</span>Publishes the syllabus, at which point every student in the section can read it and the assessment plan (FAC-ASM-03 weightage) locks — further weight changes need a signed exception.</div></li>
     <li><span class="n">7</span><div><span class="who">Student</span>Reads it in week one, and returns to it before each assessment. The Student module keeps it permanently reachable from the course.</div></li>
     <li><span class="n">8</span><div><span class="who">Teacher</span>Changes something mid-semester — a shifted topic, a moved deadline.</div></li>
     <li><span class="n">9</span><div><span class="who">System</span>Records the change, keeps the earlier version readable, and tells students what changed and why if the teacher gives a reason.</div></li>
@@ -1612,8 +1617,9 @@
     </div>
     <div class="zone">
       <strong>Similarity and integrity</strong>
-      <p>Whether submissions are checked for similarity against each other and against previous semesters, and what threshold is worth the teacher's attention. The result is always advisory — a number for a human to interpret, never an accusation and never an automatic penalty.</p>
-      <div class="copy">"Similarity checking is on. You will see a percentage; it is for your judgement, not a verdict."</div>
+      <p>Whether submissions are checked for similarity against each other, prior terms and configured sources. Two thresholds from <a href="./admin.html#ADM-POL-01">ADM-POL-01</a>: a review band (teacher must look) and a case band (auto-opens an integrity case to the chair with both submissions attached). Matching text is shown side by side — not a percentage alone. A score never applies a penalty by itself and is never shown to a student as an accusation.</p>
+      <div class="copy">Review at 20% · auto-escalate case at 50%</div>
+      <div class="copy">Tanvir Ahmed · 61% match · above the case threshold — Confirm and send to the chair · Mark as a false match</div>
     </div>
     <div class="zone">
       <strong>Before publishing</strong>
@@ -1647,7 +1653,7 @@
     <tr><td>The assignment definition and marking scheme</td><td>Created here</td><td>The student's work list, the grading queue, the gradebook, and the AI helper's grounding for drafting marks</td></tr>
     <tr><td>Submissions and their exact arrival times</td><td>Created by students in the Student module</td><td>The grading queue, and the late calculation</td></tr>
     <tr><td>Who has not submitted</td><td>Computed at the due date</td><td>The dashboard and targeted announcements</td></tr>
-    <tr><td>Similarity results</td><td>Produced by the similarity check if enabled</td><td>Shown to the teacher as advisory information only</td></tr>
+    <tr><td>Similarity results</td><td>Produced by the similarity check if enabled; bands from ADM-POL-01</td><td>Review queue for the teacher; auto-escalation to chair / ADM-DSP-01 above the case threshold</td></tr>
   </table>
 
   <h4>What it connects with</h4>
@@ -1680,6 +1686,7 @@
     <li>The marking scheme, model answer or any teacher-only material must never be visible to students unless the teacher deliberately chose to show it.</li>
     <li>Changing the marks or the grade group after marking has begun must never silently rescale marks already given. The teacher is warned and must confirm.</li>
     <li>A similarity score must never produce a penalty by itself, and must never be shown to a student as an accusation.</li>
+    <li>Above the case threshold, a teacher must never be able to bury the case — it opens to the chair automatically; false-match dismissal is an explicit recorded action.</li>
     <li>A late submission must never be silently accepted as on time, and an on-time submission must never be marked late because of the marking being done later.</li>
     <li>A teaching assistant must never publish an assignment or change its marks.</li>
   </ul>
@@ -1694,7 +1701,7 @@
     <tr><td>One student needs an extension for a medical reason</td><td>Handled as a moderation for that named student with a reason recorded, exactly as for an examination, so that individual accommodations are always visible and never informal.</td></tr>
     <tr><td>A group member did nothing</td><td>Where the assignment allows per-member marks, the teacher may vary them with a note. Where it does not, the whole group receives the same mark and the teacher raises the matter separately.</td></tr>
     <tr><td>A hartal falls on the deadline</td><td>The teacher extends and the reason is recorded on the assignment, so the extension does not later look arbitrary.</td></tr>
-    <tr><td>Similarity is very high across many scripts</td><td>The teacher is shown the group and the overlaps. Any consequence follows the university's academic-integrity process through the Administrator module; nothing is decided by the software.</td></tr>
+    <tr><td>Similarity is very high across many scripts</td><td>Scripts above the review threshold appear in the similarity review; those above the case threshold open automatically to the chair with sources attached. Any sanction follows ADM-DSP-01; the software never decides the finding alone.</td></tr>
     <tr><td>The assignment was published with the wrong weight</td><td>It can be changed before marking begins freely, and afterwards only with a warning stating exactly which students' totals will move.</td></tr>
   </table>
 
@@ -1929,7 +1936,8 @@
     </div>
     <div class="zone">
       <strong>Changing it later</strong>
-      <p>If marking has begun, changing weightage shows exactly what will happen to students before it is confirmed, and records who changed it and why.</p>
+      <p>Publishing the syllabus (or the department’s assessment-plan publish) locks the weightage plan. Changing a weight mid-term would silently rescore every submitted piece of work, so the screen refuses after lock — a correction becomes a signed exception visible at certification. Before lock, if marking has begun, changing weightage still shows exactly what will happen to students and records who changed it and why.</p>
+      <div class="copy">Assessment plan locked when syllabus published — corrections require a signed exception</div>
       <div class="copy">"Changing Midterm from 25% to 20% will change the current standing of all 53 students. 4 students would move from a B to a B minus."</div>
     </div>
   </div>
@@ -1986,6 +1994,7 @@
   <ul>
     <li>A course must never be able to submit final grades while its weightage does not add to one hundred.</li>
     <li>Changing weightage must never silently change a student's standing. The effect is always shown before confirmation and recorded afterwards.</li>
+    <li>After the assessment plan is locked (syllabus publish), weight changes must never proceed without a signed exception that certification can see.</li>
     <li>A piece of work must never contribute to the final mark without belonging to a group, and work outside a group must never be silently ignored — the teacher is warned.</li>
     <li>A teacher must never be able to change the university's grade scale or grade boundaries.</li>
     <li>The weightage shown in the syllabus must never differ from the one used in computation.</li>

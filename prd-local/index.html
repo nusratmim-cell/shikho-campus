@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Shikho Campus — Product Requirements</title>
-<link rel="stylesheet" href="./pro.css?v=22"/>
-<link rel="stylesheet" href="./spec.css?v=22"/>
-<link rel="stylesheet" href="./dev.css?v=22"/>
-<script src="./nav.js?v=22" defer></script>
+<link rel="stylesheet" href="./pro.css?v=23"/>
+<link rel="stylesheet" href="./spec.css?v=23"/>
+<link rel="stylesheet" href="./dev.css?v=23"/>
+<script src="./nav.js?v=23" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -216,20 +216,30 @@
 
 <section id="config">
   <h2>What each university can change without new software</h2>
+  <p>Every setting is dated, scoped, and signed. Behaviour of changes: <a href="./platform.html#controls">control rules</a> (not retroactive · impact preview · narrowest scope wins).</p>
   <table>
-    <tr><th>Setting</th><th>Examples we have seen</th></tr>
-    <tr><td>Term shape</td><td>Two semesters; three trimesters; summer term optional</td></tr>
-    <tr><td>Grading scale</td><td>4.00 scale with A/A−/B+…; different mark boundaries per programme</td></tr>
-    <tr><td>Attendance rule</td><td>70% required to sit finals; or attendance carries marks; or both</td></tr>
-    <tr><td>Marks distribution</td><td>Quizzes 20 / Midterm 30 / Final 40 / Lab 10 — set per course or fixed by department</td></tr>
-    <tr><td>Late work</td><td>Not accepted; accepted and flagged; accepted with a daily penalty</td></tr>
-    <tr><td>When students see marks</td><td>Immediately after grading, or only when the teacher posts them</td></tr>
-    <tr><td>Probation and progression</td><td>GPA thresholds, warning levels, maximum credits when on probation</td></tr>
-    <tr><td>Retake and repeat</td><td>Whether a retake grade is capped, and which attempt counts</td></tr>
-    <tr><td>Payment methods</td><td>Which of bKash, Nagad, Rocket, card and bank transfer are offered; who pays the convenience charge</td></tr>
-    <tr><td>What unpaid dues block</td><td>Registration, exam entry, result view, transcript — each can be a hard block, a warning, or nothing</td></tr>
-    <tr><td>Registration ownership</td><td>Students register in our portal, or registration stays in the university's existing system</td></tr>
-    <tr><td>Which modules are switched on</td><td>Live classes, payments, advising, AI, accreditation — each can be off</td></tr>
+    <tr><th>Setting</th><th>Examples / what it controls</th><th>Typical owner</th></tr>
+    <tr><td>Term pattern &amp; milestones</td><td>Semesters / trimesters; registration, add/drop, withdrawal, eligibility lock, exam and results dates</td><td>Registrar</td></tr>
+    <tr><td>Course / offering duration</td><td>Default weeks on the catalogue; offering may shorten (8-week intensive inside a 14-week term)</td><td>Chair / catalogue</td></tr>
+    <tr><td>Class slot grid</td><td>Day pattern and period times; blocked break/prayer times</td><td>Registrar</td></tr>
+    <tr><td>Credit load limits</td><td>Min/max credits per term; lower cap on probation</td><td>Chair / programme</td></tr>
+    <tr><td>Grading scale</td><td>Mark bands → letter → points; transcripts use the scale in force at the time</td><td>Registrar</td></tr>
+    <tr><td>Marks distribution &amp; component bounds</td><td>Section weights (must total 100); department range a teacher may choose inside</td><td>Faculty within chair bounds</td></tr>
+    <tr><td>Attendance, late, retake</td><td>Eligibility threshold; late penalty; retake replace vs average and cap</td><td>Chair / department</td></tr>
+    <tr><td>Similarity thresholds</td><td>Review band vs automatic integrity case; sources compared</td><td>Chair / department</td></tr>
+    <tr><td>Online exam rules</td><td>Shuffle, one-question-per-page, backtracking, tab-switch logging, disconnect grace</td><td>Faculty within department limits</td></tr>
+    <tr><td>Probation &amp; standing</td><td>CGPA triggers, terms allowed, dismissal</td><td>Registrar / programme</td></tr>
+    <tr><td>Per-credit tuition by cohort</td><td>New rates never rewrite existing students’ cohort row</td><td>Finance</td></tr>
+    <tr><td>Fee heads &amp; instalments</td><td>Flat / per credit / per course heads; instalment dates and shares</td><td>Finance</td></tr>
+    <tr><td>Scholarship schemes</td><td>Eligibility, award %, seats, renewal, stacking; chair recommends, finance commits</td><td>Finance + chair</td></tr>
+    <tr><td>Payment methods &amp; fee block matrix</td><td>Gateways; who bears convenience charge; what unpaid balances block</td><td>Finance / registrar</td></tr>
+    <tr><td>Teaching load &amp; course qualification</td><td>Sections/credits by rank; who may be assigned which catalogue courses</td><td>Chair</td></tr>
+    <tr><td>TA eligibility &amp; powers</td><td>CGPA/prior grade; hours; draft marks / lab attendance / discussion — never posting</td><td>Chair</td></tr>
+    <tr><td>Advisor allocation &amp; slots</td><td>How advisees are distributed; slot length, booking window, daily cap</td><td>Chair / each advisor</td></tr>
+    <tr><td>Exam notice &amp; invigilation</td><td>Minimum days’ notice; duties per staff; own-course invigilation rules</td><td>Controller of examinations</td></tr>
+    <tr><td>Accommodations</td><td>Extra time, room, scribe; evidence required; print on admit card</td><td>Disability office</td></tr>
+    <tr><td>Notice authority &amp; documents</td><td>Which office may address which audience; document types, fees, holds that block issuance</td><td>Registrar</td></tr>
+    <tr><td>Which modules are on</td><td>Live class, payments, advising, AI, accreditation</td><td>Tenant entitlements</td></tr>
   </table>
 </section>
 
@@ -270,23 +280,22 @@
 
 <section id="permissions">
   <h2>Who may do what (authority model)</h2>
+  <p>Four <em>modules</em> in the product; seven <em>roles</em> as dated appointments (TA, advisor and RA are first-class). Summary below; full codes in <a href="./build.html#rbac">RBAC</a>.</p>
   <table>
-    <tr><th>Capability</th><th>Student</th><th>Faculty</th><th>Admin</th><th>Coord.</th></tr>
-    <tr><td>Attend / host live class</td><td>Attend</td><td>Host</td><td>—</td><td>—</td></tr>
-    <tr><td>Grade work (with AI assist)</td><td>—</td><td>Approves each</td><td>—</td><td>—</td></tr>
-    <tr><td>Submit final grades</td><td>—</td><td>Yes</td><td>—</td><td>—</td></tr>
-    <tr><td>Certify submitted grades</td><td>—</td><td>—</td><td>Yes</td><td>—</td></tr>
-    <tr><td>Edit an individual mark</td><td>—</td><td>Own only</td><td>Never</td><td>Never</td></tr>
-    <tr><td>Rule on exam eligibility</td><td>—</td><td>—</td><td>Yes</td><td>—</td></tr>
-    <tr><td>Staff a section</td><td>—</td><td>—</td><td>Yes</td><td>Flags only</td></tr>
-    <tr><td>Set academic policy</td><td>—</td><td>—</td><td>Yes</td><td>—</td></tr>
-    <tr><td>Compose / publish offering</td><td>—</td><td>—</td><td>Yes</td><td>Loads it</td></tr>
-    <tr><td>Import / export records</td><td>—</td><td>—</td><td>—</td><td>Yes</td></tr>
-    <tr><td>Ask the Analyst</td><td>—</td><td>—</td><td>Yes</td><td>—</td></tr>
-    <tr><td>Use AI (own mode)</td><td>Tutor</td><td>Assistant</td><td>Analyst</td><td>None (clerical)</td></tr>
-    <tr><td>See a teacher’s private Momentum</td><td>—</td><td>Own only</td><td>Never</td><td>Never</td></tr>
+    <tr><th>Capability</th><th>Student</th><th>Faculty</th><th>TA</th><th>Advisor</th><th>Admin</th><th>Coord.</th><th>RA</th></tr>
+    <tr><td>Attend / host live class</td><td>Attend</td><td>Host</td><td>Attend*</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Draft / post marks</td><td>—</td><td>Posts</td><td>Draft only*</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Submit / certify finals</td><td>—</td><td>Submit</td><td>—</td><td>—</td><td>Certify</td><td>—</td><td>—</td></tr>
+    <tr><td>Edit an individual mark</td><td>—</td><td>Own only</td><td>Never</td><td>Never</td><td>Never</td><td>Never</td><td>Never</td></tr>
+    <tr><td>Approve registration plan</td><td>—</td><td>—</td><td>—</td><td>Yes</td><td>Overrides only</td><td>—</td><td>—</td></tr>
+    <tr><td>Staff section / appoint TA</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Yes</td><td>Flags only</td><td>—</td></tr>
+    <tr><td>Scholarship</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Recommend</td><td>—</td><td>—</td></tr>
+    <tr><td>Import / export / verify slips</td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Yes</td><td>—</td></tr>
+    <tr><td>Log / approve research hours</td><td>—</td><td>Approve</td><td>—</td><td>—</td><td>—</td><td>—</td><td>Log</td></tr>
+    <tr><td>Use AI (own mode)</td><td>Tutor</td><td>Assistant</td><td>None</td><td>Assistant‡</td><td>Analyst</td><td>None</td><td>None</td></tr>
+    <tr><td>See a teacher’s private Momentum</td><td>—</td><td>Own only</td><td>Never</td><td>Never</td><td>Never</td><td>Never</td><td>Never</td></tr>
   </table>
-  <p>Multi-role, session, and erasure rules: <a href="./build.html#rbac">RBAC</a> · <a href="./build.html#multirole">Multi-role</a> · <a href="./build.html#session">Session</a> · <a href="./build.html#pdpa">PDPA deletion</a></p>
+  <p>* Only if listed on the TA appointment. ‡ Advising scope. Detail: <a href="./platform.html#roles">Seven roles</a> · <a href="./build.html#rbac">RBAC</a> · <a href="./build.html#multirole">Multi-role</a> · <a href="./build.html#session">Session</a> · <a href="./build.html#pdpa">PDPA deletion</a></p>
 </section>
 
 <section id="glossary">
