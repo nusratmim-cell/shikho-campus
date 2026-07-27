@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1"/>
+<title>UI &amp; engineering build specs — Shikho Campus PRD</title>
+<link rel="stylesheet" href="./pro.css?v=21"/>
+<link rel="stylesheet" href="./spec.css?v=21"/>
+<link rel="stylesheet" href="./dev.css?v=21"/>
+<script src="./nav.js?v=21" defer></script>
+</head>
+<body>
+<div class="layout">
+
+<nav>
+  <div class="brand">Shikho Campus</div>
+  <div class="sub">UI &amp; engineering build</div>
+
+  <div class="g">On this page</div>
+  <a href="#orient">How to use this page</a>
+  <a href="#breakpoints">Breakpoints</a>
+  <a href="#toast">Toasts &amp; notifications</a>
+  <a href="#motion">Motion &amp; loading</a>
+  <a href="#errors">Shared error &amp; refusal states</a>
+  <a href="#print">Print &amp; PDF layouts</a>
+  <a href="#rbac">RBAC permission list</a>
+  <a href="#multirole">Multi-role model</a>
+  <a href="#session">Session duration</a>
+  <a href="#pdpa">PDPA deletion cascade</a>
+
+  <div class="g">Modules</div>
+  <a href="./index.html">Overview</a>
+  <a href="./student.html">Student</a>
+  <a href="./faculty.html">Faculty</a>
+  <a href="./admin.html">Administrator</a>
+  <a href="./coordinator.html">Coordinator</a>
+  <a href="./wireframes.html">Wireframes</a>
+  <a href="./platform.html">How parts connect</a>
+</nav>
+
+<main>
+<div class="page-bar">
+  <a class="page-bar-back" href="./index.html">← Back to overview</a>
+  <a class="page-bar-demo" href="https://shikho-brac-platform.vercel.app/" target="_blank" rel="noopener">Open live demo ↗</a>
+</div>
+<p class="crumb"><a href="./index.html">Overview</a> · UI &amp; engineering build specs</p>
+
+<header>
+  <h1>UI &amp; engineering build specs</h1>
+  <p class="lede">The numbers, permissions, deletion rules and layout contracts that module briefs assume but do not repeat. UI and engineering both build from this page. Product rules stay in <a href="./index.html">Overview</a>; feature behaviour stays in the four modules.</p>
+</header>
+
+<aside class="demo-strip">
+  <strong>Wireframes</strong>
+  <span>Screen layouts for each module live in the handover pack.</span>
+  <a href="./wireframes.html">Open module wireframes →</a>
+</aside>
+
+<section id="orient">
+  <h2>How to use this page</h2>
+  <table>
+    <tr><th>Audience</th><th>Read first</th><th>Then</th></tr>
+    <tr><td><strong>UI / design</strong></td><td>Breakpoints · Toasts · Motion · Error states · Print/PDF · Wireframes</td><td>Module briefs for copy and flows</td></tr>
+    <tr><td><strong>Engineering</strong></td><td>RBAC · Multi-role · Session · PDPA deletion · <a href="./platform.html">How parts connect</a></td><td>Module feature IDs for API ownership</td></tr>
+    <tr><td><strong>Both</strong></td><td>Overview rules + this page</td><td>Live demo for behaviour checks</td></tr>
+  </table>
+  <div class="callout">
+    <b>Orientation rule</b>
+    If a decision affects every module (breakpoints, session length, who may delete data), it belongs here — not repeated in four module docs. If it is role-specific behaviour, it belongs in that module.
+  </div>
+</section>
+
+<section id="breakpoints">
+  <h2>Breakpoints (binding)</h2>
+  <p>One web product. These ranges are the contract for layout. The wireframe pack draws desktop; the same components must reflow at every range below.</p>
+  <table>
+    <tr><th>Range</th><th>Width</th><th>Chrome behaviour</th><th>Content behaviour</th></tr>
+    <tr><td><strong>Phone</strong></td><td>0–767px</td><td>Sidebar is a drawer; bottom or top primary actions for key student loops</td><td>Single column; tables stack or horizontal-scroll; cards full width</td></tr>
+    <tr><td><strong>Tablet</strong></td><td>768–1099px</td><td>Sidebar is a drawer (opens on demand); masthead stays</td><td>Two-column where useful; gradebook usable in landscape</td></tr>
+    <tr><td><strong>Desktop</strong></td><td>1100–1439px</td><td>Persistent sidebar (196px); drawer never required</td><td>Dense tables; ranked chips + info column</td></tr>
+    <tr><td><strong>Wide</strong></td><td>1440px+</td><td>Same as desktop; content max-width ~1460px, centred</td><td>Do not stretch tables into unreadable columns</td></tr>
+    <tr><td><strong>Classroom TV</strong></td><td>≥1920px display, viewed from 3–8 m</td><td>Live stage chrome only — hide dense nav during broadcast</td><td>Stage fills display; materials and attendance readable at distance; no tiny type</td></tr>
+  </table>
+  <h3>Hard layout rules</h3>
+  <ul>
+    <li>At &lt; 1100px the module sidebar becomes a drawer — same components, not a second product.</li>
+    <li>Minimum tap target: <strong>44×44 CSS px</strong> for any primary action on phone and tablet.</li>
+    <li>Nothing important is hover-only. Focus-visible outlines are required on every interactive control.</li>
+    <li>Orientation change must not lose form drafts, quiz answers, playback position, or grade edits.</li>
+  </ul>
+</section>
+
+<section id="toast">
+  <h2>Toasts &amp; in-product notifications</h2>
+  <p>Events that change a person’s next action need a visible confirmation. Module briefs name the event; this section specifies the UI pattern.</p>
+  <table>
+    <tr><th>Pattern</th><th>When</th><th>Behaviour</th></tr>
+    <tr><td><strong>Toast</strong></td><td>Payment confirmed · mark posted · hold cleared · sheet certified · export ready</td><td>Top-right (desktop) / top-full (phone). Auto-dismiss after <strong>5 s</strong>. Pause on hover/focus. Stack max <strong>3</strong>; oldest drops first. One primary link optional (“View receipt”).</td></tr>
+    <tr><td><strong>Inline banner</strong></td><td>Blocking hold · eligibility refusal · provider down · finance stale</td><td>Stays until the condition clears or the user acts. Names the office and the clearing action. Never a toast alone for a blocker.</td></tr>
+    <tr><td><strong>Rail / inbox</strong></td><td>Notices issued by offices · advising replies · system announcements</td><td>Persistent list. Unread count is informational — never a sidebar badge (badges are blockers only).</td></tr>
+  </table>
+  <h3>Channel priority (engineering)</h3>
+  <p>When an event must reach the person: <strong>in-app toast/banner first</strong> → push (if allowed) → SMS (university-configured critical only) → email (receipts, digests). Deduplicate by event id so the same payment confirmation is not pushed three times.</p>
+  <div class="copy">
+    <b>Example toast copy</b>
+    “Payment of ৳28,500 confirmed. Your finance hold is clearing.” · “CSE 215 midterm marks are posted.” · “Grade sheet for CSE 215 · Sec A certified.”
+  </div>
+</section>
+
+<section id="motion">
+  <h2>Motion &amp; loading</h2>
+  <table>
+    <tr><th>Kind</th><th>Duration</th><th>Use</th></tr>
+    <tr><td>Colour / background</td><td>150–200 ms</td><td>Button hover, theme toggle, chip selection</td></tr>
+    <tr><td>Drawer / panel</td><td>200–250 ms ease-out</td><td>Sidebar drawer open/close under 1100px</td></tr>
+    <tr><td>Toast enter/exit</td><td>180 ms</td><td>Slide + fade</td></tr>
+    <tr><td>Page transition</td><td>None / instant</td><td>No decorative full-page fades between modules</td></tr>
+  </table>
+  <h3>Loading decision</h3>
+  <table>
+    <tr><th>Surface</th><th>Pattern</th><th>Rule</th></tr>
+    <tr><td>Home cockpit · ranked chips</td><td>Progressive skeleton</td><td>First meaningful content paints immediately; slower sources fill beneath. Ranking does not reshuffle as answers arrive.</td></tr>
+    <tr><td>Gradebook · directory · fee table</td><td>Row skeleton</td><td>Never a full-page spinner once the shell is shown.</td></tr>
+    <tr><td>Payment provider handshake</td><td>Inline “Checking with the bank…”</td><td>Bill remains visible; never a blank page.</td></tr>
+    <tr><td>Analyst / Tutor answer</td><td>Streaming or short wait state</td><td>Current answer finishes before a usage-cap refusal.</td></tr>
+    <tr><td>CSV import</td><td>Progress + result summary</td><td>“412 of 430 loaded. 18 rejected — see list.”</td></tr>
+  </table>
+  <p><strong>Reduced motion:</strong> if <code>prefers-reduced-motion: reduce</code>, skip slide animations; use instant show/hide. Skeletons may remain static (no shimmer).</p>
+</section>
+
+<section id="errors">
+  <h2>Shared error &amp; refusal states</h2>
+  <p>Payment and hold flows already carry strong refusal copy in the module briefs. These patterns apply everywhere else. A disabled button with no explanation is a defect.</p>
+  <table>
+    <tr><th>Situation</th><th>What the person sees</th><th>Must include</th></tr>
+    <tr><td>AI Tutor cannot answer from material</td><td>“Your course materials do not cover this. Ask your teacher on the course discussion, or try a different question.”</td><td>Deferral · next step · no invented content</td></tr>
+    <tr><td>AI refuses graded work</td><td>“I will not write your assignment. I can explain the concept from your slides.”</td><td>Refusal · useful alternative</td></tr>
+    <tr><td>File upload fails</td><td>“Upload failed — connection lost after 2.1 MB. Try again. Your draft is still here.”</td><td>What failed · what is kept · retry</td></tr>
+    <tr><td>Offline attendance save</td><td>“Saved on this device. Will sync when you are online.”</td><td>Local keep · sync promise</td></tr>
+    <tr><td>CSV import rejects rows</td><td>“412 of 430 rows loaded. 18 rejected — download the list.”</td><td>Counts · per-row reason · download</td></tr>
+    <tr><td>Recording / video unavailable</td><td>“Recording is not ready yet. You will be notified when it is.”</td><td>Honest state · no broken player</td></tr>
+    <tr><td>Empty by term phase</td><td>“No classes scheduled — registration for Summer 2026 opens on 2 June.”</td><td>Term context · dated next step</td></tr>
+    <tr><td>Permission denied</td><td>“You do not have permission to certify grades. Ask your chairperson.”</td><td>Named capability · who can help</td></tr>
+  </table>
+  <p>See also <a href="./wireframes.html#wf-shared">Shared states wireframes</a> and <a href="./platform.html#failures">When something goes wrong</a>.</p>
+</section>
+
+<section id="print">
+  <h2>Print &amp; PDF layouts</h2>
+  <p>Some artefacts must leave the browser as a printable page or downloadable PDF. Layout is part of the product, not an afterthought.</p>
+  <table>
+    <tr><th>Artefact</th><th>Who generates</th><th>Page size</th><th>Must show</th><th>Must not show</th></tr>
+    <tr><td><strong>Admit card</strong></td><td>Student · Exams</td><td>A4 portrait or phone-screen PDF</td><td>Name, photo, student ID, programme, term, exam list (course · date · room), eligibility stamp, university crest</td><td>Fee amounts · other students · AI usage</td></tr>
+    <tr><td><strong>Payment receipt</strong></td><td>Student · Fees</td><td>A4 / thermal-friendly single page</td><td>Amount, charges settled, provider reference, date/time, university name, receipt id</td><td>Unrelated holds · other students</td></tr>
+    <tr><td><strong>Fee statement</strong></td><td>Student · Fees / Documents</td><td>A4 multi-page ok</td><td>Term range, charges, payments, reductions, closing balance</td><td>Internal finance notes</td></tr>
+    <tr><td><strong>Certified grade sheet</strong></td><td>Coordinator export / Admin view</td><td>A4 landscape preferred for wide tables</td><td>Section, teacher, term, each student id + mark + letter, certification stamp (who · when)</td><td>Draft AI marks · uncertified rows</td></tr>
+    <tr><td><strong>Registrar handover file</strong></td><td>Coordinator</td><td>University-agreed CSV/PDF package</td><td>Only certified sheets; batch id; export timestamp</td><td>Drafts · returned sheets</td></tr>
+    <tr><td><strong>Transcript request print</strong></td><td>Student · Documents (if university allows self-print preview)</td><td>A4</td><td>Official name, completed terms, certified grades only, watermark “unofficial preview” until registrar seals</td><td>Incomplete terms as final · unpaid secret notes beyond hold status</td></tr>
+  </table>
+  <h3>Print CSS rules</h3>
+  <ul>
+    <li>Hide navigation, demo strips, toasts, and AI rail on <code>@media print</code>.</li>
+    <li>Black text on white; no background fills that waste ink except the university crest and certification stamp.</li>
+    <li>Page breaks never split a student row mid-table; repeat table headers on each printed page.</li>
+    <li>Admit card and receipt must remain readable when downloaded on a phone and opened offline.</li>
+  </ul>
+</section>
+
+<section id="rbac">
+  <h2>RBAC — permission enumeration</h2>
+  <p>The overview table is the human summary. This list is what engineering implements. Capability codes are stable identifiers for checks and audit.</p>
+
+  <h3>Roles</h3>
+  <table>
+    <tr><th>Role code</th><th>Product name</th><th>Typical people</th></tr>
+    <tr><td><code>student</code></td><td>Student</td><td>Enrolled learner</td></tr>
+    <tr><td><code>faculty</code></td><td>Faculty</td><td>Teacher, section owner, advisor</td></tr>
+    <tr><td><code>admin</code></td><td>Administrator</td><td>Chair, dean, exam controller delegate</td></tr>
+    <tr><td><code>coordinator</code></td><td>Coordinator</td><td>Department office / records desk</td></tr>
+    <tr><td><code>ta</code></td><td>Teaching assistant</td><td>Assists a section under faculty; never certifies; never edits finance</td></tr>
+    <tr><td><code>platform_admin</code></td><td>Shikho platform admin</td><td>Tenant provisioning only — outside university day-to-day</td></tr>
+  </table>
+
+  <h3>Permission matrix</h3>
+  <p>Y = allowed · — = not allowed · Own = only for own section / own record · Scoped = only within assigned department / sections.</p>
+  <table>
+    <tr><th>Permission</th><th>Code</th><th>Student</th><th>Faculty</th><th>TA</th><th>Admin</th><th>Coord.</th></tr>
+    <tr><td>Sign in / view own profile</td><td><code>auth.session</code></td><td>Y</td><td>Y</td><td>Y</td><td>Y</td><td>Y</td></tr>
+    <tr><td>Join live class</td><td><code>live.join</code></td><td>Y</td><td>—</td><td>Y*</td><td>—</td><td>—</td></tr>
+    <tr><td>Host live class</td><td><code>live.host</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Publish / edit section content</td><td><code>content.publish</code></td><td>—</td><td>Own</td><td>Scoped†</td><td>—</td><td>—</td></tr>
+    <tr><td>Take attendance</td><td><code>attendance.write</code></td><td>—</td><td>Own</td><td>Scoped†</td><td>—</td><td>—</td></tr>
+    <tr><td>Create assessment</td><td><code>assess.create</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Draft grade (AI or manual)</td><td><code>grade.draft</code></td><td>—</td><td>Own</td><td>Scoped†</td><td>—</td><td>—</td></tr>
+    <tr><td>Approve / post mark to student</td><td><code>grade.post</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Submit finals for certification</td><td><code>grade.submit_finals</code></td><td>—</td><td>Own</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Certify or return grade sheet</td><td><code>grade.certify</code></td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td></tr>
+    <tr><td>Edit another person’s mark</td><td><code>grade.edit_any</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Set exam eligibility / exceptions</td><td><code>exam.eligibility</code></td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td></tr>
+    <tr><td>Staff a section</td><td><code>offering.staff</code></td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td></tr>
+    <tr><td>Publish offering / term</td><td><code>offering.publish</code></td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td></tr>
+    <tr><td>Set academic / fee policy</td><td><code>policy.write</code></td><td>—</td><td>—</td><td>—</td><td>Scoped</td><td>—</td></tr>
+    <tr><td>Load / validate records import</td><td><code>records.import</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Y</td></tr>
+    <tr><td>Export certified results</td><td><code>records.export_certified</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Y</td></tr>
+    <tr><td>Verify bank slip</td><td><code>finance.verify_slip</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>Y</td></tr>
+    <tr><td>Create or edit a fee amount</td><td><code>finance.mutate_charge</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Pay own dues</td><td><code>finance.pay_own</code></td><td>Y</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Use Tutor</td><td><code>ai.tutor</code></td><td>Y</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Use Assistant</td><td><code>ai.assistant</code></td><td>—</td><td>Y</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Use Analyst</td><td><code>ai.analyst</code></td><td>—</td><td>—</td><td>—</td><td>Y</td><td>—</td></tr>
+    <tr><td>See another’s private Momentum</td><td><code>momentum.read_any</code></td><td>—</td><td>—</td><td>—</td><td>—</td><td>—</td></tr>
+    <tr><td>Trigger PDPA erasure (see below)</td><td><code>privacy.erasure_request</code></td><td>—</td><td>—</td><td>—</td><td>Registrar path</td><td>Package only</td></tr>
+  </table>
+  <p>* TA may join as participant when assigned. † TA capabilities only when the section owner grants them; never certify, never post marks as the teacher of record, never mutate finance.</p>
+  <div class="callout">
+    <b>Hard denials (always —)</b>
+    <code>grade.edit_any</code> for admin and coordinator · <code>finance.mutate_charge</code> for everyone in-product · <code>momentum.read_any</code> for admin · any AI mode for coordinator.
+  </div>
+</section>
+
+<section id="multirole">
+  <h2>Multi-role model (TA = student + faculty)</h2>
+  <p>One person may hold more than one role in the same university (common: teaching assistant who is also enrolled; rare: faculty enrolled in another programme).</p>
+  <table>
+    <tr><th>Rule</th><th>Behaviour</th></tr>
+    <tr><td>One account</td><td>One identity, one sign-in. Roles are grants on that person, not separate logins.</td></tr>
+    <tr><td>Active role</td><td>Masthead shows a role switcher when the person has 2+ roles. Switching changes sidebar, home cockpit, and AI entry — not the identity.</td></tr>
+    <tr><td>Default role</td><td>Last used role for this device, else the role with the most urgent blockers.</td></tr>
+    <tr><td>Conflict of interest</td><td>A person must not grade, take attendance, or access submissions for a section where they are enrolled as a student. The system refuses those actions with a named reason.</td></tr>
+    <tr><td>TA vs faculty</td><td>TA never appears as teacher of record on the certified sheet. Draft help is allowed only if faculty granted it.</td></tr>
+    <tr><td>AI mode</td><td>Follows the active role: student → Tutor, faculty/TA-as-helper → Assistant (if granted), admin → Analyst. No AI when coordinator is active.</td></tr>
+    <tr><td>Audit</td><td>Every privileged action records both person id and active role at the time.</td></tr>
+  </table>
+  <div class="copy">
+    <b>Role switcher copy</b>
+    “Acting as: Student” · “Switch to Faculty” · On conflict: “You cannot mark this section while you are enrolled in it.”
+  </div>
+</section>
+
+<section id="session">
+  <h2>Session duration &amp; sign-in</h2>
+  <p>Universities use their own identity provider. Shikho Campus holds a session after successful SSO return.</p>
+  <table>
+    <tr><th>Setting</th><th>Default</th><th>Notes</th></tr>
+    <tr><td>Idle timeout</td><td><strong>30 minutes</strong> without interaction</td><td>Configurable per university (15–120 min). Warn at 2 minutes remaining.</td></tr>
+    <tr><td>Absolute session lifetime</td><td><strong>12 hours</strong> from sign-in</td><td>Even with activity, re-auth after 12 h. Configurable 8–24 h.</td></tr>
+    <tr><td>Exam / quiz lock</td><td>Session must stay valid for the attempt window</td><td>If session expires mid-quiz: answers already saved are kept; student re-auths and resumes with remaining time.</td></tr>
+    <tr><td>Remember this device</td><td>Off by default</td><td>If university allows: refresh token up to 14 days; still requires IdP policy.</td></tr>
+    <tr><td>Concurrent sessions</td><td>Allowed</td><td>Sign-out-all available on profile. Payment and certify actions may re-prompt.</td></tr>
+    <tr><td>IdP unreachable</td><td>Block new sign-in</td><td>Existing valid sessions continue until idle/absolute timeout. During exams: show “University sign-in is unavailable — contact invigilator” rather than a silent failure.</td></tr>
+    <tr><td>Token type</td><td>Opaque server session + short-lived API token</td><td>Implementation detail for engineering; not JWT-as-sole-authority for privileged writes.</td></tr>
+  </table>
+  <div class="copy">
+    <b>Idle warning copy</b>
+    “Your session will end in 2 minutes. Stay signed in, or save your work.”
+  </div>
+</section>
+
+<section id="pdpa">
+  <h2>PDPA deletion cascade</h2>
+  <p>Bangladesh PDPA obligations and university record-retention duties conflict in places. The product must support lawful erasure requests without silently destroying academic integrity records the university is required to keep.</p>
+
+  <h3>Who may trigger what</h3>
+  <table>
+    <tr><th>Action</th><th>Who initiates</th><th>Who executes in product</th><th>Result</th></tr>
+    <tr><td>Access / portability request</td><td>Student (or authorised agent)</td><td>Coordinator packages; registrar may approve release</td><td>Export of own profile, enrolments, receipts, certified results — not other students</td></tr>
+    <tr><td>Correction request</td><td>Student</td><td>Coordinator / registrar workflow</td><td>Official name, DOB, photo: request only — never self-edit of sealed fields</td></tr>
+    <tr><td>Erasure request</td><td>Student via university process</td><td><strong>Registrar / data-protection officer path</strong> — not self-serve delete</td><td>See cascade below</td></tr>
+    <tr><td>Tenant offboarding wipe</td><td>University contract end</td><td>Shikho platform admin under contract</td><td>Separate runbook; outside day-to-day RBAC</td></tr>
+  </table>
+
+  <h3>Soft delete vs anonymisation vs retain</h3>
+  <table>
+    <tr><th>Data class</th><th>On erasure request</th><th>Why</th></tr>
+    <tr><td>Marketing / optional contact prefs, Tutor chat history, Momentum, device push tokens</td><td><strong>Hard delete</strong> within 30 days</td><td>Not required for academic record</td></tr>
+    <tr><td>Profile photo, alternate email, emergency contact (non-official)</td><td><strong>Hard delete</strong> or clear</td><td>Not needed once identity is sealed/anonymised</td></tr>
+    <tr><td>Official identity fields tied to transcript (name, student number, programme)</td><td><strong>Retain</strong> for university retention period (minimum 5 years typical) or <strong>anonymise</strong> only if law + university policy allow and transcript obligations are met</td><td>Integrity of certified results</td></tr>
+    <tr><td>Marks, attendance, certified sheets, payment receipts, audit log of who certified</td><td><strong>Retain</strong> (append-only). Link to anonymised subject id if identity is erased</td><td>Cannot rewrite academic history</td></tr>
+    <tr><td>AI indexes / embeddings derived from personal chat</td><td><strong>Delete and reindex</strong> without that content</td><td>Must not keep erasable personal data in vector stores</td></tr>
+    <tr><td>Backups</td><td>Expire on backup rotation schedule; no restore into live of erased personal chat/prefs</td><td>Documented retention for backups</td></tr>
+  </table>
+
+  <h3>Cascade checklist (engineering)</h3>
+  <ol class="journey">
+    <li><span class="n">1</span><div><span class="who">Registrar / DPO</span>Approves erasure ticket with scope and legal basis.</div></li>
+    <li><span class="n">2</span><div><span class="who">System</span>Flags person <code>erasure_pending</code>; blocks new Tutor history and marketing use.</div></li>
+    <li><span class="n">3</span><div><span class="who">System</span>Deletes or clears erasable classes (chat, Momentum, tokens, optional contacts).</div></li>
+    <li><span class="n">4</span><div><span class="who">System</span>Purges personal content from AI indexes; job is idempotent and logged.</div></li>
+    <li><span class="n">5</span><div><span class="who">System</span>Where policy requires, replaces display name with anonymised label on non-official surfaces; certified artefacts keep required legal identity per university policy.</div></li>
+    <li><span class="n">6</span><div><span class="who">System</span>Writes audit event: who approved, what classes deleted, what retained, timestamp.</div></li>
+    <li><span class="n">7</span><div><span class="who">Coordinator</span>Can export the erasure certificate for the university file — cannot reverse without a new lawful process.</div></li>
+  </ol>
+  <div class="callout">
+    <b>Never</b>
+    Self-serve “delete my account” that wipes certified marks · Coordinator hard-deleting a person without registrar approval · Analyst answers that re-identify an erased subject from “anonymised” fragments.
+  </div>
+</section>
+
+<footer>
+  UI &amp; engineering build · <a href="./index.html">Overview</a> · <a href="./wireframes.html">Wireframes</a> · <a href="./platform.html">How parts connect</a> · <a href="./ai.html">Campus AI</a>
+</footer>
+</main>
+</div>
+</body>
+</html>

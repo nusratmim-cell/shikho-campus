@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Student module — Shikho Campus PRD</title>
-<link rel="stylesheet" href="./pro.css?v=20"/>
-<link rel="stylesheet" href="./spec.css?v=20"/>
-<link rel="stylesheet" href="./dev.css?v=20"/>
-<script src="./nav.js?v=20" defer></script>
+<link rel="stylesheet" href="./pro.css?v=21"/>
+<link rel="stylesheet" href="./spec.css?v=21"/>
+<link rel="stylesheet" href="./dev.css?v=21"/>
+<script src="./nav.js?v=21" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -21,7 +21,9 @@
   <a href="#features">All features</a>
 
   <div class="g">Wireframes</div>
-  <a href="./wireframes.html#wf-student">Student flow →</a>
+  <a href="#wireframes">Layouts on this page</a>
+  <a href="./wireframes.html#wf-student">Student flow pack →</a>
+  <a href="./build.html">UI &amp; engineering build →</a>
   <a href="./wireframes.html#wf-shell">Nav shell →</a>
   <a href="./wireframes.html#wf-registration">Registration →</a>
   <a href="./wireframes.html#wf-payment">Bank payment →</a>
@@ -3998,6 +4000,115 @@
   <p>Three rules govern every page of this module: a mark is visible only after the teacher posts it, money moves from student to university and never rests with the platform, and a hold shown to a student is a hold some office actually placed.</p>
 </footer>
 
+
+<!-- WIREFRAME EMBED: student -->
+<style id="wf-iframe-styles">
+.wf-section {
+  margin: 56px 0 0;
+  padding: 40px 0 0;
+  border-top: 2px solid var(--line, #e0e0e6);
+}
+.wf-section-title {
+  font: 600 10px/1 var(--mono, ui-monospace, monospace);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--muted, #888);
+  margin: 0 0 6px;
+}
+.wf-section h2 {
+  font-size: 26px;
+  font-weight: 500;
+  margin: 0 0 24px;
+}
+.wf-iframe-block {
+  margin: 0 0 40px;
+}
+.wf-iframe-label {
+  font: 600 10px/1 ui-monospace, Menlo, monospace;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: #8a6425;
+  margin: 0 0 8px;
+}
+.wf-iframe {
+  display: block;
+  width: 100%;
+  height: 900px;
+  border: 1px solid #cfcbc2;
+  border-radius: 4px;
+  background: #e9e7e2;
+}
+.wf-iframe-open {
+  display: inline-block;
+  margin-top: 8px;
+  font: 11px/1 ui-monospace, Menlo, monospace;
+  color: #8a6425;
+  text-decoration: none;
+  opacity: .7;
+}
+.wf-iframe-open:hover { opacity: 1; text-decoration: underline; }
+</style>
+<section class="wf-section" id="wireframes">
+  <div class="wf-section-title">Wireframe handover</div>
+  <h2>Student · screen layouts</h2>
+  
+<div class="wf-iframe-block">
+  <div class="wf-iframe-label">02 · Student flow — dues to admit card</div>
+  <iframe
+    src="./wireframes.html#wf-student"
+    class="wf-iframe"
+    loading="lazy"
+    title="02 · Student flow — dues to admit card"
+    scrolling="no"
+  ></iframe>
+  <a class="wf-iframe-open" href="./wireframes.html#wf-student" target="_blank">Open full-size ↗</a>
+</div>
+<div class="wf-iframe-block">
+  <div class="wf-iframe-label">01 · Nav shell every role shares</div>
+  <iframe
+    src="./wireframes.html#wf-shell"
+    class="wf-iframe"
+    loading="lazy"
+    title="01 · Nav shell every role shares"
+    scrolling="no"
+  ></iframe>
+  <a class="wf-iframe-open" href="./wireframes.html#wf-shell" target="_blank">Open full-size ↗</a>
+</div>
+<div class="wf-iframe-block">
+  <div class="wf-iframe-label">09 · Registration</div>
+  <iframe
+    src="./wireframes.html#wf-registration"
+    class="wf-iframe"
+    loading="lazy"
+    title="09 · Registration"
+    scrolling="no"
+  ></iframe>
+  <a class="wf-iframe-open" href="./wireframes.html#wf-registration" target="_blank">Open full-size ↗</a>
+</div>
+<div class="wf-iframe-block">
+  <div class="wf-iframe-label">11 · Bank payment, end to end</div>
+  <iframe
+    src="./wireframes.html#wf-payment"
+    class="wf-iframe"
+    loading="lazy"
+    title="11 · Bank payment, end to end"
+    scrolling="no"
+  ></iframe>
+  <a class="wf-iframe-open" href="./wireframes.html#wf-payment" target="_blank">Open full-size ↗</a>
+</div>
+<div class="wf-iframe-block">
+  <div class="wf-iframe-label">12 · Shared states</div>
+  <iframe
+    src="./wireframes.html#wf-shared"
+    class="wf-iframe"
+    loading="lazy"
+    title="12 · Shared states"
+    scrolling="no"
+  ></iframe>
+  <a class="wf-iframe-open" href="./wireframes.html#wf-shared" target="_blank">Open full-size ↗</a>
+</div>
+</section>
+<!-- /WIREFRAME EMBED -->
 </main>
 </div>
 </body>

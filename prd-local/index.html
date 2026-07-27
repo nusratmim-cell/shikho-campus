@@ -4,10 +4,10 @@
 <meta charset="utf-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1"/>
 <title>Shikho Campus — Product Requirements</title>
-<link rel="stylesheet" href="./pro.css?v=20"/>
-<link rel="stylesheet" href="./spec.css?v=20"/>
-<link rel="stylesheet" href="./dev.css?v=20"/>
-<script src="./nav.js?v=20" defer></script>
+<link rel="stylesheet" href="./pro.css?v=21"/>
+<link rel="stylesheet" href="./spec.css?v=21"/>
+<link rel="stylesheet" href="./dev.css?v=21"/>
+<script src="./nav.js?v=21" defer></script>
 </head>
 <body>
 <div class="layout">
@@ -39,6 +39,7 @@
 
   <div class="g">More pages</div>
   <a href="./wireframes.html">Module wireframes</a>
+  <a href="./build.html">UI &amp; engineering build</a>
   <a href="./ai.html">Campus AI</a>
   <a href="./university-activities.html">All university activities</a>
   <a href="./platform.html">How parts connect</a>
@@ -62,6 +63,11 @@
   <strong>Module wireframes</strong>
   <span>Desktop layout specification for all four modules — shell, flows, blocking states, and PRD copy.</span>
   <a href="./wireframes.html">Open wireframe handover pack →</a>
+</aside>
+<aside class="demo-strip">
+  <strong>UI &amp; engineering build</strong>
+  <span>Breakpoints, toasts, print/PDF, RBAC permissions, multi-role, session duration, PDPA deletion.</span>
+  <a href="./build.html">Open build specs →</a>
 </aside>
 
 <section id="what">
@@ -207,15 +213,26 @@
     <tr><td><strong>Laptop / desktop</strong></td><td>Faculty · coordinator · administrator</td><td>Full gradebook, offering, directory, bulk records, fee policy, Analyst — dense tables that still scroll and filter cleanly</td></tr>
     <tr><td><strong>Classroom smart TV</strong></td><td>Faculty in a live class</td><td>Live stage fills the display; materials and attendance stay usable from the front of the room</td></tr>
   </table>
+  <h3>Breakpoints (binding)</h3>
+  <table>
+    <tr><th>Range</th><th>Width</th><th>Chrome</th></tr>
+    <tr><td>Phone</td><td>0–767px</td><td>Sidebar becomes a drawer</td></tr>
+    <tr><td>Tablet</td><td>768–1099px</td><td>Drawer; gradebook usable in landscape</td></tr>
+    <tr><td>Desktop</td><td>1100–1439px</td><td>Persistent sidebar</td></tr>
+    <tr><td>Wide</td><td>1440px+</td><td>Same chrome; content max ~1460px</td></tr>
+    <tr><td>Classroom TV</td><td>≥1920px viewed at distance</td><td>Live stage fills display; dense nav hidden during broadcast</td></tr>
+  </table>
   <h3>Hard requirements</h3>
   <ul>
     <li>One codebase and one design system scale across breakpoints — not a “mobile site” and a separate “desktop site” that drift apart.</li>
     <li>Layouts reflow: sidebars become drawers on small screens; tables scroll horizontally or stack; video and live class never clip under chrome.</li>
-    <li>Touch and mouse both work. Nothing important requires hover-only.</li>
+    <li>Touch and mouse both work. Nothing important requires hover-only. Minimum tap target 44×44 CSS px on phone and tablet.</li>
     <li>Text remains readable on a 5-inch phone and on a 55-inch classroom display without a special “TV mode” that loses features.</li>
     <li>Weak mobile data is assumed. Essential actions stay available when video quality must drop.</li>
     <li>Orientation change (portrait ↔ landscape) does not lose form input, playback position, or draft marks.</li>
+    <li>Idle session warning at 2 minutes; default idle timeout 30 minutes — full session rules on the build page.</li>
   </ul>
+  <p><a href="./build.html#breakpoints"><strong>Full UI build specs</strong></a> — toasts, motion, error states, print/PDF · <a href="./build.html#session">Session duration</a> · <a href="./build.html#rbac">RBAC list</a></p>
 </section>
 
 <section id="config">
@@ -295,6 +312,8 @@
     <tr><td>Use AI (own mode)</td><td>Tutor</td><td>Assistant</td><td>Analyst</td><td>None (clerical)</td></tr>
     <tr><td>See a teacher’s private Momentum</td><td>—</td><td>Own only</td><td>Never</td><td>Never</td></tr>
   </table>
+  <p><strong>Multi-role:</strong> one account, role switcher when a person is both student and faculty/TA. A person must not grade a section they are enrolled in. <strong>Session:</strong> idle 30 min (warn at 2 min), absolute 12 h — configurable. <strong>Erasure:</strong> registrar/DPO path only; certified marks are retained or anonymised per policy, never self-wipe.</p>
+  <p><a href="./build.html#rbac"><strong>Full RBAC permission list</strong></a> · <a href="./build.html#multirole">Multi-role model</a> · <a href="./build.html#session">Session duration</a> · <a href="./build.html#pdpa">PDPA deletion cascade</a></p>
 </section>
 
 <section id="glossary">
@@ -350,7 +369,7 @@
 </section>
 
 <footer>
-  Shikho Campus · Product requirements v5 · Start at <a href="./index.html">Overview</a> · Modules: <a href="./student.html">Student</a> · <a href="./faculty.html">Faculty</a> · <a href="./admin.html">Administrator</a> · <a href="./coordinator.html">Coordinator</a> · <a href="./wireframes.html">Wireframes</a> · <a href="./ai.html">AI</a> · <a href="./university-activities.html">All university activities</a> · <a href="#references">LMS references</a> · <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
+  Shikho Campus · Product requirements v5 · Start at <a href="./index.html">Overview</a> · Modules: <a href="./student.html">Student</a> · <a href="./faculty.html">Faculty</a> · <a href="./admin.html">Administrator</a> · <a href="./coordinator.html">Coordinator</a> · <a href="./wireframes.html">Wireframes</a> · <a href="./build.html">UI &amp; eng build</a> · <a href="./ai.html">AI</a> · <a href="./university-activities.html">All university activities</a> · <a href="#references">LMS references</a> · <a href="https://shikho-brac-platform.vercel.app/">Live demo</a>
 </footer>
 
 </main>

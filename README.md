@@ -14,7 +14,7 @@ Then open http://localhost:8000/index.html
 
 Start at **Overview**. The menu on every page carries a numbered document map:
 Overview, the four modules (Student, Faculty, Administrator, Coordinator),
-supporting pages, LMS reference videos, and the live demo.
+supporting pages (wireframes, **UI & engineering build**, AI, platform), LMS reference videos, and the live demo.
 
 Live demo: https://shikho-brac-platform.vercel.app/
 
@@ -23,6 +23,8 @@ Live demo: https://shikho-brac-platform.vercel.app/
 | Path | Contents |
 | --- | --- |
 | `prd-local/` | The requirements document set — start at `index.html` |
+| `prd-local/build.html` | Breakpoints, toasts, print/PDF, RBAC, multi-role, session, PDPA deletion |
+| `prd-local/wireframes.html` | Module wireframe handover pack |
 | `SHIKHO-CAMPUS-PRD.md` | Reading guide: the pages, the rules every feature obeys, product decisions |
 | `PRD-Research-Foundation.md` | Competitor analysis, architecture patterns, workflow edge cases |
 | `PRD-BD-Regulatory-Requirements.md` | PDPA 2026, accreditation, e-signature detail |

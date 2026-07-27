@@ -65,6 +65,7 @@
 
   const SUPPORT_PAGES = [
     { file: "wireframes.html", label: "Module wireframes" },
+    { file: "build.html", label: "UI & engineering build" },
     { file: "ai.html", label: "Campus AI" },
     { file: "platform.html", label: "How parts connect" },
     { file: "university-activities.html", label: "All university activities" },
